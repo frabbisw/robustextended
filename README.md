@@ -32,8 +32,10 @@ cd ..
 
 Importing humaneval-x for multi language support
 ```
-
+cd datasets/nominal
 git clone https://huggingface.co/datasets/THUDM/humaneval-x
+cd ../..
+python prepare_entry_points_for_multi_language.py
 ```
 
 Installing nlaugmenter for perturbations
