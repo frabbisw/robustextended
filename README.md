@@ -30,6 +30,12 @@ pip install -e human-eval
 cd ..
 ```
 
+Importing humaneval-x for multi language support
+```
+
+git clone https://huggingface.co/datasets/THUDM/humaneval-x
+```
+
 Installing nlaugmenter for perturbations
 ```
 cd nlaugmenter
