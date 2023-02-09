@@ -2,11 +2,12 @@ import json
 import os
 import jsonlines
 
-python_dir = "humaneval-x/data/python/data"
-java_dir = "humaneval-x/data/java/data"
-cpp_dir = "humaneval-x/data/cpp/data"
-go_dir = "humaneval-x/data/go/data"
-js_dir = "humaneval-x/data/js/data"
+dataset_dir = "datasets/nominal"
+python_dir = "datasets/nominal/humaneval-x/data/python/data"
+java_dir = "datasets/nominal/humaneval-x/data/java/data"
+cpp_dir = "datasets/nominal/humaneval-x/data/cpp/data"
+go_dir = "datasets/nominal/humaneval-x/data/go/data"
+js_dir = "datasets/nominal/humaneval-x/data/js/data"
 human_eval_with_entry_point_path = "datasets/nominal/HumanEval.jsonl"
 
 def python_to_others(entry_point):
@@ -53,7 +54,7 @@ def add_entry_points(dir, entry_points, lang):
             obj["entry_point"] = entry_point
             lines.append(obj)
 
-    with jsonlines.open(os.path.join(dir,"HumanEval_{lang}.jsonl".format(lang=lang)), mode='w') as writer:
+    with jsonlines.open(os.path.join(dataset_dir,"HumanEval_{lang}.jsonl".format(lang=lang)), mode='w') as writer:
         for line in lines:
             jsonlines.Writer.write(writer, line)
 
