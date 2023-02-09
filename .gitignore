@@ -1,0 +1,12 @@
+__pycache__/
+.DS_Store
+*.egg-info/
+.vscode/
+.env
+.venv
+.idea/
+evaluate-public-models/human-eval/
+natgen/transformations/my-languages_dot.so
+natgen/treesitter/build/
+natgen/treesitter/tree-sitter-python/
+*~
