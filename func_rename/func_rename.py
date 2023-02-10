@@ -182,3 +182,29 @@ def FuncRenameCamelCase(code, entry_point):
         # print(f"function name from \"{entry_point}\" to \"{new_func_name}\"")
         # import pdb; pdb.set_trace()
     return new_code, new_func_name
+
+def FuncRenameSnakeCase(code, entry_point):
+    """ Perturb between two versions of function name
+    We might have input function names as list which means we need to perturb all these names
+    >>> example1: has_close_elements => hasCloseElements
+    >>> example2: hasCloseElements => has_close_elements
+    """
+    new_code = str(code)
+    if not isinstance(entry_point, list):
+        entry_points = [entry_point]
+    else:
+        entry_points = entry_point
+    for entry_point in entry_points:
+        if entry_point == "": continue
+        new_func_name = [entry_point[0].lower()]
+        for c in entry_point[1:]:
+            if c in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+                new_func_name.append('_')
+                new_func_name.append(c.lower())
+            else:
+                new_func_name.append(c)
+
+        new_code, new_func_name = replace_func_name(new_code, entry_point, new_func_name)
+        # print(f"function name from \"{entry_point}\" to \"{new_func_name}\"")
+        # import pdb; pdb.set_trace()
+    return new_code, new_func_name
