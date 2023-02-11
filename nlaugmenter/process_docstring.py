@@ -13,10 +13,22 @@ def sep_doc(data, prompt, entry_point):
     the whole documents in prompt including docstring & examples.
     """
     # sep into header, docstring only (without any special charaters like """), examples
-    if data in ["humaneval", "mbpp"]:
-        start = prompt.find('"""', prompt.find(entry_point)) 
+    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava"]:
+        if data in ["humanevalpy", "humaneval", "mbpp"]:
+            doc_start_sign = '"""'
+            doc_start_sign_alt = '\'\'\''
+            start_limit = prompt.find(entry_point)
+        elif data in ["humanevaljava", "mbpj"]:
+            doc_start_sign = '/**'
+            doc_start_sign_alt = '//'
+            start_limit = 0
+        start = prompt.find(doc_start_sign, start_limit)
         if start == -1: # some humaneval will use "'''" for docstrings
-            start = prompt.find('\'\'\'', prompt.find(entry_point)) 
+            start = prompt.find(doc_start_sign_alt, start_limit)
+
+        # import pdb;
+        # pdb.set_trace()
+
         assert start != -1
         start = start + 3
         # some transformation might remove \n, so we need to keep \n \t in head part
@@ -31,6 +43,12 @@ def sep_doc(data, prompt, entry_point):
             special -= 1
         end = special + 1
         return prompt[:start], prompt[start:end], prompt[end:]
+
+    elif data in ["humanevalcpp"]:
+        import pdb;
+        pdb.set_trace()
+        return "dummy"
+
     elif data in ["mbjp", "mbjsp"]:
         # start = prompt.find('/**', prompt.find(entry_point))
         start = prompt.find('/**')

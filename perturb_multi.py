@@ -132,6 +132,10 @@ def ptb_doc(doc, ptb, seed=0, black_list=[]):
 
 def ptb_entry(args, entry, ptb, seed=0):
     head, doc, cases = sep_doc(args.data, entry['prompt'], entry["entry_point"])
+
+    print("start pdb")
+    import pdb; pdb.set_trace()
+
     # we need to maintain a blacklist for variable names, function names, and type names such that we will not perturb these names
     if args.data in ["humaneval", "mbpp"]: 
         code_string = entry["prompt"] + entry["canonical_solution"]
@@ -427,7 +431,7 @@ if __name__ == '__main__':
     """ The main function to perform perturbations
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default="humaneval", choices=["humaneval", "humanevaljava", "mbpp", "mbjp", "mbjsp", "mbkp", "mbphp", "mbrbp"])
+    parser.add_argument('--data', type=str, default="humaneval", choices=["humaneval", "humanevalpy", "humanevaljava", "humanevalgo", "humanevalcpp", "humanevaljs"])
     parser.add_argument('--config', default="config_multi.json", help="The config to run.")
     parser.add_argument('--rng-seed', type=int, default=42, help="global random seed.")
     parser.add_argument('--rng-deterministic', type=bool, default=True)

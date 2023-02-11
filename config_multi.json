@@ -1,4 +1,12 @@
 {
+    "humaneval":{
+        "NL_AUG_RECIPES": ["BackTranslation", "ButterFingersPerturbation", "ChangeCharCase", "EnglishInflectionalVariation",
+                    "SwapCharactersPerturbation", "SynonymInsertion", "SynonymSubstitution", "TenseTransformationPast",
+                    "TenseTransformationFuture", "WhitespacePerturbation"],
+        "PARTIAL_RECIPES": ["DeadCodeInserter", "ForWhileTransformer", "OperandSwap", "VarRenamerCB", "VarRenamerNaive", "VarRenamerRN"],
+        "FUNC_RECIPES": ["FuncRenameCamelCase", "FuncRenameButterFinger", "FuncRenameSwapChar", "FuncRenameChangeChar", "FuncRenameInflectionalVariation", "FuncRenameSynonymSub"],
+        "FORMAT_RECIPES": ["tab_indent", "split_lines", "doc2comments", "new_lines", "new_line_aftercode", "new_line_afterdoc"]
+    },
     "humanevalpy":{
         "NL_AUG_RECIPES": ["BackTranslation", "ButterFingersPerturbation", "ChangeCharCase", "EnglishInflectionalVariation", 
                     "SwapCharactersPerturbation", "SynonymInsertion", "SynonymSubstitution", "TenseTransformationPast", 
@@ -58,6 +66,7 @@
     ],
     "data_path": "datasets/nominal/",
     "DATASET_PATH": {
+        "humaneval": "HumanEval.jsonl",
         "humanevalpy": "HumanEval_py.jsonl",
         "humanevaljava": "HumanEval_java.jsonl",
         "humanevalcpp": "HumanEval_cpp.jsonl",
