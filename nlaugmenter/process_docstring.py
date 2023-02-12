@@ -36,12 +36,21 @@ def sep_doc(data, prompt, entry_point):
         while prompt[special] in [" ", "\n", "\t"]:
             special += 1
         start = special
-        end = prompt.find(">>>", prompt.find(entry_point))
+        end = prompt.find(">>>", start_limit)
+        if end == -1: #some docstring has no >>> string. instead they have for example, example strings
+            end = prompt.lower().find("for example", start_limit)
+        if end == -1:
+            end = prompt.lower().find("example", start_limit)
+
         # some transformation might remove \n, so we need to keep \n \t in cases part
         special = end - 1
         while prompt[special] in [" ", "\n", "\t"]:
             special -= 1
         end = special + 1
+
+        # import pdb;
+        # pdb.set_trace()
+
         return prompt[:start], prompt[start:end], prompt[end:]
 
     elif data in ["humanevalcpp"]:

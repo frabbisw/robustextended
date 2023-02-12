@@ -137,7 +137,8 @@ def ptb_entry(args, entry, ptb, seed=0):
     import pdb; pdb.set_trace()
 
     # we need to maintain a blacklist for variable names, function names, and type names such that we will not perturb these names
-    if args.data in ["humaneval", "mbpp"]: 
+
+    if args.data in ["humaneval", "humanevalpy", "mbpp"]:
         code_string = entry["prompt"] + entry["canonical_solution"]
     elif args.data in ["mbjp", "mbjsp"]: 
         code_string = entry["prompt"]
