@@ -9,5 +9,10 @@ evaluate-public-models/human-eval/
 natgen/transformations/my-languages_dot.so
 natgen/treesitter/build/
 natgen/treesitter/tree-sitter-python/
+natgen/treesitter/tree-sitter-go/
+natgen/treesitter/tree-sitter-javascript/
+natgen/treesitter/tree-sitter-cpp/
+natgen/treesitter/tree-sitter-java/
 humaneval-x/
+testing.py
 *~

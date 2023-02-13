@@ -49,7 +49,12 @@ cd ..
 Installing treesitter for perturbations. Note that we customized our code syntax perturbatons based on [natgen](https://github.com/saikat107/NatGen). 
 ```
 cd natgen/treesitter
-git clone https://github.com/tree-sitter/tree-sitter-python # clone the py-tree-sitter
+# clone the specific tree-sitter repos for different languages 
+git clone https://github.com/tree-sitter/tree-sitter-python 
+git clone https://github.com/tree-sitter/tree-sitter-javascript.git
+git clone https://github.com/tree-sitter/tree-sitter-java.git
+git clone https://github.com/tree-sitter/tree-sitter-cpp.git
+git clone https://github.com/tree-sitter/tree-sitter-go.git
 python build.py # build my-languages.so file
 cd ../transformations
 ln -s ../treesitter/build/my-languages.so ./

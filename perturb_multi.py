@@ -60,7 +60,7 @@ def load_data(args, task, data_file=None, data_path=None):
             print(f"task {task} not supported!")
 
     data = []
-    with open(data_file, 'r') as input_file:
+    with open(data_file, 'r', encoding="utf8") as input_file:
         for line in input_file:
             data.append(json.loads(line))
 
@@ -133,19 +133,25 @@ def ptb_doc(doc, ptb, seed=0, black_list=[]):
 def ptb_entry(args, entry, ptb, seed=0):
     head, doc, cases = sep_doc(args.data, entry['prompt'], entry["entry_point"])
 
-    print("start pdb")
-    import pdb; pdb.set_trace()
+    # print("start pdb")
 
     # we need to maintain a blacklist for variable names, function names, and type names such that we will not perturb these names
 
-    if args.data in ["humaneval", "humanevalpy", "mbpp"]:
+    # if args.data in ["humaneval", "humanevalpy", "mbpp"]:
+    #     code_string = entry["prompt"] + entry["canonical_solution"]
+    # elif args.data in ["mbjp", "mbjsp"]:
+    #     code_string = entry["prompt"]
+    if args.data in ["humaneval", "humanevalpy", "mbpp", "humanevaljava", "humanevaljs", "humanevalcpp"]:
         code_string = entry["prompt"] + entry["canonical_solution"]
-    elif args.data in ["mbjp", "mbjsp"]: 
-        code_string = entry["prompt"]
     else:
         print(f"data {args.data} not supported for docstring perturbation")
+        exit()
     black_list = word_blacklist(code_string, args.data)
+
     ptbd_doc = ptb_doc(doc, ptb, seed, black_list)
+
+    # import pdb;pdb.set_trace()
+
     res = {k:v for k, v in entry.items()}
     res['prompt'] = ''.join([head, ptbd_doc, cases])
     res['seed'] = seed

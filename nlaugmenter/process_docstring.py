@@ -13,13 +13,13 @@ def sep_doc(data, prompt, entry_point):
     the whole documents in prompt including docstring & examples.
     """
     # sep into header, docstring only (without any special charaters like """), examples
-    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava"]:
+    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava", "humanevalcpp", "humanevaljs"]:
         if data in ["humanevalpy", "humaneval", "mbpp"]:
             doc_start_sign = '"""'
             doc_start_sign_alt = '\'\'\''
             start_limit = prompt.find(entry_point)
-        elif data in ["humanevaljava", "mbpj"]:
-            doc_start_sign = '/**'
+        elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
+            doc_start_sign = '/*'
             doc_start_sign_alt = '//'
             start_limit = 0
         start = prompt.find(doc_start_sign, start_limit)
@@ -30,10 +30,10 @@ def sep_doc(data, prompt, entry_point):
         # pdb.set_trace()
 
         assert start != -1
-        start = start + 3
+        start = start + 2
         # some transformation might remove \n, so we need to keep \n \t in head part
         special = start + 1
-        while prompt[special] in [" ", "\n", "\t"]:
+        while prompt[special] in [" ", "\n", "\t", "*"]:
             special += 1
         start = special
         end = prompt.find(">>>", start_limit)
@@ -53,12 +53,12 @@ def sep_doc(data, prompt, entry_point):
 
         return prompt[:start], prompt[start:end], prompt[end:]
 
-    elif data in ["humanevalcpp"]:
-        import pdb;
-        pdb.set_trace()
-        return "dummy"
+    # elif data in ["humanevalcpp"]:
+    #     import pdb;
+    #     pdb.set_trace()
+    #     return "dummy"
 
-    elif data in ["mbjp", "mbjsp"]:
+    elif data in ["mbjp", "mbjsp", "mbjp", "mbjsp", "mbcp"]:
         # start = prompt.find('/**', prompt.find(entry_point))
         start = prompt.find('/**')
         assert start != -1
@@ -102,8 +102,13 @@ def word_blacklist(code_string, language="python"):
     """ A help function to get a blacklist of words in the docstring that cannot be perturbed by nlaugmenter
     """
     # tsf = VarRenamerBase("natgen/languages.so", language)
-    if language == "humaneval": language = "python"
-    if language == "mbpp": language = "python"
+    if language in ["humaneval", "humanevalpy", "mbpp"]: language = "python"
+    elif language in ["humanevaljava", "mbjp"]: language = "java"
+    elif language in ["humanevalcpp", "mbcp"]: language = "cpp"
+    elif language in ["humanevaljs", "mbjsp"]: language = "javascript"
+    elif language in ["humanevalgo", "mbgop"]: language = "go"
+    else: print(f"data {language} not supported for docstring perturbation")
+
     tsf = VarRenamerBase("natgen/treesitter/build/my-languages.so", language)
     
     root = tsf.parse_code(code_string)
