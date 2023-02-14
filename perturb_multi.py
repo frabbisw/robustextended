@@ -257,11 +257,12 @@ def perturb_partial(args, data, recipes):
         if "partial" not in res: import pdb; pdb.set_trace()
         if res["partial"] is not None:
             header, doc, body = sep(res["partial"], res['entry_point'])
+            import pdb;
+            pdb.set_trace()
+
         else:
             # only 1 line return code in canonical solution
             header, doc, body = sep(res['prompt'] + res['canonical_solution'], res['entry_point'])
-            import pdb;
-            pdb.set_trace()
 
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
