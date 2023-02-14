@@ -37,6 +37,9 @@ def get_languages(data):
         return "python"
     if data in ["python"]:
         return data
+    if data in ["java", "humanevaljava"]:
+        return "java"
+
     print(f"language for {data} not supported")
     exit()
 
@@ -273,7 +276,7 @@ def perturb_partial(args, data, recipes):
         else:
             new_code = code
             # new_code = res["prompt"]
-            if args.data in ["humaneval", "mbpp"]:
+            if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = new_code.replace(";\n", "\n").replace(";", "\n")
             if "@@this is the line to split##" in code:
                 # uncomment the split such that deadcode can also be inserted before this line; If comment, indent will be wrong with deadcode insertion
@@ -546,10 +549,10 @@ if __name__ == '__main__':
         elif args.method == "nlaugmenter":
             generated_data = perturb_nlaug(args, data, NL_AUG_RECIPES)
         elif args.method == "natgen":
-            assert args.task == "partial_code", "please add --tast partial_code for code syntax (natgen) perturbation"
+            assert args.task == "partial_code", "please add --task partial_code for code syntax (natgen) perturbation"
             generated_data = perturb_partial(args, data, PARTIAL_RECIPES)
         elif args.method == "format":
-            assert args.task == "partial_code", "please add --tast partial_code for code format (format) perturbation"
+            assert args.task == "partial_code", "please add --task partial_code for code format (format) perturbation"
             generated_data = perturb_format(args, data, FORMAT_RECIPES)
         elif args.method == "func_name":
             generated_data = perturb_func_name(args, data, FUNC_RECIPES)
