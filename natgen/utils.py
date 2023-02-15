@@ -240,6 +240,7 @@ def sep(code, entry_point):
     # doc_begin != -1 and doc_end != -1, means no docstring in the code, just return "" for docstring
     doc = code[header_end+1 : doc_end+4] if doc_begin != -1 and doc_end != -1 else ""
     code = code[doc_end+4:] if doc_begin != -1 and doc_end != -1 else code[header_end+1:]
+    # import pdb; pdb.set_trace()
     return header, doc, code
 
 
