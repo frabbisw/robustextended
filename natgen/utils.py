@@ -220,29 +220,72 @@ def count_lines(s):
     return cnt
 
 
-def sep(code, entry_point):
-    """ core function to seperate function signature (header) ||| docstring ||| code
-    here entry point is the main function we need to complete
-    """
-    single_doc = code.find("\'\'\'")
-    double_doc = code.find("\"\"\"")
-    if single_doc == -1: doc_type = "\"\"\""
-    elif double_doc == -1: doc_type = "\'\'\'"
-    elif single_doc != -1 and double_doc != -1:
-        doc_type = "\"\"\""
-    else:
-        print("doc_type not supported!")
-        exit()
-    header_end = code.find('\n', code.find(entry_point))
-    header = code[:header_end + 1]
-    doc_begin = code.find(doc_type, header_end)
-    doc_end = code.find(f"{doc_type}\n", doc_begin + 3)
-    # doc_begin != -1 and doc_end != -1, means no docstring in the code, just return "" for docstring
-    doc = code[header_end+1 : doc_end+4] if doc_begin != -1 and doc_end != -1 else ""
-    code = code[doc_end+4:] if doc_begin != -1 and doc_end != -1 else code[header_end+1:]
-    # import pdb; pdb.set_trace()
-    return header, doc, code
+# def sep(code, entry_point):
+#     """ core function to seperate function signature (header) ||| docstring ||| code
+#     here entry point is the main function we need to complete
+#     """
+#     single_doc = code.find("\'\'\'")
+#     double_doc = code.find("\"\"\"")
+#     if single_doc == -1: doc_type = "\"\"\""
+#     elif double_doc == -1: doc_type = "\'\'\'"
+#     elif single_doc != -1 and double_doc != -1:
+#         doc_type = "\"\"\""
+#     else:
+#         print("doc_type not supported!")
+#         exit()
+#     header_end = code.find('\n', code.find(entry_point))
+#     header = code[:header_end + 1]
+#     doc_begin = code.find(doc_type, header_end)
+#     doc_end = code.find(f"{doc_type}\n", doc_begin + 3)
+#     # doc_begin != -1 and doc_end != -1, means no docstring in the code, just return "" for docstring
+#     doc = code[header_end+1 : doc_end+4] if doc_begin != -1 and doc_end != -1 else ""
+#     code = code[doc_end+4:] if doc_begin != -1 and doc_end != -1 else code[header_end+1:]
+#     # import pdb; pdb.set_trace()
+#     return header, doc, code
 
+def sep(code, entry_point, data):
+    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava", "humanevalcpp", "humanevaljs"]:
+        if data in ["humanevalpy", "humaneval", "mbpp"]:
+            doc_start_sign = '"""'
+            doc_start_sign_alt = '\'\'\''
+            start_limit = code.find(entry_point)
+        elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
+            doc_start_sign = '/*'
+            doc_start_sign_alt = '//'
+            start_limit = 0
+        start = code.find(doc_start_sign, start_limit)
+        if start == -1: # some humaneval will use "'''" for docstrings
+            start = code.find(doc_start_sign_alt, start_limit)
+
+        # import pdb;
+        # pdb.set_trace()
+
+        assert start != -1
+        start = start + 2
+        # some transformation might remove \n, so we need to keep \n \t in head part
+        special = start + 1
+        while code[special] in [" ", "\n", "\t", "*"]:
+            special += 1
+        start = special
+        end = code.find(">>>", start_limit)
+        if end == -1: #some docstring has no >>> string. instead they have for example, example strings
+            end = code.lower().find("for example", start_limit)
+        if end == -1:
+            end = code.lower().find("example", start_limit)
+
+        # some transformation might remove \n, so we need to keep \n \t in cases part
+        special = end - 1
+        while code[special] in [" ", "\n", "\t"]:
+            special -= 1
+        end = special + 1
+
+        # import pdb;
+        # pdb.set_trace()
+
+        return code[:start], code[start:end], code[end:]
+    else:
+        print(f"dataset {data} not supported")
+        exit()
 
 def black_reformat(code, orig_code=None, order=0, debug=False):
     """ Calling black function to normalize python code
