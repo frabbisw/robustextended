@@ -248,14 +248,14 @@ def sep(code, entry_point, data):
         start = code.find('"""', code.find(entry_point))
         if start == -1:  # some humaneval will use "'''" for docstrings
             start = code.find('\'\'\'', code.find(entry_point))
-            end = code.find('\'\'\'', start+3)
+            end = code.find('\'\'\'', start+3) + 3
         else:
-            end = code.find('"""', start + 3)
+            end = code.find('"""', start + 3) + 3
         import pdb; pdb.set_trace()
         return code[:start], code[start:end], code[end:]
     elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
         start = code.find("/*")
-        end = code.find("*/", start+2)
+        end = code.find("*/", start+2) +2
         import pdb; pdb.set_trace()
         return code[:start], code[start:end], code[end:]
     else:
