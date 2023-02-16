@@ -333,7 +333,7 @@ def perturb_partial(args, data, recipes):
             print(f" === perturbed with {recipes[args.aug_method]} === ")
             print(res["prompt"])
             print("================")
-            # import pdb; pdb.set_trace()
+            import pdb; pdb.set_trace()
         
         if res["prompt"] != entry["prompt"]: diff += 1
         generated_data.append(res)
