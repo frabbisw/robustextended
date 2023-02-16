@@ -245,16 +245,26 @@ def sep(code, entry_point):
 
 def sep2(code, entry_point, data):
     if data in ["humanevalpy", "humaneval", "mbpp"]:
-        start = code.find('"""', code.find(entry_point))
-        if start == -1:  # some humaneval will use "'''" for docstrings
-            start = code.find('\'\'\'', code.find(entry_point))
-            end = code.find('\'\'\'', start+3)+3
-            end = code.find("\n", end) + 1
+        single_doc = code.find("\'\'\'")
+        double_doc = code.find("\"\"\"")
+        if single_doc == -1:
+            doc_type = "\"\"\""
+        elif double_doc == -1:
+            doc_type = "\'\'\'"
+        elif single_doc != -1 and double_doc != -1:
+            doc_type = "\"\"\""
         else:
-            end = code.find('"""', start + 3)+3
-            end = code.find("\n", end) + 1
+            print("doc_type not supported!")
+            exit()
+        header_end = code.find('\n', code.find(entry_point))
+        header = code[:header_end + 1]
+        doc_begin = code.find(doc_type, header_end)
+        doc_end = code.find(f"{doc_type}\n", doc_begin + 3)
+        # doc_begin != -1 and doc_end != -1, means no docstring in the code, just return "" for docstring
+        doc = code[header_end + 1: doc_end + 4] if doc_begin != -1 and doc_end != -1 else ""
+        code = code[doc_end + 4:] if doc_begin != -1 and doc_end != -1 else code[header_end + 1:]
         # import pdb; pdb.set_trace()
-        return code[:start], code[start:end], code[end:]
+        return header, doc, code
     elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
         start = code.find("/*")
         end = code.find("*/", start+2)+2
