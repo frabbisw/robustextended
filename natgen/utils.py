@@ -243,27 +243,27 @@ def sep(code, entry_point):
     # import pdb; pdb.set_trace()
     return header, doc, code
 
-def sep(code, entry_point, data):
-    if data in ["humanevalpy", "humaneval", "mbpp"]:
-        start = code.find('"""', code.find(entry_point))
-        if start == -1:  # some humaneval will use "'''" for docstrings
-            start = code.find('\'\'\'', code.find(entry_point))
-            end = code.find('\'\'\'', start+3)+3
-            end = code.find("\n", end) + 1
-        else:
-            end = code.find('"""', start + 3)+3
-            end = code.find("\n", end) + 1
-        # import pdb; pdb.set_trace()
-        return code[:start], code[start:end], code[end:]
-    elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
-        start = code.find("/*")
-        end = code.find("*/", start+2)+2
-        end = code.find("\n", end) + 1
-        # import pdb; pdb.set_trace()
-        return code[:start], code[start:end], code[end:]
-    else:
-        print(f"dataset {data} not supported")
-        exit()
+# def sep(code, entry_point, data):
+#     if data in ["humanevalpy", "humaneval", "mbpp"]:
+#         start = code.find('"""', code.find(entry_point))
+#         if start == -1:  # some humaneval will use "'''" for docstrings
+#             start = code.find('\'\'\'', code.find(entry_point))
+#             end = code.find('\'\'\'', start+3)+3
+#             end = code.find("\n", end) + 1
+#         else:
+#             end = code.find('"""', start + 3)+3
+#             end = code.find("\n", end) + 1
+#         # import pdb; pdb.set_trace()
+#         return code[:start], code[start:end], code[end:]
+#     elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
+#         start = code.find("/*")
+#         end = code.find("*/", start+2)+2
+#         end = code.find("\n", end) + 1
+#         # import pdb; pdb.set_trace()
+#         return code[:start], code[start:end], code[end:]
+#     else:
+#         print(f"dataset {data} not supported")
+#         exit()
 
 def black_reformat(code, orig_code=None, order=0, debug=False):
     """ Calling black function to normalize python code
