@@ -194,7 +194,9 @@ def create_partial_code(data):
 
         whole = res['prompt'] + res['canonical_solution']
         header, doc, body = sep(whole, res['entry_point'])
-        # header, doc, body = sep(whole, res['entry_point'],args.data)
+        header2, doc2, body2 = sep2(whole, res['entry_point'],args.data)
+        import pdb;
+        pdb.set_trace()
 
         if args.print_sample:
             print(" === orig === ")
