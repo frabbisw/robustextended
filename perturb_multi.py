@@ -259,16 +259,16 @@ def perturb_partial(args, data, recipes):
         if "partial" not in res: import pdb; pdb.set_trace()
         if res["partial"] is not None:
             # header, doc, body = sep(res["partial"], res['entry_point'], args.data)
-            header, doc, body = sep(res["partial"], res['entry_point'])
-            header2, doc2, body2 = sep2(res["partial"], res['entry_point'],args.data)
-            import pdb; pdb.set_trace()
+            # header, doc, body = sep(res["partial"], res['entry_point'])
+            header, doc, body = sep(res["partial"], res['entry_point'],args.data)
+            # import pdb; pdb.set_trace()
 
 
         else:
             # only 1 line return code in canonical solution
-            header, doc, body = sep(res['prompt'] + res['canonical_solution'], res['entry_point'])
-            header2, doc2, body2 = sep2(res["partial"], res['entry_point'], args.data)
-            import pdb; pdb.set_trace()
+            # header, doc, body = sep(res['prompt'] + res['canonical_solution'], res['entry_point'])
+            header, doc, body = sep(res["partial"], res['entry_point'], args.data)
+            # import pdb; pdb.set_trace()
 
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
@@ -307,8 +307,8 @@ def perturb_partial(args, data, recipes):
             # import pdb; pdb.set_trace()
 
         # add doc into the transformed new code
-        new_header, _, new_body = sep(new_code, res['entry_point'])
-        # new_header, _, new_body = sep(new_code, res['entry_point'], args.data)
+        # new_header, _, new_body = sep(new_code, res['entry_point'])
+        new_header, _, new_body = sep(new_code, res['entry_point'], args.data)
 
         new_code = new_header + new_doc + new_body
         # use black to do the normalization
