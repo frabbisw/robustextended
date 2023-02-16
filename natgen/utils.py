@@ -253,13 +253,13 @@ def sep(code, entry_point, data):
         else:
             end = code.find('"""', start + 3)+3
             end = code.find("\n", end) + 1
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         return code[:start], code[start:end], code[end:]
     elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
         start = code.find("/*")
         end = code.find("*/", start+2)+2
         end = code.find("\n", end) + 1
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         return code[:start], code[start:end], code[end:]
     else:
         print(f"dataset {data} not supported")
