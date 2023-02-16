@@ -244,44 +244,19 @@ def count_lines(s):
 #     return header, doc, code
 
 def sep(code, entry_point, data):
-    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava", "humanevalcpp", "humanevaljs"]:
-        if data in ["humanevalpy", "humaneval", "mbpp"]:
-            doc_start_sign = '"""'
-            doc_start_sign_alt = '\'\'\''
-            start_limit = code.find(entry_point)
-        elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
-            doc_start_sign = '/*'
-            doc_start_sign_alt = '//'
-            start_limit = 0
-        start = code.find(doc_start_sign, start_limit)
-        if start == -1: # some humaneval will use "'''" for docstrings
-            start = code.find(doc_start_sign_alt, start_limit)
-
-        # import pdb;
-        # pdb.set_trace()
-
-        assert start != -1
-        start = start + 2
-        # some transformation might remove \n, so we need to keep \n \t in head part
-        special = start + 1
-        while code[special] in [" ", "\n", "\t", "*"]:
-            special += 1
-        start = special
-        end = code.find(">>>", start_limit)
-        if end == -1: #some docstring has no >>> string. instead they have for example, example strings
-            end = code.lower().find("for example", start_limit)
-        if end == -1:
-            end = code.lower().find("example", start_limit)
-
-        # some transformation might remove \n, so we need to keep \n \t in cases part
-        special = end - 1
-        while code[special] in [" ", "\n", "\t"]:
-            special -= 1
-        end = special + 1
-
-        # import pdb;
-        # pdb.set_trace()
-
+    if data in ["humanevalpy", "humaneval", "mbpp"]:
+        start = code.find('"""', code.find(entry_point))
+        if start == -1:  # some humaneval will use "'''" for docstrings
+            start = code.find('\'\'\'', code.find(entry_point))
+            end = code.find('\'\'\'', start+3)
+        else:
+            end = code.find('"""', start + 3)
+        import pdb; pdb.set_trace()
+        return code[:start], code[start:end], code[end:]
+    elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
+        start = code.find("/*")
+        end = code.find("*/", start+2)
+        import pdb; pdb.set_trace()
         return code[:start], code[start:end], code[end:]
     else:
         print(f"dataset {data} not supported")
