@@ -268,7 +268,7 @@ def perturb_partial(args, data, recipes):
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
 
-        import pdb; pdb.set_trace();
+        # import pdb; pdb.set_trace();
 
         if args.print_sample:
             print(f" === orig [{res['task_id']}] === ")
@@ -291,7 +291,8 @@ def perturb_partial(args, data, recipes):
             tsf = eval(recipes[args.aug_method])("natgen/languages.so", get_languages(args.data))
             # first half = True for prompt based perturbations
             new_code, meta = tsf.transform_code(code=new_code, first_half=True)
-            new_code = beautify_python_code(new_code.split()).replace("\\", "")
+            if args.data in ["humaneval", "mbpp", "humanevalpy"]:
+                new_code = beautify_python_code(new_code.split()).replace("\\", "")
             # make doc indent to be \t to match natgen format
             new_doc = black_tablize_doc(doc, indent_type)
             if "@@this is the line to split##" in code:
