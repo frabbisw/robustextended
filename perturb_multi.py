@@ -290,6 +290,8 @@ def perturb_partial(args, data, recipes):
             # Only black normalization or no partial code (just one line return)
             new_code = code
         else:
+            import pdb; pdb.set_trace()
+
             new_code = code
             # new_code = res["prompt"]
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
@@ -328,7 +330,9 @@ def perturb_partial(args, data, recipes):
         # make sure this sep works correctly for mbpp
         # new_header, new_doc, new_body = sep(new_code)
 
-        import pdb; pdb.set_trace();
+
+        # this stage, new code is a complete python code with a prompt inside it. there is a line "# print('@@this is the line to split##')" in the comment.
+        # import pdb; pdb.set_trace();
 
 
         if res["partial"] is not None and resp:
