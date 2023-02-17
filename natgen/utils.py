@@ -214,8 +214,9 @@ def count_lines(s):
     try:
         if s[-1] != "\n": s += "\n"
     except:
-        import pdb;
-        pdb.set_trace()
+        return 1
+        # import pdb;
+        # pdb.set_trace()
     tmp = cnt = 0
     while tmp != -1:
         start = tmp + 1
