@@ -182,8 +182,7 @@ def perturb_nlaug(args, data, recipes):
     print(f"{ptb_type.name()} has {diff} perturbations")
     return generated_data
 
-
-def create_partial_code(data):
+def create_partial_code(data, args):
     """ The function to create partial code
     """
     generated_data = []
@@ -193,7 +192,7 @@ def create_partial_code(data):
             res[k] = v
 
         whole = res['prompt'] + res['canonical_solution']
-        header, doc, body = sep(whole, res['entry_point'])
+        header, doc, body = sep(whole, res['entry_point'], args.data)
 
         if args.print_sample:
             print(" === orig === ")
@@ -312,8 +311,11 @@ def perturb_partial(args, data, recipes):
 
         new_code = new_header + new_doc + new_body
         # use black to do the normalization
-        import pdb; pdb.set_trace()
-        new_code, resp = black_reformat(new_code, orig_code=res)
+        # import pdb; pdb.set_trace()
+        if args.data in ["humaneval","humanevalpy","mbpp"]:
+            new_code, resp = black_reformat(new_code, orig_code=res)
+        else:
+            resp = False
         # import pdb; pdb.set_trace()
         # make sure this sep works correctly for mbpp
         # new_header, new_doc, new_body = sep(new_code)
@@ -531,7 +533,7 @@ if __name__ == '__main__':
     if args.create_partial_code:
         # we have to recreate partial code for regular code-generation dataset
         data = load_data(args, args.task, data_file=None, data_path=data_path)
-        generated_data = create_partial_code(data)
+        generated_data = create_partial_code(data, args)
         output_adv_path = os.path.join(data_path, args.data + "_partial.jsonl")
         print(f"generating partial code! redirect to {output_adv_path}")
         if os.path.exists(output_adv_path):
