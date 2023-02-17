@@ -8,8 +8,8 @@
         "FORMAT_RECIPES": ["tab_indent", "split_lines", "doc2comments", "new_lines", "new_line_aftercode", "new_line_afterdoc"]
     },
     "humanevalpy":{
-        "NL_AUG_RECIPES": ["BackTranslation", "ButterFingersPerturbation", "ChangeCharCase", "EnglishInflectionalVariation", 
-                    "SwapCharactersPerturbation", "SynonymInsertion", "SynonymSubstitution", "TenseTransformationPast", 
+        "NL_AUG_RECIPES": ["BackTranslation", "ButterFingersPerturbation", "ChangeCharCase", "EnglishInflectionalVariation",
+                    "SwapCharactersPerturbation", "SynonymInsertion", "SynonymSubstitution", "TenseTransformationPast",
                     "TenseTransformationFuture", "WhitespacePerturbation"],
         "PARTIAL_RECIPES": ["DeadCodeInserter", "ForWhileTransformer", "OperandSwap", "VarRenamerCB", "VarRenamerNaive", "VarRenamerRN"],
         "FUNC_RECIPES": ["FuncRenameCamelCase", "FuncRenameButterFinger", "FuncRenameSwapChar", "FuncRenameChangeChar", "FuncRenameInflectionalVariation", "FuncRenameSynonymSub"],

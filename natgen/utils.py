@@ -210,6 +210,7 @@ def black_tablize_doc(doc, indent_type):
 def count_lines(s):
     """ count total line numbers of code
     """
+    import pdb; pdb.set_trace()
     if s[-1] != "\n": s += "\n"
     tmp = cnt = 0
     while tmp != -1:
