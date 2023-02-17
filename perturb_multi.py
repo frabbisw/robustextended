@@ -33,12 +33,18 @@ def set_seed(seed, deterministic=True):
 
 
 def get_languages(data):
-    if data in ["humaneval", "mbpp"]:
+    if data in ["humaneval", "mbpp", "humanevalpy"]:
         return "python"
     if data in ["python"]:
         return data
     if data in ["java", "humanevaljava"]:
         return "java"
+    if data in ["cpp", "humanevalcpp"]:
+        return "cpp"
+    if data in ["js", "javascript", "humanevaljs"]:
+        return "javascript"
+    if data in ["go", "humanevalgo"]:
+        return "go"
 
     print(f"language for {data} not supported")
     exit()
