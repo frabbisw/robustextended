@@ -314,7 +314,6 @@ def perturb_partial(args, data, recipes):
         # add doc into the transformed new code
         # new_header, _, new_body = sep(new_code, res['entry_point'])
 
-        import pdb; pdb.set_trace();
 
         new_header, _, new_body = sep(new_code, res['entry_point'], args.data)
 
@@ -328,7 +327,10 @@ def perturb_partial(args, data, recipes):
         # import pdb; pdb.set_trace()
         # make sure this sep works correctly for mbpp
         # new_header, new_doc, new_body = sep(new_code)
-        
+
+        import pdb; pdb.set_trace();
+
+
         if res["partial"] is not None and resp:
             # new_code = new_header + new_doc + new_body
             # idx = new_code.find("@@this is the line to split##")
