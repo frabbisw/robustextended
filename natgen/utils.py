@@ -143,7 +143,14 @@ def beautify_java_code(tokens, indent):
             tmp.append(tok)
     tokens=tmp
     if "" in tokens:
-        tokens.remove("")
+        tmp = []
+        for t in tokens:
+            if t == "" or t is None:
+                continue
+            else:
+                tmp.append(t)
+        tokens=tmp
+
     total_indent = 0
     trailing_space = True;
     new_tokens = tokens[:1]
