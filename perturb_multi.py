@@ -261,7 +261,7 @@ def perturb_partial(args, data, recipes):
         for k, v in entry.items():
             res[k] = v
         
-        if "partial" not in res: import pdb; pdb.set_trace()
+        # if "partial" not in res: import pdb; pdb.set_trace()
         if res["partial"] is not None:
             # header, doc, body = sep(res["partial"], res['entry_point'], args.data)
             # header, doc, body = sep(res["partial"], res['entry_point'])
@@ -307,7 +307,7 @@ def perturb_partial(args, data, recipes):
                 new_code = beautify_python_code(new_code.split()).replace("\\", "")
             if args.data in ["mbjp", "humanevaljava"]:
                 new_code = beautify_java_code(new_code.split(), indent_type).replace("\\", "")
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
             new_doc = black_tablize_doc(doc, indent_type)
             if "@@this is the line to split##" in code:
@@ -327,8 +327,8 @@ def perturb_partial(args, data, recipes):
         # import pdb; pdb.set_trace()
         if args.data in ["humaneval","humanevalpy","mbpp"]:
             new_code, resp = black_reformat(new_code, orig_code=res)
-        else:
-            resp = False
+        # else:
+        #     resp = False
         # import pdb; pdb.set_trace()
         # make sure this sep works correctly for mbpp
         # new_header, new_doc, new_body = sep(new_code)
