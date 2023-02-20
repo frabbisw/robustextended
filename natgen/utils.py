@@ -155,8 +155,6 @@ def beautify_java_code(tokens, indent="    "):
     trailing_space = True;
     new_tokens = tokens[:1]
 
-    print("" in tokens)
-
     # indent = "\t"
     # quote_start = False
     # trailing_space * " " +
@@ -218,16 +216,6 @@ def beautify_java_code(tokens, indent="    "):
         else:
             new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
-            if trailing_space == True:
-                print("###"+tok+"$$$"+tokens[i-1]+"###")
-            # if tokens[i-1] == "NEWLINE":
-            #     new_tokens.append(tok)
-            # else:
-            #     new_tokens.append(trailing_space * " " + tok)
-            # trailing_space = True
-        # if tok in ["\"","\'"]:
-        #     quote_start *= False
-        # if tok in ["(",""]
     return "".join(new_tokens)
 def beautify_python_code(tokens):
     """ A customized beautify function for python.
