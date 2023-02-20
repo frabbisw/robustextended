@@ -132,9 +132,14 @@ def beautify_java_code(tokens, indent):
                 tmp.append("NEWLINE")
                 tmp.append(r)
         elif tok in ["{","}"]:
-            if tokens[i+1] != "NEWLINE":
+            try:
+                if tokens[i+1] != "NEWLINE":
+                    tmp.append(tok)
+                    tmp.append("NEWLINE")
+                else:
+                    tmp.append(tok)
+            except:
                 tmp.append(tok)
-                tmp.append("NEWLINE")
         else:
             tmp.append(tok)
     tokens=tmp
