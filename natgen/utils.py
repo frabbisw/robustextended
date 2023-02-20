@@ -175,7 +175,7 @@ def beautify_java_code(tokens):
         # if tok in ["\"","\'"]:
         #     quote_start *= False
         # if tok in ["(",""]
-    return "".join(tokens)
+    return "".join(new_tokens)
 def beautify_python_code(tokens):
     """ A customized beautify function for python.
     NatGEN transformation will return a list of perturbed tokens, 
