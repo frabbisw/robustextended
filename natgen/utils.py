@@ -120,7 +120,7 @@ def beautify_code(tokens, language="python"):
         print(f"language {language} not supported for beatify_code!")
         exit()
 
-def beaitify_java_code(tokens):
+def beautify_java_code(tokens):
     total_indent = 0
     trailing_space = True;
     new_tokens = tokens[:1]

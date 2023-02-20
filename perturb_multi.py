@@ -290,8 +290,6 @@ def perturb_partial(args, data, recipes):
             # Only black normalization or no partial code (just one line return)
             new_code = code
         else:
-            import pdb; pdb.set_trace()
-
             new_code = code
             # new_code = res["prompt"]
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
@@ -305,6 +303,9 @@ def perturb_partial(args, data, recipes):
             new_code, meta = tsf.transform_code(code=new_code, first_half=True)
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = beautify_python_code(new_code.split()).replace("\\", "")
+            if args.data in ["mbjp", "humanevaljava"]:
+                new_code = beautify_java_code(new_code.split()).replace("\\", "")
+            import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
             new_doc = black_tablize_doc(doc, indent_type)
             if "@@this is the line to split##" in code:
