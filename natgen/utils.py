@@ -122,7 +122,6 @@ def beautify_code(tokens, language="python"):
 
 def beautify_java_code(tokens, indent):
     tmp = []
-    tokens.remove("")
     for i in range(len(tokens)):
         tok = tokens[i]
         if "NEWLINE" in tok:
@@ -143,6 +142,8 @@ def beautify_java_code(tokens, indent):
         else:
             tmp.append(tok)
     tokens=tmp
+    if "" in tokens:
+        tokens.remove("")
     total_indent = 0
     trailing_space = True;
     new_tokens = tokens[:1]
