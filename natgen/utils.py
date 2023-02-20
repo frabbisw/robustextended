@@ -120,7 +120,7 @@ def beautify_code(tokens, language="python"):
         print(f"language {language} not supported for beatify_code!")
         exit()
 
-def beautify_java_code(tokens, indent):
+def beautify_java_code(tokens, indent="    "):
     tmp = []
     for i in range(len(tokens)):
         tok = tokens[i]

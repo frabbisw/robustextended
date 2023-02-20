@@ -277,6 +277,8 @@ def perturb_partial(args, data, recipes):
 
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
+        if indent_type == "" or indent_type is None:
+            indent_type = "    "
 
         # import pdb; pdb.set_trace();
 
