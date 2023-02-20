@@ -327,8 +327,8 @@ def perturb_partial(args, data, recipes):
         # import pdb; pdb.set_trace()
         if args.data in ["humaneval","humanevalpy","mbpp"]:
             new_code, resp = black_reformat(new_code, orig_code=res)
-        # else:
-        #     resp = False
+        else:
+            resp = True
         # import pdb; pdb.set_trace()
         # make sure this sep works correctly for mbpp
         # new_header, new_doc, new_body = sep(new_code)
