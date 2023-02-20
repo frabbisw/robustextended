@@ -304,7 +304,7 @@ def perturb_partial(args, data, recipes):
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = beautify_python_code(new_code.split()).replace("\\", "")
             if args.data in ["mbjp", "humanevaljava"]:
-                new_code = beautify_java_code(new_code.split()).replace("\\", "")
+                new_code = beautify_java_code(new_code.split()).replace("\\", "", indent_type)
             import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
             new_doc = black_tablize_doc(doc, indent_type)
