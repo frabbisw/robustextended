@@ -121,10 +121,21 @@ def beautify_code(tokens, language="python"):
         exit()
 
 def beautify_java_code(tokens, indent):
+    tmp = []
+    for tok in tokens:
+        if "NEWLINE" in tok:
+            rr = tok.split("NEWLINE")
+            tmp.append(rr[0])
+            for r in rr[1:]:
+                tmp.append("NEWLINE")
+                tmp.append(r)
+        else:
+            tmp.append(tok)
+    tokens=tmp
     total_indent = 0
     trailing_space = True;
     new_tokens = tokens[:1]
-    indent = "\t"
+    # indent = "\t"
     # quote_start = False
     # trailing_space * " " +
     for i in range(1, len(tokens)):
@@ -140,9 +151,13 @@ def beautify_java_code(tokens, indent):
             trailing_space = True
         elif tok == "(":
             new_tokens.append(trailing_space * " " +"(")
+            trailing_space = False
         elif tok == ")":
             new_tokens.append(")")
             trailing_space = False
+        elif tok == ",":
+            new_tokens.append(tok)
+            trailing_space = True
         elif tok in ["if", "for", "foreach", "while", "do"]:
             new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
@@ -164,14 +179,13 @@ def beautify_java_code(tokens, indent):
             trailing_space = False
         elif tok == ";":
             new_tokens.append(tok)
-            trailing_space = False
-
+            trailing_space = True
         elif tok == "NEWLINE":
-            new_tokens.append("\n"+total_indent*indent)
             trailing_space = False
+            new_tokens.append("\n"+total_indent*indent)
         else:
             new_tokens.append(trailing_space * " " + tok)
-            trailing_space = True
+            trailing_space = False
         # if tok in ["\"","\'"]:
         #     quote_start *= False
         # if tok in ["(",""]
