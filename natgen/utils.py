@@ -124,6 +124,8 @@ def beautify_java_code(tokens, indent):
     tmp = []
     for i in range(len(tokens)):
         tok = tokens[i]
+        if tok == "":
+            continue
     # for tok in tokens:
         if "NEWLINE" in tok:
             rr = tok.split("NEWLINE")
