@@ -148,6 +148,10 @@ def beautify_java_code(tokens, indent):
     total_indent = 0
     trailing_space = True;
     new_tokens = tokens[:1]
+
+    if "" in tokens:
+        print("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaallllll")
+
     # indent = "\t"
     # quote_start = False
     # trailing_space * " " +
