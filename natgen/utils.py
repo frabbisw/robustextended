@@ -120,7 +120,62 @@ def beautify_code(tokens, language="python"):
         print(f"language {language} not supported for beatify_code!")
         exit()
 
+def beaitify_java_code(tokens):
+    total_indent = 0
+    trailing_space = True;
+    new_tokens = tokens[:1]
+    indent = "\t"
+    # quote_start = False
+    # trailing_space * " " +
+    for i in range(1, len(tokens)):
+        tok = tokens[i]
+    # for tok in tokens:
+        if tok == "{":
+            new_tokens.append(" {")
+            total_indent += 1
+            trailing_space = False
+        elif tok == "}":
+            new_tokens.append("}")
+            total_indent -= 1
+            trailing_space = True
+        elif tok == "(":
+            new_tokens.append(trailing_space * " " +"(")
+        elif tok == ")":
+            new_tokens.append(")")
+            trailing_space = False
+        elif tok in ["if", "for", "foreach", "while", "do"]:
+            new_tokens.append(trailing_space * " " + tok)
+            trailing_space = True
+        elif tok == ".":
+            trailing_space = False
+            new_tokens.append(tok)
+        elif tok == "*":
+            if tokens[i-1] == ".":
+                new_tokens.append(tok)
+                trailing_space = False
+            else:
+                new_tokens.append(" " + tok)
+                trailing_space = True
+        elif tok in ["+", "-", "/", "*", "&", "&&", "<", ">", "%"]:
+            trailing_space = True
+            new_tokens.append(trailing_space * " " + tok)
+        elif tok == "!":
+            new_tokens.append(" " + tok)
+            trailing_space = False
+        elif tok == ";":
+            new_tokens.append(tok)
+            trailing_space = False
 
+        elif tok == "NEWLINE":
+            new_tokens.append("\n"+total_indent*indent)
+            trailing_space = False
+        else:
+            new_tokens.append(trailing_space * " " + tok)
+            trailing_space = True
+        # if tok in ["\"","\'"]:
+        #     quote_start *= False
+        # if tok in ["(",""]
+    return "".join(tokens)
 def beautify_python_code(tokens):
     """ A customized beautify function for python.
     NatGEN transformation will return a list of perturbed tokens, 
