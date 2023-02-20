@@ -154,7 +154,7 @@ def beautify_java_code(tokens, indent):
             trailing_space = False
         elif tok == ")":
             new_tokens.append(")")
-            trailing_space = False
+            trailing_space = True
         elif tok == ",":
             new_tokens.append(tok)
             trailing_space = True
