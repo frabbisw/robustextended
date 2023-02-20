@@ -185,7 +185,7 @@ def beautify_java_code(tokens, indent):
             new_tokens.append("\n"+total_indent*indent)
         else:
             new_tokens.append(trailing_space * " " + tok)
-            trailing_space = False
+            trailing_space = True
         # if tok in ["\"","\'"]:
         #     quote_start *= False
         # if tok in ["(",""]
