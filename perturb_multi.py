@@ -260,7 +260,11 @@ def perturb_partial(args, data, recipes):
         res = {}
         for k, v in entry.items():
             res[k] = v
-        
+
+        import pdb;
+        pdb.set_trace()
+
+
         # if "partial" not in res: import pdb; pdb.set_trace()
         if res["partial"] is not None:
             # header, doc, body = sep(res["partial"], res['entry_point'], args.data)
@@ -320,8 +324,6 @@ def perturb_partial(args, data, recipes):
         # add doc into the transformed new code
         # new_header, _, new_body = sep(new_code, res['entry_point'])
 
-        import pdb;
-        pdb.set_trace()
 
         new_header, _, new_body = sep(new_code, res['entry_point'], args.data)
 
