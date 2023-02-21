@@ -53,6 +53,7 @@ def add_entry_points(dir, entry_points, lang):
                 entry_point = python_to_others(entry_points[cnt])
             obj["entry_point"] = entry_point
             lines.append(obj)
+            cnt += 1
 
     with jsonlines.open(os.path.join(dataset_dir,"HumanEval_{lang}.jsonl".format(lang=lang)), mode='w') as writer:
         for line in lines:
