@@ -120,6 +120,8 @@ def beautify_code(tokens, language="python"):
         print(f"language {language} not supported for beatify_code!")
         exit()
 
+def beautify_cpp_code(tokens, indent="    "):
+    print("function not ready")
 def beautify_java_code(tokens, indent="    "):
     tmp = []
     for i in range(len(tokens)):
