@@ -309,7 +309,8 @@ def perturb_partial(args, data, recipes):
                 new_code = beautify_java_code(new_code.split(), indent_type).replace("\\", "")
             # import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
-            new_doc = black_tablize_doc(doc, indent_type)
+            if data in ["humaneval", "mbpp", "humanevalpy"]:
+                new_doc = black_tablize_doc(doc, indent_type)
             if "@@this is the line to split##" in code:
                 # uncomment the split such that it will not be removed by natgen
                 new_code = new_code.replace("print(\'@@this is the line to split##\')", "# print(\'@@this is the line to split##\')")
