@@ -367,7 +367,18 @@ def sep(code, entry_point, data):
         code = code[doc_end + 4:] if doc_begin != -1 and doc_end != -1 else code[header_end + 1:]
         # import pdb; pdb.set_trace()
         return header, doc, code
-    elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjp", "mbjsp", "mbcp"]:
+    elif data in ["humanevaljava"]:
+        lines = code.split("\n")
+        first_index = 0
+        last_index = 0
+        for i in range(len(lines)):
+            if "Solution" in lines[i]:
+                first_index=i
+            elif entry_point in lines[i]:
+                last_index=i
+                break
+        return "\n".join(lines[:first_index+1],lines[first_index+1,last_index],lines[last_index:])
+    elif data in ["humanevalcpp", "humanevaljs", "mbjsp", "mbcp"]:
         start = code.find("/*")
         end = code.find("*/", start+2)+2
         end = code.find("\n", end) + 1
