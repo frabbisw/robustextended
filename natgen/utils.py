@@ -377,7 +377,7 @@ def sep(code, entry_point, data):
             elif entry_point in lines[i]:
                 last_index=i
                 break
-        return "\n".join(lines[:first_index+1]), "\n".join(lines[first_index+1,last_index]), "\n".join(lines[last_index:])
+        return "\n".join(lines[:first_index+1]), "\n".join(lines[first_index+1:last_index]), "\n".join(lines[last_index:])
     elif data in ["humanevalcpp", "humanevaljs", "mbjsp", "mbcp"]:
         start = code.find("/*")
         end = code.find("*/", start+2)+2
