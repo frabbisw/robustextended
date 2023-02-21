@@ -256,8 +256,8 @@ def perturb_partial(args, data, recipes):
     generated_data = []
     diff = 0
     for idx, entry in tqdm(enumerate(data)):
-        import pdb;
-        pdb.set_trace()
+        # import pdb;
+        # pdb.set_trace()
 
         # if entry["task_id"] != "MBPP/11": continue
         res = {}
