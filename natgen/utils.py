@@ -120,9 +120,17 @@ def beautify_code(tokens, language="python"):
         print(f"language {language} not supported for beatify_code!")
         exit()
 
-def beautify_cpp_code(tokens, indent="    "):
-    print("function not ready")
-def beautify_java_code(tokens, indent="    "):
+# def beautify_other_codes(tokens, dataname, indent="    "):
+#     if dataname == "humanevaljava":
+#         cond_signs = ["if", "for", "foreach", "while", "do"]
+#         operators = ["+", "-", "/", "*", "&", "&&", "<", ">", "%"]
+#         incrementers = ["++", "+=", "--", "-=", "**", "/="]
+#     elif dataname == "humanevalcpp":
+#         cond_signs = ["if", "else", "switch", "for", "foreach", "while", "do"]
+#         operators = ["+", "-", "/", "*", "&", "&&", "<", ">", "%"]
+#         incrementers = ["++", "+=", "--", "-=", "**", "/="]
+
+def beautify_cpp_java_js_code(tokens, indent="    "):
     tmp = []
     for i in range(len(tokens)):
         tok = tokens[i]
