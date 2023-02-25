@@ -255,6 +255,9 @@ def perturb_partial(args, data, recipes):
     # import pdb; pdb.set_trace()
     generated_data = []
     diff = 0
+    import random
+    random.shuffle(data)
+    random.shuffle(data)
     for idx, entry in tqdm(enumerate(data)):
         # import pdb;
         # pdb.set_trace()
@@ -280,6 +283,9 @@ def perturb_partial(args, data, recipes):
             header, doc, body = sep(res["partial"], res['entry_point'], args.data)
             # import pdb; pdb.set_trace()
 
+        # import pdb;
+        # pdb.set_trace()
+
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
         if indent_type == "" or indent_type is None:
@@ -298,6 +304,8 @@ def perturb_partial(args, data, recipes):
             new_code = code
         else:
             new_code = code
+            # import pdb;
+            # pdb.set_trace()
             # new_code = res["prompt"]
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = new_code.replace(";\n", "\n").replace(";", "\n")
@@ -347,6 +355,8 @@ def perturb_partial(args, data, recipes):
             # new_code = new_header + new_doc + new_body
             # idx = new_code.find("@@this is the line to split##")
             idx = new_code.find("# print(\'@@this is the line to split##\')")
+            if idx == -1:
+                idx = new_code.find("print(' @ this is the line to split ## '")
             line_end = idx - 1
             while new_code[idx] in [" ", "\t"]:
                 line_end -= 1

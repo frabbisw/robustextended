@@ -164,8 +164,12 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
     # trailing_space * " " +
     for i in range(1, len(tokens)):
         tok = tokens[i]
-    # for tok in tokens:
-        if tok == "{":
+    for tok in tokens:
+        if tok in ["#include","#define","using"] and tokens[i-1] != "NEWLINE":
+            new_tokens.append("\n")
+            new_tokens.append(tok)
+            trailing_space = False
+        elif tok == "{":
             new_tokens.append(" {")
             total_indent += 1
             trailing_space = False
@@ -220,6 +224,8 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
         else:
             new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
+        if new_tokens[0] == "\n":
+            new_tokens[1:]
     return "".join(new_tokens)
 def beautify_python_code(tokens):
     """ A customized beautify function for python.
@@ -382,12 +388,34 @@ def sep(code, entry_point, data):
                 last_index=i
                 # break
         return "\n".join(lines[:first_index+1])+"\n", "\n".join(lines[first_index+1:last_index])+"\n", "\n".join(lines[last_index:])
-    elif data in ["humanevalcpp", "humanevaljs", "mbjsp", "mbcp"]:
-        start = code.find("/*")
-        end = code.find("*/", start+2)+2
-        end = code.find("\n", end) + 1
-        # import pdb; pdb.set_trace()
-        return code[:start], code[start:end], code[end:]
+    # elif data in ["humanevalcpp"]:
+    #     lines = code.split("\n")
+    #     first_index = 0
+    #     last_index = 0
+    #     for i in range(len(lines)):
+    #         if "#include" in lines[i] or in lines[i]:
+    #             first_index = i
+    #         elif entry_point in lines[i]:
+    #             last_index = i
+    #             # break
+    #     return "\n".join(lines[:first_index + 1]) + "\n", "\n".join(
+    #         lines[first_index + 1:last_index]) + "\n", "\n".join(lines[last_index:])
+    elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjsp", "mbcp"]:
+        lines = code.split("\n")
+        first_index = 0
+        last_index = 0
+        for i in range(len(lines)):
+            if "/*" in lines[i]:
+                first_index=i
+            elif "*/" in lines[i]:
+                last_index=i
+        return "\n".join(lines[:first_index]) + "\n", "\n".join(
+            lines[first_index:last_index+1]) + "\n", "\n".join(lines[last_index+1:])
+        # start = code.find("/*")
+        # end = code.find("*/", start+2)+2
+        # end = code.find("\n", end) + 1
+        # # import pdb; pdb.set_trace()
+        # return code[:start], code[start:end], code[end:]
     else:
         print(f"dataset {data} not supported")
         exit()
