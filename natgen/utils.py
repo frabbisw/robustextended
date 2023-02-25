@@ -388,34 +388,32 @@ def sep(code, entry_point, data):
                 last_index=i
                 # break
         return "\n".join(lines[:first_index+1])+"\n", "\n".join(lines[first_index+1:last_index])+"\n", "\n".join(lines[last_index:])
-    # elif data in ["humanevalcpp"]:
-    #     lines = code.split("\n")
-    #     first_index = 0
-    #     last_index = 0
-    #     for i in range(len(lines)):
-    #         if "#include" in lines[i] or in lines[i]:
-    #             first_index = i
-    #         elif entry_point in lines[i]:
-    #             last_index = i
-    #             # break
-    #     return "\n".join(lines[:first_index + 1]) + "\n", "\n".join(
-    #         lines[first_index + 1:last_index]) + "\n", "\n".join(lines[last_index:])
-    elif data in ["humanevaljava", "humanevalcpp", "humanevaljs", "mbjsp", "mbcp"]:
-        lines = code.split("\n")
-        first_index = 0
-        last_index = 0
-        for i in range(len(lines)):
-            if "/*" in lines[i]:
-                first_index=i
-            elif "*/" in lines[i]:
-                last_index=i
-        return "\n".join(lines[:first_index]) + "\n", "\n".join(
-            lines[first_index:last_index+1]) + "\n", "\n".join(lines[last_index+1:])
-        # start = code.find("/*")
-        # end = code.find("*/", start+2)+2
-        # end = code.find("\n", end) + 1
-        # # import pdb; pdb.set_trace()
-        # return code[:start], code[start:end], code[end:]
+    elif data in ["humanevalcpp"]:
+        if "*/" not in code:
+            return "","",code
+        else:
+            lines = code.split("\n")
+            first_index = 0
+            last_index = 0
+            for i in range(len(lines)):
+                if "/*" in lines[i]:
+                    first_index = i
+                elif "*/" in lines[i]:
+                    last_index = i
+        return "","\n".join(lines[:last_index + 1])+"\n", "\n".join(lines[last_index + 1:])
+    elif data in ["humanevaljs"]:
+        if "*/" not in code:
+            return "", "", code
+        else:
+            lines = code.split("\n")
+            first_index = 0
+            last_index = 0
+            for i in range(len(lines)):
+                if "/*" in lines[i]:
+                    first_index = i
+                elif "*/" in lines[i]:
+                    last_index = i
+        return "", "\n".join(lines[:last_index + 1]) + "\n", "\n".join(lines[last_index + 1:])
     else:
         print(f"dataset {data} not supported")
         exit()
