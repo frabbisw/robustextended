@@ -83,7 +83,7 @@ def detect_indent_type(code, entry_point):
 def tab_indent(code, entry_point, language="python"):
     """ The main function to decide which type of tab_indent transformations used
     """
-    assert language == "python"
+    # assert language == "python"
     indent_type = detect_indent_type(code, entry_point)
     # if indent_type not in ["        ", "    ", "  "]:
     #     import pdb; pdb.set_trace()

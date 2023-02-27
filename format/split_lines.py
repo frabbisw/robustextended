@@ -33,15 +33,25 @@ def longest_splits(code, entry_point, language):
     longest_idx = 0
     longest_length = -1
     comment = False
+
+    line_comment_sign = {"python":"#","java":"//","javascript":"//","cpp":"//","go":"//"}
+
     for line_idx, line in enumerate(lines):
         if line.replace(" ", "").replace("\t", "").replace("\n", "") == "": # empty line
             continue
         # skip comment lines so as not to perturb these lines
+
         if language == "python":
             if "\'\'\'" in line or "\"\"\"" in line:
                 comment = not comment
                 continue
             if "#" in line or comment:
+                continue
+        elif language in line_comment_sign.keys():
+            if "/*" in line or "*/" in line:
+                comment = not comment
+                continue
+            if line_comment_sign[language] in line or comment:
                 continue
         else:
             raise NotImplementedError
@@ -124,7 +134,7 @@ def longest_splits(code, entry_point, language):
                     new_line = new_line[:string_start] + "@!string!@" + new_line[string_end + 1:]
                     string_start = new_line.find("\"")
 
-            if language == "python":
+            if language in ["python","java","javascript","cpp","go"]:
                 words = new_line.split(" ")
                 if len(words) >= 2:
                     # split_pos = random.randint(1, len(words) - 1) # random position split
@@ -132,8 +142,15 @@ def longest_splits(code, entry_point, language):
                     words.insert(split_pos, " \\\n ")
                     new_line = indent + " ".join(words) + post
                     added_splits += 1
-            else:
-                raise NotImplementedError
+            # else:
+            #     words = new_line.split(" ")
+            #     if len(words) >= 2:
+            #         # split_pos = random.randint(1, len(words) - 1) # random position split
+            #         split_pos = len(words) // 2  # middle position split
+            #         words.insert(split_pos, " \\\n ")
+            #         new_line = indent + " ".join(words) + post
+            #         added_splits += 1
+            #     # raise NotImplementedError
 
             string_start = new_line.find("@!string!@")
             while string_start != -1:
