@@ -164,7 +164,7 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
     # trailing_space * " " +
     for i in range(1, len(tokens)):
         tok = tokens[i]
-    for tok in tokens:
+    # for tok in tokens:
         if tok in ["#include","#define","using"] and tokens[i-1] != "NEWLINE":
             new_tokens.append("\n")
             new_tokens.append(tok)
@@ -224,8 +224,8 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
         else:
             new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
-        if new_tokens[0] == "\n":
-            new_tokens[1:]
+    if new_tokens[0] == "\n":
+        new_tokens[1:]
     return "".join(new_tokens)
 def beautify_python_code(tokens):
     """ A customized beautify function for python.

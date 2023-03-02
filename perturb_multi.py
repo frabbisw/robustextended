@@ -283,8 +283,6 @@ def perturb_partial(args, data, recipes):
             header, doc, body = sep(res["partial"], res['entry_point'], args.data)
             # import pdb; pdb.set_trace()
 
-        # import pdb;
-        # pdb.set_trace()
 
         code = header + body
         indent_type = detect_indent_type(res["prompt"], res['entry_point'])
@@ -332,6 +330,8 @@ def perturb_partial(args, data, recipes):
 
         # add doc into the transformed new code
         # new_header, _, new_body = sep(new_code, res['entry_point'])
+        # import pdb;
+        # pdb.set_trace()
 
         new_header, _, new_body = sep(new_code, res['entry_point'], args.data)
 
