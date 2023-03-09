@@ -69,9 +69,13 @@ class EnglishInflectionalVariation(SentenceOperation):
         perturbed_tokens = [
             self.randomly_inflect(
                 tokens, pos_tagged, random.randint(0, i * 1000)
+                # tokens, pos_tagged, 0
             )
             for i in range(self.max_outputs)
         ]
+        # import pdb;
+        # pdb.set_trace()
+
         perturbed_tokens = [
             [(t, tokenized[i][1]) for i, t in enumerate(sentence)]
             for sentence in perturbed_tokens

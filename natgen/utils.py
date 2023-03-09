@@ -414,6 +414,30 @@ def sep(code, entry_point, data):
                 elif "*/" in lines[i]:
                     last_index = i
         return "", "\n".join(lines[:last_index + 1]) + "\n", "\n".join(lines[last_index + 1:])
+    elif data in ["humanevalgo", "mbppgo"]:
+        if "//" not in code:
+            entry_line = -1
+            lines = code.split("\n")
+            for i in range(len(lines)):
+                if entry_point in lines[i]:
+                    entry_line = i
+                    break
+            return "\n".join(lines[0:entry_line])+"\n", "", "\n".join(lines[entry_line:])
+        else:
+            start_point = -1
+            end_point = -1
+            lines = code.split("\n")
+            for i in range(len(lines)):
+                if "//" in lines[i]:
+                    if start_point < 0:
+                        start_point = i
+                if entry_point in lines[i]:
+                    end_point = i
+                    break
+            head = "\n".join(lines[0:start_point])+"\n"
+            doc = "\n".join(lines[start_point:end_point])+"\n"
+            test = "\n".join(lines[end_point:])
+            return head, doc, test
     else:
         print(f"dataset {data} not supported")
         exit()

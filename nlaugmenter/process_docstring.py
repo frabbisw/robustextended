@@ -13,8 +13,26 @@ def sep_doc(data, prompt, entry_point):
     the whole documents in prompt including docstring & examples.
     """
     # sep into header, docstring only (without any special charaters like """), examples
-    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava", "humanevalcpp", "humanevaljs"]:
-        if data in ["humanevalpy", "humaneval", "mbpp"]:
+    if data in ["humaneval", "mbpp", "humanevalpy", "humanevaljava", "humanevalcpp", "humanevaljs", "humanevalgo", "mbgo"]:
+        if data in ["humanevalgo", "mbgo"]:
+            start_point = -1
+            end_point = -1
+            lines = prompt.split("\n")
+            for i in range(len(lines)):
+                if "//" in lines[i]:
+                    if start_point < 0:
+                        start_point = i
+                if entry_point in lines[i]:
+                    end_point = i
+                    break
+            head = "\n".join(lines[0:start_point])+"\n"
+            doc = "\n".join(lines[start_point:end_point])
+            doc = doc.replace("// ", "")
+            doc = doc.replace("//", "")
+            test = "\n"+"\n".join(lines[end_point:])
+            return head, doc, test
+
+        elif data in ["humanevalpy", "humaneval", "mbpp"]:
             doc_start_sign = '"""'
             doc_start_sign_alt = '\'\'\''
             start_limit = prompt.find(entry_point)

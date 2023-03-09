@@ -144,13 +144,14 @@ def ptb_entry(args, entry, ptb, seed=0):
 
     # print("start pdb")
 
+
     # we need to maintain a blacklist for variable names, function names, and type names such that we will not perturb these names
 
     # if args.data in ["humaneval", "humanevalpy", "mbpp"]:
     #     code_string = entry["prompt"] + entry["canonical_solution"]
     # elif args.data in ["mbjp", "mbjsp"]:
     #     code_string = entry["prompt"]
-    if args.data in ["humaneval", "humanevalpy", "mbpp", "humanevaljava", "humanevaljs", "humanevalcpp"]:
+    if args.data in ["humaneval", "humanevalpy", "mbpp", "humanevaljava", "humanevaljs", "humanevalcpp", "humanevalgo","mbgo"]:
         code_string = entry["prompt"] + entry["canonical_solution"]
     else:
         print(f"data {args.data} not supported for docstring perturbation")
@@ -159,11 +160,13 @@ def ptb_entry(args, entry, ptb, seed=0):
 
     ptbd_doc = ptb_doc(doc, ptb, seed, black_list)
 
-    # import pdb;pdb.set_trace()
+    if args.data in ["humanevalgo","mbgo"]:
+        ptbd_doc = "\n".join(["// " + line for line in ptbd_doc.split("\n")])
 
     res = {k:v for k, v in entry.items()}
     res['prompt'] = ''.join([head, ptbd_doc, cases])
     res['seed'] = seed
+
     return res
 
 

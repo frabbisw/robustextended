@@ -76,6 +76,9 @@ def FuncRenameInflectionalVariation(code, entry_point):
         # new_func_name = t.generate(entry_point)[0]
         if "_" in entry_point:
             # has_close_elements => receive_close_element
+            # import pdb;
+            # pdb.set_trace()
+
             new_func_name = " ".join(entry_point.split("_"))
             new_func_name = t.generate(new_func_name)[0]
             new_func_name = "_".join(new_func_name.split(" "))
@@ -88,7 +91,6 @@ def FuncRenameInflectionalVariation(code, entry_point):
             _, new_func_name = FuncRenameCamelCase(new_code, new_func_name)
         new_code, new_func_name = replace_func_name(new_code, entry_point, new_func_name)
         # print(f"function name from \"{entry_point}\" to \"{new_func_name}\"")
-        # import pdb; pdb.set_trace()
     return new_code, new_func_name
 
 

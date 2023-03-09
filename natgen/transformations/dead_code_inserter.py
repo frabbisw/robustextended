@@ -257,6 +257,8 @@ class DeadCodeInserter(TransformationBase):
                 return modified_root, modified_code, True
         # except:
         #     pass
+        # import pdb; pdb.set_trace()
+
         return root, original_code, False
 
     def transform_code(
