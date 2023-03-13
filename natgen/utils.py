@@ -165,7 +165,7 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
     for i in range(1, len(tokens)):
         tok = tokens[i]
     # for tok in tokens:
-        if tok in ["#include","#define","using"] and tokens[i-1] != "NEWLINE":
+        if tok in ["#include","#define","using", "package", "import"] and tokens[i-1] != "NEWLINE":
             new_tokens.append("\n")
             new_tokens.append(tok)
             trailing_space = False
@@ -194,7 +194,9 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
             if tokens[i-1] == "NEWLINE":
                 new_tokens.append(tok)
             else:
-                new_tokens.append(trailing_space * " " + tok)
+                new_tokens.append("\n")
+                new_tokens.append(tok)
+                # new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
         elif tok == ".":
             trailing_space = False
@@ -215,7 +217,7 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
         elif tok == ";":
             new_tokens.append(tok)
             trailing_space = True
-        elif tok in ["++", "+=", "--", "-=", "**", "/="]:
+        elif tok in ["++", "+=", "--", "-=", "**", "/=", ":="]:
             new_tokens.append(tok)
             trailing_space = False
         elif tok == "NEWLINE":
@@ -432,8 +434,11 @@ def sep(code, entry_point, data):
                     if start_point < 0:
                         start_point = i
                 if entry_point in lines[i]:
-                    end_point = i
-                    break
+                    if "func" in lines[i]:
+                        end_point = i
+                        break
+                    else:
+                        continue
             head = "\n".join(lines[0:start_point])+"\n"
             doc = "\n".join(lines[start_point:end_point])+"\n"
             test = "\n".join(lines[end_point:])

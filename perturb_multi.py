@@ -317,9 +317,15 @@ def perturb_partial(args, data, recipes):
             tsf = eval(recipes[args.aug_method])("natgen/languages.so", get_languages(args.data))
             # first half = True for prompt based perturbations
             new_code, meta = tsf.transform_code(code=new_code, first_half=True)
+
+            # import pdb;pdb.set_trace()
+
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = beautify_python_code(new_code.split()).replace("\\", "")
-            if args.data in ["mbjp", "humanevaljava", "mbcp", "humanevalcpp", "mbjsp", "humanevaljs"]:
+            if args.data in ["mbjp", "humanevaljava", "mbcp", "humanevalcpp", "mbjsp", "humanevaljs", "humanevalgo", "mbgo"]:
+                print("####",end="")
+
+                print("####",end="")
                 new_code = beautify_cpp_java_js_code(new_code.split(), indent_type).replace("\\", "")
             # import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
@@ -357,9 +363,18 @@ def perturb_partial(args, data, recipes):
         if res["partial"] is not None and resp:
             # new_code = new_header + new_doc + new_body
             # idx = new_code.find("@@this is the line to split##")
-            idx = new_code.find("# print(\'@@this is the line to split##\')")
-            if idx == -1:
-                idx = new_code.find("print(' @ this is the line to split ## '")
+
+            split_lines_garbage = ["print(\'@@ this is the line to split ##\')", "# print(\'@@this is the line to split##\')", "print(' @ this is the line to split ## '"]
+            for s in split_lines_garbage:
+                idx = new_code.find(s)
+                if idx < 0:
+                    continue
+                else:
+                    break
+
+            # idx = new_code.find("# print(\'@@this is the line to split##\')")
+            # if idx == -1:
+            #     idx = new_code.find("print(' @ this is the line to split ## '")
             line_end = idx - 1
             while new_code[idx] in [" ", "\t"]:
                 line_end -= 1

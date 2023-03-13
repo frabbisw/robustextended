@@ -19,8 +19,8 @@ def new_lines(code, entry_point, language="python", ratio=0.5):
         doc_start = code.find("/*", code.find(entry_point))
         doc_end = code.find("*/", doc_start + 2) + 2
     elif language == "go":
-        print("for go, not implemented yet!")
-        exit()
+        doc_start = code.find("//")
+        doc_end = code.rfind(entry_point) - len("func ")
     else:
         print("doc_type not supported!")
         exit()
@@ -103,8 +103,8 @@ def new_line_afterdoc(code, entry_point, language="python"):
         doc_start = code.find("/*", code.find(entry_point))
         doc_end = code.find("*/", doc_start + 2) + 2
     elif language == "go":
-        print("for go, not implemented yet!")
-        exit()
+        doc_start = code.find("//")
+        doc_end = code.rfind(entry_point) - len("func ")
     else:
         print("doc_type not supported!")
         exit()
