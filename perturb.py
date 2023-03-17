@@ -428,7 +428,7 @@ if __name__ == '__main__':
     """
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', type=str, default="humaneval", choices=["humaneval", "mbpp", "mbjp", "mbjsp", "mbkp", "mbphp", "mbrbp"])
-    parser.add_argument('--config', default="config.json", help="The config to run.")
+    parser.add_argument('--config', default="config_multi.json", help="The config to run.")
     parser.add_argument('--rng-seed', type=int, default=42, help="global random seed.")
     parser.add_argument('--rng-deterministic', type=bool, default=True)
     parser.add_argument('--task', type=str, default="code_generation", choices=["code_generation", "partial_code", "function_completion"], help="The task for generating perturbation.")
