@@ -889,7 +889,7 @@ if __name__ == '__main__':
     parser.add_argument('method', type=str, choices=["normal", "nlaugmenter", "natgen", "format", "func_name", "random"], help="The classes of perturbation. Please set method to natgen with status nominal to evaluate nominal partial code.")
     parser.add_argument('--config', default="config.json", help="The config to run.")
     parser.add_argument('--aug_method', type=int, default=None, help="The detailed augmentation method used with index (index defined in config.json for each method). Default None means running all the perturbations")
-    parser.add_argument('--datasets', nargs='+', default=["humaneval"], help='A list of datasets to perturb/evaluate with')
+    parser.add_argument('--datasets', nargs='+', default=["humaneval"], choices=["humaneval", "humanevalpy", "humanevaljava", "humanevalgo", "humanevalcpp", "humanevaljs"], help='A list of datasets to perturb/evaluate with')
     parser.add_argument('--models', nargs='+', default=["codegen-350M-mono"], help="A list of the models needed to evaluate with (or create subset dataset for perturbed dataset, not needed most of the times).")
     parser.add_argument('--n_outputs', type=int, default=1, help="The total number of perturbations generated/evaluated with")
     parser.add_argument('--ngpus', type=int, default=1, help="The number of gpus to use.")
