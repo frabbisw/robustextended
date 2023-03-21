@@ -30,7 +30,7 @@ import torch
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 ##code generation model
 # checkpoint = "Salesforce/codegen-2B-mono"
-checkpoint = "Salesforce/codegen-350M-multi"
+checkpoint = "Salesforce/codegen-6B-multi"
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
