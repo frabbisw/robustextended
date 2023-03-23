@@ -20,4 +20,6 @@ py_path = "datasets/nominal/HumanEval_py.jsonl"
 go_path = "datasets/nominal/HumanEval_go.jsonl"
 js_path = "datasets/nominal/HumanEval_js.jsonl"
 
+prompts = full_view(java_path)
+
 import pdb; pdb.set_trace()

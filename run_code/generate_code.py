@@ -20,7 +20,7 @@ py_path = "../datasets/nominal/HumanEval_py.jsonl"
 go_path = "../datasets/nominal/HumanEval_go.jsonl"
 js_path = "../datasets/nominal/HumanEval_js.jsonl"
 
-prompts = load_prompts(java_path)
+prompts = load_prompts("../datasets/perturbed/humanevaljava/full/natgen/humanevaljava_DeadCodeInserter_s0.jsonl")
 
 #for the code generation model
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -30,7 +30,8 @@ import torch
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 ##code generation model
 # checkpoint = "Salesforce/codegen-2B-mono"
-checkpoint = "Salesforce/codegen-6B-multi"
+model_name = "codegen-6B-multi"
+checkpoint = "Salesforce/"+model_name
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
@@ -38,8 +39,9 @@ def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=512,temperature=0.8,top_p=0.9,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
-for i in tq(range(len(prompts))):
-    p = prompts[i]
-    p["gc"] = prompt_to_code(p["prompt"])
-    prompts[i]=p
-save_prompts("../datasets/generated/HumanEval_java.jsonl", prompts)
+for itr in range(10):
+    for i in tq(range(len(prompts))):
+        p = prompts[i]
+        p["gc"] = prompt_to_code(p["prompt"])
+        prompts[i] = p
+    save_prompts(f"../datasets/generated/humanevaljava_DeadCodeInserter_s0_6B_itr_{itr}.jsonl", prompts)

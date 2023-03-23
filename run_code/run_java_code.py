@@ -1,4 +1,7 @@
 import json
+from tqdm import tqdm as tq
+import os
+import subprocess
 
 def view(filename):
     prompts = []
@@ -21,50 +24,52 @@ def load_prompts(filename):
             prompts.append(json.loads(line))
     return prompts
 
-java_path = "../datasets/nominal/HumanEval_java.jsonl"
-cpp_path = "../datasets/nominal/HumanEval_cpp.jsonl"
-py_path = "../datasets/nominal/HumanEval_py.jsonl"
-go_path = "../datasets/nominal/HumanEval_go.jsonl"
-js_path = "../datasets/nominal/HumanEval_js.jsonl"
+result_path = "../datasets/generated/HumanEval_java_350m.jsonl"
 
-prompts = load_prompts(java_path)
-sample_java_main = "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n" + prompts[0]["test"]
-sample_java_solution = prompts[0]["prompt"] + prompts[0]["canonical_solution"]
+prompts = load_prompts(result_path)
 
-with open("../tmp/Main.java", "w") as f:
-    f.write(sample_java_main)
-with open("../tmp/Solution.java", "w") as f:
-    f.write(sample_java_solution)
+# for i in tq(range(len(prompts))):
+for i in range(164):
+    if i == 49:
+        continue
+    prompt = prompts[i]
+
+    sample_java_main = "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n" + prompts[i]["test"]
+    sample_java_solution = prompts[i]["gc"]
+
+    if "<|endoftext|>" in sample_java_solution:
+        sample_java_solution = sample_java_solution[:sample_java_solution.find("<|endoftext|>")]
+
+    with open("../tmp/Main.java", "w") as f:
+        f.write(sample_java_main)
+    with open("../tmp/Solution.java", "w") as f:
+        f.write(sample_java_solution)
+    os.chdir("../tmp/")
+
+    try:
+        # run javac command to compile Java code
+        compile_output = subprocess.check_output(['javac', 'Main.java', 'Solution.java'], stderr=subprocess.STDOUT)
+
+        # run java command to execute Main class
+        run_output = subprocess.check_output(['java', 'Main'], stderr=subprocess.STDOUT)
+
+        # print the output from the Java program
+        print(f"{i} successful")
+        # print(run_output.decode('utf-8'))
 
 
+    except subprocess.CalledProcessError as e:
+        # print the error message and output from the Java compiler or program
+        print(f"{i} failed")
+        # print("An error occurred while running the program:")
+        # print(e.output.decode('utf-8'))
+        # print("Return code: ", e.returncode)
 
-import os
-import subprocess
-os.chdir("../tmp/")
+    # try:
+    #     subprocess.check_output(['rm', 'Main.java', 'Solution.java', 'Main.class', 'Solution.class'])
+    # except:
+    #     print("can not delete files")
 
-try:
-    # run javac command to compile Java code
-    compile_output = subprocess.check_output(['javac', 'Main.java', 'Solution.java'], stderr=subprocess.STDOUT)
-
-    # run java command to execute Main class
-    run_output = subprocess.check_output(['java', 'Main'], stderr=subprocess.STDOUT)
-
-    # print the output from the Java program
-    print("the program ran successfully")
-    print(run_output.decode('utf-8'))
-
-
-except subprocess.CalledProcessError as e:
-    # print the error message and output from the Java compiler or program
-    print("An error occurred while running the program:")
-    print(e.output.decode('utf-8'))
-    print("Return code: ", e.returncode)
-
-try:
-    subprocess.check_output(['rm', 'Main.java', 'Solution.java', 'Main.class', 'Solution.class'])
-except:
-    print("can not delete files")
-
-print("finished!!")
+    # print(f"finished!! {i}")
 
 # import pdb; pdb.set_trace()
