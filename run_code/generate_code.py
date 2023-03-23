@@ -36,7 +36,7 @@ code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(devic
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=512,temperature=0.8,top_p=0.9,do_sample = True)
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.8,top_p=0.9,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
 for itr in range(10):
@@ -45,3 +45,5 @@ for itr in range(10):
         p["gc"] = prompt_to_code(p["prompt"])
         prompts[i] = p
     save_prompts(f"../datasets/generated/humanevaljava_DeadCodeInserter_s0_6B_itr_{itr}.jsonl", prompts)
+    print("saved", f"../datasets/generated/humanevaljava_DeadCodeInserter_s0_6B_itr_{itr}.jsonl")
+print("saved all")

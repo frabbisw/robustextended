@@ -62,8 +62,10 @@ for i in range(164):
         # print the error message and output from the Java compiler or program
         print(f"{i} failed")
         # print("An error occurred while running the program:")
-        # print(e.output.decode('utf-8'))
-        # print("Return code: ", e.returncode)
+        print(e.output.decode('utf-8'))
+        print("Return code: ", e.returncode)
+        import pdb; pdb.set_trace()
+        print()
 
     # try:
     #     subprocess.check_output(['rm', 'Main.java', 'Solution.java', 'Main.class', 'Solution.class'])
