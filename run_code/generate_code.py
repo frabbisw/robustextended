@@ -51,5 +51,5 @@ for itr in range(10):
         prompts[i] = p
     save_prompts(os.path.join(save_dir, f"humanevaljava_BackTranslation_s0_java_6B_{itr}.jsonl"), prompts)
     print("saved", os.path.join(save_dir, f"humanevaljava_BackTranslation_s0_java_6B_{itr}.jsonl"))
-print("saved all")
+print("saved all files")
 
