@@ -38,8 +38,8 @@ def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.8,top_p=0.9,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
-prompts = load_prompts("../datasets/nominal/HumanEval_java.jsonl")
-save_dir = f"../datasets/generated/java/nominal"
+prompts = load_prompts("../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_BackTranslation_s0.jsonl")
+save_dir = f"../datasets/generated/java/docstring"
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
@@ -49,7 +49,7 @@ for itr in range(10):
         p = prompts[i]
         p["gc"] = prompt_to_code(p["prompt"])
         prompts[i] = p
-    save_prompts(os.path.join(save_dir, f"HumanEval_java_6B_{itr}.jsonl"), prompts)
-    print("saved", os.path.join(save_dir, f"HumanEval_java_6B_{itr}.jsonl"))
+    save_prompts(os.path.join(save_dir, f"humanevaljava_BackTranslation_s0_java_6B_{itr}.jsonl"), prompts)
+    print("saved", os.path.join(save_dir, f"humanevaljava_BackTranslation_s0_java_6B_{itr}.jsonl"))
 print("saved all")
 
