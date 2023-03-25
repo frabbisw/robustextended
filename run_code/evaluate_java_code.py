@@ -93,5 +93,7 @@ def get_report(directory):
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
 
     return report
-report = get_report("../datasets/generated/java/nominal")
-import pdb; pdb.set_trace()
+report = get_report("../datasets/generated/java/docstring")
+from collections import Counter
+print(Counter(report.values()))
+# import pdb; pdb.set_trace()
