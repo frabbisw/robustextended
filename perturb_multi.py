@@ -415,6 +415,9 @@ def perturb_format(args, data, recipes):
             print(entry["prompt"])
             print("================")
 
+        # print("6"*50)
+        # print(entry["prompt"])
+        # print("6" * 50)
         res["prompt"] = eval(recipes[args.aug_method])(entry["prompt"], entry["entry_point"], language=get_languages(args.data))
 
         if args.print_sample:

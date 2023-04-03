@@ -2,6 +2,7 @@ import json
 import os
 import jsonlines
 from tqdm import tqdm as tq
+import sys
 
 def load_prompts(filename):
     prompts = []
@@ -13,13 +14,6 @@ def save_prompts(filename, prompts):
     with jsonlines.open(filename, mode='w') as writer:
         for line in prompts:
             jsonlines.Writer.write(writer, line)
-
-java_path = "../datasets/nominal/HumanEval_java.jsonl"
-cpp_path = "../datasets/nominal/HumanEval_cpp.jsonl"
-py_path = "../datasets/nominal/HumanEval_py.jsonl"
-go_path = "../datasets/nominal/HumanEval_go.jsonl"
-js_path = "../datasets/nominal/HumanEval_js.jsonl"
-
 
 #for the code generation model
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -38,8 +32,11 @@ def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.8,top_p=0.9,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
-prompts = load_prompts("../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s0.jsonl")
-save_dir = f"../datasets/generated/java/docstring"
+# prompts = load_prompts("../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s0.jsonl")
+# save_dir = f"../datasets/generated/java/docstring"
+
+prompts = load_prompts(sys.argv[1])
+save_dir = sys.argv[2]
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
@@ -49,7 +46,9 @@ for itr in range(10):
         p = prompts[i]
         p["gc"] = prompt_to_code(p["prompt"])
         prompts[i] = p
-    save_prompts(os.path.join(save_dir, f"humanevaljava_SynonymInsertion_s0_java_6B_{itr}.jsonl"), prompts)
-    print("saved", os.path.join(save_dir, f"humanevaljava_SynonymInsertion_s0_java_6B_{itr}.jsonl"))
+    save_prompts(os.path.join(save_dir, f"f_{itr}.jsonl"), prompts)
+    print("saved", os.path.join(save_dir, f"f_{itr}.jsonl"))
 print("saved all files")
 
+
+# print(sys.argv[1], sys.argv[2])

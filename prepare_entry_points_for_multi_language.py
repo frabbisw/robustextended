@@ -45,13 +45,15 @@ def add_entry_points(dir, entry_points, lang):
     with open(os.path.join(dir,"humaneval.jsonl"),"r", encoding="utf8") as f:
         for line in f.readlines():
             obj = json.loads(line)
+            old_entry_point = entry_points[cnt]
             if lang == "go":
-                entry_point = python_to_go(entry_points[cnt])
+                new_entry_point = python_to_go(entry_points[cnt])
             elif lang == "py":
-                entry_point = entry_points[cnt]
+                new_entry_point = entry_points[cnt]
             else:
-                entry_point = python_to_others(entry_points[cnt])
-            obj["entry_point"] = entry_point
+                new_entry_point = python_to_others(entry_points[cnt])
+            obj["entry_point"] = new_entry_point
+            obj["prompt"] = obj["prompt"].replace(old_entry_point, new_entry_point)
             lines.append(obj)
             cnt += 1
 

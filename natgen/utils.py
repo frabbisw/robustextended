@@ -389,6 +389,8 @@ def sep(code, entry_point, data):
             elif entry_point in lines[i]:
                 last_index=i
                 # break
+        # if "accepts a list of strings as a parameter" in code:
+        #     import pdb; pdb.set_trace()
         return "\n".join(lines[:first_index+1])+"\n", "\n".join(lines[first_index+1:last_index])+"\n", "\n".join(lines[last_index:])
     elif data in ["humanevalcpp"]:
         if "*/" not in code:

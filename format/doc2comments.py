@@ -31,7 +31,7 @@ def doc2comments_structural(code, entry_point, language="java"):
     doc_end = code.find(doc_end_sign, doc_start + 2)
     # in case there are spaces after doc_end of """
     doc_line_end = doc_end + 2
-    for ch in code[doc_end:]:
+    for ch in code[doc_line_end:]:
         if ch in [" ", "\t"]:
             doc_line_end += 1
         else:
@@ -72,6 +72,11 @@ def doc2comments_structural(code, entry_point, language="java"):
     return new_code
 
 def doc2comments(code, entry_point, language="python"):
+    # print("@" * 50)
+    # print(code)
+    # print("+" * 50)
+    # print(entry_point)
+    # print("#"*50)
     if language in ["java", "cpp", "javascript", "go"]:
         return doc2comments_structural(code, entry_point, language)
     """ change \"\"\" to # comments
@@ -99,7 +104,7 @@ def doc2comments(code, entry_point, language="python"):
             indent = ch + indent
         else:
             break
-    if code[doc_line_start] != "\n": import pdb; pdb.set_trace()
+    # if code[doc_line_start] != "\n": import pdb; pdb.set_trace()
     assert code[doc_line_start] == "\n"
     doc_line_start += 1
 
@@ -111,7 +116,7 @@ def doc2comments(code, entry_point, language="python"):
             doc_line_end += 1
         else:
             break
-    if code[doc_line_end] != "\n": import pdb; pdb.set_trace()
+    # if code[doc_line_end] != "\n": import pdb; pdb.set_trace()
     assert code[doc_line_end] == "\n"
 
     doc_lines = code[doc_line_start: doc_line_end + 1]

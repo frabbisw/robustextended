@@ -2,6 +2,7 @@ import json
 from tqdm import tqdm as tq
 import os
 import subprocess
+from collections import Counter
 
 def view(filename):
     prompts = []
@@ -29,6 +30,19 @@ def load_prompts(filename):
 # prompts = load_prompts(result_path)
 
 # for i in tq(range(len(prompts))):
+def eliminate_second_Sollution(sample_java_solution):
+    ##eliminate 2nd solution class
+    first_class_pointer = sample_java_solution.find("class Solution")
+    if first_class_pointer < 0:
+        return sample_java_solution
+    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        return sample_java_solution
+    sample_java_solution = sample_java_solution[:second_class_pointer]
+    return sample_java_solution[:sample_java_solution.rfind("}")+1]
+
 def get_test_result(filepath):
     prompts = load_prompts(filepath)
     result = {}
@@ -41,6 +55,7 @@ def get_test_result(filepath):
 
         if "<|endoftext|>" in sample_java_solution:
             sample_java_solution = sample_java_solution[:sample_java_solution.find("<|endoftext|>")]
+        sample_java_solution = eliminate_second_Sollution(sample_java_solution)
 
         with open("../tmp/Main.java", "w") as f:
             f.write(sample_java_main)
@@ -93,7 +108,24 @@ def get_report(directory):
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
 
     return report
-report = get_report("../datasets/generated/java/docstring")
-from collections import Counter
+# report = get_report("../datasets/generated/java/nominal")
+# print(Counter(report.values()))
+# report = get_report("../datasets/generated/java/deadcode")
+# print(Counter(report.values()))
+# report = get_report("../datasets/generated/java/docstring/humanevaljava_ButterFingersPerturbation")
+# print(Counter(report.values()))
+# report = get_report("../datasets/generated/java/docstring/humanevaljava_BackTranslation")
+# print(Counter(report.values()))
+# report = get_report("../datasets/generated/java/docstring/humanevaljava_SynonymInsertion")
+# print(Counter(report.values()))
+
+# report = get_report("../datasets/generated/java/docstring/humanevaljava_EnglishInflectionalVariation")
+# print(Counter(report.values()))
+#
+# report = get_report("../datasets/generated/java/docstring/humanevaljava_SynonymSubstitution")
+# print(Counter(report.values()))
+
+report = get_report("../datasets/generated/java/func_name/humanevaljava_FuncRenameInflectionalVariation")
 print(Counter(report.values()))
+
 # import pdb; pdb.set_trace()
