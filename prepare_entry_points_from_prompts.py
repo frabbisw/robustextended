@@ -25,14 +25,30 @@ def add_entry_points(dir, lang):
                 print(prompt)
                 print("+" * 50)
                 lines.append(obj)
+            elif lang == "cpp":
+                comment_end = prompt.find("*/") + 2
+                method_args_start = prompt.find("(", comment_end)
+                garbage = prompt[comment_end:method_args_start]
+                try:
+                    obj["entry_point"] = garbage.split()[-1]
+                    print(obj["entry_point"])
+                    lines.append(obj)
+                except:
+                    method_args_end = prompt[:prompt.rfind("/*")].rfind("(")
+                    obj["entry_point"] = prompt[:method_args_end].split()[-1]
+                    print(obj["entry_point"])
+                    lines.append(obj)
+            else:
+                print("*"*50)
+                print(prompt)
 
     with jsonlines.open(os.path.join(dataset_dir,"HumanEval_{lang}.jsonl".format(lang=lang)), mode='w') as writer:
         for line in lines:
             jsonlines.Writer.write(writer, line)
 
 # add_entry_points(python_dir, "py")
-add_entry_points(java_dir, "java")
-# add_entry_points(cpp_dir, "cpp")
+# add_entry_points(java_dir, "java")
+add_entry_points(cpp_dir, "cpp")
 # add_entry_points(js_dir, "js")
 # add_entry_points(go_dir, "go")
 

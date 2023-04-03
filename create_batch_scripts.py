@@ -1,8 +1,8 @@
 import os
 
-dataset_dir = "datasets/perturbed/humanevaljava/full"
+dataset_dir = "datasets/perturbed/humanevalcpp/full"
 generated_dir = "datasets/generated"
-lang = "java"
+lang = "cpp"
 with open("run_code/bash_template.sh", "r") as f:
     template = f.read()
 
