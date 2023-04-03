@@ -21,8 +21,6 @@ from transformers import GPTJForCausalLM
 import torch
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-##code generation model
-# checkpoint = "Salesforce/codegen-2B-mono"
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
@@ -32,11 +30,11 @@ def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.8,top_p=0.9,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
-# prompts = load_prompts("../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s0.jsonl")
-# save_dir = f"../datasets/generated/java/docstring"
-
 prompts = load_prompts(sys.argv[1])
 save_dir = sys.argv[2]
+
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
