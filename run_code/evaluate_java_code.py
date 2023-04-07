@@ -1,8 +1,11 @@
 import json
+import pdb
+import pickle
 from tqdm import tqdm as tq
 import os
 import subprocess
 from collections import Counter
+import pandas as pd
 
 def view(filename):
     prompts = []
@@ -25,9 +28,6 @@ def load_prompts(filename):
             prompts.append(json.loads(line))
     return prompts
 
-# result_path = "../datasets/generated/HumanEval_java_350m.jsonl"
-
-# prompts = load_prompts(result_path)
 
 # for i in tq(range(len(prompts))):
 def eliminate_second_Sollution(sample_java_solution):
@@ -43,6 +43,70 @@ def eliminate_second_Sollution(sample_java_solution):
     sample_java_solution = sample_java_solution[:second_class_pointer]
     return sample_java_solution[:sample_java_solution.rfind("}")+1]
 
+def test_it(solution, main, new_entry_point, i):
+    old_entry_point = nominal_prompts[i]["entry_point"]
+
+    solution = solution[:solution.find("<|endoftext|>")]
+    solution=eliminate_second_Sollution(solution)
+    main = main.replace(old_entry_point, new_entry_point)
+    # print((old_entry_point, new_entry_point))
+
+    main = "import java.util.ArrayList;\n" \
+           "import java.util.Arrays;\n" \
+           "import java.util.List;\n" \
+           "import java.util.Objects;\n" \
+           "import java.util.Map;\n" \
+           "import java.util.Random;\n" \
+           "import java.util.HashMap;\n" \
+           "import java.util.Optional;\n" \
+           "import java.security.NoSuchAlgorithmException;\n" \
+           + main
+    with open("../tmp/Main.java", "w") as f:
+        f.write(main)
+    with open("../tmp/Solution.java", "w") as f:
+        f.write(solution)
+    os.chdir("../tmp/")
+    try:
+        # run javac command to compile Java code
+        compile_output = subprocess.check_output(['javac', 'Main.java', 'Solution.java'], stderr=subprocess.STDOUT)
+
+        # run java command to execute Main class
+        run_output = subprocess.check_output(['java', 'Main'], stderr=subprocess.STDOUT, timeout=3)
+
+        # print the output from the Java program
+        print(f"{i} successful")
+        print(run_output.decode('utf-8'))
+
+    except subprocess.CalledProcessError as e:
+        # print the error message and output from the Java compiler or program
+        print(f"{i} failed")
+        print("An error occurred while running the program:")
+        # print("*"*50)
+        # print(solution)
+        # print("*" * 50)
+        # print(main)
+        # print("*" * 50)
+
+        print(e.output.decode('utf-8'))
+        print("Return code: ", e.returncode)
+        # import pdb; pdb.set_trace()
+        # print()
+    except subprocess.TimeoutExpired as e:
+        print(f"{i} timeout")
+
+nominal_prompts = load_prompts("../datasets/nominal/HumanEval_java.jsonl")
+
+# path = "../datasets/nominal/HumanEval_java.jsonl"
+# path = "../datasets/generated/java/func_name/FuncRenameSnakeCase/f_0.jsonl"
+# snake_case_prompts = load_prompts("../datasets/generated/java/func_name/FuncRenameSnakeCase/f_0.jsonl")
+# pert_prompts = load_prompts("../datasets/generated/java/func_name/FuncRenameChangeChar/f_0.jsonl")
+#
+# for i in range(164):
+#     test_it(pert_prompts[i]["gc"], pert_prompts[i]["test"], pert_prompts[i]["entry_point"], i)
+#
+# pdb.set_trace()
+
+
 def get_test_result(filepath):
     prompts = load_prompts(filepath)
     result = {}
@@ -50,7 +114,19 @@ def get_test_result(filepath):
         # print(i)
         # prompt = prompts[i]
 
-        sample_java_main = "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n" + prompts[i]["test"]
+        sample_java_main = "import java.util.ArrayList;\n" \
+           "import java.util.Arrays;\n" \
+           "import java.util.List;\n" \
+           "import java.util.Objects;\n" \
+           "import java.util.Map;\n" \
+           "import java.util.Random;\n" \
+           "import java.util.HashMap;\n" \
+           "import java.util.Optional;\n" \
+           "import java.security.NoSuchAlgorithmException;\n" \
+           + prompts[i]["test"]
+        #updating the main.java because it calls the method from solution.java. the method may change because of function renaming
+        sample_java_main = sample_java_main.replace(nominal_prompts[i]["entry_point"], prompts[i]["entry_point"])
+
         sample_java_solution = prompts[i]["gc"]
 
         if "<|endoftext|>" in sample_java_solution:
@@ -108,24 +184,42 @@ def get_report(directory):
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
 
     return report
-# report = get_report("../datasets/generated/java/nominal")
-# print(Counter(report.values()))
-# report = get_report("../datasets/generated/java/deadcode")
-# print(Counter(report.values()))
-# report = get_report("../datasets/generated/java/docstring/humanevaljava_ButterFingersPerturbation")
-# print(Counter(report.values()))
-# report = get_report("../datasets/generated/java/docstring/humanevaljava_BackTranslation")
-# print(Counter(report.values()))
-# report = get_report("../datasets/generated/java/docstring/humanevaljava_SynonymInsertion")
-# print(Counter(report.values()))
 
-# report = get_report("../datasets/generated/java/docstring/humanevaljava_EnglishInflectionalVariation")
-# print(Counter(report.values()))
+##checking get_report with only one directory
+print("butter", Counter(get_report("../datasets/generated/java/nlaugmenter/ButterFingersPerturbation").values()))
+print("char",Counter(get_report("../datasets/generated/java/nlaugmenter/ChangeCharCase").values()))
+print("back", Counter(get_report("../datasets/generated/java/nlaugmenter/BackTranslation").values()))
+pdb.set_trace()
+
+
+# dataset_names = ['py', 'java', 'cpp', 'js', 'go']
+datasets_path = "../datasets/generated"
+langs = ['java']
+methods = ["nlaugmenter", "natgen", "format", "func_name"]
+def get_result_dict(lang):
+    result_dict = {}
+    for method in methods:
+        method_path = os.path.join(os.path.join(datasets_path, lang), method)
+        for aug_method in os.listdir(method_path):
+            aug_method_path = os.path.join(method_path,aug_method)
+            print(aug_method_path)
+            report = get_report(aug_method_path)
+            result_dict [f"{lang}_{method}_{aug_method}"] = Counter(report.values())
+            print(f"{lang}_{method}_{aug_method} done!!!")
+    return result_dict
+
+lang = "java"
+result_dict = get_result_dict(lang)
+
+# with open(f"../datasets/result/{lang}.pickle", 'rb') as f:
+#     result_dict = pickle.load(f)
 #
-# report = get_report("../datasets/generated/java/docstring/humanevaljava_SynonymSubstitution")
-# print(Counter(report.values()))
+pd.DataFrame(result_dict).sort_index().to_csv(f"../datasets/result/{lang}.csv", index=True)
 
-report = get_report("../datasets/generated/java/func_name/humanevaljava_FuncRenameInflectionalVariation")
-print(Counter(report.values()))
+with open(f"../datasets/result/{lang}.pickle", 'wb') as f:
+    pickle.dump(result_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-# import pdb; pdb.set_trace()
+with open(f"../datasets/result/{lang}.json", "w") as f:
+    json.dump(result_dict, f)
+
+import pdb; pdb.set_trace()
