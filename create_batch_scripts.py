@@ -1,6 +1,6 @@
 import os
 
-dataset_dir = "datasets/perturbed/humanevalcpp/full"
+dataset_dir = "datasets/perturbed/humanevaljs/full"
 generated_dir = "datasets/generated"
 lang = "js"
 with open("run_code/bash_template.sh", "r") as f:
