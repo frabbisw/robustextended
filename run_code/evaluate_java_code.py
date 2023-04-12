@@ -43,6 +43,7 @@ def eliminate_second_Sollution(sample_java_solution):
     sample_java_solution = sample_java_solution[:second_class_pointer]
     return sample_java_solution[:sample_java_solution.rfind("}")+1]
 
+
 def test_it(solution, main, new_entry_point, i):
     old_entry_point = nominal_prompts[i]["entry_point"]
 
@@ -76,6 +77,7 @@ def test_it(solution, main, new_entry_point, i):
         # print the output from the Java program
         print(f"{i} successful")
         print(run_output.decode('utf-8'))
+        return 1
 
     except subprocess.CalledProcessError as e:
         # print the error message and output from the Java compiler or program
@@ -91,18 +93,38 @@ def test_it(solution, main, new_entry_point, i):
         print("Return code: ", e.returncode)
         # import pdb; pdb.set_trace()
         # print()
+        return 0
     except subprocess.TimeoutExpired as e:
         print(f"{i} timeout")
+        return 0
 
 nominal_prompts = load_prompts("../datasets/nominal/HumanEval_java.jsonl")
 
 # path = "../datasets/nominal/HumanEval_java.jsonl"
-# path = "../datasets/generated/java/func_name/FuncRenameSnakeCase/f_0.jsonl"
+# operand_swap_path_prompts = load_prompts("../datasets/generated/java/natgen/OperandSwap/f_0.jsonl")
+# operand_swap_path_prompts.sort(key=lambda x: x['task_id'])
+# partial_prompts = load_prompts("../datasets/nominal/humanevaljava_partial.jsonl")
+# partial_prompts.sort(key=lambda x: x['task_id'])
+# default_prompts = load_prompts("../datasets/generated/java/nominal/f_0.jsonl")
+# default_prompts.sort(key=lambda x: x['task_id'])
+
+
 # snake_case_prompts = load_prompts("../datasets/generated/java/func_name/FuncRenameSnakeCase/f_0.jsonl")
 # pert_prompts = load_prompts("../datasets/generated/java/func_name/FuncRenameChangeChar/f_0.jsonl")
 #
+# def_res = {}
 # for i in range(164):
-#     test_it(pert_prompts[i]["gc"], pert_prompts[i]["test"], pert_prompts[i]["entry_point"], i)
+#     def_res[i] = test_it(default_prompts[i]["gc"], default_prompts[i]["test"], default_prompts[i]["entry_point"], i)
+# print(def_res)
+# per_res = {}
+# for i in range(164):
+#     per_res[i] = test_it(operand_swap_path_prompts[i]["gc"], operand_swap_path_prompts[i]["test"], operand_swap_path_prompts[i]["entry_point"], i)
+# print(per_res)
+# df = pd.DataFrame({"default":def_res, "op_swap":per_res})
+# df.to_csv("../datasets/result/def_v_swap.csv")
+
+# pdb.set_trace()
+
 #
 # pdb.set_trace()
 
@@ -185,11 +207,14 @@ def get_report(directory):
 
     return report
 
+print(Counter(get_report("../datasets/generated/java/partial").values()))
+
+
 ##checking get_report with only one directory
-print("butter", Counter(get_report("../datasets/generated/java/nlaugmenter/ButterFingersPerturbation").values()))
-print("char",Counter(get_report("../datasets/generated/java/nlaugmenter/ChangeCharCase").values()))
-print("back", Counter(get_report("../datasets/generated/java/nlaugmenter/BackTranslation").values()))
-pdb.set_trace()
+# print("butter", Counter(get_report("../datasets/generated/java/nlaugmenter/ButterFingersPerturbation").values()))
+# print("char",Counter(get_report("../datasets/generated/java/nlaugmenter/ChangeCharCase").values()))
+# print("back", Counter(get_report("../datasets/generated/java/nlaugmenter/BackTranslation").values()))
+# pdb.set_trace()
 
 
 # dataset_names = ['py', 'java', 'cpp', 'js', 'go']
@@ -208,18 +233,18 @@ def get_result_dict(lang):
             print(f"{lang}_{method}_{aug_method} done!!!")
     return result_dict
 
-lang = "java"
-result_dict = get_result_dict(lang)
+# lang = "java"
+# result_dict = get_result_dict(lang)
 
 # with open(f"../datasets/result/{lang}.pickle", 'rb') as f:
 #     result_dict = pickle.load(f)
 #
-pd.DataFrame(result_dict).sort_index().to_csv(f"../datasets/result/{lang}.csv", index=True)
-
-with open(f"../datasets/result/{lang}.pickle", 'wb') as f:
-    pickle.dump(result_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
-
-with open(f"../datasets/result/{lang}.json", "w") as f:
-    json.dump(result_dict, f)
-
-import pdb; pdb.set_trace()
+# pd.DataFrame(result_dict).sort_index().to_csv(f"../datasets/result/{lang}.csv", index=True)
+#
+# with open(f"../datasets/result/{lang}.pickle", 'wb') as f:
+#     pickle.dump(result_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
+#
+# with open(f"../datasets/result/{lang}.json", "w") as f:
+#     json.dump(result_dict, f)
+#
+# import pdb; pdb.set_trace()

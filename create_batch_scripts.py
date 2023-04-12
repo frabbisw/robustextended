@@ -2,7 +2,7 @@ import os
 
 dataset_dir = "datasets/perturbed/humanevalcpp/full"
 generated_dir = "datasets/generated"
-lang = "cpp"
+lang = "js"
 with open("run_code/bash_template.sh", "r") as f:
     template = f.read()
 

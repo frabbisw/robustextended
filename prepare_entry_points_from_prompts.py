@@ -38,6 +38,16 @@ def add_entry_points(dir, lang):
                     obj["entry_point"] = prompt[:method_args_end].split()[-1]
                     print(obj["entry_point"])
                     lines.append(obj)
+            elif lang == "js":
+                comment_end = prompt.find("*/") + 2
+                method_args_start = prompt.find("=", comment_end)
+                garbage = prompt[comment_end:method_args_start]
+                try:
+                    obj["entry_point"] = garbage.split()[-1]
+                    print(obj["entry_point"])
+                    lines.append(obj)
+                except:
+                    print(prompt)
             else:
                 print("*"*50)
                 print(prompt)
@@ -46,9 +56,11 @@ def add_entry_points(dir, lang):
         for line in lines:
             jsonlines.Writer.write(writer, line)
 
+lang = "js"
+
 # add_entry_points(python_dir, "py")
 # add_entry_points(java_dir, "java")
-add_entry_points(cpp_dir, "cpp")
+add_entry_points(f"datasets/nominal/humaneval-x/data/{lang}/data", lang)
 # add_entry_points(js_dir, "js")
 # add_entry_points(go_dir, "go")
 
