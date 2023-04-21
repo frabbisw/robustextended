@@ -20,6 +20,7 @@ for method_name in os.listdir(dataset_dir):
         sh_file_contents = template.replace("{command}",generate_command).replace("{task_name}",task_name)
         # print(sh_file_contents)
         with open(f"batch_files/{task_name}.sh", "w") as f:
+            print(f"qsub {task_name}.sh")
             f.write(sh_file_contents)
 
         # print(generate_command)

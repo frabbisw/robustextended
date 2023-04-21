@@ -198,17 +198,21 @@ def get_test_result(filepath):
 
 
 
-def get_report(directory):
+def get_report(directory, K):
     report = {}
-    for filename in os.listdir(directory):
-        result = get_test_result(os.path.join(directory, filename))
+    for i in range(K):
+    # for filename in os.listdir(directory):
+        filename = os.path.join(directory, f"f_{i}.jsonl")
+        result = get_test_result(filename)
         print(f"result ready for {filename}")
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
 
     return report
 
-print(Counter(get_report("../datasets/generated/java/partial").values()))
-
+# print("partial")
+# print(Counter(get_report("../datasets/generated/java/partial").values()))
+# print("nominal")
+# print(Counter(get_report("../datasets/generated/java/nominal").values()))
 
 ##checking get_report with only one directory
 # print("butter", Counter(get_report("../datasets/generated/java/nlaugmenter/ButterFingersPerturbation").values()))
@@ -221,25 +225,35 @@ print(Counter(get_report("../datasets/generated/java/partial").values()))
 datasets_path = "../datasets/generated"
 langs = ['java']
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
-def get_result_dict(lang):
+def get_result_dict(lang, K):
     result_dict = {}
+    for method in ['nominal', 'partial']:
+        method_path = os.path.join(os.path.join(datasets_path, lang), method)
+        print(method_path)
+        report = get_report(method_path, K)
+        result_dict[f"{lang}_{method}"] = Counter(report.values())
+        print(f"{lang}_{method} done!!!")
     for method in methods:
         method_path = os.path.join(os.path.join(datasets_path, lang), method)
         for aug_method in os.listdir(method_path):
             aug_method_path = os.path.join(method_path,aug_method)
             print(aug_method_path)
-            report = get_report(aug_method_path)
+            report = get_report(aug_method_path, K)
             result_dict [f"{lang}_{method}_{aug_method}"] = Counter(report.values())
             print(f"{lang}_{method}_{aug_method} done!!!")
+    print(f"report ready for {lang} and {K}!!")
     return result_dict
 
+# K = 1
 # lang = "java"
-# result_dict = get_result_dict(lang)
+# result_dict = get_result_dict(lang, K)
 
 # with open(f"../datasets/result/{lang}.pickle", 'rb') as f:
 #     result_dict = pickle.load(f)
 #
-# pd.DataFrame(result_dict).sort_index().to_csv(f"../datasets/result/{lang}.csv", index=True)
+for lang in ["java"]:
+    for K in [1, 5, 10]:
+        pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
 #
 # with open(f"../datasets/result/{lang}.pickle", 'wb') as f:
 #     pickle.dump(result_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
@@ -247,4 +261,4 @@ def get_result_dict(lang):
 # with open(f"../datasets/result/{lang}.json", "w") as f:
 #     json.dump(result_dict, f)
 #
-# import pdb; pdb.set_trace()
+import pdb; pdb.set_trace()

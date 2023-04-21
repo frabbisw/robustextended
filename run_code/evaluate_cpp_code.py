@@ -75,33 +75,44 @@ def get_test_result(filepath):
         result[i] = test_it(prompts[i]["gc"], prompts[i]["test"], i)
     return result
 
-def get_report(directory):
+def get_report(directory, K):
     report = {}
-    for filename in os.listdir(directory):
-        result = get_test_result(os.path.join(directory, filename))
+    for i in range(K):
+    # for filename in os.listdir(directory):
+        filename = os.path.join(directory, f"f_{i}.jsonl")
+        result = get_test_result(filename)
         print(f"result ready for {filename}")
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
-        ##temp
-        # break
 
     return report
 
-print(Counter(get_report("../datasets/generated/cpp/partial").values()))
+# print(Counter(get_report("../datasets/generated/cpp/partial").values()))
 # print(Counter(get_report("../datasets/generated/cpp/nominal").values()))
 
 datasets_path = "../datasets/generated"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
-def get_result_dict(lang):
+def get_result_dict(lang, K):
     result_dict = {}
+    for method in ['nominal', 'partial']:
+        method_path = os.path.join(os.path.join(datasets_path, lang), method)
+        print(method_path)
+        report = get_report(method_path, K)
+        result_dict[f"{lang}_{method}"] = Counter(report.values())
+        print(f"{lang}_{method} done!!!")
     for method in methods:
         method_path = os.path.join(os.path.join(datasets_path, lang), method)
         for aug_method in os.listdir(method_path):
             aug_method_path = os.path.join(method_path,aug_method)
             print(aug_method_path)
-            report = get_report(aug_method_path)
+            report = get_report(aug_method_path, K)
             result_dict [f"{lang}_{method}_{aug_method}"] = Counter(report.values())
             print(f"{lang}_{method}_{aug_method} done!!!")
+    print(f"report ready for {lang} and {K}!!")
     return result_dict
+
+for lang in ["cpp"]:
+    for K in [1, 5, 10]:
+        pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
 
 # lang = "cpp"
 # result_dict = get_result_dict(lang)
@@ -114,7 +125,7 @@ def get_result_dict(lang):
 # with open(f"../datasets/result/{lang}.json", "w") as f:
 #     json.dump(result_dict, f)
 # #
-# import pdb; pdb.set_trace()
+import pdb; pdb.set_trace()
 #
 
 

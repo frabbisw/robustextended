@@ -38,6 +38,15 @@ def add_entry_points(dir, lang):
                     obj["entry_point"] = prompt[:method_args_end].split()[-1]
                     print(obj["entry_point"])
                     lines.append(obj)
+            elif lang == "go":
+                try:
+                    last_first_bracket_index = prompt.rfind("(")
+                    parts = prompt[:last_first_bracket_index].split()
+                    obj["entry_point"] = parts[-1]
+                    print(obj["entry_point"])
+                    lines.append(obj)
+                except:
+                    print(prompt)
             elif lang == "js":
                 comment_end = prompt.find("*/") + 2
                 method_args_start = prompt.find("=", comment_end)
@@ -56,7 +65,7 @@ def add_entry_points(dir, lang):
         for line in lines:
             jsonlines.Writer.write(writer, line)
 
-lang = "js"
+lang = "go"
 
 # add_entry_points(python_dir, "py")
 # add_entry_points(java_dir, "java")

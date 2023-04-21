@@ -1,7 +1,8 @@
 import os
 import subprocess
 
-dataset_names = ['humanevalpy', 'humanevaljava', 'humanevalcpp', 'humanevaljs', 'humanevalgo']
+# dataset_names = ['humanevalpy', 'humanevaljava', 'humanevalcpp', 'humanevaljs', 'humanevalgo']
+dataset_names = ['humanevalgo']
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
 aug_methods = {"nlaugmenter": 10, "natgen": 6, "format": 6, "func_name": 6}
 
