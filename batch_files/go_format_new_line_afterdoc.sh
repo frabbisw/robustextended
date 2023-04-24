@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#$ -N js_nlaugmenter_BackTranslation
+#$ -N go_format_new_line_afterdoc
 #$ -cwd
 #$ -l m_mem_free=50G
 #$ -l g=1
@@ -14,7 +14,7 @@ source activate ReCode
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/ReCode/lib/python3.8/site-packages/nvidia/cublas/lib/:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/conda_env/lib:$LD_LIBRARY_PATH
 # run job
-python generate_code.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s0.jsonl ../datasets/generated/js/nlaugmenter/BackTranslation
+python generate_code.py ../datasets/perturbed/humanevalgo/full/format/humanevalgo_new_line_afterdoc_s0.jsonl ../datasets/generated/go/format/new_line_afterdoc
 # clean loaded modules
 module unload anaconda/3.2019.10/default
 module unload cuda/11.4/default

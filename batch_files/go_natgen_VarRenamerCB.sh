@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#$ -N js_natgen_VarRenamerRN
+#$ -N go_natgen_VarRenamerCB
 #$ -cwd
 #$ -l m_mem_free=50G
 #$ -l g=1
@@ -14,7 +14,7 @@ source activate ReCode
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/ReCode/lib/python3.8/site-packages/nvidia/cublas/lib/:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/conda_env/lib:$LD_LIBRARY_PATH
 # run job
-python generate_code.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s0.jsonl ../datasets/generated/js/natgen/VarRenamerRN
+python generate_code.py ../datasets/perturbed/humanevalgo/full/natgen/humanevalgo_VarRenamerCB_s0.jsonl ../datasets/generated/go/natgen/VarRenamerCB
 # clean loaded modules
 module unload anaconda/3.2019.10/default
 module unload cuda/11.4/default

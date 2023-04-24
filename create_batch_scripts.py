@@ -1,8 +1,8 @@
 import os
 
-dataset_dir = "datasets/perturbed/humanevaljs/full"
+dataset_dir = "datasets/perturbed/humanevalgo/full"
 generated_dir = "datasets/generated"
-lang = "js"
+lang = "go"
 with open("run_code/bash_template.sh", "r") as f:
     template = f.read()
 

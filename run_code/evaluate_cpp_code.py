@@ -28,11 +28,13 @@ def load_prompts(filename):
             prompts.append(json.loads(line))
     return prompts
 
-def test_it(code, main, i):
+def test_it(code, main, new_entry_point, i):
     if "<|endoftext|>" in code:
         code = code[:code.find("<|endoftext|>")]
     if "int main()" in code:
         code = code[:code.find("int main()")]
+    old_entry_point = nominal_prompts[i]["entry_point"]
+    main = main.replace(old_entry_point, new_entry_point)
     full_code = code + main
     with open("../tmp/cpp_code.cpp", "w") as f:
         f.write(full_code)
@@ -72,7 +74,7 @@ def get_test_result(filepath):
     prompts = load_prompts(filepath)
     result = {}
     for i in range(164):
-        result[i] = test_it(prompts[i]["gc"], prompts[i]["test"], i)
+        result[i] = test_it(prompts[i]["gc"], prompts[i]["test"], prompts[i]["entry_point"], i)
     return result
 
 def get_report(directory, K):
@@ -88,6 +90,8 @@ def get_report(directory, K):
 
 # print(Counter(get_report("../datasets/generated/cpp/partial").values()))
 # print(Counter(get_report("../datasets/generated/cpp/nominal").values()))
+
+nominal_prompts = load_prompts("../datasets/nominal/HumanEval_cpp.jsonl")
 
 datasets_path = "../datasets/generated"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]

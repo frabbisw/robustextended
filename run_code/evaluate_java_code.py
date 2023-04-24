@@ -49,6 +49,9 @@ def test_it(solution, main, new_entry_point, i):
 
     solution = solution[:solution.find("<|endoftext|>")]
     solution=eliminate_second_Sollution(solution)
+
+    # old entry points must be replaced by new entry points in the test code.
+    # otherwise test codes will call the methods by old entry points, and it will always fail.
     main = main.replace(old_entry_point, new_entry_point)
     # print((old_entry_point, new_entry_point))
 
