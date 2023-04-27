@@ -26,7 +26,7 @@ import torch
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map = 'auto')
-code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint, device_map = 'auto')
 
 def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
