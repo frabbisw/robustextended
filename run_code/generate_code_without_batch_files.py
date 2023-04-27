@@ -4,6 +4,7 @@ import jsonlines
 from tqdm import tqdm as tq
 import sys
 from pynvml import *
+import gc
 from accelerate import infer_auto_device_map, init_empty_weights
 
 
@@ -26,16 +27,15 @@ import torch
 # device = "cuda:0" if torch.cuda.is_available() else "cpu"
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
-code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map = 'auto')
+code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map ={0: "15GIB", 1: "15GIB"})
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
 
 
 def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=512,temperature=0.2,top_p=0.95,do_sample = True)
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
     code = code_generaton_tokenizer.decode(completion[0])
-    del code_generaton_model, code_generaton_tokenizer
-
+    gc.collect()
     torch.cuda.empty_cache()
     return code
 
@@ -56,24 +56,8 @@ if not os.path.exists(save_dir):
 #
 for i in tq(range(len(prompts))):
     p = prompts[i]
-    try:
-        p["gc"] = prompt_to_code(p["prompt"])
-        prompts[i] = p
-    except:
-        nvmlInit()
-        h1 = nvmlDeviceGetHandleByIndex(0)
-        h2 = nvmlDeviceGetHandleByIndex(1)
-        info1 = nvmlDeviceGetMemoryInfo(h1)
-        info2 = nvmlDeviceGetMemoryInfo(h2)
-
-        # print(f'total 1   : {info1.total}')
-        print(f'free  1   : {info1.free}')
-        # print(f'used  1   : {info1.used}')
-
-        # print(f'total 2   : {info1.total}')
-        print(f'free  2   : {info2.free}')
-        # print(f'used  2   : {info1.used}')
-        exit()
+    p["gc"] = prompt_to_code(p["prompt"])
+    prompts[i] = p
 save_prompts(outpath, prompts)
 print("saved", outpath)
 
