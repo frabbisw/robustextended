@@ -32,9 +32,12 @@ def prompt_to_code(prompt):
 
 prompts = load_prompts(sys.argv[1])
 save_dir = sys.argv[2]
-ext, _ = sys.argv[1].split(".")
-_, ext = sys.argv[1].split("_")
+ext, _ = sys.argv[1][5:].split(".")
+
+_, ext = ext[-5:].split("_")
+#
 outpath = os.path.join(save_dir, f"f_{ext}.jsonl")
+
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
