@@ -27,7 +27,7 @@ import torch
 # device = "cuda:0" if torch.cuda.is_available() else "cpu"
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
-code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map ={0: "15GIB", 1: "15GIB"})
+code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, max_memory ={0: "15GIB", 1: "15GIB"})
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
 
