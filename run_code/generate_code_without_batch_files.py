@@ -32,6 +32,9 @@ def prompt_to_code(prompt):
 
 prompts = load_prompts(sys.argv[1])
 save_dir = sys.argv[2]
+ext, _ = sys.argv[1].split(".")
+_, ext = sys.argv[1].split("_")
+outpath = os.path.join(save_dir, f"f_{ext}.jsonl")
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
@@ -39,14 +42,12 @@ if not os.path.exists(save_dir):
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
-for itr in range(10):
-    for i in tq(range(len(prompts))):
-        p = prompts[i]
-        p["gc"] = prompt_to_code(p["prompt"])
-        prompts[i] = p
-    save_prompts(os.path.join(save_dir, f"f_{itr}.jsonl"), prompts)
-    print("saved", os.path.join(save_dir, f"f_{itr}.jsonl"))
-print("saved all files")
+for i in tq(range(len(prompts))):
+    p = prompts[i]
+    p["gc"] = prompt_to_code(p["prompt"])
+    prompts[i] = p
+save_prompts(outpath, prompts)
+print("saved", outpath)
 
 
 # print(sys.argv[1], sys.argv[2])
