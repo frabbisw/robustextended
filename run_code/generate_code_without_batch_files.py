@@ -45,13 +45,14 @@ if not os.path.exists(save_dir):
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
-# for i in tq(range(len(prompts))):
-#     p = prompts[i]
-#     p["gc"] = prompt_to_code(p["prompt"])
-#     prompts[i] = p
-# save_prompts(outpath, prompts)
-# print("saved", outpath)
+for i in tq(range(len(prompts))):
+    p = prompts[i]
+    p["gc"] = prompt_to_code(p["prompt"])
+    prompts[i] = p
+    torch.cuda.empty_cache()
+save_prompts(outpath, prompts)
+print("saved", outpath)
 
-print(prompt_to_code(prompts[0]["prompt"]))
+# print(prompt_to_code(prompts[0]["prompt"]))
 
 # print(sys.argv[1], sys.argv[2])
