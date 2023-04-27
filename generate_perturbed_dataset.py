@@ -11,8 +11,8 @@ template = "python perturb_multi.py --data {dataset} --method {method} --aug_met
 for d in dataset_names:
     for m in methods:
         for a in range(aug_methods[m]):
-            for k in range(1, K):
-                command = template.format(dataset = d, method = m, aug_method = a, seed = k, extra = "--task partial_code" if m in ["natgen", "format"] else "")
+            for k in range(K):
+                command = template.format(dataset = d, method = m, aug_method = a, seed = k, overwrite = True, extra = "--task partial_code" if m in ["natgen", "format"] else "")
                 print(command)
                 # # print(command.split())
                 # output = subprocess.check_output(command.split(), stderr=subprocess.STDOUT)

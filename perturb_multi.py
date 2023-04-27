@@ -576,9 +576,9 @@ if __name__ == '__main__':
     # handle overwrite if exists
     if os.path.exists(output_adv_path):
         print(f"{output_adv_path} exists")
-        if not args.overwrite:
-            print(f"Not overwrite, stop generating!")
-            exit()
+        # if not args.overwrite:
+        #     print(f"Not overwrite, stop generating!")
+        #     exit()
         print(f"removing {output_adv_path}...")
         os.system(f"rm {output_adv_path}")
 
