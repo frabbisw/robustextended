@@ -3,6 +3,8 @@ import os
 import jsonlines
 from tqdm import tqdm as tq
 import sys
+from pynvml import *
+
 
 def load_prompts(filename):
     prompts = []
@@ -30,6 +32,7 @@ def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
     code = code_generaton_tokenizer.decode(completion[0])
     del code_generaton_model, code_generaton_tokenizer
+
     torch.cuda.empty_cache()
     return code
 
@@ -50,8 +53,24 @@ if not os.path.exists(save_dir):
 #
 for i in tq(range(len(prompts))):
     p = prompts[i]
-    p["gc"] = prompt_to_code(p["prompt"])
-    prompts[i] = p
+    try:
+        p["gc"] = prompt_to_code(p["prompt"])
+        prompts[i] = p
+    except:
+        nvmlInit()
+        h1 = nvmlDeviceGetHandleByIndex(0)
+        h2 = nvmlDeviceGetHandleByIndex(1)
+        info1 = nvmlDeviceGetMemoryInfo(h1)
+        info2 = nvmlDeviceGetMemoryInfo(h2)
+
+        # print(f'total 1   : {info1.total}')
+        print(f'free  1   : {info1.free}')
+        # print(f'used  1   : {info1.used}')
+
+        # print(f'total 2   : {info1.total}')
+        print(f'free  2   : {info2.free}')
+        # print(f'used  2   : {info1.used}')
+        exit()
 save_prompts(outpath, prompts)
 print("saved", outpath)
 
