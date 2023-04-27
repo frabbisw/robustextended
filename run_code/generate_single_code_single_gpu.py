@@ -3,8 +3,6 @@ import os
 import jsonlines
 from tqdm import tqdm as tq
 import sys
-from accelerate import infer_auto_device_map, init_empty_weights
-
 
 def load_prompts(filename):
     prompts = []
