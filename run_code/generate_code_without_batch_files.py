@@ -28,7 +28,10 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
-    return code_generaton_tokenizer.decode(completion[0])
+    code = code_generaton_tokenizer.decode(completion[0])
+    del code_generaton_model, code_generaton_tokenizer
+    torch.cuda.empty_cache()
+    return code
 
 prompts = load_prompts(sys.argv[1])
 save_dir = sys.argv[2]
@@ -49,7 +52,6 @@ for i in tq(range(len(prompts))):
     p = prompts[i]
     p["gc"] = prompt_to_code(p["prompt"])
     prompts[i] = p
-    torch.cuda.empty_cache()
 save_prompts(outpath, prompts)
 print("saved", outpath)
 
