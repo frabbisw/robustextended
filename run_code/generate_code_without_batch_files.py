@@ -44,7 +44,7 @@ if not os.path.exists(save_dir):
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
-
+#
 for i in tq(range(len(prompts))):
     p = prompts[i]
     p["gc"] = prompt_to_code(p["prompt"])
