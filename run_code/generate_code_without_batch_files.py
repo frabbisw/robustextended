@@ -20,14 +20,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import GPTJForCausalLM
 import torch
 
-# device = "cuda:0" if torch.cuda.is_available() else "cpu"
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map = 'auto')
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt", device_map = 'auto'), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
 prompts = load_prompts(sys.argv[1])
@@ -45,12 +45,13 @@ if not os.path.exists(save_dir):
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
-for i in tq(range(len(prompts))):
-    p = prompts[i]
-    p["gc"] = prompt_to_code(p["prompt"])
-    prompts[i] = p
-save_prompts(outpath, prompts)
-print("saved", outpath)
+# for i in tq(range(len(prompts))):
+#     p = prompts[i]
+#     p["gc"] = prompt_to_code(p["prompt"])
+#     prompts[i] = p
+# save_prompts(outpath, prompts)
+# print("saved", outpath)
 
+print(prompt_to_code(prompts[0]["prompt"]))
 
 # print(sys.argv[1], sys.argv[2])
