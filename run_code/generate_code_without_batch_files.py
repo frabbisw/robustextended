@@ -20,14 +20,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import GPTJForCausalLM
 import torch
 
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
+# device = "cuda:0" if torch.cuda.is_available() else "cpu"
 model_name = "codegen-6B-multi"
 checkpoint = "Salesforce/"+model_name
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map = 'auto')
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
     return code_generaton_tokenizer.decode(completion[0])
 
 prompts = load_prompts(sys.argv[1])
