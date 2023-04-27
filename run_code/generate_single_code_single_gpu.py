@@ -3,8 +3,6 @@ import os
 import jsonlines
 from tqdm import tqdm as tq
 import sys
-from pynvml import *
-import gc
 from accelerate import infer_auto_device_map, init_empty_weights
 
 
@@ -35,8 +33,6 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint).to(device)
 def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt"), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
     code = code_generaton_tokenizer.decode(completion[0])
-    gc.collect()
-    torch.cuda.empty_cache()
     return code
 
 prompts = load_prompts(sys.argv[1])
