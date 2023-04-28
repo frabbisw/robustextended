@@ -1,0 +1,5 @@
+python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ButterFingersPerturbation_s3.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ButterFingersPerturbation
+python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ButterFingersPerturbation_s0.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ButterFingersPerturbation
+python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ButterFingersPerturbation_s4.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ButterFingersPerturbation
+python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ButterFingersPerturbation_s1.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ButterFingersPerturbation
+python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ButterFingersPerturbation_s2.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ButterFingersPerturbation
