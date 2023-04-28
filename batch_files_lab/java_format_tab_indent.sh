@@ -1,3 +1,4 @@
+cd ..
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_tab_indent_s3.jsonl ../datasets/generated_pass5_1/java/format/tab_indent
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_tab_indent_s2.jsonl ../datasets/generated_pass5_1/java/format/tab_indent
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_tab_indent_s1.jsonl ../datasets/generated_pass5_1/java/format/tab_indent

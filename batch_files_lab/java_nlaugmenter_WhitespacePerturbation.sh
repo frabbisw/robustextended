@@ -1,3 +1,4 @@
+cd ..
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_WhitespacePerturbation_s1.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/WhitespacePerturbation
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_WhitespacePerturbation_s2.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/WhitespacePerturbation
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_WhitespacePerturbation_s4.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/WhitespacePerturbation

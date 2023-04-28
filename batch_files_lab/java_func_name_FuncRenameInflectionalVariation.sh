@@ -1,3 +1,4 @@
+cd ..
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/func_name/humanevaljava_FuncRenameInflectionalVariation_s4.jsonl ../datasets/generated_pass5_1/java/func_name/FuncRenameInflectionalVariation
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/func_name/humanevaljava_FuncRenameInflectionalVariation_s2.jsonl ../datasets/generated_pass5_1/java/func_name/FuncRenameInflectionalVariation
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/func_name/humanevaljava_FuncRenameInflectionalVariation_s3.jsonl ../datasets/generated_pass5_1/java/func_name/FuncRenameInflectionalVariation

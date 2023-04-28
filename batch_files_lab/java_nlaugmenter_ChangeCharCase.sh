@@ -1,3 +1,4 @@
+cd ..
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ChangeCharCase_s0.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ChangeCharCase
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ChangeCharCase_s4.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ChangeCharCase
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_ChangeCharCase_s2.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/ChangeCharCase

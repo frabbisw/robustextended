@@ -1,3 +1,4 @@
+cd ..
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/natgen/humanevaljava_VarRenamerNaive_s2.jsonl ../datasets/generated_pass5_1/java/natgen/VarRenamerNaive
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/natgen/humanevaljava_VarRenamerNaive_s3.jsonl ../datasets/generated_pass5_1/java/natgen/VarRenamerNaive
 python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/natgen/humanevaljava_VarRenamerNaive_s4.jsonl ../datasets/generated_pass5_1/java/natgen/VarRenamerNaive
