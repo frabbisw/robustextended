@@ -1,6 +1,5 @@
-cd ..
-python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s4.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
-python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s0.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
-python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s3.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
-python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s1.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
-python generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s2.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
+python ../run_code/generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s4.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
+python ../run_code/generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s0.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
+python ../run_code/generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s3.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
+python ../run_code/generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s1.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
+python ../run_code/generate_single_code_multiple_gpu.py ../datasets/perturbed/humanevaljava/full/nlaugmenter/humanevaljava_SynonymInsertion_s2.jsonl ../datasets/generated_pass5_1/java/nlaugmenter/SynonymInsertion
