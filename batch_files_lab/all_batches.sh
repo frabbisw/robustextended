@@ -1,28 +1,28 @@
-batch java_func_name_FuncRenameSnakeCase.sh
-batch java_func_name_FuncRenameInflectionalVariation.sh
-batch java_func_name_FuncRenameButterFinger.sh
-batch java_func_name_FuncRenameSynonymSub.sh
-batch java_func_name_FuncRenameChangeChar.sh
-batch java_func_name_FuncRenameSwapChar.sh
-batch java_format_new_line_aftercode.sh
-batch java_format_doc2comments.sh
-batch java_format_tab_indent.sh
-batch java_format_new_line_afterdoc.sh
-batch java_format_new_lines.sh
-batch java_format_split_lines.sh
-batch java_nlaugmenter_TenseTransformationPast.sh
-batch java_nlaugmenter_ChangeCharCase.sh
-batch java_nlaugmenter_SynonymInsertion.sh
-batch java_nlaugmenter_BackTranslation.sh
-batch java_nlaugmenter_SynonymSubstitution.sh
-batch java_nlaugmenter_WhitespacePerturbation.sh
-batch java_nlaugmenter_ButterFingersPerturbation.sh
-batch java_nlaugmenter_EnglishInflectionalVariation.sh
-batch java_nlaugmenter_TenseTransformationFuture.sh
-batch java_nlaugmenter_SwapCharactersPerturbation.sh
-batch java_natgen_ForWhileTransformer.sh
-batch java_natgen_OperandSwap.sh
-batch java_natgen_VarRenamerRN.sh
-batch java_natgen_DeadCodeInserter.sh
-batch java_natgen_VarRenamerNaive.sh
-batch java_natgen_VarRenamerCB.sh
+./java_func_name_FuncRenameSnakeCase.sh
+./java_func_name_FuncRenameInflectionalVariation.sh
+./java_func_name_FuncRenameButterFinger.sh
+./java_func_name_FuncRenameSynonymSub.sh
+./java_func_name_FuncRenameChangeChar.sh
+./java_func_name_FuncRenameSwapChar.sh
+./java_format_new_line_aftercode.sh
+./java_format_doc2comments.sh
+./java_format_tab_indent.sh
+./java_format_new_line_afterdoc.sh
+./java_format_new_lines.sh
+./java_format_split_lines.sh
+./java_nlaugmenter_TenseTransformationPast.sh
+./java_nlaugmenter_ChangeCharCase.sh
+./java_nlaugmenter_SynonymInsertion.sh
+./java_nlaugmenter_BackTranslation.sh
+./java_nlaugmenter_SynonymSubstitution.sh
+./java_nlaugmenter_WhitespacePerturbation.sh
+./java_nlaugmenter_ButterFingersPerturbation.sh
+./java_nlaugmenter_EnglishInflectionalVariation.sh
+./java_nlaugmenter_TenseTransformationFuture.sh
+./java_nlaugmenter_SwapCharactersPerturbation.sh
+./java_natgen_ForWhileTransformer.sh
+./java_natgen_OperandSwap.sh
+./java_natgen_VarRenamerRN.sh
+./java_natgen_DeadCodeInserter.sh
+./java_natgen_VarRenamerNaive.sh
+./java_natgen_VarRenamerCB.sh

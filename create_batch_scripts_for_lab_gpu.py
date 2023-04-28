@@ -23,11 +23,9 @@ for method_name in os.listdir(dataset_dir):
 
 all_batches = ""
 for task_name in task_dict.keys():
-    all_batches += f"batch {task_name}.sh\n"
+    all_batches += f"./{task_name}.sh\n"
     with open(f"batch_files_lab/{task_name}.sh", "w") as f:
-        print(f"qsub {task_name}.sh")
         f.write(task_dict[task_name])
 
 with open(f"batch_files_lab/all_batches.sh", "w") as f:
-    print(f"qsub {task_name}.sh")
     f.write(all_batches)
