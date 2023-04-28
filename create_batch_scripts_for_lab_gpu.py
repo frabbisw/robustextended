@@ -14,7 +14,7 @@ for method_name in os.listdir(dataset_dir):
         # print(file_path, os.path.isfile(file_path))
         new_folder_name = file_name[file_name.find("_")+1:file_name.rfind("_")]
         output_path = os.path.join("..", os.path.join(os.path.join(os.path.join(os.path.join(generated_dir, lang), method_name), new_folder_name)))
-        generate_command = f"python ../run_code/generate_single_code_multiple_gpu.py {file_path} {output_path}"
+        generate_command = f"python ../run_code/generate_single_code_multiple_gpus.py {file_path} {output_path}"
 
         task_name = f"{lang}_{method_name}_{new_folder_name}"
         if task_name not in task_dict.keys():
