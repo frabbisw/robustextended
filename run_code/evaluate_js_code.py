@@ -29,7 +29,6 @@ def load_prompts(filename):
     return prompts
 
 
-
 def test_it(code, main, new_entry_point, i):
     code = code[:code.find("<|endoftext|>")]
     # method_mark = code.find("const")
@@ -40,6 +39,16 @@ def test_it(code, main, new_entry_point, i):
     main = main.replace(old_entry_point, new_entry_point)
     full_code = code + main
 
+    print("#" * 20)
+    print(partial_prompts[i]["prompt"])
+    print("1" * 20)
+    print(perturbed_prompts[i]["prompt"])
+    print("2" * 20)
+    print(code)
+    print("3" * 20)
+    print(main)
+    print("#" * 20)
+
     with open("../tmp/Sample.js", "w") as f:
         f.write(full_code)
     os.chdir("../tmp/")
@@ -47,7 +56,17 @@ def test_it(code, main, new_entry_point, i):
         # run node command to execute full code
         run_output = subprocess.check_output(['node', 'Sample.js'], stderr=subprocess.STDOUT, timeout=3)
 
-        # print(f"{i} successful")
+        # print("#" * 20)
+        # print(partial_prompts[i]["prompt"])
+        # print("*" * 20)
+        # print(perturbed_prompts[i]["prompt"])
+        # print("*" * 20)
+        # print(code)
+        # print("*" * 20)
+        # print(main)
+        # print("#" * 20)
+
+        print(f"{i} successful")
         # print(run_output.decode('utf-8'))
         return 1
 
@@ -88,6 +107,7 @@ def get_report(directory, K):
     return report
 
 nominal_prompts = load_prompts("../datasets/nominal/HumanEval_js.jsonl")
+nominal_prompts.sort(key=lambda x: x["task_id"])
 
 datasets_path = "../datasets/generated"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
@@ -115,13 +135,25 @@ def get_result_dict(lang, K):
 #     for K in [10]:
 #         pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
 
+# perturbed_prompts = load_prompts("../datasets/generated/js/natgen/ForWhileTransformer/f_0.jsonl")
+# perturbed_prompts = load_prompts("../datasets/generated/js/natgen/DeadCodeInserter/f_0.jsonl")
+perturbed_prompts = load_prompts("../datasets/generated/js/natgen/OperandSwap/f_0.jsonl")
 # perturbed_prompts = load_prompts("../datasets/generated/js/natgen/VarRenamerRN/f_0.jsonl")
-# for i in range(164):
-#     print(i, test_it(perturbed_prompts[i]["gc"], perturbed_prompts[i]["test"], perturbed_prompts[i]["entry_point"], i) * "passed")
+# perturbed_prompts = load_prompts("../datasets/generated/js/natgen/VarRenamerCB/f_0.jsonl")
+# perturbed_prompts = load_prompts("../datasets/generated/js/natgen/VarRenamerNaive/f_0.jsonl")
 
-report = get_report("../datasets/generated/js/natgen/VarRenamerRN", 4)
-dict_count = Counter(report.values())
+perturbed_prompts.sort(key=lambda x: x["task_id"])
+partial_prompts = load_prompts("../datasets/nominal/humanevaljs_partial.jsonl")
+partial_prompts.sort(key=lambda x: x["task_id"])
 
-print(dict_count)
+# import pdb; pdb.set_trace();
+
+for i in range(164):
+    print(i, test_it(perturbed_prompts[i]["gc"], perturbed_prompts[i]["test"], perturbed_prompts[i]["entry_point"], i) * "passed")
+
+# report = get_report("../datasets/generated/js/natgen/VarRenamerRN", 4)
+# dict_count = Counter(report.values())
+#
+# print(dict_count)
 
 # import pdb; pdb.set_trace()
