@@ -12,6 +12,7 @@ def view(filename):
     with open(filename, encoding="utf8") as f:
         for line in f.readlines():
             prompts.append(json.loads(line)["prompt"])
+    prompts.sort(key=lambda x: x["task_id"])
     return prompts
 
 def full_view(filename):
@@ -19,6 +20,7 @@ def full_view(filename):
     with open(filename, encoding="utf8") as f:
         for line in f.readlines():
             prompts.append(json.loads(line)["prompt"]+json.loads(line)["canonical_solution"])
+    prompts.sort(key=lambda x: x["task_id"])
     return prompts
 
 def load_prompts(filename):
@@ -26,6 +28,7 @@ def load_prompts(filename):
     with open(filename, encoding="utf8") as f:
         for line in f.readlines():
             prompts.append(json.loads(line))
+    prompts.sort(key=lambda x: x["task_id"])
     return prompts
 
 def test_it(code, main, new_entry_point, i):
@@ -81,7 +84,7 @@ def get_report(directory, K):
     report = {}
     for i in range(K):
     # for filename in os.listdir(directory):
-        filename = os.path.join(directory, f"f_{i}.jsonl")
+        filename = os.path.join(directory, f"f_s{i}.jsonl")
         result = get_test_result(filename)
         print(f"result ready for {filename}")
         report = {k: report.get(k, 0) + result.get(k, 0) for k in set(report) | set(result)}
@@ -92,17 +95,18 @@ def get_report(directory, K):
 # print(Counter(get_report("../datasets/generated/cpp/nominal").values()))
 
 nominal_prompts = load_prompts("../datasets/nominal/HumanEval_cpp.jsonl")
+nominal_prompts.sort(key=lambda x: x["task_id"])
 
-datasets_path = "../datasets/generated"
+datasets_path = "../datasets/generated_pass5_1"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
 def get_result_dict(lang, K):
     result_dict = {}
-    for method in ['nominal', 'partial']:
-        method_path = os.path.join(os.path.join(datasets_path, lang), method)
-        print(method_path)
-        report = get_report(method_path, K)
-        result_dict[f"{lang}_{method}"] = Counter(report.values())
-        print(f"{lang}_{method} done!!!")
+    # for method in ['nominal', 'partial']:
+    #     method_path = os.path.join(os.path.join(datasets_path, lang), method)
+    #     print(method_path)
+    #     report = get_report(method_path, K)
+    #     result_dict[f"{lang}_{method}"] = Counter(report.values())
+    #     print(f"{lang}_{method} done!!!")
     for method in methods:
         method_path = os.path.join(os.path.join(datasets_path, lang), method)
         for aug_method in os.listdir(method_path):
@@ -115,8 +119,8 @@ def get_result_dict(lang, K):
     return result_dict
 
 for lang in ["cpp"]:
-    for K in [1, 5, 10]:
-        pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
+    for K in [5]:
+        pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result_rd5/{lang}_K_{K}.csv", index=True)
 
 # lang = "cpp"
 # result_dict = get_result_dict(lang)
