@@ -1,0 +1,5 @@
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_new_line_aftercode_s4.jsonl ../datasets/incoder1b/generated_pass5_1/java/format/new_line_aftercode
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_new_line_aftercode_s2.jsonl ../datasets/incoder1b/generated_pass5_1/java/format/new_line_aftercode
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_new_line_aftercode_s1.jsonl ../datasets/incoder1b/generated_pass5_1/java/format/new_line_aftercode
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_new_line_aftercode_s3.jsonl ../datasets/incoder1b/generated_pass5_1/java/format/new_line_aftercode
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevaljava/full/format/humanevaljava_new_line_aftercode_s0.jsonl ../datasets/incoder1b/generated_pass5_1/java/format/new_line_aftercode

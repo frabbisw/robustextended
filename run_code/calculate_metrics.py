@@ -7,6 +7,7 @@ import subprocess
 import jsonlines
 from collections import Counter
 from os import listdir
+import pandas as pd
 from os.path import isfile, join
 
 
@@ -43,9 +44,9 @@ def save_prompts(filename, prompts):
 
 def get_nominal_prompts(lang, type):
     if type == "nominal":
-        return load_prompts(f"../datasets/generated_pass5_1/{lang}/nominal/nominal_temp_2.jsonl")
+        return load_prompts(f"../datasets/codegen6bmulti/generated_pass5_1/{lang}/nominal/f_s0.jsonl")
     elif type == "partial":
-        return load_prompts(f"../datasets/generated_pass5_1/{lang}/partial/partial_temp_2.jsonl")
+        return load_prompts(f"../datasets/codegen6bmulti/generated_pass5_1/{lang}/partial/f_s0.jsonl")
 
 def calculate_passatk(data):
     return sum(data.values()) / len(data)
@@ -78,31 +79,77 @@ def get_relative_passatk(passatk_worst_dict, nominal_passatk_dict):
             cnt += 1
     return cnt/len(passatk_worst_dict)
 
-def calculate_metrics(K):
-    datasets_path = "../datasets/generated_pass5_1"
+def calculate_metrics(K, lang, model_name):
+    result_dict = {}
+    fake_dict = {}
+    result_dict["aug_method"] = ["RP@k", "RD@k", "RR@k"]
+    fake_dict["aug_method"] = ["RP@k", "RD@k", "RR@k"]
+    datasets_path = f"../datasets/{model_name}/generated_pass5_1"
     methods = ["nlaugmenter", "natgen", "format", "func_name"]
-    langs = ["cpp"]
-    K = 5
-    for lang in langs:
-        nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal")
-        partial_passatk_dict = get_nominal_passatk_dict(lang, "partial")
+    # langs = ["java"]
+    nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal")
+    partial_passatk_dict = get_nominal_passatk_dict(lang, "partial")
 
-        nominal_passatk = calculate_passatk(nominal_passatk_dict)
-        partial_passatk = calculate_passatk(partial_passatk_dict)
+    nominal_passatk = calculate_passatk(nominal_passatk_dict)
+    partial_passatk = calculate_passatk(partial_passatk_dict)
 
-        lang_path = os.path.join(datasets_path, lang)
-        for method in methods:
-            method_path = os.path.join(lang_path, method)
-            for aug_method in os.listdir(method_path):
-                aug_method_path = os.path.join(method_path,aug_method)
-                passatk_worst_dict = get_worst_passatk_dict(aug_method_path, K)
-                passatk_worst = calculate_passatk(passatk_worst_dict)
-                if method in ["natgen", "format"]:
-                    robust_drop = (partial_passatk - passatk_worst) / partial_passatk
-                    robust_relative = get_relative_passatk(passatk_worst_dict, partial_passatk_dict)
-                elif method in ["nlaugmenter", "func_name"]:
-                    robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
-                    robust_relative = get_relative_passatk(passatk_worst_dict, nominal_passatk_dict)
-                print(f"Lang: {lang}, Method: {method}, style: {aug_method}, worst: {round(passatk_worst, 2)}, drop: {round(robust_drop, 2)}, relative: {round(robust_relative, 2)}")
+    lang_path = os.path.join(datasets_path, lang)
+    for method in methods:
+        method_path = os.path.join(lang_path, method)
+        for aug_method in os.listdir(method_path):
+            aug_method_path = os.path.join(method_path,aug_method)
+            passatk_worst_dict = get_worst_passatk_dict(aug_method_path, K)
+            passatk_worst = calculate_passatk(passatk_worst_dict)
+            if method in ["natgen", "format"]:
+                robust_drop = (partial_passatk - passatk_worst) / partial_passatk
+                robust_relative = get_relative_passatk(passatk_worst_dict, partial_passatk_dict)
+            elif method in ["nlaugmenter", "func_name"]:
+                robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
+                robust_relative = get_relative_passatk(passatk_worst_dict, nominal_passatk_dict)
+            result_dict[aug_method] = [round(passatk_worst, 2), round(robust_drop, 2), round(robust_relative, 2)]
+            fake_dict[aug_method] = ["N/A", "N/A", "N/A"]
+            print(f"Lang: {lang}, Method: {method}, style: {aug_method}, worst: {round(passatk_worst, 2)}, drop: {round(robust_drop, 2)}, relative: {round(robust_relative, 2)}")
+            # print("\\multirow{3}{*}{\\centering TenseTransformationFuture} & RP{\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\")
+    return result_dict, fake_dict
 
-calculate_metrics(5)
+def prepare_overleaf_table(model_dict):
+    aug_dict = {}
+    print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
+    print("\\hline")
+    print("0 & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} \\\\")
+    print("\\hline")
+    print("Perturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
+    print("\\hline")
+
+    for model_name in model_dict.keys():
+        for lang_dict in model_dict[model_name]:
+            for aug_method in lang_dict.keys():
+                if aug_method not in aug_dict.keys():
+                    aug_dict[aug_method] = "\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & java_1b & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\ " \
+                                           "& RD{\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\ " \
+                                           "& RR{\\\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\"
+
+                passatk_worst, robust_drop, robust_relative = lang_dict[aug_method]
+                print("\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\")
+
+
+java_dict, fake_dict = calculate_metrics(5, "java", "codegen6bmulti")
+cpp_dict, _ = calculate_metrics(5, "cpp", "codegen6bmulti")
+
+
+pd.DataFrame(java_dict).set_index("aug_method").to_csv("../datasets/result_rd5/java_6b_metrics.csv")
+pd.DataFrame(cpp_dict).set_index("aug_method").to_csv("../datasets/result_rd5/cpp_6b_metrics.csv")
+
+# js_dict = fake_dict
+#
+# codegen6bmulti = [java_dict, cpp_dict, js_dict]
+# incoder1b = [fake_dict, fake_dict, fake_dict]
+# codegen2bmulti = [fake_dict, fake_dict, fake_dict]
+#
+# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+# prepare_overleaf_table(model_dict)
+#
+# df = pd.DataFrame(result_dict)
+# df.set_index("aug_method")
+#
+# print(df.head())

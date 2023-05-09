@@ -97,7 +97,7 @@ def get_report(directory, K):
 nominal_prompts = load_prompts("../datasets/nominal/HumanEval_cpp.jsonl")
 nominal_prompts.sort(key=lambda x: x["task_id"])
 
-datasets_path = "../datasets/generated_pass5_1"
+datasets_path = "../datasets/codegen6bmulti/generated_pass5_1"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
 def get_result_dict(lang, K):
     result_dict = {}
