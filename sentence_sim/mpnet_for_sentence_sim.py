@@ -176,14 +176,14 @@ def load_all_entry_points(paths_dict, lang):
         perturbed_entry_points[key] = []
 
     for path in paths_dict["perturbed"]:
-        contents = load_docstrings(path, lang)
+        contents = load_entry_points(path, lang)
         for key in perturbed_entry_points.keys():
             perturbed_entry_points[key].append(contents[key])
     return nominal_entry_points, perturbed_entry_points
 
 
 
-lang = "js"
+lang = "cpp"
 
 paths_dict_d = load_paths(lang, "nlaugmenter")
 paths_dict_e = load_paths(lang, "func_name")

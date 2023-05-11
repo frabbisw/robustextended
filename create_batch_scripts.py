@@ -1,6 +1,6 @@
 import os
 
-lang = "js"
+lang = "cpp"
 dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
 generated_dir = "datasets/codegen6bmulti/generated_pass5_1"
 with open("run_code/bash_template.sh", "r") as f:

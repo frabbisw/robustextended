@@ -107,47 +107,72 @@ def calculate_metrics(K, lang, model_name):
                 robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
                 robust_relative = get_relative_passatk(passatk_worst_dict, nominal_passatk_dict)
             result_dict[aug_method] = [round(passatk_worst, 2), round(robust_drop, 2), round(robust_relative, 2)]
-            fake_dict[aug_method] = ["N/A", "N/A", "N/A"]
-            print(f"Lang: {lang}, Method: {method}, style: {aug_method}, worst: {round(passatk_worst, 2)}, drop: {round(robust_drop, 2)}, relative: {round(robust_relative, 2)}")
+            fake_dict[aug_method] = [".", ".", "."]
+            # print(f"Lang: {lang}, Method: {method}, style: {aug_method}, worst: {round(passatk_worst, 2)}, drop: {round(robust_drop, 2)}, relative: {round(robust_relative, 2)}")
             # print("\\multirow{3}{*}{\\centering TenseTransformationFuture} & RP{\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\")
     return result_dict, fake_dict
 
 def prepare_overleaf_table(model_dict):
     aug_dict = {}
-    print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
-    print("\\hline")
-    print("0 & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} \\\\")
-    print("\\hline")
-    print("Perturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
-    print("\\hline")
 
     for model_name in model_dict.keys():
         for lang_dict in model_dict[model_name]:
             for aug_method in lang_dict.keys():
                 if aug_method not in aug_dict.keys():
-                    aug_dict[aug_method] = "\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & java_1b & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\ " \
-                                           "& RD{\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\ " \
-                                           "& RR{\\\\footnotesize5}@1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\\\"
+                    aug_dict[aug_method] = {"rpk":[], "rdk":[], "rrk":[]}
 
                 passatk_worst, robust_drop, robust_relative = lang_dict[aug_method]
-                print("\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\")
+                aug_dict[aug_method]["rpk"].append(passatk_worst)
+                aug_dict[aug_method]["rdk"].append(robust_drop)
+                aug_dict[aug_method]["rrk"].append(robust_relative)
+
+                # passatk_worst, robust_drop, robust_relative = lang_dict[aug_method]
+                # print("\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\")
+    print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
+    print("\t\\hline")
+    print("\t0 & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} \\\\")
+    print("\t\\hline")
+    print("\tPerturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
+    print("\t\\hline")
+    for key in aug_dict.keys():
+        print("\t\\multirow{3}{*}{\\centering "+key+"} & RP{\\footnotesize5}@1", end = " ")
+        for v in aug_dict[key]["rpk"]:
+            print(f"& {v}", end = " ")
+        print("\\\\")
+
+        print("\t& RD{\\footnotesize5}@1 ", end = " ")
+        for v in aug_dict[key]["rdk"]:
+            print(f"& {v}", end = " ")
+        print("\\\\")
+
+        print("\t& RR{\\footnotesize5}@1 ", end = " ")
+        for v in aug_dict[key]["rrk"]:
+            print(f"& {v}", end=" ")
+        print("\\\\")
+        print("\t\\hline")
+
+        # print(key, aug_dict[key]["rpk"])
+        # print(key, aug_dict[key]["rdk"])
+        # print(key, aug_dict[key]["rrk"])
+        # print("*"*100)
 
 
-java_dict, fake_dict = calculate_metrics(5, "java", "codegen6bmulti")
-cpp_dict, _ = calculate_metrics(5, "cpp", "codegen6bmulti")
+
+java_dict_6b, fake_dict = calculate_metrics(5, "java", "codegen6bmulti")
+cpp_dict_6b, _ = calculate_metrics(5, "cpp", "codegen6bmulti")
+js_dict_6b = fake_dict
 
 
-pd.DataFrame(java_dict).set_index("aug_method").to_csv("../datasets/result_rd5/java_6b_metrics.csv")
-pd.DataFrame(cpp_dict).set_index("aug_method").to_csv("../datasets/result_rd5/cpp_6b_metrics.csv")
+pd.DataFrame(java_dict_6b).set_index("aug_method").to_csv("../datasets/result_rd5/codegen6bmulti/java_6b_metrics.csv")
+pd.DataFrame(cpp_dict_6b).set_index("aug_method").to_csv("../datasets/result_rd5/codegen6bmulti/cpp_6b_metrics.csv")
 
-# js_dict = fake_dict
 #
-# codegen6bmulti = [java_dict, cpp_dict, js_dict]
-# incoder1b = [fake_dict, fake_dict, fake_dict]
-# codegen2bmulti = [fake_dict, fake_dict, fake_dict]
+codegen6bmulti = [java_dict_6b, cpp_dict_6b, js_dict_6b]
+incoder1b = [fake_dict, fake_dict, fake_dict]
+codegen2bmulti = [fake_dict, fake_dict, fake_dict]
 #
-# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# prepare_overleaf_table(model_dict)
+model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+prepare_overleaf_table(model_dict)
 #
 # df = pd.DataFrame(result_dict)
 # df.set_index("aug_method")

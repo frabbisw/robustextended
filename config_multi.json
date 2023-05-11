@@ -28,7 +28,7 @@
                     "SwapCharactersPerturbation", "SynonymInsertion", "SynonymSubstitution", "TenseTransformationPast",
                     "TenseTransformationFuture", "WhitespacePerturbation"],
         "PARTIAL_RECIPES": ["DeadCodeInserter", "ForWhileTransformer", "OperandSwap", "VarRenamerCB", "VarRenamerNaive", "VarRenamerRN"],
-        "FUNC_RECIPES": ["FuncRenameSnakeCase", "FuncRenameButterFinger", "FuncRenameSwapChar", "FuncRenameChangeChar", "FuncRenameInflectionalVariation", "FuncRenameSynonymSub"],
+        "FUNC_RECIPES": ["FuncRenameCamelCase", "FuncRenameButterFinger", "FuncRenameSwapChar", "FuncRenameChangeChar", "FuncRenameInflectionalVariation", "FuncRenameSynonymSub"],
         "FORMAT_RECIPES": ["tab_indent", "split_lines", "doc2comments", "new_lines", "new_line_aftercode", "new_line_afterdoc"]
     },
     "humanevaljs":{

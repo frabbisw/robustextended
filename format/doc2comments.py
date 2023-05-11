@@ -1,11 +1,17 @@
 
-from matplotlib import docstring
+# from matplotlib import docstring
 
 
 def doc2comments_structural(code, entry_point, language="java"):
     """ change \"\"\" to # comments
     This function only fits for special style of MBXP or humaneval
     """
+    # if "/*" not in code and "*/" not in code:
+    #     print(f"got error for \n{code}")
+    #     code = "/*\n" \
+    #            "returns encoded string by shifting every character by 5 in the alphabet.\n" \
+    #            "*/\n" + code
+    #
     doc_start_sign = "/*"
     doc_end_sign = "*/"
 
