@@ -1,5 +1,0 @@
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s0.jsonl ../datasets/incoder1b/generated_pass5_1/js/func_name/FuncRenameSnakeCase
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s2.jsonl ../datasets/incoder1b/generated_pass5_1/js/func_name/FuncRenameSnakeCase
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s3.jsonl ../datasets/incoder1b/generated_pass5_1/js/func_name/FuncRenameSnakeCase
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s1.jsonl ../datasets/incoder1b/generated_pass5_1/js/func_name/FuncRenameSnakeCase
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s4.jsonl ../datasets/incoder1b/generated_pass5_1/js/func_name/FuncRenameSnakeCase

@@ -1,5 +1,0 @@
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s2.jsonl ../datasets/incoder1b/generated_pass5_1/js/natgen/ForWhileTransformer
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s3.jsonl ../datasets/incoder1b/generated_pass5_1/js/natgen/ForWhileTransformer
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s0.jsonl ../datasets/incoder1b/generated_pass5_1/js/natgen/ForWhileTransformer
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s1.jsonl ../datasets/incoder1b/generated_pass5_1/js/natgen/ForWhileTransformer
-python ../run_code/generate_single_code_gpu2.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s4.jsonl ../datasets/incoder1b/generated_pass5_1/js/natgen/ForWhileTransformer
