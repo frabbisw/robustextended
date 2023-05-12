@@ -142,6 +142,7 @@ def test_directory(directory, lang):
     file_paths = [f for f in listdir(directory) if isfile(join(directory, f))]
     for file_name in file_paths:
         file_path = join(directory, file_name)
+        print(file_path)
         generated_data = test_file(file_path, lang)
         save_prompts(file_path, generated_data)
 
@@ -170,5 +171,5 @@ def test_lang(lang):
             print(aug_method_path)
             test_directory(aug_method_path, lang)
 
-for lang in ["java"]:
+for lang in ["cpp"]:
     test_lang(lang)
