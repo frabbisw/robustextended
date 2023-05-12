@@ -1,0 +1,5 @@
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevalcpp/full/nlaugmenter/humanevalcpp_SwapCharactersPerturbation_s1.jsonl ../datasets/incoder1b/generated_pass5_1/cpp/nlaugmenter/SwapCharactersPerturbation
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevalcpp/full/nlaugmenter/humanevalcpp_SwapCharactersPerturbation_s3.jsonl ../datasets/incoder1b/generated_pass5_1/cpp/nlaugmenter/SwapCharactersPerturbation
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevalcpp/full/nlaugmenter/humanevalcpp_SwapCharactersPerturbation_s4.jsonl ../datasets/incoder1b/generated_pass5_1/cpp/nlaugmenter/SwapCharactersPerturbation
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevalcpp/full/nlaugmenter/humanevalcpp_SwapCharactersPerturbation_s0.jsonl ../datasets/incoder1b/generated_pass5_1/cpp/nlaugmenter/SwapCharactersPerturbation
+python ../run_code/generate_single_code_gpu1.py ../datasets/perturbed/humanevalcpp/full/nlaugmenter/humanevalcpp_SwapCharactersPerturbation_s2.jsonl ../datasets/incoder1b/generated_pass5_1/cpp/nlaugmenter/SwapCharactersPerturbation
