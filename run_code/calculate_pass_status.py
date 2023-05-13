@@ -152,7 +152,7 @@ def test_directory(directory, lang):
 def get_nominal_prompts(lang):
     return load_prompts(f"../datasets/nominal/HumanEval_{lang}.jsonl")
 
-datasets_path = "../datasets/codegen6bmulti/generated_pass5_1"
+datasets_path = "../datasets/incoder1b/generated_pass5_1"
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
 nominals = ["nominal", "partial"]
 # methods = []
@@ -171,5 +171,5 @@ def test_lang(lang):
             print(aug_method_path)
             test_directory(aug_method_path, lang)
 
-for lang in ["cpp"]:
+for lang in ["java", "js"]:
     test_lang(lang)

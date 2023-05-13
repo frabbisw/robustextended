@@ -1,7 +1,7 @@
 import os
 
 lang = "cpp"
-gpu_number = 1
+gpu_number = 2
 dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
 generated_dir = "datasets/incoder1b/generated_pass5_1"
 
