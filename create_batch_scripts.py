@@ -1,8 +1,9 @@
 import os
 
 lang = "js"
+model_name = "codegen2bmulti"
 dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
-generated_dir = "datasets/codegen6bmulti/generated_pass5_1"
+generated_dir = f"datasets/{model_name}/generated_pass5_1"
 with open("run_code/bash_template.sh", "r") as f:
     template = f.read()
 
@@ -16,7 +17,7 @@ for method_name in os.listdir(dataset_dir):
         # print(file_path, os.path.isfile(file_path))
         new_folder_name = file_name[file_name.find("_")+1:file_name.rfind("_")]
         output_path = os.path.join("..", os.path.join(os.path.join(os.path.join(os.path.join(generated_dir, lang), method_name), new_folder_name)))
-        generate_command = f"python generate_single_code_single_gpu.py {file_path} {output_path}"
+        generate_command = f"python generate_single_code_single_gpu.py {file_path} {output_path} {model_name}"
         # print(generate_command)
         task_name = f"{lang}_{method_name}_{new_folder_name}"
         if task_name not in task_dict.keys():

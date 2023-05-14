@@ -21,12 +21,13 @@ from transformers import GPTJForCausalLM
 import torch
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-model_name = "codegen-6B-multi"
-checkpoint = "Salesforce/"+model_name
+models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B"}
+
+checkpoint = models_dict[sys.argv[3]]
+
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
-
 
 def prompt_to_code(prompt):
     completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
