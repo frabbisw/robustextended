@@ -30,5 +30,5 @@ for task_name in task_dict.keys():
     with open(f"batch_files_lab_gpu{gpu_number+1}/{task_name}.sh", "w") as f:
         f.write(task_dict[task_name])
 
-with open(f"batch_files_lab_gpu{gpu_number}/all_batches.sh", "w") as f:
+with open(f"batch_files_lab_gpu{gpu_number+1}/all_batches.sh", "w") as f:
     f.write(all_batches)
