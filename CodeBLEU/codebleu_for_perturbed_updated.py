@@ -166,22 +166,36 @@ def load_partial_codes(paths_dict, lang):
             perturbed_codes[key].append(contents[key])
     return nominal_codes, perturbed_codes
 
-# def load_partial_dicts(nominal_codes, perturbed_codes):
+def load_indivudual_partial_codes(paths_dict, lang):
+    nominal_codes = load_codes(paths_dict["nominal"], lang, "nominal")
+    parturbed_dict = {}
+    for path in paths_dict["perturbed"]:
+        perturbed_codes = {}
+        for key in nominal_codes.keys():
+            perturbed_codes[key] = []
+
+        contents = load_codes(path, lang, "perturbed")
+        for key in perturbed_codes.keys():
+            perturbed_codes[key].append(contents[key])
+        aug_method = path[path.rfind(f"humaneval{lang}")+len(f"humaneval{lang}")+1:path.find("_s0.jsonl")]
+        parturbed_dict[aug_method] = perturbed_codes
+    return nominal_codes, parturbed_dict
+
+# lang = "js"
+# paths_dict = load_partial_paths(lang)
+# # nominal_codes, perturbed_codes = load_partial_codes(paths_dict, lang)
+# nominal_codes, parturbed_dict = load_indivudual_partial_codes(paths_dict, lang)
+#
+#
+# lang = "javascript"
+
+# print(parturbed_dict)
+# print(paths_dict)
+# exit()
 
 
-lang = "js"
-paths_dict = load_partial_paths(lang)
-nominal_codes, perturbed_codes = load_partial_codes(paths_dict, lang)
-lang = "javascript"
 
-print(paths_dict)
-exit()
-
-
-syntax = []
-dataflow = []
-
-def get_score(task_id):
+def get_score(perturbed_codes, task_id, lang):
     alpha, beta, gamma, theta = 0.25, 0.25, 0.25, 0.25
 
     hypothesis = [nominal_codes[task_id].strip()]
@@ -206,21 +220,55 @@ def get_score(task_id):
 
     return syntax_match_score, dataflow_match_score
 
-for task_id in nominal_codes.keys():
-    try:
-        syntax_match_score, dataflow_match_score = get_score(task_id)
-        syntax.append(syntax_match_score)
-        dataflow.append(dataflow_match_score)
-    except:
-        print("problem with:", task_id)
+def get_result(nominal_codes, parturbed_dict, lang):
+    result = ""
+    result_dict = {}
+    for aug_method in parturbed_dict.keys():
+        syntax = []
+        dataflow = []
+        perturbed_codes = parturbed_dict[aug_method]
+        for task_id in nominal_codes.keys():
+            try:
+                syntax_match_score, dataflow_match_score = get_score(perturbed_codes, task_id, lang)
+                syntax.append(syntax_match_score)
+                dataflow.append(dataflow_match_score)
+            except:
+                None
 
-print(sum(syntax)/len(syntax))
-print(sum(dataflow)/len(dataflow))
+        # print(sum(syntax)/len(syntax))
+        # print(sum(dataflow)/len(dataflow))
+        #
+        # print("eliminating zeros in dataflow")
 
-print("eliminating zeros in dataflow")
+        syntax = [s for s in syntax if s != 0]
+        dataflow = [s for s in dataflow if s != 0]
 
-syntax = [s for s in syntax if s != 0]
-dataflow = [s for s in dataflow if s != 0]
+        # print(sum(syntax)/len(syntax))
+        # print(sum(dataflow)/len(dataflow))
 
-print(sum(syntax)/len(syntax))
-print(sum(dataflow)/len(dataflow))
+        # result += (aug_method + str(round(sum(syntax)/len(syntax),2) + round(sum(dataflow)/len(dataflow),2))
+        # result += f"{aug_method} {round(sum(syntax)/len(syntax),2)} {round(sum(dataflow)/len(dataflow),2)}\n"
+        result_dict[aug_method] = [round(sum(syntax)/len(syntax),2), round(sum(dataflow)/len(dataflow),2)]
+        # break
+    return result_dict
+
+lang_map = {"java":"java","cpp":"cpp","js":"javascript"}
+langs = ["java","js"]
+
+dicts = []
+for lang in langs:
+    paths_dict = load_partial_paths(lang)
+    nominal_codes, parturbed_dict = load_indivudual_partial_codes(paths_dict, lang)
+    result_dict = get_result(nominal_codes, parturbed_dict, lang_map[lang])
+    dicts.append(result_dict)
+
+for i in range(1, len(dicts)):
+    result_dict = dicts[i]
+    for key in dicts[0].keys():
+        dicts[0][key] = dicts[0][key] + result_dict[key]
+
+for key in dicts[0].keys():
+    print("Syntax & " + key.replace("_","\_"), end = " ")
+    for v in dicts[0][key]:
+        print(f"& {v}", end=" ")
+    print("\\\\")

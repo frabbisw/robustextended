@@ -158,50 +158,57 @@ def load_paths(lang, method):
     return paths_dict
 
 def load_all_docstrings(paths_dict, lang):
-    perturbed_docstrings = {}
     nominal_docstrings = load_docstrings(paths_dict["nominal"], lang)
-    for key in nominal_docstrings.keys():
-        perturbed_docstrings[key] = []
-
+    perturbed_doc_dict = {}
     for path in paths_dict["perturbed"]:
+        perturbed_docstrings = {}
+        for key in nominal_docstrings.keys():
+            perturbed_docstrings[key] = []
         contents = load_docstrings(path, lang)
         for key in perturbed_docstrings.keys():
             perturbed_docstrings[key].append(contents[key])
-    return nominal_docstrings, perturbed_docstrings
+        aug_method = path[path.rfind(f"humaneval{lang}") + len(f"humaneval{lang}") + 1:path.find("_s0.jsonl")]
+        perturbed_doc_dict[aug_method] = perturbed_docstrings
+    return nominal_docstrings, perturbed_doc_dict
 
 def load_all_entry_points(paths_dict, lang):
-    perturbed_entry_points = {}
     nominal_entry_points = load_entry_points(paths_dict["nominal"], lang)
-    for key in nominal_entry_points.keys():
-        perturbed_entry_points[key] = []
-
+    perturbed_entry_dict = {}
     for path in paths_dict["perturbed"]:
+        perturbed_entry_points = {}
+        for key in nominal_entry_points.keys():
+            perturbed_entry_points[key] = []
         contents = load_entry_points(path, lang)
         for key in perturbed_entry_points.keys():
             perturbed_entry_points[key].append(contents[key])
-    return nominal_entry_points, perturbed_entry_points
-
-
-
-lang = "cpp"
-
-paths_dict_d = load_paths(lang, "nlaugmenter")
-paths_dict_e = load_paths(lang, "func_name")
-
-nominal_docstrings, perturbed_docstrings = load_all_docstrings(paths_dict_d, lang)
-nominal_entry_points, perturbed_entry_points = load_all_entry_points(paths_dict_e, lang)
-
-
+        aug_method = path[path.rfind(f"humaneval{lang}") + len(f"humaneval{lang}") + 1:path.find("_s0.jsonl")]
+        perturbed_entry_dict[aug_method] = perturbed_entry_points
+    return nominal_entry_points, perturbed_entry_dict
 
 import pickle
 
-with open("nominal_docstrings.pkl", "wb") as f:
-    pickle.dump(nominal_docstrings, f)
-with open("perturbed_docstrings.pkl", "wb") as f:
-    pickle.dump(perturbed_docstrings, f)
-with open("nominal_entry_points.pkl", "wb") as f:
-    pickle.dump(nominal_entry_points, f)
-with open("perturbed_entry_points.pkl", "wb") as f:
-    pickle.dump(perturbed_entry_points, f)
+langs = ["java","cpp","js"]
 
+for lang in langs:
+    paths_dict_d = load_paths(lang, "nlaugmenter")
+    paths_dict_e = load_paths(lang, "func_name")
+
+    nominal_docstrings, perturbed_doc_dict = load_all_docstrings(paths_dict_d, lang)
+    nominal_entry_points, perturbed_entry_dict = load_all_entry_points(paths_dict_e, lang)
+
+    with open(f"nominal_docstrings{lang}.pkl", "wb") as f:
+        pickle.dump(nominal_docstrings, f)
+
+    with open(f"perturbed_doc_dict{lang}.pkl", "wb") as f:
+        pickle.dump(perturbed_doc_dict, f)
+
+    with open(f"nominal_entry_points{lang}.pkl", "wb") as f:
+        pickle.dump(nominal_entry_points, f)
+
+    with open(f"perturbed_entry_dict{lang}.pkl", "wb") as f:
+        pickle.dump(perturbed_entry_dict, f)
+
+    # print(perturbed_entry_dict.keys())
+    # exit()
 # import pdb; pdb.set_trace()
+
