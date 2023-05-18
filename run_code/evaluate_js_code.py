@@ -31,23 +31,22 @@ def load_prompts(filename):
 
 def test_it(code, main, new_entry_point, i):
     code = code[:code.find("<|endoftext|>")]
+    old_code = code
+    # cmnt_index = code.find("/*")
+    # cmnt_index2 = code.find("/*", cmnt_index+5)
+    # print(cmnt_index2)
+    # exit()
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index+5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
     # method_mark = code.find("const")
     # second_method_mark = code.find("const", method_mark)
     # if second_method_mark >= 0:
     #     code = code[:second_method_mark]
     old_entry_point = nominal_prompts[i]["entry_point"]
-    main = main.replace(old_entry_point, new_entry_point)
+    # main = main.replace(old_entry_point, new_entry_point)
     full_code = code + main
-
-    print("#" * 20)
-    print(partial_prompts[i]["prompt"])
-    print("1" * 20)
-    print(perturbed_prompts[i]["prompt"])
-    print("2" * 20)
-    print(code)
-    print("3" * 20)
-    print(main)
-    print("#" * 20)
 
     with open("../tmp/Sample.js", "w") as f:
         f.write(full_code)
@@ -66,7 +65,9 @@ def test_it(code, main, new_entry_point, i):
         # print(main)
         # print("#" * 20)
 
+        print("*" * 50)
         print(f"{i} successful")
+        print("*"*50)
         # print(run_output.decode('utf-8'))
         return 1
 
@@ -79,14 +80,34 @@ def test_it(code, main, new_entry_point, i):
         # print(main)
         # print("*" * 50)
         #
-        # print(e.output.decode('utf-8'))
+        print(f"{i}"*50)
+        print(e.output.decode('utf-8'))
+        print("prompt" + "=" * 50)
+        print(nominal_prompts[i]["prompt"])
+        print("old code"+"=" * 50)
+        print(old_code)
+        print("new code"+"=" * 50)
+        print(code)
+        print(f"{i}"*50)
         # print("Return code: ", e.returncode)
         # import pdb; pdb.set_trace()
         # print()
         return 0
     except subprocess.TimeoutExpired as e:
-        # print(f"{i} timeout")
+        print(f"{i} timeout")
         return 0
+
+nominal_prompts = load_prompts("../datasets/nominal/HumanEval_js.jsonl")
+
+tmp_prompts = load_prompts("../datasets/codegen6bmulti/generated_pass5_1/js/nominal/f_s0.jsonl")
+
+cnt = 0
+for p in tmp_prompts:
+    test_it(p["gc"], p["test"], p["entry_point"], cnt)
+    cnt += 1
+    # print(p["gc"])
+exit()
+
 
 def get_test_result(filepath):
     prompts = load_prompts(filepath)

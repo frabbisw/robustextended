@@ -42,16 +42,16 @@ def save_prompts(filename, prompts):
         for line in prompts:
             jsonlines.Writer.write(writer, line)
 
-def get_nominal_prompts(lang, type):
+def get_nominal_prompts(lang, type, model_name):
     if type == "nominal":
-        return load_prompts(f"../datasets/codegen6bmulti/generated_pass5_1/{lang}/nominal/f_s0.jsonl")
+        return load_prompts(f"../datasets/{model_name}/generated_pass5_1/{lang}/nominal/f_s0.jsonl")
     elif type == "partial":
-        return load_prompts(f"../datasets/codegen6bmulti/generated_pass5_1/{lang}/partial/f_s0.jsonl")
+        return load_prompts(f"../datasets/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl")
 
 def calculate_passatk(data):
     return sum(data.values()) / len(data)
-def get_nominal_passatk_dict(lang, type):
-    prompts = get_nominal_prompts(lang, type)
+def get_nominal_passatk_dict(lang, type, model_name):
+    prompts = get_nominal_prompts(lang, type, model_name)
     passatk = {}
     for prompt in prompts:
         passatk[prompt["task_id"]] = prompt["passed"]
@@ -107,14 +107,14 @@ def calculate_metrics_summary(K, lang, model_name):
     datasets_path = f"../datasets/{model_name}/generated_pass5_1"
     methods = ["nlaugmenter", "natgen", "format", "func_name"]
     # langs = ["java"]
-    nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal")
-    partial_passatk_dict = get_nominal_passatk_dict(lang, "partial")
+    nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal", model_name)
+    partial_passatk_dict = get_nominal_passatk_dict(lang, "partial", model_name)
 
     nominal_passatk = calculate_passatk(nominal_passatk_dict)
     partial_passatk = calculate_passatk(partial_passatk_dict)
 
-    result_dict["nominal"] = round(nominal_passatk, 2)
-    result_dict["partial"] = round(partial_passatk, 2)
+    result_dict["nominal"] = nominal_passatk
+    result_dict["partial"] = partial_passatk
 
     fake_dict["nominal"] = "."
     fake_dict["partial"] = "."
@@ -135,13 +135,24 @@ def calculate_metrics_summary(K, lang, model_name):
                 relative_list.append([passatk_worst_dict, nominal_passatk_dict])
 
         passatk_worst = calculate_passatk_summary(drop_list)
-        if method in ["natgen", "format"]:
-            robust_drop = (partial_passatk - passatk_worst) / partial_passatk
-        else:
-            robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
+
+        try:
+            if method in ["natgen", "format"]:
+                robust_drop = (partial_passatk - passatk_worst) / partial_passatk
+            else:
+                robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
+        except:
+            robust_drop = 0
+
         robust_relative = get_relative_passatk_summary(relative_list)
-        result_dict[method] = [round(passatk_worst, 2), round(robust_drop, 2), round(robust_relative, 2)]
+        # nominal_passatk = round(nominal_passatk, 2)
+        # partial_passatk = round(partial_passatk, 2)
+        # passatk_worst = round(passatk_worst, 2)
+        # robust_drop = robust_drop
+
+        result_dict[method] = [passatk_worst, robust_drop, robust_relative]
         fake_dict[method] = [".", ".", "."]
+
 
     return result_dict, fake_dict
 
@@ -154,8 +165,8 @@ def calculate_metrics(K, lang, model_name):
     datasets_path = f"../datasets/{model_name}/generated_pass5_1"
     methods = ["nlaugmenter", "natgen", "format", "func_name"]
     # langs = ["java"]
-    nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal")
-    partial_passatk_dict = get_nominal_passatk_dict(lang, "partial")
+    nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal", model_name)
+    partial_passatk_dict = get_nominal_passatk_dict(lang, "partial", model_name)
 
     nominal_passatk = calculate_passatk(nominal_passatk_dict)
     partial_passatk = calculate_passatk(partial_passatk_dict)
@@ -175,10 +186,16 @@ def calculate_metrics(K, lang, model_name):
             passatk_worst_dict = get_worst_passatk_dict(aug_method_path, K)
             passatk_worst = calculate_passatk(passatk_worst_dict)
             if method in ["natgen", "format"]:
-                robust_drop = (partial_passatk - passatk_worst) / partial_passatk
+                try:
+                    robust_drop = (partial_passatk - passatk_worst) / partial_passatk
+                except:
+                    robust_drop = 0
                 robust_relative = get_relative_passatk(passatk_worst_dict, partial_passatk_dict)
             elif method in ["nlaugmenter", "func_name"]:
-                robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
+                try:
+                    robust_drop = (nominal_passatk - passatk_worst) / nominal_passatk
+                except:
+                    robust_drop = 0
                 robust_relative = get_relative_passatk(passatk_worst_dict, nominal_passatk_dict)
             result_dict[aug_method] = [round(passatk_worst, 2), round(robust_drop, 2), round(robust_relative, 2)]
             fake_dict[aug_method] = [".", ".", "."]
@@ -255,17 +272,20 @@ def prepare_overleaf_table(model_dict):
 
 
 
-# java_dict_6b, fake_dict = calculate_metrics(5, "java", "codegen6bmulti")
-# cpp_dict_6b, _ = calculate_metrics(5, "cpp", "codegen6bmulti")
-# js_dict_6b, _ = calculate_metrics(5, "js", "codegen6bmulti")
+java_dict_6b, fake_dict = calculate_metrics(5, "java", "codegen6bmulti")
+cpp_dict_6b, _ = calculate_metrics(5, "cpp", "codegen6bmulti")
+js_dict_6b, _ = calculate_metrics(5, "js", "codegen6bmulti")
 
+java_dict_1b, fake_dict = calculate_metrics(5, "java", "incoder1b")
+cpp_dict_1b, _ = calculate_metrics(5, "cpp", "incoder1b")
+js_dict_1b, _ = calculate_metrics(5, "js", "incoder1b")
 
-# codegen6bmulti = [java_dict_6b, cpp_dict_6b, js_dict_6b]
-# incoder1b = [fake_dict, fake_dict, fake_dict]
-# codegen2bmulti = [fake_dict, fake_dict, fake_dict]
-#
-# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# prepare_overleaf_table(model_dict)
+codegen6bmulti = [java_dict_6b, cpp_dict_6b, js_dict_6b]
+incoder1b = [java_dict_1b, cpp_dict_1b, js_dict_1b]
+codegen2bmulti = [fake_dict, fake_dict, fake_dict]
+
+model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+prepare_overleaf_table(model_dict)
 
 def prepare_overleaf_table_summary(model_dict):
     method_dict = {}
@@ -302,14 +322,21 @@ def prepare_overleaf_table_summary(model_dict):
 
     print("\tNominal & RP{\\footnotesize5}@1 ", end = "")
     for v in nominal_dict["nominal"]:
-        print(f"& {v} ", end="")
+        try:
+            print(f"& {round(v,2)} ", end="")
+        except:
+            print(f"& . ", end="")
+            # exit()
     print("\\\\")
 
     print("\t\\hline")
 
     print("\tPartial & RP{\\footnotesize5}@1 ", end="")
     for v in nominal_dict["partial"]:
-        print(f"& {v} ", end="")
+        try:
+            print(f"& {round(v, 2)} ", end="")
+        except:
+            print(f"& . ", end="")
     print("\\\\")
 
     print("\t\\hline")
@@ -323,36 +350,52 @@ def prepare_overleaf_table_summary(model_dict):
             tmp = nominal_dict["nominal"]
         print("\t\\multirow{4}{*}{\\centering " + key.replace("_", "\\_") + "} & Nominal$\\uparrow$", end=" ")
         for v in tmp:
-            print(f"& {v} ", end="")
+            try:
+                print(f"& {round(v, 2)} ", end="")
+            except:
+                print(f"& . ", end="")
         print("\\\\")
 
         print("\t& RP{\\footnotesize5}@1$\\uparrow$ ", end = " ")
         for v in method_dict[key]["rpk"]:
-            print(f"& {v}", end = " ")
+            try:
+                print(f"& {round(v, 2)} ", end="")
+            except:
+                print(f"& . ", end="")
         print("\\\\")
 
         print("\t& RD{\\footnotesize5}@1$\\downarrow$ ", end = " ")
         for v in method_dict[key]["rdk"]:
-            print(f"& {v}", end = " ")
+            try:
+                print(f"& {round(v, 2)} ", end="")
+            except:
+                print(f"& . ", end="")
         print("\\\\")
 
         print("\t& RR{\\footnotesize5}@1$\\downarrow$ ", end = " ")
         for v in method_dict[key]["rrk"]:
-            print(f"& {v}", end=" ")
+            try:
+                print(f"& {round(v, 2)} ", end="")
+            except:
+                print(f"& . ", end="")
         print("\\\\")
         print("\t\\hline")
 
-java_sum_6b, fake_dict = calculate_metrics_summary(5, "java", "codegen6bmulti")
-cpp_sum_6b, fake_dict = calculate_metrics_summary(5, "cpp", "codegen6bmulti")
-js_sum_6b, fake_dict = calculate_metrics_summary(5, "js", "codegen6bmulti")
-
-
-codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
-incoder1b = [fake_dict, fake_dict, fake_dict]
-codegen2bmulti = [fake_dict, fake_dict, fake_dict]
+# java_sum_6b, fake_dict = calculate_metrics_summary(5, "java", "codegen6bmulti")
+# cpp_sum_6b, fake_dict = calculate_metrics_summary(5, "cpp", "codegen6bmulti")
+# js_sum_6b, fake_dict = calculate_metrics_summary(5, "js", "codegen6bmulti")
 #
-model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-prepare_overleaf_table_summary(model_dict)
+# java_sum_1b, fake_dict = calculate_metrics_summary(5, "java", "incoder1b")
+# cpp_sum_1b, fake_dict = calculate_metrics_summary(5, "cpp", "incoder1b")
+# js_sum_1b, fake_dict = calculate_metrics_summary(5, "js", "incoder1b")
+#
+#
+# codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
+# incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
+# codegen2bmulti = [fake_dict, fake_dict, fake_dict]
+# #
+# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+# prepare_overleaf_table_summary(model_dict)
 
 
 # print(java_sum_6b)

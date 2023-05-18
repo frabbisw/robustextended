@@ -82,6 +82,8 @@ def test_it(solution, main, new_entry_point, i):
         print(run_output.decode('utf-8'))
         return 1
 
+    # except subprocess.CompletedProcess as e:
+    #     print("completed")
     except subprocess.CalledProcessError as e:
         # print the error message and output from the Java compiler or program
         print(f"{i} failed")
@@ -102,6 +104,15 @@ def test_it(solution, main, new_entry_point, i):
         return 0
 
 nominal_prompts = load_prompts("../datasets/nominal/HumanEval_java.jsonl")
+
+tmp_prompts = load_prompts("../datasets/codegen6bmulti/generated_pass5_1/java/nominal/f_s0.jsonl")
+
+cnt = 0
+for p in tmp_prompts:
+    test_it(solution=p["gc"], main=p["test"], new_entry_point=p["entry_point"], i=cnt)
+    cnt += 1
+    # print(p["gc"])
+
 
 # path = "../datasets/nominal/HumanEval_java.jsonl"
 # operand_swap_path_prompts = load_prompts("../datasets/generated/java/natgen/OperandSwap/f_0.jsonl")
@@ -247,6 +258,40 @@ def get_result_dict(lang, K):
     print(f"report ready for {lang} and {K}!!")
     return result_dict
 
+def test_java(solution, main, new_entry_point, old_entry_point):
+    solution = solution[:solution.find("<|endoftext|>")]
+    solution=eliminate_second_Sollution(solution)
+
+    main = main.replace(old_entry_point, new_entry_point)
+
+    main = "import java.util.ArrayList;\n" \
+           "import java.util.Arrays;\n" \
+           "import java.util.List;\n" \
+           "import java.util.Objects;\n" \
+           "import java.util.Map;\n" \
+           "import java.util.Random;\n" \
+           "import java.util.HashMap;\n" \
+           "import java.util.Optional;\n" \
+           "import java.security.NoSuchAlgorithmException;\n" \
+           + main
+    with open("../tmp/Main.java", "w") as f:
+        f.write(main)
+    with open("../tmp/Solution.java", "w") as f:
+        f.write(solution)
+    os.chdir("../tmp/")
+    try:
+        subprocess.check_output(['javac', 'Main.java', 'Solution.java'], stderr=subprocess.STDOUT)
+        subprocess.check_output(['java', 'Main'], stderr=subprocess.STDOUT, timeout=3)
+        return 1
+    except AssertionError as e:
+        return 0
+    except subprocess.CalledProcessError as e:
+        return 0
+    except subprocess.TimeoutExpired as e:
+        return 0
+
+
+
 # K = 1
 # lang = "java"
 # result_dict = get_result_dict(lang, K)
@@ -254,9 +299,9 @@ def get_result_dict(lang, K):
 # with open(f"../datasets/result/{lang}.pickle", 'rb') as f:
 #     result_dict = pickle.load(f)
 #
-for lang in ["java"]:
-    for K in [1, 5, 10]:
-        pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
+# for lang in ["java"]:
+#     for K in [1, 5, 10]:
+#         pd.DataFrame(get_result_dict(lang, K)).sort_index().to_csv(f"../datasets/result/{lang}_K_{K}.csv", index=True)
 #
 # with open(f"../datasets/result/{lang}.pickle", 'wb') as f:
 #     pickle.dump(result_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
@@ -264,4 +309,4 @@ for lang in ["java"]:
 # with open(f"../datasets/result/{lang}.json", "w") as f:
 #     json.dump(result_dict, f)
 #
-import pdb; pdb.set_trace()
+# import pdb; pdb.set_trace()

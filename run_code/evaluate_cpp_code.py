@@ -51,27 +51,31 @@ def test_it(code, main, new_entry_point, i):
         run_output = subprocess.check_output(['./cpp_code'], stderr=subprocess.STDOUT, timeout=3)
 
         # print the output from the Java program
-        return 1
         print(f"{i} successful")
-        print(run_output.decode('utf-8'))
+        # print(run_output.decode('utf-8'))
         return 1
 
     except subprocess.CalledProcessError as e:
-        return 0
         # print the error message and output from the Java compiler or program
-        print(f"{i}failed")
+        # print(f"{i}failed")
         # print("*"*50)
         # print(code)
         # print("*" * 50)
-        print("An error occurred while running the program:")
-        print(e.output.decode('utf-8'))
-        print("Return code: ", e.returncode)
+        # print("An error occurred while running the program:")
+        if "assertion" in e.output.decode('utf-8').lower():
+            print(f"{i} assertion error")
+        else:
+            print(f"{i} compilation error")
+        # print(e.output.decode('utf-8'))
+        # print("Return code: ", e.returncode)
         return 0
         # import pdb; pdb.set_trace()
         # print()
     except subprocess.TimeoutExpired as e:
-        return 0
         print(f"{i} timeout")
+
+nominal_prompts = load_prompts("../datasets/nominal/HumanEval_cpp.jsonl")
+
 
 def get_test_result(filepath):
     prompts = load_prompts(filepath)
