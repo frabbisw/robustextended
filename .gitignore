@@ -6,8 +6,12 @@ __pycache__/
 .venv
 .idea/
 evaluate-public-models/human-eval/
-datasets/generated/
+datasets/
 tmp/
+testing_dir
+testing_dir2
+testing_dir3
+testing_dir4
 natgen/transformations/my-languages_dot.so
 natgen/treesitter/build/
 natgen/treesitter/tree-sitter-python/

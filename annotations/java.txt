@@ -1,0 +1,499 @@
+java/62
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/28 perturbation in syntax not natural
+Perturbed :0.20
+Nominal:1
+Semantic:0.40
+
+java/13
+Perturbed :0.85
+Nominal:1
+Semantic:0.80
+
+java/152
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/72 dead code insertion is not natural
+Perturbed :0.30
+Nominal:1
+Semantic:1
+
+java/39
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/144 after back translation perturbation both prompt become same
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/129
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/112
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/28
+Perturbed :0.75
+Nominal:1
+Semantic:0.90
+
+java/125
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/148  extent of synonyms substitution is not natural they are not semantically similar also
+Perturbed :0.40
+Nominal:1
+Semantic:0.50
+
+java/38
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/53
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/155
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/88
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/23 splitting a line after return is not common
+Perturbed :0.40 
+Nominal:1
+Semantic:1
+
+java/130
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/80
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/80
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/52
+Perturbed :0.85
+Nominal:1
+Semantic:1
+
+java/151
+Perturbed :0.80
+Nominal:1
+Semantic:0.91
+
+java/52
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/127
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/31
+Perturbed :0.40
+Nominal:1
+Semantic:0.60
+
+java/126
+Perturbed :0.90
+Nominal:1
+Semantic:0.95
+
+java/73
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/137
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/64 dead code insertion is not common
+Perturbed :0.40
+Nominal:
+Semantic:
+
+java/85
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/6
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/13
+Perturbed :0.90
+Nominal:1
+Semantic:1
+
+java/13
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/13 variable naming is not common
+Perturbed :0.70
+Nominal:1
+Semantic:1
+
+java/86
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/140 dead code insertion is not common
+Perturbed :0.40
+Nominal:1
+Semantic:1
+
+java/8
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/74
+Perturbed :0.40
+Nominal:1
+Semantic:1
+
+java/132
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/47
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/144 perturbation in syntax
+Perturbed :0.40
+Nominal:1
+Semantic:0.40
+
+java/87
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/86
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/133
+Perturbed :0.40
+Nominal:1
+Semantic:1
+
+java/11
+Perturbed :0.80
+Nominal:1
+Semantic:0.90
+
+java/18
+Perturbed :0.40
+Nominal:1
+Semantic:1
+
+java/151
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/95
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/0.87
+Perturbed :0.90
+Nominal:1
+Semantic:0.95
+
+java/92
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/22
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/120
+Perturbed :0.70
+Nominal:1
+Semantic:0.95
+
+java/69
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/112
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/147
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/21
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/83
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/32
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/119
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/13
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/135
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/34 variable naming is not common
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/62
+Perturbed :
+Nominal:
+Semantic:
+
+java/136
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/90 semantically they mean different thing from docstring 
+Perturbed :0.65
+Nominal:1
+Semantic:0.60
+
+java/100
+Perturbed :0.90
+Nominal:1
+Semantic:1
+
+java/155
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/77
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/9
+Perturbed :0.40
+Nominal:0.80
+Semantic:0.45
+
+java/129
+Perturbed :0.40
+Nominal:1
+Semantic:0.75
+
+java/76
+Perturbed :0.60
+Nominal:1
+Semantic:0.85
+
+java/120
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/40
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/46
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/96
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/117
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/58
+Perturbed :0.80
+Nominal:1
+Semantic:0.95
+
+java/48
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/22
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/13
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/59
+Perturbed :0.90
+Nominal:1
+Semantic:1
+
+java/126
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/28
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/156
+Perturbed:0.90
+Nominal:1
+Semantic:1
+
+java/6
+Perturbed :0.80
+Nominal:1
+Semantic:0.90
+
+java/155
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/49
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/49
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/15
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/162
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/69
+Perturbed :0.95
+Nominal:1
+Semantic:1
+
+java/155
+Perturbed :0.98
+Nominal:1
+Semantic:1
+
+java/143
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/161
+Perturbed :0.80
+Nominal:1
+Semantic:1
+
+java/102
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/108
+Perturbed :1
+Nominal:1
+Semantic:1
+
+java/102
+Perturbed :0.70
+Nominal:1
+Semantic:0.85
+
+java/118
+Perturbed :0.90
+Nominal:1
+Semantic:1
+
+Java 157
+Perturbed:1
+Nominal:1
+Semantic:1
+
+Javan121
+Perturbed:1
+Nominal:1
+semantic:1

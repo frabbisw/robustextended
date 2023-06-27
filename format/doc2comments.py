@@ -3,6 +3,8 @@
 
 
 def doc2comments_structural(code, entry_point, language="java"):
+    # print(code)
+    # import pdb; pdb.set_trace()
     """ change \"\"\" to # comments
     This function only fits for special style of MBXP or humaneval
     """
@@ -14,6 +16,8 @@ def doc2comments_structural(code, entry_point, language="java"):
     #
     doc_start_sign = "/*"
     doc_end_sign = "*/"
+    if language == "javascript":
+        code = code.replace("*/", "*/\n")
 
     # print("doc_type not supported!")
     # exit()
@@ -74,7 +78,9 @@ def doc2comments_structural(code, entry_point, language="java"):
 
     new_code = code[:doc_line_start] + "\n".join(new_lines) + code[doc_line_end + 1:]
 
+    # print(new_code)
     # import pdb; pdb.set_trace()
+
     return new_code
 
 def doc2comments(code, entry_point, language="python"):

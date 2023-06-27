@@ -1,7 +1,7 @@
 import os
 
-lang = "js"
-model_name = "codegen2bmulti"
+lang = "py"
+model_name = "codegen6bmulti"
 dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
 generated_dir = f"datasets/{model_name}/generated_pass5_1"
 with open("run_code/bash_template.sh", "r") as f:

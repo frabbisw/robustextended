@@ -134,12 +134,20 @@ def longest_splits(code, entry_point, language):
                     new_line = new_line[:string_start] + "@!string!@" + new_line[string_end + 1:]
                     string_start = new_line.find("\"")
 
-            if language in ["python","java","javascript","cpp","go"]:
+            if language in ["python"]:
                 words = new_line.split(" ")
                 if len(words) >= 2:
                     # split_pos = random.randint(1, len(words) - 1) # random position split
                     split_pos = len(words) // 2 # middle position split
                     words.insert(split_pos, " \\\n ")
+                    new_line = indent + " ".join(words) + post
+                    added_splits += 1
+            elif language in ["java","javascript","cpp","go"]:
+                words = new_line.split(" ")
+                if len(words) >= 2:
+                    # split_pos = random.randint(1, len(words) - 1) # random position split
+                    split_pos = len(words) // 2 # middle position split
+                    words.insert(split_pos, "\n")
                     new_line = indent + " ".join(words) + post
                     added_splits += 1
             # else:

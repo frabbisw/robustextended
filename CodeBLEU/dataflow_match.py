@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. 
 # Licensed under the MIT license.
 
-from parser import DFG_python,DFG_java,DFG_ruby,DFG_go,DFG_php,DFG_javascript,DFG_csharp
+from parser import DFG_python,DFG_java,DFG_ruby,DFG_go,DFG_php,DFG_javascript,DFG_csharp,DFG_cpp
 from parser import (remove_comments_and_docstrings,
                    tree_to_token_index,
                    index_to_code_token,
@@ -12,6 +12,7 @@ import pdb
 dfg_function={
     'python':DFG_python,
     'java':DFG_java,
+    'cpp':DFG_cpp,
     'ruby':DFG_ruby,
     'go':DFG_go,
     'php':DFG_php,

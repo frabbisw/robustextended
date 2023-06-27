@@ -164,11 +164,10 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
     # trailing_space * " " +
     for i in range(1, len(tokens)):
         tok = tokens[i]
-    # for tok in tokens:
         if tok in ["#include","#define","using", "package", "import"] and tokens[i-1] != "NEWLINE":
             new_tokens.append("\n")
             new_tokens.append(tok)
-            trailing_space = False
+            trailing_space = True
         elif tok == "{":
             new_tokens.append(" {")
             total_indent += 1
@@ -223,6 +222,10 @@ def beautify_cpp_java_js_code(tokens, indent="    "):
         elif tok == "NEWLINE":
             trailing_space = False
             new_tokens.append("\n" + total_indent * indent)
+        elif tok == "namespace":
+            if trailing_space == False:
+                new_tokens.append(" "+tok)
+            trailing_space = True
         else:
             new_tokens.append(trailing_space * " " + tok)
             trailing_space = True
@@ -358,7 +361,10 @@ def count_lines(s):
 #     return header, doc, code
 
 def sep(code, entry_point, data):
+    # import pdb; pdb.set_trace()
     if data in ["humanevalpy", "humaneval", "mbpp"]:
+        # if code is None:
+        #     import pdb; pdb.set_trace()
         single_doc = code.find("\'\'\'")
         double_doc = code.find("\"\"\"")
         if single_doc == -1:

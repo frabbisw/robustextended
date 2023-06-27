@@ -259,8 +259,8 @@ def perturb_partial(args, data, recipes):
     generated_data = []
     diff = 0
     import random
-    random.shuffle(data)
-    random.shuffle(data)
+    # random.shuffle(data)
+    # random.shuffle(data)
     for idx, entry in tqdm(enumerate(data)):
         # import pdb;
         # pdb.set_trace()
@@ -276,6 +276,7 @@ def perturb_partial(args, data, recipes):
         if res["partial"] is not None:
             # header, doc, body = sep(res["partial"], res['entry_point'], args.data)
             # header, doc, body = sep(res["partial"], res['entry_point'])
+            # header, doc, body = sep(res["partial"], res['entry_point'])
             header, doc, body = sep(res["partial"], res['entry_point'],args.data)
             # import pdb; pdb.set_trace()
 
@@ -283,7 +284,8 @@ def perturb_partial(args, data, recipes):
         else:
             # only 1 line return code in canonical solution
             # header, doc, body = sep(res['prompt'] + res['canonical_solution'], res['entry_point'])
-            header, doc, body = sep(res["partial"], res['entry_point'], args.data)
+            # header, doc, body = sep(res["partial"], res['entry_point'], args.data)
+            header, doc, body = sep(res['prompt'] + res['canonical_solution'], res['entry_point'], args.data)
             # import pdb; pdb.set_trace()
 
 

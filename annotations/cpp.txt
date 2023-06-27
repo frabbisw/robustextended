@@ -1,0 +1,499 @@
+cpp24
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp22
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp78
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp157
+Perturbed prompt:0.30
+Nominal prompt:1
+Semantic:0.50
+
+cpp102
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp18
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp93
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp84
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp118
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:0.90
+
+cpp126
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp15
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp6
+Perturbed prompt:0.8
+Nominal prompt:1
+Semantic:1
+
+cpp92
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp61
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp49
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:1
+
+cpp118
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp110
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.80
+
+cpp111
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp65
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp111
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp142
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:0.80
+
+cpp48   both prompt  are same->
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp150
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:0.95
+
+cpp92
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp27
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp66
+Perturbed prompt:0.95
+Nominal prompt:0.95
+Semantic:1
+
+cpp3
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:0.90
+
+cpp86
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.70
+
+cpp53
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:1
+
+cpp32
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp130 tab_indent
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp41 both prompt are same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp24 Dead code insertion not common in programming society thats why i rate it below 0.50
+Perturbed prompt:0.30
+Nominal prompt:1
+Semantic:1
+
+cpp9
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp134 both prompt are same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp63  such extent of change in char case is not natural usually
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp150
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:0.90
+
+cpp5
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp47  type of perturbation is written but final prompt is exact similar
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp25
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp 129 such an extent of synonyms insertion is not natural so i rate below naturalness rare ie 0.50
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.60
+
+cpp1
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp111
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp45 high in place of height
+Perturbed prompt:0.75
+Nominal prompt:0.75
+Semantic:1
+
+cpp92 dead code insertion
+Perturbed prompt:0.30
+Nominal prompt:1
+Semantic:1
+
+cpp84
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp154
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp155   Both prompt are same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp104  breaking a line  just after for loop/ or return statement is not usually common in programming 
+Perturbed prompt:0.30
+Nominal prompt:1
+Semantic:1
+
+cpp19 such an extent of white space perturbation is not natural
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.60
+
+cpp104
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp3
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp121 using namespace usually written on same line not natural
+Perturbed prompt:0.60
+Nominal prompt:1
+Semantic:1
+
+cpp141  After apply backtranslation become similar to nominal prompt 
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp63
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp94
+Perturbed prompt:0.60
+Nominal prompt:0.80
+Semantic:0.90
+
+cpp115 
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.70
+
+cpp88  variable naming is rare
+Perturbed prompt:0.50
+Nominal prompt:1
+Semantic:1
+
+cpp162 
+perturbed:0.90
+Nominal prompt:1
+Semantic:0.95 
+
+cpp153 variable naming is rare
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp69
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp95
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp14
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp103
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp134
+Perturbed prompt:0.90
+Nominal prompt:0.95
+Semantic:1
+
+cpp63
+Perturbed prompt:0.95
+Nominal prompt:1
+Semantic:1
+
+cpp5  variable naming is rare
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp157 
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.70
+
+cpp121
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp79
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:0.90
+
+cpp82 perturbation in swapping character is not natural
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:1
+
+cpp32 variable naming is rare
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:1
+
+cpp49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp156
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp103
+Perturbed prompt:0.70
+Nominal prompt:1
+Semantic:0.80
+
+cpp136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp67 extent of white space perturbation is not natural
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:1
+
+cpp72
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp86
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:0.70
+
+cpp49
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp138
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp90
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp15 both prompt are same
+Perturbed prompt:
+Nominal prompt:
+Semantic:
+
+cpp142  its very common in programing society to for while switch
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp33
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp14 extent of perturbation is not natural
+Perturbed prompt:0.40
+Nominal prompt:1
+Semantic:0.50
+
+cpp136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp19
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp117
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp35
+Perturbed prompt:1
+nominal prompt:1
+Semantic:1
+
+cpp136
+Perturbed prompt:0.90
+Nominal prompt:1
+Semantic:1
+
+cpp21
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp27
+Perturbed prompt:0.98
+Nominal prompt:1
+Semantic:1
+
+cpp37
+Perturbed prompt:0.80
+Nominal prompt:1
+Semantic:1
+
+cpp61
+Perturbed prompt:0.96
+Nominal prompt:1
+Semantic:0.95
+
+cpp23 dead code insertion is not common
+Perturbed prompt:0.30
+Nominal prompt:1
+Semantic:1
+
+cpp144
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp79
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1

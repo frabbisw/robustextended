@@ -5,8 +5,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative(Arrays.asList(3, 1, 2, 4, 5))\n    [1, 4, 12, 20]\n    >>> derivative(Arrays.asList(1, 2, 3]))\n    [2, 6]\n     */\n    public List<Integer> derivative(List<Integer> xs) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#0"
   },
   {
     "task_id": "Java/28",
@@ -14,8 +16,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Concatenate list of strings into a single string\n    >>> concatenate(List.of())\n    \"\"\n    >>> concatenate(Arrays.asList(\"a\", \"b\", \"c\"))\n    \"abc\"\n     */\n    public String concatenate(List<String> strings) {\n        return String.join(\"\", strings);\n",
     "aug_method_name": "VarRenamerRN",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#1"
   },
   {
     "task_id": "Java/13",
@@ -23,8 +27,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#2"
   },
   {
     "task_id": "Java/152",
@@ -32,8 +38,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    I think we all remember that feeling when the result of some long-awaited\n    event is finally known. The feelings and thoughts you have at that moment are\n    definitely worth noting down and comparing.\n    Your task is to determine if a person correctly guessed the results of a number of matches.\n    You are given two arrays of scores and guesses of equal length, where each index shows a match.\n    Return an array of the same length denoting how far off each guess was. If they have guessed correctly,\n    the value is 0, and if not, the value is the absolute difference between the guess and the score.\n\n    example:\n\n    compare(Arrays.asList(1,2,3,4,5,1),Arrays.asList(1,2,3,4,2,-2)) -> [0,0,0,0,3,3]\n    compare(Arrays.asList(0,5,0,0,0,4),Arrays.asList(4,1,1,0,0,-2)) -> [4,4,1,0,0,6]\n     */\n    public List<Integer> compare(List<Integer> game, List<Integer> guess) {\n        List<Integer> result = new ArrayList<>();\n        for (int i = 0; i < game.size(); i++) {\n            result.add(Math.abs(game.get(i) - guess.get(i)));\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#3"
   },
   {
     "task_id": "Java/72",
@@ -41,8 +49,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    willItFly(Arrays.asList(1, 2), 5) -> false\n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    willItFly(Arrays.asList(3, 2, 3), 1) -> false\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    willItFly(Arrays.asList(3, 2, 3), 9) -> true\n    # 3+2+3 is less than the maximum possible weight, and it's balanced.\n\n    willItFly(Arrays.asList(3), 5) -> true\n    # 3 is less than the maximum possible weight, and it's balanced.\n     */\n    public boolean willItFly(List<Integer> q, int w) {\n        if (q.stream().reduce(0, Integer::sum) > w) {\n            return false;\n        }\n        int i = 0, j = q.size() - 1;\n        while (i < j) {\n            if (!Objects.equals(q.get(i), q.get(j))) {\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#4"
   },
   {
     "task_id": "Java/39",
@@ -50,8 +60,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    primeFib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> primeFib(1)\n    2\n    >>> primeFib(2)\n    3\n    >>> primeFib(3)\n    5\n    >>> primeFib(4)\n    13\n    >>> primeFib(5)\n    89\n     */\n    public int primeFib(int n) {\n        int f0 = 0, f1 = 1;\n        while (true) {\n            int p = f0 + f1;\n            boolean is_prime = p >= 2;\n            for (int k = 2; k < Math.min(Math.sqrt(p) + 1, p - 1); k++) {\n                if (p % k == 0) {\n                    is_prime = false;\n                    break;\n                }\n            }\n",
     "aug_method_name": "VarRenamerRN",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#5"
   },
   {
     "task_id": "Java/144",
@@ -59,8 +71,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Your task is to implement a function that will simplify the expression\n    x * n. The function returns true if x * n evaluates to a whole number and false\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = true\n    simplify(\"1/6\", \"2/1\") = false\n    simplify(\"7/10\", \"10/2\") = false\n     */\n    public boolean simplify(String x, String n) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#6"
   },
   {
     "task_id": "Java/129",
@@ -68,8 +82,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k,\n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n     */\n    public List<Integer> minPath(List<List<Integer>> grid, int k) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#7"
   },
   {
     "task_id": "Java/112",
@@ -77,8 +93,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and true/false for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be (\"bcd\",false)\n    For s = \"abcdef\", c = \"b\"  the result should be (\"acdef\",false)\n    For s = \"abcdedcba\", c = \"ab\", the result should be (\"cdedc\",true)\n     */\n    public List<Object> reverseDelete(String s, String c) {\n        StringBuilder sb = new StringBuilder();\n        for (char ch : s.toCharArray()) {\n            if (c.indexOf(ch) == -1) {\n                sb.append(ch);\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#8"
   },
   {
     "task_id": "Java/28",
@@ -86,8 +104,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Concatenate list of strings into a single string\n    >>> concatenate(List.of())\n    \"\"\n    >>> concatenate(Arrays.asList(\"a\", \"b\", \"c\"))\n    \"abc\"\n     */\n    public String concatenate(List<String> strings) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#9"
   },
   {
     "task_id": "Java/125",
@@ -95,8 +115,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    splitWords(\"Hello world!\") == [\"Hello\", \"world!\"]\n    splitWords(\"Hello,world!\") == [\"Hello\", \"world!\"]\n    splitWords(\"abcdef\") == 3\n     */\n    public Object splitWords(String txt) {\n        if (txt.contains(\" \" )) {\n            return Arrays.asList(txt.split(\" \" ));\n        } else if (txt.contains(\",\" )) {\n            return Arrays.asList(txt.split(\"[,\\s]\" ));\n        } else {\n            int count = 0;\n            for (char c : txt.toCharArray()) {\n",
     "aug_method_name": "new_line_afterdoc",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#10"
   },
   {
     "task_id": "Java/148",
@@ -104,8 +126,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    There are eight planets in our solar system: the closerst to the Sun\n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn,\n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2.\n    The function should return a tuple containing all planets whose orbits are\n    located between the orbit of planet1 and the orbit of planet2, sorted by\n    the proximity to the sun.\n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names.\n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> [\"Saturn\", \"Uranus\"]\n    bf(\"Earth\", \"Mercury\") ==> [\"Venus\"]\n    bf(\"Mercury\", \"Uranus\") ==> [\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\"]\n     */\n    public List<String> bf(String planet1, String planet2) {\n",
     "aug_method_name": "SynonymSubstitution",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#11"
   },
   {
     "task_id": "Java/38",
@@ -113,8 +137,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    returns encoded string by cycling groups of three characters.\n     */\n    public String encodeCyclic(String s) {\n        // split string to groups. Each of length 3.\n        List<String> groups = new ArrayList<>();\n        for (int i = 0; i < s.length(); i += 3) {\n            groups.add(s.substring(i, Math.min(i + 3, s.length())));\n        }\n        // cycle elements in each group. Unless group has fewer elements than 3.\n        for (int i = 0; i < groups.size(); i++) {\n            if (groups.get(i).length() == 3) {\n                groups.set(i, groups.get(i).substring(1) + groups.get(i).charAt(0));\n            }\n        }\n        return String.join(\"\", groups);\n    }\n\n    /**\n    takes as input string encoded with encodeCyclic function. Returns decoded string.\n     */\n    public String decodeCyclic(String s) {\n        return encodeCyclic(encodeCyclic(s));\n",
     "aug_method_name": "OperandSwap",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#12"
   },
   {
     "task_id": "Java/53",
@@ -122,8 +148,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n     */\n    public int add(int x, int y) {\n",
     "aug_method_name": "ChangeCharCase",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#13"
   },
   {
     "task_id": "Java/155",
@@ -131,8 +159,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an integer. return a tuple that has the number of even and odd digits respectively.\n    \n     Example:\n        evenOddCount(-12) ==> (1, 1)\n        evenOddCount(123) ==> (1, 2)\n     */\n    public List<Integer> evenOddCount(int num) {\n",
     "aug_method_name": "TenseTransformationFuture",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#14"
   },
   {
     "task_id": "Java/88",
@@ -140,8 +170,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n\n    Examples:\n    * sortArray(Arrays.asList()) => []\n    * sortArray(Arrays.asList(5)) => [5]\n    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5)) => [0, 1, 2, 3, 4, 5]\n    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5, 6)) => [6, 5, 4, 3, 2, 1, 0]\n     */\n    public List<Integer> sortArray(List<Integer> array) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#15"
   },
   {
     "task_id": "Java/23",
@@ -149,8 +181,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return length of given string\n    >>> strlen(\"\")\n    0\n    >>> strlen(\"abc\")\n    3\n     */\n    public int strlen(String string) {\n        return string.length();\n",
     "aug_method_name": "split_lines",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#16"
   },
   {
     "task_id": "Java/130",
@@ -158,8 +192,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in\n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8\n    You are given a non-negative integer number n, you have to a return a list of the\n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n     */\n    public List<Integer> tri(int n) {\n        if (n == 0) {\n            return List.of(1);\n        }\n        List<Integer> my_tri = new ArrayList<>(Arrays.asList(1, 3));\n        for (int i = 2; i <= n; i++) {\n            if (i % 2 == 0) {\n                my_tri.add(i / 2 + 1);\n            } else {\n                my_tri.add(my_tri.get(my_tri.size() - 1) + my_tri.get(my_tri.size() - 2) + (i + 3) / 2);\n            }\n        }\n        return my_tri;\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#17"
   },
   {
     "task_id": "Java/80",
@@ -167,8 +203,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct\n    For example:\n    isHappy(a) => false\n    isHappy(aa) => false\n    isHappy(abcd) => true\n    isHappy(aabb) => false\n    isHappy(adb) => true\n    isHappy(xyy) => false\n     */\n    public boolean isHappy(String s) {\n        if (s.length() < 3) {\n            return false;\n        }\n\n        for (int i = 0; i < s.length() - 2; i++) {\n",
     "aug_method_name": "VarRenamerCB",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#18"
   },
   {
     "task_id": "Java/80",
@@ -176,8 +214,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct\n    For example:\n    isHappy(a) => false\n    isHappy(aa) => false\n    isHappy(abcd) => true\n    isHappy(aabb) => false\n    isHappy(adb) => true\n    isHappy(xyy) => false\n     */\n    public boolean isHappy(String s) {\n        if (s.length() < 3) {\n            return false;\n        }\n\n        for (int i = 0; i < s.length() - 2; i++) {\n",
     "aug_method_name": "new_lines",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#19"
   },
   {
     "task_id": "Java/52",
@@ -185,8 +225,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return True if all numbers in the list l are below threshold t.\n    >>> belowThreshold(Arrays.asList(1, 2, 4, 10), 100)\n    true\n    >>> belowThreshold(Arrays.asList(1, 20, 4, 10), 5)\n    false\n     */\n    public boolean belowThreshold(List<Integer> l, int t) {\n",
     "aug_method_name": "FuncRenameChangeChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#20"
   },
   {
     "task_id": "Java/151",
@@ -194,8 +236,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n\n    doubleTheDifference(Arrays.asList(1, 3, 2, 0)) == 1 + 9 + 0 + 0 = 10\n    doubleTheDifference(Arrays.asList(-1, -2, 0)) == 0\n    doubleTheDifference(Arrays.asList(9, -2)) == 81\n    doubleTheDifference(Arrays.asList(0)) == 0\n\n    If the input list is empty, return 0.\n     */\n    public int doubleTheDifference(List<Object> lst) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#21"
   },
   {
     "task_id": "Java/52",
@@ -203,8 +247,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return True if all numbers in the list l are below threshold t.\n    >>> belowThreshold(Arrays.asList(1, 2, 4, 10), 100)\n    true\n    >>> belowThreshold(Arrays.asList(1, 20, 4, 10), 5)\n    false\n     */\n    public boolean belowThreshold(List<Integer> l, int t) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#22"
   },
   {
     "task_id": "Java/127",
@@ -212,8 +258,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two\n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n     */\n    public String intersection(List<Integer> interval1, List<Integer> interval2) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#23"
   },
   {
     "task_id": "Java/31",
@@ -221,8 +269,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return true if a given number is prime, and false otherwise.\n    >>> isPrime(6)\n    false\n    >>> isPrime(101)\n    true\n    >>> isPrime(11)\n    true\n    >>> isPrime(13441)\n    true\n    >>> isPrime(61)\n    true\n    >>> isPrime(4)\n    false\n    >>> isPrime(1)\n    false\n     */\n    public boolean isPrime(int n) {\n",
     "aug_method_name": "SynonymSubstitution",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#24"
   },
   {
     "task_id": "Java/126",
@@ -230,8 +280,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return false. Assume no negative numbers and only integers.\n\n    Examples\n    isSorted(Arrays.asList(5)) -> true\n    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true\n    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false\n    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true\n    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true\n    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false\n    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true\n    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false\n     */\n    public boolean isSorted(List<Integer> lst) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#25"
   },
   {
     "task_id": "Java/73",
@@ -239,8 +291,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an array arr of integers, find the minimum number of elements that\n    need to be changed to make the array palindromic. A palindromic array is an array that\n    is read the same backwards and forwards. In one change, you can change one element to any other element.\n\n    For example:\n    smallestChange(Arrays.asList(1,2,3,5,4,7,9,6)) == 4\n    smallestChange(Arrays.asList(1, 2, 3, 4, 3, 2, 2)) == 1\n    smallestChange(Arrays.asList(1, 2, 3, 2, 1)) == 0\n     */\n    public int smallestChange(List<Integer> arr) {\n        int ans = 0;\n        for (int i = 0; i < arr.size() / 2; i++) {\n            if (!Objects.equals(arr.get(i), arr.get(arr.size() - i - 1))) {\n                ans += 1;\n",
     "aug_method_name": "VarRenamerRN",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#26"
   },
   {
     "task_id": "Java/137",
@@ -248,8 +302,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compareOne(1, 2.5) -> Optional.of(2.5)\n    compareOne(1, \"2,3\") -> Optional.of(\"2,3\")\n    compareOne(\"5,1\", \"6\") -> Optional.of(\"6\")\n    compareOne(\"1\", 1) -> Optional.empty()\n     */\n    public Optional<Object> compareOne(Object a, Object b) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#27"
   },
   {
     "task_id": "Java/64",
@@ -257,8 +313,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function vowelsCount which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowelsCount(\"abcde\")\n    2\n    >>> vowelsCount(\"ACEDY\")\n    3\n     */\n    public int vowelsCount(String s) {\n        String vowels = \"aeiouAEIOU\";\n        int n_vowels = 0;\n        for (char c : s.toCharArray()) {\n            if (vowels.indexOf(c) != -1) {\n                n_vowels += 1;\n            }\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#28"
   },
   {
     "task_id": "Java/85",
@@ -266,8 +324,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a non-empty list of integers lst. add the even elements that are at odd indices..\n\n    Examples:\n        add(Arrays.asList(4, 2, 6, 7)) ==> 2\n     */\n    public int add(List<Integer> lst) {\n",
     "aug_method_name": "FuncRenameSwapChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#29"
   },
   {
     "task_id": "Java/6",
@@ -275,8 +335,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parseNestedParens(\"(()()) ((())) () ((())()())\")\n    [2, 3, 1, 3]\n     */\n    public List<Integer> parseNestedParens(String paren_string) {\n",
     "aug_method_name": "FuncRenameSynonymSub",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#30"
   },
   {
     "task_id": "Java/13",
@@ -284,8 +346,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n",
     "aug_method_name": "FuncRenameInflectionalVariation",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#31"
   },
   {
     "task_id": "Java/13",
@@ -293,8 +357,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n        if (a == 0 || b == 0) {\n            return a + b;\n        }\n        if (a == b) {\n            return a;\n        }\n        if (a > b) {\n            return greatestCommonDivisor(a % b, b);\n        } else {\n            return greatestCommonDivisor(a, b % a);\n        }\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#32"
   },
   {
     "task_id": "Java/13",
@@ -302,8 +368,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n        if (a == 0 || b == 0) {\n            return a + b;\n        }\n        if (a == b) {\n            return a;\n        }\n        if (a > b) {\n            return greatestCommonDivisor(a % b, b);\n        } else {\n            return greatestCommonDivisor(a, b % a);\n        }\n",
     "aug_method_name": "VarRenamerNaive",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#33"
   },
   {
     "task_id": "Java/86",
@@ -311,8 +379,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    antiShuffle(\"Hi\") returns \"Hi\"\n    antiShuffle(\"hello\") returns \"ehllo\"\n    antiShuffle(\"Hello World!!!\") returns \"Hello !!!Wdlor\"\n     */\n    public String antiShuffle(String s) {\n",
     "aug_method_name": "FuncRenameChangeChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#34"
   },
   {
     "task_id": "Java/140",
@@ -320,8 +390,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n\n    fixSpaces(\"Example\") == \"Example\"\n    fixSpaces(\"Example 1\") == \"Example_1\"\n    fixSpaces(\" Example 2\") == \"_Example_2\"\n    fixSpaces(\" Example   3\") == \"_Example-3\"\n     */\n    public String fixSpaces(String text) {\n        StringBuilder sb = new StringBuilder();\n        int start = 0, end = 0;\n        for (int i = 0; i < text.length(); i++) {\n            if (text.charAt(i) == ' ') {\n                end += 1;\n            } else {\n                if (end - start > 2) {\n                    sb.append('-');\n                } else if (end - start > 0) {\n                    sb.append(\"_\".repeat(end - start));\n                }\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#35"
   },
   {
     "task_id": "Java/8",
@@ -329,8 +401,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sumProduct(List.of())\n    [0, 1]\n    >>> sumProduct(Arrays.asList(1, 2, 3, 4))\n    [10, 24]\n     */\n    public List<Integer> sumProduct(List<Integer> numbers) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#36"
   },
   {
     "task_id": "Java/74",
@@ -338,8 +412,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function that accepts two lists of strings and returns the list that has\n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    totalMatch(Arrays.asList(), Arrays.asList()) -> []\n    totalMatch(Arrays.asList(\"hi\", \"admin\"), Arrays.asList(\"hI\", \"Hi\")) -> [\"hI\", \"Hi\"]\n    totalMatch(Arrays.asList(\"hi\", \"admin\"), Arrays.asList(\"hi\", \"hi\", \"admin\", \"project\")) -> [\"hi\", \"admin\"]\n    totalMatch(Arrays.asList(\"hi\", \"admin\"), Arrays.asList(\"hI\", \"hi\", \"hi\")) -> [\"hI\", \"hi\", \"hi\"]\n    totalMatch(Arrays.asList(\"4\"), Arrays.asList(\"1\", \"2\", \"3\", \"4\", \"5\")) -> [\"4\"]\n     */\n    public List<String> totalMatch(List<String> lst1, List<String> lst2) {\n        int l1 = 0;\n        for (String st : lst1) {\n            l1 += st.length();\n        }\n\n        int l2 = 0;\n        for (String st : lst2) {\n            l2 += st.length();\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#37"
   },
   {
     "task_id": "Java/132",
@@ -347,8 +423,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return true if and only if there is a valid subsequence of brackets\n    where at least one bracket in the subsequence is nested.\n\n    isNested(\"[[]]\") -> true\n    isNested(\"[]]]]]]][[[[[]\") -> false\n    isNested(\"[][]\") -> false\n    isNested(\"[]\") -> false\n    isNested(\"[[][]]\") -> true\n    isNested(\"[[]][[\") -> true\n     */\n    public boolean isNested(String string) {\n",
     "aug_method_name": "FuncRenameSwapChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#38"
   },
   {
     "task_id": "Java/47",
@@ -356,8 +434,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return median of elements in the list l.\n    >>> median(Arrays.asList(3, 1, 2, 4, 5))\n    3\n    >>> median(Arrays.asList(-10, 4, 6, 1000, 10, 20))\n    15.0\n     */\n    public double median(List<Integer> l) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#39"
   },
   {
     "task_id": "Java/144",
@@ -365,8 +445,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Your task is to implement a function that will simplify the expression\n    x * n. The function returns true if x * n evaluates to a whole number and false\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = true\n    simplify(\"1/6\", \"2/1\") = false\n    simplify(\"7/10\", \"10/2\") = false\n     */\n    public boolean simplify(String x, String n) {\n        String[] a = x.split(\"/\");\n        String[] b = n.split(\"/\");\n        int numerator = Integer.parseInt(a[0]) * Integer.parseInt(b[0]);\n",
     "aug_method_name": "VarRenamerRN",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#40"
   },
   {
     "task_id": "Java/87",
@@ -374,8 +456,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a 2 dimensional data, as a nested lists,\n    which is similar to matrix, however, unlike matrices,\n    each row may contain a different number of columns.\n    Given lst, and integer x, find integers x in the list,\n    and return list of lists, [[x1, y1], [x2, y2] ...] such that\n    each list is a coordinate - (row, columns), starting with 0.\n    Sort coordinates initially by rows in ascending order.\n    Also, sort coordinates of the row by columns in descending order.\n\n    Examples:\n    getRow([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]\n    getRow([], 1) == []\n    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]\n     */\n    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {\n",
     "aug_method_name": "FuncRenameSnakeCase",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#41"
   },
   {
     "task_id": "Java/86",
@@ -383,8 +467,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    antiShuffle(\"Hi\") returns \"Hi\"\n    antiShuffle(\"hello\") returns \"ehllo\"\n    antiShuffle(\"Hello World!!!\") returns \"Hello !!!Wdlor\"\n     */\n    public String antiShuffle(String s) {\n        String[] strings = s.split(\" \");\n        List<String> result = new ArrayList<>();\n        for (String string : strings) {\n            char[] chars = string.toCharArray();\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#42"
   },
   {
     "task_id": "Java/133",
@@ -392,8 +478,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list to the upper int(Ceiling) first.\n    Examples:\n    For lst = [1,2,3] the output should be 14\n    For lst = [1,4,9] the output should be 98\n    For lst = [1,3,5,7] the output should be 84\n    For lst = [1.4,4.2,0] the output should be 29\n    For lst = [-2.4,1,1] the output should be 6\n     */\n    public int sumSquares(List<Double> lst) {\n        return lst.stream().map(p -> (int) Math.ceil(p)).map(p -> p * p).reduce(Integer::sum).get();\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#43"
   },
   {
     "task_id": "Java/11",
@@ -401,8 +489,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> stringXor(\"010\", \"110\")\n    \"100\"\n     */\n    public String stringXor(String a, String b) {\n",
     "aug_method_name": "ButterFingersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#44"
   },
   {
     "task_id": "Java/18",
@@ -410,8 +500,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> howManyTimes(\"\", \"a\")\n    0\n    >>> howManyTimes(\"aaa\", \"a\")\n    3\n    >>> howManyTimes(\"aaaa\", \"aa\")\n    3\n     */\n    public int howManyTimes(String string, String substring) {\n        int times = 0;\n\n        for (int i = 0; i < string.length() - substring.length() + 1; i++) {\n            if (string.substring(i, i + substring.length()).equals(substring)) {\n                times += 1;\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#45"
   },
   {
     "task_id": "Java/151",
@@ -419,8 +511,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n\n    doubleTheDifference(Arrays.asList(1, 3, 2, 0)) == 1 + 9 + 0 + 0 = 10\n    doubleTheDifference(Arrays.asList(-1, -2, 0)) == 0\n    doubleTheDifference(Arrays.asList(9, -2)) == 81\n    doubleTheDifference(Arrays.asList(0)) == 0\n\n    If the input list is empty, return 0.\n     */\n    public int doubleTheDifference(List<Object> lst) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#46"
   },
   {
     "task_id": "Java/95",
@@ -428,8 +522,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a map, return True if all keys are strings in lower\n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given map is empty.\n    Examples:\n    checkDictCase({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    checkDictCase({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    checkDictCase({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    checkDictCase({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    checkDictCase({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n     */\n    public boolean checkDictCase(Map<Object, Object> dict) {\n        if (dict.isEmpty()) {\n            return false;\n        }\n        String state = \"start\";\n        for (Map.Entry entry : dict.entrySet()) {\n            if (!(entry.getKey() instanceof String key)) {\n                state = \"mixed\";\n                break;\n            }\n            boolean is_upper = true, is_lower = true;\n            for (char c : key.toCharArray()) {\n                if (Character.isLowerCase(c)) {\n                    is_upper = false;\n                } else if (Character.isUpperCase(c)) {\n                    is_lower = false;\n                } else {\n                    is_upper = false;\n",
     "aug_method_name": "new_line_afterdoc",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#47"
   },
   {
     "task_id": "Java/87",
@@ -437,8 +533,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a 2 dimensional data, as a nested lists,\n    which is similar to matrix, however, unlike matrices,\n    each row may contain a different number of columns.\n    Given lst, and integer x, find integers x in the list,\n    and return list of lists, [[x1, y1], [x2, y2] ...] such that\n    each list is a coordinate - (row, columns), starting with 0.\n    Sort coordinates initially by rows in ascending order.\n    Also, sort coordinates of the row by columns in descending order.\n\n    Examples:\n    getRow([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]\n    getRow([], 1) == []\n    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]\n     */\n    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {\n",
     "aug_method_name": "FuncRenameSynonymSub",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#48"
   },
   {
     "task_id": "Java/87",
@@ -446,8 +544,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a 2 dimensional data, as a nested lists,\n    which is similar to matrix, however, unlike matrices,\n    each row may contain a different number of columns.\n    Given lst, and integer x, find integers x in the list,\n    and return list of lists, [[x1, y1], [x2, y2] ...] such that\n    each list is a coordinate - (row, columns), starting with 0.\n    Sort coordinates initially by rows in ascending order.\n    Also, sort coordinates of the row by columns in descending order.\n\n    Examples:\n    getRow([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]\n    getRow([], 1) == []\n    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]\n     */\n    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {\n",
     "aug_method_name": "FuncRenameSwapChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#49"
   },
   {
     "task_id": "Java/92",
@@ -455,8 +555,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Create a function that takes 3 numbers.\n    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.\n    Returns false in any other cases.\n\n    Examples\n    anyInt(5, 2, 7) -> true\n\n    anyInt(3, 2, 2) -> false\n\n    anyInt(3, -2, 1) -> true\n\n    anyInt(3.6, -2.2, 2) -> false\n     */\n    public boolean anyInt(Object x, Object y, Object z) {\n",
     "aug_method_name": "FuncRenameInflectionalVariation",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#50"
   },
   {
     "task_id": "Java/22",
@@ -464,8 +566,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Filter given list of any values only for integers\n    >>> filter_integers(Arrays.asList('a', 3.14, 5))\n    [5]\n    >>> filter_integers(Arrays.asList(1, 2, 3, \"abc\", Map.of(), List.of()))\n    [1, 2, 3]\n     */\n    public List<Integer> filterIntergers(List<Object> values) {\n        List<Integer> result = new ArrayList<>();\n        for (Object x : values) {\n            if (x instanceof Integer) {\n                result.add((Integer) x);\n",
     "aug_method_name": "VarRenamerCB",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#51"
   },
   {
     "task_id": "Java/120",
@@ -473,8 +577,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an array arr of integers and a positive integer k, return a sorted list\n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n     */\n    public List<Integer> maximum(List<Integer> arr, int k) {\n",
     "aug_method_name": "SynonymInsertion",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#52"
   },
   {
     "task_id": "Java/69",
@@ -482,8 +588,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than\n    zero, and has a frequency greater than or equal to the value of the integer itself.\n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2\n        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3\n        search(Arrays.asList(5, 5, 4, 4, 4)) == -1\n     */\n    public int search(List<Integer> lst) {\n",
     "aug_method_name": "FuncRenameSwapChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#53"
   },
   {
     "task_id": "Java/112",
@@ -491,8 +599,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and true/false for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be (\"bcd\",false)\n    For s = \"abcdef\", c = \"b\"  the result should be (\"acdef\",false)\n    For s = \"abcdedcba\", c = \"ab\", the result should be (\"cdedc\",true)\n     */\n    public List<Object> reverseDelete(String s, String c) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#54"
   },
   {
     "task_id": "Java/147",
@@ -500,8 +610,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 <= i <= n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k,\n    and a[i] + a[j] + a[k] is a multiple of 3.\n\n    Example :\n        Input: n = 5\n        Output: 1\n        Explanation:\n        a = [1, 3, 7, 13, 21]\n        The only valid triple is (1, 7, 13).\n     */\n    public int getMaxTriples(int n) {\n",
     "aug_method_name": "FuncRenameInflectionalVariation",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#55"
   },
   {
     "task_id": "Java/21",
@@ -509,8 +621,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescaleToUnit(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0))\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n     */\n    public List<Double> rescaleToUnit(List<Double> numbers) {\n        double min_number = Collections.min(numbers);\n        double max_number = Collections.max(numbers);\n        List<Double> result = new ArrayList<>();\n        for (double x : numbers) {\n",
     "aug_method_name": "VarRenamerCB",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#56"
   },
   {
     "task_id": "Java/83",
@@ -518,8 +632,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n     */\n    public int startsOneEnds(int n) {\n",
     "aug_method_name": "FuncRenameSnakeCase",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#57"
   },
   {
     "task_id": "Java/32",
@@ -527,8 +643,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n     */\n    public double poly(List<Double> xs, double x) {\n        double result = 0;\n        for (int i = 0; i < xs.size(); i++) {\n            result += xs.get(i) * Math.pow(x, i);\n        }\n        return result;\n    }\n    \n    /**\n    xs are coefficients of a polynomial.\n    findZero find x such that poly(x) = 0.\n    findZero returns only only zero point, even if there are many.\n    Moreover, findZero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> findZero(Arrays.asList(1, 2)) // f(x) = 1 + 2x\n    -0.5\n    >>> findZero(Arrays.asList(-6, 11, -6, 1)) // (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n     */\n    public double findZero(List<Double> xs) {\n        double begin = -1, end = 1;\n        while (poly(xs, begin) * poly(xs, end) > 0) {\n            begin *= 2;\n            end *= 2;\n        }\n        while (end - begin > 1e-10) {\n            double center = (begin + end) / 2;\n            if (poly(xs, begin) * poly(xs, center) > 0) {\n                begin = center;\n            } else {\n                end = center;\n",
     "aug_method_name": "tab_indent",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#58"
   },
   {
     "task_id": "Java/119",
@@ -536,8 +654,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a list of two strings, both strings consist of open\n    parentheses \"(\" or close parentheses \")\" only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string \"(())()\" is good, while the string\n    \"())\" is not.\n    Return \"Yes\" if there\"s a way to make a good string, and return \"No\" otherwise.\n\n    Examples:\n    matchParens(Arrays.asList(\"()(\", \")\")) == \"Yes\"\n    matchParens(Arrays.asList(\")\", \")\")) == \"No\"\n     */\n    public String matchParens(List<String> lst) {\n        List<String> S = Arrays.asList(lst.get(0) + lst.get(1), lst.get(1) + lst.get(0));\n        for (String s : S) {\n            int val = 0;\n            for (char i : s.toCharArray()) {\n                if (i == '(') {\n                    val += 1;\n                } else {\n                    val -= 1;\n                }\n",
     "aug_method_name": "VarRenamerCB",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#59"
   },
   {
     "task_id": "Java/13",
@@ -545,8 +665,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n        if (a == 0 || b == 0) {\n            return a + b;\n        }\n        if (a == b) {\n            return a;\n        }\n        if (a > b) {\n            return greatestCommonDivisor(a % b, b);\n        } else {\n            return greatestCommonDivisor(a, b % a);\n        }\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#60"
   },
   {
     "task_id": "Java/135",
@@ -554,8 +676,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Create a function which returns the largest index of an element which\n    is not greater than or equal to the element immediately preceding it. If\n    no such element exists then return -1. The given array will not contain\n    duplicate values.\n\n    Examples:\n    canArrange(Arrays.asList(1,2,4,3,5)) = 3\n    canArrange(Arrays.asList(1,2,3)) = -1\n     */\n    public int canArrange(List<Integer> arr) {\n        int ind = -1, i = 1;\n        while (i < arr.size()) {\n            if (arr.get(i) < arr.get(i - 1)) {\n                ind = i;\n",
     "aug_method_name": "tab_indent",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#61"
   },
   {
     "task_id": "Java/34",
@@ -563,8 +687,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return sorted unique elements in a list\n    >>> unique(Arrays.asList(5, 3, 5, 2, 3, 3, 9, 0, 123))\n    [0, 2, 3, 5, 9, 123]\n     */\n    public List<Integer> unique(List<Integer> l) {\n        List<Integer> result = new ArrayList<>(new HashSet<>(l));\n        Collections.sort(result);\n",
     "aug_method_name": "VarRenamerRN",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#62"
   },
   {
     "task_id": "Java/136",
@@ -572,8 +698,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largestSmallestIntegers(Arrays.asList(2, 4, 1, 3, 5, 7)) == (Optional.empty(), Optional.of(1))\n    largestSmallestIntegers(Arrays.asList()) == (Optional.empty(), Optional.empty())\n    largestSmallestIntegers(Arrays.asList(0)) == (Optional.empty(), Optional.empty())\n     */\n    public List<Optional<Integer>> largestSmallestIntegers(List<Integer> lst){\n        List<Integer> smallest = lst.stream().filter(p -> p < 0).toList();\n        List<Integer> largest = lst.stream().filter(p -> p > 0).toList();\n        Optional<Integer> s = Optional.empty();\n        if (smallest.size() > 0) {\n            s = Optional.of(Collections.max(smallest));\n        }\n",
     "aug_method_name": "doc2comments",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#63"
   },
   {
     "task_id": "Java/90",
@@ -581,8 +709,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a list of integers.\n    Write a function nextSmallest() that returns the 2nd smallest element of the list.\n    Return null if there is no such element.\n    <p>\n    nextSmallest(Arrays.asList(1, 2, 3, 4, 5)) == Optional[2]\n    nextSmallest(Arrays.asList(5, 1, 4, 3, 2)) == Optional[2]\n    nextSmallest(Arrays.asList()) == Optional.empty\n    nextSmallest(Arrays.asList(1, 1)) == Optional.empty\n     */\n    public Optional<Integer> nextSmallest(List<Integer> lst) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#64"
   },
   {
     "task_id": "Java/100",
@@ -590,8 +720,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n\n    Examples:\n    >>> makeAPile(3)\n    [3, 5, 7]\n     */\n    public List<Integer> makeAPile(int n) {\n",
     "aug_method_name": "FuncRenameChangeChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#65"
   },
   {
     "task_id": "Java/155",
@@ -599,8 +731,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an integer. return a tuple that has the number of even and odd digits respectively.\n    \n     Example:\n        evenOddCount(-12) ==> (1, 1)\n        evenOddCount(123) ==> (1, 2)\n     */\n    public List<Integer> evenOddCount(int num) {\n        int even_count = 0, odd_count = 0;\n        for (char i : String.valueOf(Math.abs(num)).toCharArray()) {\n            if ((i - '0') % 2 == 0) {\n                even_count += 1;\n            } else {\n",
     "aug_method_name": "ForWhileTransformer",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#66"
   },
   {
     "task_id": "Java/77",
@@ -608,8 +742,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function that takes an integer a and returns true\n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> true\n    iscube(2) ==> false\n    iscube(-1) ==> true\n    iscube(64) ==> true\n    iscube(0) ==> true\n    iscube(180) ==> false\n     */\n    public boolean iscube(int a) {\n        a = Math.abs(a);\n",
     "aug_method_name": "tab_indent",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#67"
   },
   {
     "task_id": "Java/9",
@@ -617,8 +753,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rollingMax(Arrays.asList(1, 2, 3, 2, 3, 4, 2))\n    [1, 2, 3, 3, 3, 4, 4]\n     */\n    public List<Integer> rollingMax(List<Integer> numbers) {\n",
     "aug_method_name": "ButterFingersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#68"
   },
   {
     "task_id": "Java/129",
@@ -626,8 +764,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k,\n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n     */\n    public List<Integer> minPath(List<List<Integer>> grid, int k) {\n",
     "aug_method_name": "SynonymSubstitution",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#69"
   },
   {
     "task_id": "Java/76",
@@ -635,8 +775,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    isSimplePower(1, 4) => true\n    isSimplePower(2, 2) => true\n    isSimplePower(8, 2) => true\n    isSimplePower(3, 2) => false\n    isSimplePower(3, 1) => false\n    isSimplePower(5, 3) => false\n     */\n    public boolean isSimplePower(int x, int n) {\n",
     "aug_method_name": "ButterFingersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#70"
   },
   {
     "task_id": "Java/120",
@@ -644,8 +786,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an array arr of integers and a positive integer k, return a sorted list\n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n     */\n    public List<Integer> maximum(List<Integer> arr, int k) {\n        if (k == 0) {\n            return List.of();\n        }\n",
     "aug_method_name": "new_lines",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#71"
   },
   {
     "task_id": "Java/40",
@@ -653,8 +797,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    triplesSumToZero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triplesSumToZero(Arrays.asList(1, 3, 5, 0))\n    false\n    >>> triplesSumToZero(Arrays.asList(1, 3, -2, 1))\n    true\n    >>> triplesSumToZero(Arrays.asList(1, 2, 3, 7))\n    false\n    >>> triplesSumToZero(Arrays.asList(2, 4, -5, 3, 9, 7))\n    true\n    >>> triplesSumToZero(Arrays.asList(1))\n    false\n     */\n    public boolean triplesSumToZero(List<Integer> l) {\n",
     "aug_method_name": "FuncRenameChangeChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#72"
   },
   {
     "task_id": "Java/46",
@@ -662,8 +808,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    >>> fib4(5)\n    4\n    >>> fib4(6)\n    8\n    >>> fib4(7)\n    14\n     */\n    public int fib4(int n) {\n        List<Integer> results = new ArrayList<>();\n        results.add(0);\n        results.add(0);\n        results.add(2);\n        results.add(0);\n        if (n < 4) {\n            return results.get(n);\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#73"
   },
   {
     "task_id": "Java/96",
@@ -671,8 +819,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Implement a function that takes an non-negative integer and returns an array of the first n\n    integers that are prime numbers and less than n.\n    for example:\n    countUpTo(5) => [2,3]\n    countUpTo(11) => [2,3,5,7]\n    countUpTo(0) => []\n    countUpTo(20) => [2,3,5,7,11,13,17,19]\n    countUpTo(1) => []\n    countUpTo(18) => [2,3,5,7,11,13,17]\n     */\n    public List<Integer> countUpTo(int n) {\n        List<Integer> primes = new ArrayList<>();\n        for (int i = 2; i < n; i++) {\n            boolean is_prime = true;\n            for (int j = 2; j < i; j++) {\n                if (i % j == 0) {\n                    is_prime = false;\n                    break;\n",
     "aug_method_name": "OperandSwap",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#74"
   },
   {
     "task_id": "Java/117",
@@ -680,8 +830,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a string s and a natural number n, you have been tasked to implement\n    a function that returns a list of all words from string s that contain exactly\n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    selectWords(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    selectWords(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    selectWords(\"simple white space\", 2) ==> []\n    selectWords(\"Hello world\", 4) ==> [\"world\"]\n    selectWords(\"Uncle sam\", 3) ==> [\"Uncle\"]\n     */\n    public List<String> selectWords(String s, int n) {\n",
     "aug_method_name": "ChangeCharCase",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#75"
   },
   {
     "task_id": "Java/58",
@@ -689,8 +841,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return sorted unique common elements for two lists.\n    >>> common(Arrays.asList(1, 4, 3, 34, 653, 2, 5), Arrays.asList(5, 7, 1, 5, 9, 653, 121))\n    [1, 5, 653]\n    >>> common(Arrays.asList(5, 3, 2, 8), Arrays.asList(3, 2))\n    [2, 3]\n     */\n    public List<Integer> common(List<Integer> l1, List<Integer> l2) {\n",
     "aug_method_name": "SynonymInsertion",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#76"
   },
   {
     "task_id": "Java/48",
@@ -698,8 +852,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Checks if given string is a palindrome\n    >>> isPalindrome(\"\")\n    true\n    >>> isPalindrome(\"aba\")\n    true\n    >>> isPalindrome(\"aaaaa\")\n    true\n    >>> isPalindrome(\"zbcd\")\n    false\n     */\n    public boolean isPalindrome(String text) {\n",
     "aug_method_name": "TenseTransformationPast",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#77"
   },
   {
     "task_id": "Java/22",
@@ -707,8 +863,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Filter given list of any values only for integers\n    >>> filter_integers(Arrays.asList('a', 3.14, 5))\n    [5]\n    >>> filter_integers(Arrays.asList(1, 2, 3, \"abc\", Map.of(), List.of()))\n    [1, 2, 3]\n     */\n    public List<Integer> filterIntergers(List<Object> values) {\n        List<Integer> result = new ArrayList<>();\n        for (Object x : values) {\n            if (x instanceof Integer) {\n                result.add((Integer) x);\n",
     "aug_method_name": "new_line_afterdoc",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#78"
   },
   {
     "task_id": "Java/13",
@@ -716,8 +874,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a greatest common divisor of two integers a and b\n    >>> greatestCommonDivisor(3, 5)\n    1\n    >>> greatestCommonDivisor(25, 15)\n    5\n     */\n    public int greatestCommonDivisor(int a, int b) {\n        if (a == 0 || b == 0) {\n            return a + b;\n        }\n        if (a == b) {\n            return a;\n        }\n        if (a > b) {\n            return greatestCommonDivisor(a % b, b);\n        } else {\n            return greatestCommonDivisor(a, b % a);\n        }\n",
     "aug_method_name": "DeadCodeInserter",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#79"
   },
   {
     "task_id": "Java/59",
@@ -725,8 +885,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largestPrimeFactor(13195)\n    29\n    >>> largestPrimeFactor(2048)\n    2\n     */\n    public int largestPrimeFactor(int n) {\n",
     "aug_method_name": "ButterFingersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#80"
   },
   {
     "task_id": "Java/126",
@@ -734,8 +896,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return false. Assume no negative numbers and only integers.\n\n    Examples\n    isSorted(Arrays.asList(5)) -> true\n    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true\n    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false\n    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true\n    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true\n    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false\n    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true\n    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false\n     */\n    public boolean isSorted(List<Integer> lst) {\n        List<Integer> sorted_lst = new ArrayList<>(lst);\n        Collections.sort(sorted_lst);\n        if (!lst.equals(sorted_lst)) {\n            return false;\n        }\n        for (int i = 0; i < lst.size() - 2; i++) {\n",
     "aug_method_name": "VarRenamerCB",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#81"
   },
   {
     "task_id": "Java/28",
@@ -743,8 +907,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Concatenate list of strings into a single string\n    >>> concatenate(List.of())\n    \"\"\n    >>> concatenate(Arrays.asList(\"a\", \"b\", \"c\"))\n    \"abc\"\n     */\n    public String concatenate(List<String> strings) {\n        return String.join(\"\", strings);\n",
     "aug_method_name": "new_line_afterdoc",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#82"
   },
   {
     "task_id": "Java/156",
@@ -752,8 +918,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a positive integer, obtain its roman numeral equivalent as a string,\n    and return it in lowercase.\n    Restrictions: 1 <= num <= 1000\n\n    Examples:\n    >>> intToMiniRoman(19) == \"xix\"\n    >>> intToMiniRoman(152) == \"clii\"\n    >>> intToMiniRoman(426) == \"cdxxvi\"\n     */\n    public String intToMiniRoman(int number) {\n",
     "aug_method_name": "EnglishInflectionalVariation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#83"
   },
   {
     "task_id": "Java/6",
@@ -761,8 +929,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parseNestedParens(\"(()()) ((())) () ((())()())\")\n    [2, 3, 1, 3]\n     */\n    public List<Integer> parseNestedParens(String paren_string) {\n",
     "aug_method_name": "SwapCharactersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#84"
   },
   {
     "task_id": "Java/155",
@@ -770,8 +940,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an integer. return a tuple that has the number of even and odd digits respectively.\n    \n     Example:\n        evenOddCount(-12) ==> (1, 1)\n        evenOddCount(123) ==> (1, 2)\n     */\n    public List<Integer> evenOddCount(int num) {\n        int even_count = 0, odd_count = 0;\n        for (char i : String.valueOf(Math.abs(num)).toCharArray()) {\n            if ((i - '0') % 2 == 0) {\n                even_count += 1;\n            } else {\n",
     "aug_method_name": "ForWhileTransformer",
     "method_name": "natgen",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#85"
   },
   {
     "task_id": "Java/49",
@@ -779,8 +951,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return 2^n modulo p (be aware of numerics).\n    >>> modp(3, 5)\n    3\n    >>> modp(1101, 101)\n    2\n    >>> modp(0, 101)\n    1\n    >>> modp(3, 11)\n    8\n    >>> modp(100, 101)\n    1\n     */\n    public int modp(int n, int p) {\n",
     "aug_method_name": "FuncRenameSynonymSub",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#86"
   },
   {
     "task_id": "Java/49",
@@ -788,8 +962,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return 2^n modulo p (be aware of numerics).\n    >>> modp(3, 5)\n    3\n    >>> modp(1101, 101)\n    2\n    >>> modp(0, 101)\n    1\n    >>> modp(3, 11)\n    8\n    >>> modp(100, 101)\n    1\n     */\n    public int modp(int n, int p) {\n",
     "aug_method_name": "TenseTransformationFuture",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#87"
   },
   {
     "task_id": "Java/15",
@@ -797,8 +973,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> stringSequence(0)\n    \"0\"\n    >>> stringSequence(5)\n    \"0 1 2 3 4 5\"\n     */\n    public String stringSequence(int n) {\n",
     "aug_method_name": "FuncRenameSynonymSub",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#88"
   },
   {
     "task_id": "Java/162",
@@ -806,8 +984,10 @@
     "nominal_prompt": "import java.math.BigInteger;\nimport java.security.*;\nimport java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a string \"text\", return its md5 hash equivalent string with length being 32.\n    If \"text\" is an empty string, return Optional.empty().\n    \n    >>> stringToMd5(\"Hello world\") == \"3e25960a79dbc69b674cd4ec67a72c62\"\n     */\n    public Optional<String> stringToMd5(String text) throws NoSuchAlgorithmException {\n",
     "aug_method_name": "FuncRenameSnakeCase",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#89"
   },
   {
     "task_id": "Java/69",
@@ -815,8 +995,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than\n    zero, and has a frequency greater than or equal to the value of the integer itself.\n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2\n        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3\n        search(Arrays.asList(5, 5, 4, 4, 4)) == -1\n     */\n    public int search(List<Integer> lst) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#90"
   },
   {
     "task_id": "Java/155",
@@ -824,8 +1006,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given an integer. return a tuple that has the number of even and odd digits respectively.\n    \n     Example:\n        evenOddCount(-12) ==> (1, 1)\n        evenOddCount(123) ==> (1, 2)\n     */\n    public List<Integer> evenOddCount(int num) {\n",
     "aug_method_name": "FuncRenameChangeChar",
     "method_name": "func_name",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#91"
   },
   {
     "task_id": "Java/143",
@@ -833,8 +1017,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a string representing a sentence,\n    the sentence contains some words separated by a space,\n    and you have to return a string that contains the words from the original sentence,\n    whose lengths are prime numbers,\n    the order of the words in the new string should be the same as the original one.\n\n    Example 1:\n        Input: sentence = \"This is a test\"\n        Output: \"is\"\n\n    Example 2:\n        Input: sentence = \"lets go for swimming\"\n        Output: \"go for\"\n\n    Constraints:\n        * 1 <= len(sentence) <= 100\n        * sentence contains only letters\n     */\n    public String wordsInSentence(String sentence) {\n",
     "aug_method_name": "ChangeCharCase",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#92"
   },
   {
     "task_id": "Java/161",
@@ -842,8 +1028,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a string s.\n    if s[i] is a letter, reverse its case from lower to upper or vise versa,\n    otherwise keep it as it is.\n    If the string contains no letters, reverse the string.\n    The function should return the resulted string.\n    Examples\n    solve(\"1234\") = \"4321\"\n    solve(\"ab\") = \"AB\"\n    solve(\"#a@C\") = \"#A@c\"\n     */\n    public String solve(String s) {\n",
     "aug_method_name": "ButterFingersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#93"
   },
   {
     "task_id": "Java/102",
@@ -851,8 +1039,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If\n    there's no such number, then the function should return -1.\n    \n    For example:\n    chooseNum(12, 15) = 14\n    chooseNum(13, 12) = -1\n     */\n    public int chooseNum(int x, int y) {\n        if (x > y) {\n            return -1;\n        }\n        if (y % 2 == 0) {\n            return y;\n",
     "aug_method_name": "tab_indent",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#94"
   },
   {
     "task_id": "Java/108",
@@ -860,8 +1050,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Write a function countNums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> countNums(Arrays.asList()) == 0\n    >>> countNums(Arrays.asList(-1, 11, -11)) == 1\n    >>> countNums(Arrays.asList(1, 1, 2)) == 3\n     */\n    public int countNums(List<Integer> arr) {\n        int count = 0;\n        for (int n: arr) {\n            int neg = 1;\n            if (n < 0) {\n                n = -n;\n                neg = -1;\n            }\n            List<Integer> digits = new ArrayList<>();\n            for (char digit : String.valueOf(n).toCharArray()) {\n",
     "aug_method_name": "tab_indent",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#95"
   },
   {
     "task_id": "Java/102",
@@ -869,8 +1061,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If\n    there's no such number, then the function should return -1.\n    \n    For example:\n    chooseNum(12, 15) = 14\n    chooseNum(13, 12) = -1\n     */\n    public int chooseNum(int x, int y) {\n",
     "aug_method_name": "SwapCharactersPerturbation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#96"
   },
   {
     "task_id": "Java/118",
@@ -878,8 +1072,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    You are given a word. Your task is to find the closest vowel that stands between\n    two consonants from the right side of the word (case sensitive).\n\n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition.\n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    getClosestVowel(\"yogurt\") ==> \"u\"\n    getClosestVowel(\"FULL\") ==> \"U\"\n    getClosestVowel(\"quick\") ==> \"\"\n    getClosestVowel(\"ab\") ==> \"\"\n     */\n    public String getClosestVowel(String word) {\n",
     "aug_method_name": "BackTranslation",
     "method_name": "nlaugmenter",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#97"
   },
   {
     "task_id": "Java/157",
@@ -887,8 +1083,10 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given the lengths of the three sides of a triangle. Return true if the three\n    sides form a right-angled triangle, false otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or\n    90 degree.\n    Example:\n    rightAngleTriangle(3, 4, 5) == true\n    rightAngleTriangle(1, 2, 3) == false\n     */\n    public boolean rightAngleTriangle(int a, int b, int c) {\n        return a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b;\n",
     "aug_method_name": "new_line_afterdoc",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#98"
   },
   {
     "task_id": "Java/121",
@@ -896,7 +1094,9 @@
     "nominal_prompt": "import java.util.*;\nimport java.lang.*;\n\nclass Solution {\n    /**\n    Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.\n\n    Examples\n    solution(Arrays.asList(5, 8, 7, 1)) ==> 12\n    solution(Arrays.asList(3, 3, 3, 3, 3)) ==> 9\n    solution(Arrays.asList(30, 13, 24, 321)) ==>0\n     */\n    public int solution(List<Integer> lst) {\n        int sum = 0;\n        for (int i = 0; i < lst.size(); i += 2) {\n            if ((lst.get(i) % 2) == 1) {\n                sum += lst.get(i);\n",
     "aug_method_name": "new_line_aftercode",
     "method_name": "format",
-    "naturalness": -1,
-    "semantic": -1
+    "naturalness_nominal": -1,
+    "naturalness_perturbed": -1,
+    "semantic": -1,
+    "unique_id": "java#99"
   }
 ]

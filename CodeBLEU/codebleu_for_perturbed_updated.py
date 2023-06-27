@@ -194,7 +194,9 @@ def load_indivudual_partial_codes(paths_dict, lang):
 # exit()
 
 
-
+def make_weights(reference_tokens, key_word_list):
+    return {token:1 if token in key_word_list else 0.2 \
+            for token in reference_tokens}
 def get_score(perturbed_codes, task_id, lang):
     alpha, beta, gamma, theta = 0.25, 0.25, 0.25, 0.25
 
@@ -215,10 +217,22 @@ def get_score(perturbed_codes, task_id, lang):
             ref_for_instance.append(pre_references[j][i])
         references.append(ref_for_instance)
 
+    ngram_match_score = bleu.corpus_bleu(references, hypothesis)
+
+
     syntax_match_score = syntax_match.corpus_syntax_match(references, hypothesis, lang)
     dataflow_match_score = dataflow_match.corpus_dataflow_match(references, hypothesis, lang)
 
-    return syntax_match_score, dataflow_match_score
+    tokenized_hyps = [x.split() for x in hypothesis]
+    tokenized_refs = [[x.split() for x in reference] for reference in references]
+    ngram_match_score = bleu.corpus_bleu(tokenized_refs, tokenized_hyps)
+    keywords = [x.strip() for x in open('keywords/' + lang + '.txt', 'r', encoding='utf-8').readlines()]
+
+    tokenized_refs_with_weights = [[[reference_tokens, make_weights(reference_tokens, keywords)] for reference_tokens in reference] for reference in tokenized_refs]
+    weighted_ngram_match_score = weighted_ngram_match.corpus_bleu(tokenized_refs_with_weights, tokenized_hyps)
+    code_bleu_score = alpha * ngram_match_score + beta * weighted_ngram_match_score + gamma * syntax_match_score + theta * dataflow_match_score
+
+    return syntax_match_score, dataflow_match_score, code_bleu_score
 
 def get_result(nominal_codes, parturbed_dict, lang):
     result = ""
@@ -226,12 +240,14 @@ def get_result(nominal_codes, parturbed_dict, lang):
     for aug_method in parturbed_dict.keys():
         syntax = []
         dataflow = []
+        codebleu = []
         perturbed_codes = parturbed_dict[aug_method]
         for task_id in nominal_codes.keys():
             try:
-                syntax_match_score, dataflow_match_score = get_score(perturbed_codes, task_id, lang)
+                syntax_match_score, dataflow_match_score, code_bleu_score = get_score(perturbed_codes, task_id, lang)
                 syntax.append(syntax_match_score)
                 dataflow.append(dataflow_match_score)
+                codebleu.append(code_bleu_score)
             except:
                 None
 
@@ -242,18 +258,21 @@ def get_result(nominal_codes, parturbed_dict, lang):
 
         syntax = [s for s in syntax if s != 0]
         dataflow = [s for s in dataflow if s != 0]
+        codebleu = [s for s in codebleu if s != 0]
 
         # print(sum(syntax)/len(syntax))
         # print(sum(dataflow)/len(dataflow))
 
         # result += (aug_method + str(round(sum(syntax)/len(syntax),2) + round(sum(dataflow)/len(dataflow),2))
         # result += f"{aug_method} {round(sum(syntax)/len(syntax),2)} {round(sum(dataflow)/len(dataflow),2)}\n"
-        result_dict[aug_method] = [round(sum(syntax)/len(syntax),2), round(sum(dataflow)/len(dataflow),2)]
+        # result_dict[aug_method] = [round(sum(syntax)/len(syntax),2), round(sum(dataflow)/len(dataflow),2), round(sum(codebleu)/len(codebleu),2)]
+        result_dict[aug_method] = [round(sum(syntax) / len(syntax), 2), round(sum(dataflow) / len(dataflow), 2)]
         # break
     return result_dict
 
 lang_map = {"java":"java","cpp":"cpp","js":"javascript"}
-langs = ["java","js"]
+# langs = ["java","cpp","js"]
+langs = ["cpp"]
 
 dicts = []
 for lang in langs:
@@ -267,8 +286,18 @@ for i in range(1, len(dicts)):
     for key in dicts[0].keys():
         dicts[0][key] = dicts[0][key] + result_dict[key]
 
+values = [0,0,0,0,0,0]
 for key in dicts[0].keys():
-    print("Syntax & " + key.replace("_","\_"), end = " ")
+    if key in ["ForWhileTransformer", "OperandSwap", "DeadCodeInserter", "VarRenamerRN", "VarRenamerCB", "VarRenamerNaive"]:
+        cat = "Syntax"
+    else:
+        cat = "Format"
+    print(f"{cat} & " + key.replace("_","\_"), end = " ")
+    index = 0
     for v in dicts[0][key]:
+        values[index] += v
+        index += 1
         print(f"& {v}", end=" ")
     print("\\\\")
+import numpy as np
+print(np.array(values)/12)

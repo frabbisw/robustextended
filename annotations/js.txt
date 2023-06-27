@@ -1,0 +1,489 @@
+javascript/62
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/70
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/13
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/152
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/128
+Perturbed: 0.30
+Nominal:1
+Semantic:1
+
+javascript/69
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/144
+Perturbed: 0.40
+Nominal:1
+Semantic:0.75
+
+javascript/129
+Perturbed: 0.80
+Nominal:1
+Semantic:0.95
+
+javascript/112
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/28
+Perturbed: 0.80
+Nominal:1
+Semantic:0.70
+
+javascript/125
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/148
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/150
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/53
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/155
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/88
+Perturbed: 0.50
+Nominal:1
+Semantic:0.70
+
+javascript/23
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/130
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/73
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/80
+Perturbed: 0.50
+Nominal:1
+Semantic:1
+
+javascript/52
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/151
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/52
+Perturbed: 0.85
+Nominal:1
+Semantic:0.85
+
+javascript/127
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/31
+Perturbed: 0.80
+Nominal:1
+Semantic:0.85
+
+javascript/126
+Perturbed: 0.80
+Nominal:1
+Semantic:1
+
+javascript/130
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/137
+Perturbed: 0.40
+Nominal:1
+Semantic:0.70
+
+javascript/64
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/85
+Perturbed: 0.70
+Nominal:1
+Semantic:0.95
+
+javascript/13
+Perturbed: 0.80
+Nominal:1
+Semantic:1
+
+javascript/13
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/13
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/86
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/3
+Perturbed: 0.40
+Nominal:1
+Semantic:1
+
+javascript/8
+Perturbed: 0.60
+Nominal:1
+Semantic:0.90
+
+javascript/74
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/132
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/47
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/36
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/87
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/86
+Perturbed: 1
+Nominal:1
+Semantic:
+
+javascript/52
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/11
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/162
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/151
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/95
+Perturbed: 0.40
+Nominal:1
+Semantic:1
+
+javascript/87
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/92
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/119
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/120
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/69
+Perturbed:0.95
+Nominal:1
+Semantic:1
+
+javascript/112
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/147
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/88
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/83
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/32
+Perturbed: 0.45
+Nominal:1
+Semantic:1
+
+javascript/22
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/13
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/135
+Perturbed: 0.45
+Nominal:1
+Semantic:1
+
+javascript/2
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/136
+Perturbed: 0.45
+Nominal:1
+Semantic:1
+
+javascript/90
+Perturbed: 0.85
+Nominal:1
+Semantic:1
+
+javascript/100
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/61
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/77
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/9
+Perturbed: 0.80
+Nominal:1
+Semantic:1
+
+javascript/129
+Perturbed: 0.40
+Nominal:1
+Semantic:0.60
+
+javascript/76
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/120
+Perturbed: 0.40
+Nominal:1
+Semantic:1
+
+javascript/40
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/118
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/117
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/58
+Perturbed: 0.40
+Nominal:1
+Semantic:0.50
+
+javascript/48
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/22
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/13
+Perturbed: 0.98
+Nominal:1
+Semantic:1
+
+javascript/59
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/80
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/28
+Perturbed: 0.45
+Nominal:1
+Semantic:1
+
+javascript/156
+Perturbed: 0.40
+Nominal:1
+Semantic:0.70
+
+javascript/6
+Perturbed: 0.80
+Nominal:1
+Semantic:1
+
+javascript/155
+Perturbed: 0.70
+Nominal:1
+Semantic:1
+
+javascript/49
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/49
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/15
+Perturbed: 0.95
+Nominal:1
+Semantic:1
+
+javascript/162
+Perturbed: 0.90
+Nominal:1
+Semantic:1
+
+javascript/69
+Perturbed: 0.50
+Nominal:1
+Semantic:0.85
+
+javascript/155
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/143
+Perturbed: 0.65
+Nominal:1
+Semantic:0.95
+
+javascript/161
+Perturbed: 0.70
+Nominal:0.90
+Semantic:0.85
+
+javascript/102
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/108
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/102
+Perturbed: 0.45
+Nominal:1
+Semantic:0.85
+
+javascript/118
+Perturbed: 0.80
+Nominal:1
+Semantic:0.95
+
+javascript/157
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/157
+Perturbed: 1
+Nominal:1
+Semantic:1
+
+javascript/121
+perturbed: 1
+Nominal:1
+Semantic:1
