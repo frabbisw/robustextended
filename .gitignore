@@ -7,6 +7,7 @@ __pycache__/
 .idea/
 evaluate-public-models/human-eval/
 datasets/
+dataset-release/
 tmp/
 testing_dir
 testing_dir2
