@@ -1,0 +1,25 @@
+function toString(data) {
+  if (typeof data === 'string' || typeof data === 'number') {
+    // Convert strings and numbers directly to string
+    return String(data);
+  } else if (Array.isArray(data)) {
+    // Convert arrays to string
+    return '[' + data.map(toString).join(', ') + ']';
+  } else if (data instanceof Map) {
+    // Convert maps to string
+    return '{' + Array.from(data).map(([key, value]) => `${toString(key)}: ${toString(value)}`).join(', ') + '}';
+  } else if (typeof data === 'object' && data !== null) {
+    // Convert objects to string
+    const entries = Object.entries(data).map(([key, value]) => `${key}: ${toString(value)}`);
+    return '{' + entries.join(', ') + '}';
+  } else if (typeof data === 'number' && !isNaN(data)) {
+    // Convert floats to string
+    return data.toString();
+  } else if (typeof data === 'function' && data.name) {
+    // Convert functions to string
+    return `function ${data.name}() { /* Function code */ }`;
+  } else {
+    // Convert unsupported data types to string
+    return String(data);
+  }
+}

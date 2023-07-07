@@ -41,13 +41,15 @@ def add_slashes(input_string):
         else:
             rets += s
     return rets
+MAX_LIST_SIZE = 500
 def recurse(line, lang):
     if line is None:
         return {"java":"null","cpp":"NULL","js":"null"}[lang]
     if isinstance(line, bool):
         if lang in ["java", "cpp", "js"]:
-            return str(line).lower()
+            return str(int(line))
     if isinstance(line, list):
+        # line = line[:MAX_LIST_SIZE]
         converted = []
         for l in line:
             converted.append(recurse(l, lang))
@@ -60,10 +62,16 @@ def recurse(line, lang):
     elif isinstance(line, str):
         return f"\"{add_slashes(line)}\""
     elif isinstance(line, int):
-        if line > 2147483646:
-            return "2147483646"
+        if line > 147483646:
+            return "147483646"
+        elif line < -147483646:
+            return "-147483646"
         return str(line)
     elif isinstance(line, float):
+        if line > 147483646:
+            return "147483646.0"
+        elif line < -147483646:
+            return "-147483646.0"
         return str(line)
     elif isinstance(line, dict):
         if lang == "java":
@@ -80,7 +88,7 @@ def recurse(line, lang):
             cppdict = []
             for k in line.keys():
                 v = line[k]
-                cppdict.append(f"{{{recurse(k, lang)}: {recurse(v, lang)}}}")
+                cppdict.append(f"{{{recurse(k, lang)}, {recurse(v, lang)}}}")
             return "{" + ", ".join(cppdict) + "}"
         if lang == "js":
             jsdict = []
@@ -102,7 +110,7 @@ def py_to_others(line, lang):
         line_mod.append(recurse(l, lang))
     return ", ".join(line_mod)
 
-evalplus_type = "mini"
+evalplus_type = "full"
 python_prompts = load_prompts(f"/home/frabbi/Documents/evalplus/{evalplus_type}.jsonl")
 task_id_map = {"java":"Java", "cpp":"CPP", "js":"JavaScript"}
 
@@ -147,6 +155,7 @@ def detect_list_type(lst):
 
 def filter_python_prompt(prompt):
     test_cases_py = prompt['plus_input']
+    test_cases_py = test_cases_py[:min(len(test_cases_py), MAX_LIST_SIZE)]
     case_types = {}
     for i in range(len(test_cases_py)):
         tc = test_cases_py[i]
@@ -158,9 +167,16 @@ def filter_python_prompt(prompt):
             # if case_type == list:
             #     case_type = detect_list_type(sample)
             case_types[j].append(case_type)
-
+    # print(case_types)
     for j in case_types.keys():
         if 0 == case_types[j].count(list):
+            if case_types[j].count(int) + case_types[j].count(float) + case_types[j].count(None) == len(case_types[j]):
+                if case_types[j].count(int) < case_types[j].count(float):
+                    for i in range(len(test_cases_py)):
+                        test_cases_py[i][j] = float(test_cases_py[i][j])
+                else:
+                    for i in range(len(test_cases_py)):
+                        test_cases_py[i][j] = int(test_cases_py[i][j])
             continue
         if 0 < case_types[j].count(list) < len(case_types[j]):
             for i in range(len(test_cases_py)):
@@ -173,7 +189,7 @@ def filter_python_prompt(prompt):
             else:
                 for i in range(len(test_cases_py)):
                     test_cases_py[i][j] = cast_list(test_cases_py[i][j],int)
-            # print(list_types.count(int), list_types.count(float), list_types.count("empty_list"), len(case_types[j]))
+        # print(list_types.count(int), list_types.count(float), list_types.count("empty_list"), len(case_types[j]))
 
     # print(prompt['plus_input'])
     prompt['plus_input'] = test_cases_py
@@ -192,13 +208,21 @@ def filter_python_prompt(prompt):
 
 def filter_inputs():
     for prompt in python_prompts:
-        # if prompt["task_id"] == "HumanEval/30":
+        # if prompt["task_id"] == "HumanEval/157":
         filter_python_prompt(prompt)
 filter_inputs()
 java_inputs = get_input_dict("java")
+
 with open(f"java_inputs_{evalplus_type}", "wb") as f:
     pickle.dump(java_inputs, f)
 
+cpp_inputs = get_input_dict("cpp")
+with open(f"cpp_inputs_{evalplus_type}", "wb") as f:
+    pickle.dump(cpp_inputs, f)
+
+js_inputs = get_input_dict("js")
+with open(f"js_inputs_{evalplus_type}", "wb") as f:
+    pickle.dump(js_inputs, f)
 
     # print(len(types[key_with_max_values]), types[key_with_max_values])
         # print(len(types[key_with_max_values]))

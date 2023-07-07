@@ -1,0 +1,54 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <array>
+#include <map>
+
+template<typename T>
+std::string toString(const T& value) {
+    std::stringstream ss;
+    ss << value;
+    return ss.str();
+}
+
+template<typename T, size_t N>
+std::string toString(const std::array<T, N>& arr) {
+    std::stringstream ss;
+    ss << "[";
+    for (size_t i = 0; i < N; ++i) {
+        ss << toString(arr[i]);
+        if (i != N - 1) {
+            ss << ", ";
+        }
+    }
+    ss << "]";
+    return ss.str();
+}
+
+template<typename T>
+std::string toString(const std::vector<T>& vec) {
+    std::stringstream ss;
+    ss << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        ss << toString(vec[i]);
+        if (i != vec.size() - 1) {
+            ss << ", ";
+        }
+    }
+    ss << "]";
+    return ss.str();
+}
+
+template<typename K, typename V>
+std::string toString(const std::map<K, V>& map) {
+    std::stringstream ss;
+    ss << "{";
+    for (const auto& pair : map) {
+        ss << toString(pair.first) << ": " << toString(pair.second);
+        if (pair != *map.rbegin()) {
+            ss << ", ";
+        }
+    }
+    ss << "}";
+    return ss.str();
+}
