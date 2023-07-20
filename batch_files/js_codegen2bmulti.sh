@@ -14,149 +14,69 @@ source activate ReCode
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/ReCode/lib/python3.8/site-packages/nvidia/cublas/lib/:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/conda_env/lib:$LD_LIBRARY_PATH
 # run job
-python generate_single_code_single_gpu.py ../datasets/nominal/humanevaljs_nominal_f_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nominal/ codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/nominal/humanevaljs_partial_f_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/partial/ codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/nominal/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/partial/f_s0.jsonl codegen2bmulti
 
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameButterFinger_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameButterFinger codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameInflectionalVariation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameChangeChar_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameChangeChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameChangeChar_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameChangeChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameChangeChar_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameChangeChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSnakeCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSwapChar_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSwapChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameChangeChar_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameChangeChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameButterFinger_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameButterFinger codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameChangeChar_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameChangeChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameButterFinger_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameButterFinger codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSwapChar_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSwapChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameInflectionalVariation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSnakeCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSwapChar_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSwapChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSwapChar_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSwapChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameInflectionalVariation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSnakeCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSnakeCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSynonymSub_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSynonymSub codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSynonymSub_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSynonymSub codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSynonymSub_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSynonymSub codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameInflectionalVariation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSynonymSub_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSynonymSub codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameInflectionalVariation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSwapChar_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSwapChar codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameButterFinger_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameButterFinger codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameButterFinger_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameButterFinger codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSynonymSub_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSynonymSub codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/func_name/humanevaljs_FuncRenameSnakeCase_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/func_name/FuncRenameSnakeCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_tab_indent_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_lines_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_lines_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_split_lines_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_aftercode_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_aftercode_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_afterdoc_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_split_lines_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_split_lines_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_afterdoc_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_doc2comments_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_afterdoc_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_aftercode_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_doc2comments_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_tab_indent_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_split_lines_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_lines_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_afterdoc_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_doc2comments_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_aftercode_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_doc2comments_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_doc2comments_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_tab_indent_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_aftercode_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_lines_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_line_afterdoc_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_split_lines_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_tab_indent_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_tab_indent_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/format/humanevaljs_new_lines_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/BackTranslation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ButterFingersPerturbation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ButterFingersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/BackTranslation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymSubstitution_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymSubstitution codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymSubstitution_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymSubstitution codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ButterFingersPerturbation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ButterFingersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_WhitespacePerturbation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/WhitespacePerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ButterFingersPerturbation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ButterFingersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_EnglishInflectionalVariation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/EnglishInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymInsertion_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymInsertion codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ChangeCharCase_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ChangeCharCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ChangeCharCase_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ChangeCharCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymSubstitution_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymSubstitution codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/BackTranslation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ButterFingersPerturbation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ButterFingersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationPast_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationPast codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_EnglishInflectionalVariation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/EnglishInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationPast_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationPast codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/BackTranslation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymInsertion_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymInsertion codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ChangeCharCase_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ChangeCharCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ChangeCharCase_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ChangeCharCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ButterFingersPerturbation_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ButterFingersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_EnglishInflectionalVariation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/EnglishInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymInsertion_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymInsertion codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_ChangeCharCase_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/ChangeCharCase codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymSubstitution_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymSubstitution codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_WhitespacePerturbation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/WhitespacePerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationPast_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationPast codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationPast_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationPast codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_EnglishInflectionalVariation_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/EnglishInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_WhitespacePerturbation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/WhitespacePerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_WhitespacePerturbation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/WhitespacePerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationPast_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationPast codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_EnglishInflectionalVariation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/EnglishInflectionalVariation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymSubstitution_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymSubstitution codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymInsertion_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymInsertion codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_WhitespacePerturbation_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/WhitespacePerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_BackTranslation_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/BackTranslation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SynonymInsertion_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SynonymInsertion codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_OperandSwap_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_DeadCodeInserter_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_OperandSwap_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerNaive_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerNaive_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_DeadCodeInserter_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_OperandSwap_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerCB_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_OperandSwap_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerCB_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_DeadCodeInserter_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerCB_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_OperandSwap_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerNaive_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerNaive_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_DeadCodeInserter_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_DeadCodeInserter_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_ForWhileTransformer_s4.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerNaive_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s0.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerCB_s3.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerRN_s2.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN codegen2bmulti
-python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/natgen/humanevaljs_VarRenamerCB_s1.jsonl ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/split_lines/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_afterdoc/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_line_aftercode/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/tab_indent/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/doc2comments/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/format/new_lines/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/OperandSwap/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/ForWhileTransformer/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerNaive/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/DeadCodeInserter/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerRN/f_s0.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB/f_s2.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB/f_s3.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB/f_s4.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB/f_s1.jsonl codegen2bmulti
+python generate_codes_only_for_changed_prompts.py ../datasets/codegen2bmulti/generated_pass5_1/js/natgen/VarRenamerCB/f_s0.jsonl codegen2bmulti
 
 # clean loaded modules
 module unload anaconda/3.2019.10/default

@@ -41,7 +41,7 @@ def add_slashes(input_string):
         else:
             rets += s
     return rets
-MAX_LIST_SIZE = 500
+# MAX_LIST_SIZE = 100
 def recurse(line, lang):
     if line is None:
         return {"java":"null","cpp":"NULL","js":"null"}[lang]
@@ -155,7 +155,7 @@ def detect_list_type(lst):
 
 def filter_python_prompt(prompt):
     test_cases_py = prompt['plus_input']
-    test_cases_py = test_cases_py[:min(len(test_cases_py), MAX_LIST_SIZE)]
+    # test_cases_py = test_cases_py[:min(len(test_cases_py), MAX_LIST_SIZE)]
     case_types = {}
     for i in range(len(test_cases_py)):
         tc = test_cases_py[i]

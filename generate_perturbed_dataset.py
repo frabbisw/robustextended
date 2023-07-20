@@ -5,10 +5,10 @@ import subprocess
 dataset_names = ['humanevalcpp', 'humanevaljs', 'humanevaljava']
 # methods = ["nlaugmenter", "natgen", "format", "func_name"]
 # methods = ["nlaugmenter", "format", "func_name", "natgen"]
-methods = ["format"]
+methods = ["format", "natgen"]
 aug_methods = {"nlaugmenter": 10, "natgen": 6, "format": 6, "func_name": 6}
 K = 5
-template = "python perturb_multi.py --data {dataset} --method {method} --aug_method {aug_method} --seed {seed} {extra}"
+template = "python perturb_multi.py --data {dataset} --method {method} --aug_method {aug_method} --seed {seed} --overwrite {extra}"
 
 for d in dataset_names:
     for m in methods:
