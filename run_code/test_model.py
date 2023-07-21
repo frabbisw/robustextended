@@ -68,11 +68,11 @@ def test_java(solution, main, new_entry_point, old_entry_point):
            "import java.util.Optional;\n" \
            "import java.security.NoSuchAlgorithmException;\n" \
            + main
-    with open("../testing_dir/Main.java", "w") as f:
+    with open("../testing_dir5/Main.java", "w") as f:
         f.write(main)
-    with open("../testing_dir/Solution.java", "w") as f:
+    with open("../testing_dir5/Solution.java", "w") as f:
         f.write(solution)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=4, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
@@ -126,9 +126,9 @@ def test_cpp(code, main, new_entry_point, old_entry_point):
     main = main.replace(old_entry_point, new_entry_point)
     full_code = code + main
 
-    with open("../testing_dir/cpp_code.cpp", "w") as f:
+    with open("../testing_dir5/cpp_code.cpp", "w") as f:
         f.write(full_code)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
 
     try:
         compilation_output = subprocess.run(['g++', '-o', 'cpp_code', 'cpp_code.cpp', '-lcrypto', '-lssl'], timeout=4,
@@ -188,9 +188,9 @@ def test_js(gc, main, new_entry_point, old_entry_point):
     # print(full_code)
     # print("*"*50)
 
-    with open("../testing_dir/Sample.js", "w") as f:
+    with open("../testing_dir5/Sample.js", "w") as f:
         f.write(full_code)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
     try:
         output = subprocess.run(['node', 'Sample.js'], timeout=4, capture_output=True)
         # print(full_code)

@@ -3,34 +3,37 @@ import java.lang.*;
 
 class SolutionGenerated {
     /**
-    Write a function that returns True if the object q will fly, and False otherwise.
-    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.
+    Create a function that takes a value (string) representing a number
+    and returns the closest integer to it. If the number is equidistant
+    from two integers, round it away from zero.
 
-    Example:
-    willItFly(Arrays.asList(1, 2), 5) -> false
-    # 1+2 is less than the maximum possible weight, but it's unbalanced.
+    Examples
+    >>> closest_integer("10")
+    10
+    >>> closest_integer("15.3")
+    15
 
-    willItFly(Arrays.asList(3, 2, 3), 1) -> false
-    # it's balanced, but 3+2+3 is more than the maximum possible weight.
-
-    willItFly(Arrays.asList(3, 2, 3), 9) -> true
-    # 3+2+3 is less than the maximum possible weight, and it's balanced.
-
-    willItFly(Arrays.asList(3), 5) -> true
-    # 3 is less than the maximum possible weight, and it's balanced.
+    Note:
+    Rounding away from zero means that if the given number is equidistant
+    from two integers, the one you should return is the one that is the
+    farthest from zero. For example closest_integer("14.5") should
+    return 15 and closest_integer("-14.5") should return -15.
      */
-    public boolean willItFly(List<Integer> q, int w) {
-        if (q.stream().reduce(0, Integer::sum) > w) {
-            return false;
+    public int countUpper(String value) {
+        if (value == null || value.length() == 0) {
+            return 0;
         }
-        int i = 0, j = q.size() - 1;
-        while (i < j) {
-            if (!Objects.equals(q.get(i), q.get(j))) {
-
-                i++;
-                j--;
+        int[] nums = value.split("\\.");
+        int lower = Integer.parseInt(nums[0]);
+        int upper = Integer.parseInt(nums[1]);
+        int count = 0;
+        for (int i = lower; i <= upper; i++) {
+            if (i == lower) {
+                count++;
+            } else if (i == upper) {
+                count++;
             }
         }
-        return i == j;
+        return count;
     }
 }

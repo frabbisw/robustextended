@@ -136,19 +136,19 @@ def generate_output(prompts, inputs, lang):
         task_inputs = inputs[task_id]
         solution = prompt["prompt"] + prompt["canonical_solution"]
         if lang == "js":
-            if task_id in ['JavaScript/39', 'JavaScript/163', 'JavaScript/44', 'JavaScript/49', 'JavaScript/55', 'JavaScript/63', 'JavaScript/76', 'JavaScript/91', 'JavaScript/95']:
+            if task_id in ['JavaScript/39', 'JavaScript/163', 'JavaScript/44', 'JavaScript/49', 'JavaScript/55', 'JavaScript/63', 'JavaScript/76', 'JavaScript/56', 'JavaScript/91', 'JavaScript/95']:
                 continue
             # if task_id in ['JavaScript/111', 'JavaScript/124', 'JavaScript/132', 'JavaScript/139', 'JavaScript/162', 'JavaScript/163', 'JavaScript/39', 'JavaScript/44', 'JavaScript/49', 'JavaScript/55', 'JavaScript/63', 'JavaScript/76', 'JavaScript/91', 'JavaScript/95']:
             #     continue
             generate_run_test_js(solution, prompt["entry_point"], task_inputs, prompt["test"], task_id)
         if lang == "cpp":
-            if task_id in ['CPP/110', 'CPP/115', 'CPP/123', 'CPP/137', 'CPP/15', 'CPP/163', 'CPP/18', 'CPP/22', 'CPP/28', 'CPP/32', 'CPP/33', 'CPP/34', 'CPP/38', 'CPP/39', 'CPP/44', 'CPP/46', 'CPP/49', 'CPP/50', 'CPP/55', 'CPP/58', 'CPP/63', 'CPP/74', 'CPP/76', 'CPP/87', 'CPP/95']:
+            if task_id in ['CPP/110', 'CPP/115', 'CPP/123', 'CPP/137', 'CPP/15', 'CPP/163', 'CPP/18', 'CPP/22', 'CPP/28', 'CPP/32', 'CPP/33', 'CPP/56', 'CPP/34', 'CPP/38', 'CPP/39', 'CPP/44', 'CPP/46', 'CPP/49', 'CPP/50', 'CPP/55', 'CPP/58', 'CPP/63', 'CPP/74', 'CPP/76', 'CPP/87', 'CPP/95']:
                 continue
             # if task_id in ["CPP/10", "CPP/15", "CPP/18", "CPP/22", "CPP/32", "CPP/34", "CPP/38", "CPP/46", "CPP/50", "CPP/58", "CPP/63", "CPP/95", "CPP/123"]:
             #     continue
             generate_run_test_cpp(solution, prompt["entry_point"], task_inputs, prompt["test"], task_id)
         if lang == "java":
-            if task_id in ['Java/123', 'Java/133', 'Java/144', 'Java/22', 'Java/25', 'Java/32', 'Java/33', 'Java/34', 'Java/55', 'Java/58', 'Java/63', 'Java/76', 'Java/78', 'Java/87']:
+            if task_id in ['Java/123', 'Java/133', 'Java/144', 'Java/22', 'Java/25', 'Java/32', 'Java/33', 'Java/34', 'Java/55', 'Java/56', 'Java/58', 'Java/63', 'Java/76', 'Java/78', 'Java/87']:
                 continue
             # if task_id in ["Java/25", "Java/32", "Java/34", "Java/58", "Java/87", "Java/133", "Java/55", "Java/63", "Java/91"]:
             #     continue

@@ -61,11 +61,11 @@ def run_java(code, entry_point, task_inputs, orgmain, task_id):
 
     # return 0
 
-    with open("../testing_dir/Main.java", "w") as f:
+    with open("../testing_dir5/Main.java", "w") as f:
         f.write(main)
-    with open("../testing_dir/Solution.java", "w") as f:
+    with open("../testing_dir5/Solution.java", "w") as f:
         f.write(code)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
     try:
         # print(task_id)
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=5, capture_output=True)
@@ -120,9 +120,9 @@ def run_cpp(code, entry_point, task_inputs, orgmain, task_id):
     #     f.write(main)
     # return 0
 
-    with open("../testing_dir/cpp_code.cpp", "w") as f:
+    with open("../testing_dir5/cpp_code.cpp", "w") as f:
         f.write(full_code)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
 
     try:
         compilation_output = subprocess.run(['g++', '-o', 'cpp_code', 'cpp_code.cpp', '-lcrypto', '-lssl'], timeout=5, capture_output=True)
@@ -177,9 +177,9 @@ def run_js(code, entry_point, task_inputs, orgmain, task_id):
     #     f.write(main)
     # return 0
 
-    with open("../testing_dir/js_code.js", "w") as f:
+    with open("../testing_dir5/js_code.js", "w") as f:
         f.write(full_code)
-    os.chdir("../testing_dir/")
+    os.chdir("../testing_dir5/")
 
     try:
         # timeStarted = time.time()

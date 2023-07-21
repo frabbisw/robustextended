@@ -3,34 +3,39 @@ import java.lang.*;
 
 class Solution {
     /**
-    Write a function that returns True if the object q will fly, and False otherwise.
-    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.
+    Create a function that takes a value (string) representing a number
+    and returns the closest integer to it. If the number is equidistant
+    from two integers, round it away from zero.
 
-    Example:
-    willItFly(Arrays.asList(1, 2), 5) -> false
-    # 1+2 is less than the maximum possible weight, but it's unbalanced.
+    Examples
+    >>> closest_integer("10")
+    10
+    >>> closest_integer("15.3")
+    15
 
-    willItFly(Arrays.asList(3, 2, 3), 1) -> false
-    # it's balanced, but 3+2+3 is more than the maximum possible weight.
-
-    willItFly(Arrays.asList(3, 2, 3), 9) -> true
-    # 3+2+3 is less than the maximum possible weight, and it's balanced.
-
-    willItFly(Arrays.asList(3), 5) -> true
-    # 3 is less than the maximum possible weight, and it's balanced.
+    Note:
+    Rounding away from zero means that if the given number is equidistant
+    from two integers, the one you should return is the one that is the
+    farthest from zero. For example closest_integer("14.5") should
+    return 15 and closest_integer("-14.5") should return -15.
      */
-    public boolean willItFly(List<Integer> q, int w) {
-        if (q.stream().reduce(0, Integer::sum) > w) {
-            return false;
-        }
-        int i = 0, j = q.size() - 1;
-        while (i < j) {
-            if (!Objects.equals(q.get(i), q.get(j))) {
-                return false;
+    public int countUpper(String value) {
+        if (value.contains(".")) {
+            while (value.charAt(value.length() - 1) == '0') {
+                value = value.substring(0, value.length() - 1);
             }
-            i += 1;
-            j -= 1;
         }
-        return true;
+        double num = Double.parseDouble(value);
+        int res = 0;
+        if (value.substring(Math.max(value.length() - 2, 0)).equals(".5")) {
+            if (num > 0) {
+                res = (int) Math.ceil(num);
+            } else {
+                res = (int) Math.floor(num);
+            }
+        } else if(value.length() > 0) {
+            res = (int) Math.round(num);
+        }
+        return res;
     }
 }

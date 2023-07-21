@@ -38,44 +38,16 @@ def save_prompts(filename, prompts):
             jsonlines.Writer.write(writer, line)
 def get_nominal_prompts(lang):
     return load_prompts(f"../datasets/nominal/HumanEval_{lang}.jsonl")
-def eliminate_second_Sollution(sample_java_solution):
-    ##eliminate 2nd solution class
-    first_class_pointer = sample_java_solution.find("class Solution")
-    if first_class_pointer < 0:
-        return sample_java_solution
-    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
-    if second_class_pointer < 0:
-        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
-    if second_class_pointer < 0:
-        return sample_java_solution
-    sample_java_solution = sample_java_solution[:second_class_pointer]
-    return sample_java_solution[:sample_java_solution.rfind("}")+1]
-
-def test_java(prompt, solution, main, new_entry_point, old_entry_point):
-    backup = solution
-    start_index = solution.find("<|endoftext|>")
-    if start_index < 0:
-        start_index = 0
-    elif start_index < 5:
-        start_index = start_index + len("<|endoftext|>")
-    else:
-        start_index = 0
-    end_index = solution.rfind("<|endoftext|>")
-    if end_index < 5:
-        end_index = len(solution)
-
-    solution = solution[start_index:end_index]
-
-    if f"</code>" in solution:
-        solution = solution[:solution.find("</code>")]
-    if f"<code>" in solution:
-        solution = solution[solution.find("<code>"):]
-
-    solution = eliminate_second_Sollution(solution)
-
-    main = main.replace(old_entry_point, new_entry_point)
-
-    main = "import java.util.ArrayList;\n" \
+def get_evalplus_test_cases(lang, task_id):
+    with open(join(join(join(evalplus_dir,lang)),task_id.replace("/",""),f"main.{lang}"), "r") as f:
+        return f.read()
+def get_evalplus_main_class_for_java(task_id):
+    with open(join(join(join(evalplus_dir,"java")),task_id.replace("/",""),f"Main.java"), "r") as f:
+        return f.read()
+def get_evalplus_slution_for_java(task_id):
+    with open(join(join(join(evalplus_dir,"java")),task_id.replace("/",""),f"Solution.java"), "r") as f:
+        return f.read()
+java_imports = "import java.util.ArrayList;\n" \
            "import java.util.Arrays;\n" \
            "import java.util.List;\n" \
            "import java.util.Objects;\n" \
@@ -83,8 +55,29 @@ def test_java(prompt, solution, main, new_entry_point, old_entry_point):
            "import java.util.Random;\n" \
            "import java.util.HashMap;\n" \
            "import java.util.Optional;\n" \
-           "import java.security.NoSuchAlgorithmException;\n" \
-           + main
+           "import java.security.NoSuchAlgorithmException;\n"
+def filter_java_solution(code, prompt, old_entry_point, new_entry_point):
+    start_signs = ["<|endoftext|>", "<code>" ]
+    end_signs = ["public class", "class Solution", "<|endoftext|>", "</code>" ]
+    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+        code = code.replace(new_entry_point, old_entry_point)
+    prompt_start = code.find(prompt)
+    if prompt_start < 0:
+        for sign in start_signs:
+            sign_pos = code.find(sign)
+            if 20 > sign_pos > prompt_start:
+                prompt_start = sign_pos + len(sign)
+        prompt_start = max(prompt_start, 0)
+
+    prompt_end = prompt_start+len(prompt)
+    for sign in end_signs:
+        code_end = code.find(sign, prompt_end)
+        if code_end >= 0:
+            code = code[prompt_start: code_end]
+    return code
+
+def test_java_he(solution, main):
+    print("humaneval testing")
     with open(f"../{testing_folder}/Main.java", "w") as f:
         f.write(main)
     with open(f"../{testing_folder}/Solution.java", "w") as f:
@@ -96,29 +89,84 @@ def test_java(prompt, solution, main, new_entry_point, old_entry_point):
             subprocess.run(['rm', f'../{testing_folder}/Solution.class'], capture_output=False)
         if os.path.exists(f'../{testing_folder}/Main.class'):
             subprocess.run(['rm', f'../{testing_folder}/Main.class'], capture_output=False)
-    except:
-        None
+    except Exception as e:
+        print(e[:100])
 
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
+            print(str(compilation_output.stderr).lower()[:100])
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
         output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
 
         if "assertion" in str(output.stderr).lower():
+            print(str(output.stderr))
             return 0, CODE_RUN_STATUS["ASSERTION"]
         elif "exception" in str(output.stderr).lower() or "error" in str(output.stderr).lower():
+            print(str(output.stderr))
             return 0, CODE_RUN_STATUS["RUNTIME"]
         else:
+            print("passed")
             return 1, CODE_RUN_STATUS["PASSED"]
 
-    # except subprocess.CalledProcessError as e:
-    #     return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
+        print(e)
         return 0, CODE_RUN_STATUS["TIMEOUT"]
-    # except Exception as e:
-    #     return 0, CODE_RUN_STATUS["COMPILATION"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
+def test_java_ep(solution_generated, org_solution, main):
+    print("evalplus testing")
+    with open(f"../{testing_folder}/Main.java", "w") as f:
+        f.write(main)
+    with open(f"../{testing_folder}/Solution.java", "w") as f:
+        f.write(org_solution)
+    with open(f"../{testing_folder}/SolutionGenerated.java", "w") as f:
+        f.write(solution_generated)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/Solution.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Solution.class'], capture_output=False)
+        if os.path.exists(f'../{testing_folder}/SolutionGenerated.class'):
+            subprocess.run(['rm', f'../{testing_folder}/SolutionGenerated.class'], capture_output=False)
+        if os.path.exists(f'../{testing_folder}/Main.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Main.class'], capture_output=False)
+    except Exception as e:
+        print(e[:100])
+
+    try:
+        compilation_output = subprocess.run(['javac', 'Solution.java', 'SolutionGenerated.java', 'Main.java'], timeout=20, capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            print(str(compilation_output.stderr).lower()[:100])
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "exception" in str(output.stderr).lower() or "error" in str(output.stderr).lower():
+            print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            print("passed")
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
 
 
 def test_cpp(prompt, code, main, new_entry_point, old_entry_point):
@@ -246,71 +294,43 @@ def test_file(generated_path, lang):
 
     result = {}
     for i in range(164):
+        assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
+
         if lang == "cpp":
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-            passed_status, run_status = test_cpp(generated_data[i]["prompt"], generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            passed_status_he, run_status_he = test_cpp(generated_data[i]["prompt"], generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            eval_main = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+            passed_status_ep, run_status_ep = test_cpp(generated_data[i]["prompt"], generated_data[i]["gc"], eval_main, generated_data[i]["entry_point"])
+
         elif lang == "java":
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-            passed_status, run_status = test_java(generated_data[i]["prompt"], generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            # if generated_data[i]["task_id"] not in ["Java/105","Java/162","Java/22","Java/34","Java/46"]:
+            # if generated_data[i]["task_id"] not in ["Java/50", "Java/38", "Java/56"]["Java/20", "Java/32", "Java/63"]::
+            # if generated_data[i]["task_id"] not in ["Java/20"]:
+            #     continue
+            test_he = java_imports + generated_data[i]["test"]
+            test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
+            solution_gc = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
+            solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
+            # print(generated_data[i]["gc"])
+            # print(solution_gc)
+            # print("-"*100)
+            # print(solution_gc.replace("Solution", "SolutionGenerated"))
+            # print("=" * 100)
+
+            passed_status_he, run_status_he = test_java_he(solution_gc, test_he)
+            passed_status_ep, run_status_ep = test_java_ep(solution_gc.replace("Solution", "SolutionGenerated"), solution_org, test_ep)
+
+            print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
         elif lang == "js":
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             passed_status, run_status = test_js(generated_data[i]["prompt"], generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
-        generated_data[i]["passed"] = passed_status
-        generated_data[i]["run_status"] = run_status
+        # generated_data[i]["passed"] = passed_status
+        # generated_data[i]["run_status"] = run_status
     return generated_data
-def test_aug_method(directory, lang):
-    print(directory)
-    file_paths = [f for f in listdir(directory) if isfile(join(directory, f))]
-    for file_name in file_paths:
-        file_path = join(directory, file_name)
-        # print(file_path)
-        generated_data = test_file(file_path, lang)
-        save_prompts(file_path, generated_data)
 
+lang = "java"
+testing_folder = "testing_dir5"
+generated_path = "../datasets/incoder6b/generated_pass5_1/java/partial/f_s0.jsonl"
+evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
 
+res = test_file(generated_path, lang)
 
-
-# methods = []
-# nominals = ["nominal"]
-def test_lang(lang, datasets_path):
-    lang_path = os.path.join(datasets_path, lang)
-    for method in nominals:
-        method_path = os.path.join(lang_path, method)
-        # print(method_path)
-        test_aug_method(method_path, lang)
-
-    for method in methods:
-        method_path = os.path.join(lang_path, method)
-        for aug_method in os.listdir(method_path):
-            aug_method_path = os.path.join(method_path,aug_method)
-            test_aug_method(aug_method_path, lang)
-
-
-# langs = ["cpp", "java", "js"]
-nominals = ["nominal", "partial"]
-methods = ["nlaugmenter", "natgen", "format", "func_name"]
-
-model_name = sys.argv[1]
-lang_name = sys.argv[2]
-testing_folder = sys.argv[3]
-print(model_name, lang_name)
-
-datasets_path = f"../datasets/{model_name}/generated_pass5_1"
-test_lang(lang_name, datasets_path)
-
-# file_path_6b = "../datasets/codegen6bmulti/generated_pass5_1/js/nominal/f_s0.jsonl"
-# file_path_6b = "../tmp/java_nominal_6b.jsonl"
-# file_path_2b = "../datasets/codegen2bmulti/generated_pass5_1/js/nominal/f_s0.jsonl"
-#
-# print("6B js nominal", str(sum([v["passed"] for v in test_file("../datasets/codegen6bmulti/generated_pass5_1/js/nominal/f_s0.jsonl", "js")])))
-# print("2B js nominal", str(sum([v["passed"] for v in test_file("../datasets/codegen2bmulti/generated_pass5_1/js/nominal/f_s0.jsonl", "js")])))
-#
-# print("Check", str(sum([v["passed"] for v in test_file("../tmp/js_2b.jsonl", "js")])))
-
-# 6B 90
-# 2B 93
-
-##in java partial, 2b is still than 6b
-
-# 6B js nominal 96
-# 2B js nominal 116
+# print(sum([r["passed"] for r in res]))
