@@ -3,39 +3,13 @@ import java.lang.*;
 
 class Solution {
     /**
-    Create a function that takes a value (string) representing a number
-    and returns the closest integer to it. If the number is equidistant
-    from two integers, round it away from zero.
-
-    Examples
-    >>> closest_integer("10")
-    10
-    >>> closest_integer("15.3")
-    15
-
-    Note:
-    Rounding away from zero means that if the given number is equidistant
-    from two integers, the one you should return is the one that is the
-    farthest from zero. For example closest_integer("14.5") should
-    return 15 and closest_integer("-14.5") should return -15.
+    Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    isEqualToSumEven(4) == false
+    isEqualToSumEven(6) == false
+    isEqualToSumEven(8) == true
      */
-    public int countUpper(String value) {
-        if (value.contains(".")) {
-            while (value.charAt(value.length() - 1) == '0') {
-                value = value.substring(0, value.length() - 1);
-            }
-        }
-        double num = Double.parseDouble(value);
-        int res = 0;
-        if (value.substring(Math.max(value.length() - 2, 0)).equals(".5")) {
-            if (num > 0) {
-                res = (int) Math.ceil(num);
-            } else {
-                res = (int) Math.floor(num);
-            }
-        } else if(value.length() > 0) {
-            res = (int) Math.round(num);
-        }
-        return res;
+    public boolean isEqualToSumEven(int n) {
+        return n % 2 == 0 && n >= 8;
     }
 }

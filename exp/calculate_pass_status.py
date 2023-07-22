@@ -97,12 +97,12 @@ def test_java_he(solution, main):
         print(e[:100])
 
     try:
-        compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=30, capture_output=True)
+        compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
             # print(str(compilation_output.stderr).lower()[:100])
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
-        output = subprocess.run(['java', 'Main'], timeout=10, capture_output=True)
+        output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
 
         if "assertion" in str(output.stderr).lower():
             # print(str(output.stderr))
@@ -144,12 +144,12 @@ def test_java_ep(solution_generated, org_solution, main):
         print(e[:100])
 
     try:
-        compilation_output = subprocess.run(['javac', 'Solution.java', 'SolutionGenerated.java', 'Main.java'], timeout=30, capture_output=True)
+        compilation_output = subprocess.run(['javac', 'Solution.java', 'SolutionGenerated.java', 'Main.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
             # print(str(compilation_output.stderr).lower()[:100])
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
-        output = subprocess.run(['java', 'Main'], timeout=10, capture_output=True)
+        output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
 
         if "assertion" in str(output.stderr).lower():
             # print(str(output.stderr))
@@ -199,7 +199,7 @@ def test_js_he(solution, main):
         f.write(full_code)
     os.chdir(f"../{testing_folder}/")
     try:
-        output = subprocess.run(['node', 'Sample.js'], timeout=12, capture_output=True)
+        output = subprocess.run(['node', 'Sample.js'], timeout=8, capture_output=True)
         # print(full_code)
         if "assertion" in str(output.stderr).lower():
             return 0, CODE_RUN_STATUS["ASSERTION"]
@@ -223,7 +223,7 @@ def test_js_ep(solution_generated, main):
         f.write(full_code)
     os.chdir(f"../{testing_folder}/")
     try:
-        output = subprocess.run(['node', 'Sample.js'], timeout=12, capture_output=True)
+        output = subprocess.run(['node', 'Sample.js'], timeout=8, capture_output=True)
         # print(full_code)
         if "assertion" in str(output.stderr).lower():
             return 0, CODE_RUN_STATUS["ASSERTION"]
@@ -256,7 +256,7 @@ def test_cpp_he(solution, main):
         if "error" in str(compilation_output.stderr).lower():
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
-        output = subprocess.run(['./cpp_code'], timeout=10, capture_output=True)
+        output = subprocess.run(['./cpp_code'], timeout=8, capture_output=True)
 
         if "assertion" in str(output.stderr).lower():
             return 0, CODE_RUN_STATUS["ASSERTION"]
@@ -291,7 +291,7 @@ def test_cpp_ep(solution_generated, main):
         if "error" in str(compilation_output.stderr).lower():
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
-        output = subprocess.run(['./cpp_code'], timeout=10, capture_output=True)
+        output = subprocess.run(['./cpp_code'], timeout=8, capture_output=True)
 
         if "assertion" in str(output.stderr).lower():
             return 0, CODE_RUN_STATUS["ASSERTION"]
@@ -311,7 +311,7 @@ def test_cpp_ep(solution_generated, main):
         return 0, CODE_RUN_STATUS["COMPILATION"]
 def test_file(generated_path, lang):
     generated_data = load_prompts(generated_path)
-    nominal_data =  get_nominal_prompts(lang)
+    nominal_data = get_nominal_prompts(lang)
 
     generated_data.sort(key=lambda x: x["task_id"])
     nominal_data.sort(key=lambda x: x["task_id"])
@@ -319,11 +319,7 @@ def test_file(generated_path, lang):
     result = {}
     for i in range(164):
         assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-
         if lang == "cpp":
-            # 60 49
-            if generated_data[i]["task_id"] not in ["CPP/60"]:
-                continue
             test_he = generated_data[i]["test"]
             test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
             solution_gc_he, solution_gc_ep = filter_js_cpp_solution(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
@@ -333,42 +329,60 @@ def test_file(generated_path, lang):
             # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
 
         elif lang == "java":
-            # if generated_data[i]["task_id"] not in ["Java/105","Java/162","Java/22","Java/34","Java/46"]:
-            # if generated_data[i]["task_id"] not in ["Java/50", "Java/38", "Java/56"]["Java/20", "Java/32", "Java/63"]::
-            # if generated_data[i]["task_id"] not in ["Java/20"]:
-            #     continue
             test_he = java_imports + generated_data[i]["test"]
             test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
             solution_gc_he, solution_gc_ep = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
             solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
-            # print(generated_data[i]["gc"])
-            # print(solution_gc_he)
-            # print("-"*100)
-            # print(solution_gc_ep)
-            # print("=" * 100)
 
             passed_status_he, run_status_he = test_java_he(solution_gc_he, test_he)
             passed_status_ep, run_status_ep = test_java_ep(solution_gc_ep, solution_org, test_ep)
 
-            print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
         elif lang == "js":
-            # if generated_data[i]["task_id"] not in ["Java/112", "Java/124", "Java/32", "Java/38"]:
             test_he = generated_data[i]["test"]
             test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
             solution_gc_he, solution_gc_ep = filter_js_cpp_solution(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
 
             passed_status_he, run_status_he = test_js_he(solution_gc_he, test_he)
             passed_status_ep, run_status_ep = test_js_ep(solution_gc_ep, test_ep)
-            print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
-        # generated_data[i]["passed"] = passed_status
-        # generated_data[i]["run_status"] = run_status
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+        generated_data[i]["passed_he"] = passed_status_he
+        generated_data[i]["run_status_he"] = run_status_he
+        generated_data[i]["passed_ep"] = passed_status_ep
+        generated_data[i]["run_status_ep"] = run_status_ep
     return generated_data
 
-lang = "cpp"
-testing_folder = "testing_dir5"
-generated_path = "../datasets/codegen6bmulti/generated_pass5_1/cpp/partial/f_s0.jsonl"
+def test_aug_method(directory, lang):
+    print(directory)
+    file_paths = [f for f in listdir(directory) if isfile(join(directory, f))]
+    for file_name in file_paths:
+        file_path = join(directory, file_name)
+        # print(file_path)
+        generated_data = test_file(file_path, lang)
+        save_prompts(file_path, generated_data)
+
+def test_lang(lang, datasets_path):
+    lang_path = os.path.join(datasets_path, lang)
+    for method in nominals:
+        method_path = os.path.join(lang_path, method)
+        # print(method_path)
+        test_aug_method(method_path, lang)
+
+    for method in methods:
+        method_path = os.path.join(lang_path, method)
+        for aug_method in os.listdir(method_path):
+            aug_method_path = os.path.join(method_path,aug_method)
+            test_aug_method(aug_method_path, lang)
+
 evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
 
-res = test_file(generated_path, lang)
+nominals = ["nominal", "partial"]
+methods = ["nlaugmenter", "natgen", "format", "func_name"]
 
-# print(sum([r["passed"] for r in res]))
+model_name = sys.argv[1]
+lang_name = sys.argv[2]
+testing_folder = f"testing_dir{sys.argv[3]}"
+print(model_name, lang_name)
+
+datasets_path = f"../datasets/{model_name}/generated_pass5_1"
+test_lang(lang_name, datasets_path)
