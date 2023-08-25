@@ -61,24 +61,72 @@ java_imports = "import java.util.ArrayList;\n" \
            "import java.util.HashMap;\n" \
            "import java.util.Optional;\n" \
            "import java.security.NoSuchAlgorithmException;\n"
-def filter_java_solution(code, prompt, old_entry_point, new_entry_point):
-    start_signs = ["<|endoftext|>", "<code>" ]
-    end_signs = ["public class", "class Solution", "<|endoftext|>", "</code>" ]
-    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
-        code = code.replace(new_entry_point, old_entry_point)
-    prompt_start = code.find(prompt)
-    if prompt_start < 0:
-        for sign in start_signs:
-            sign_pos = code.find(sign)
-            if 20 > sign_pos > prompt_start:
-                prompt_start = sign_pos + len(sign)
-        prompt_start = max(prompt_start, 0)
 
-    prompt_end = prompt_start+len(prompt)
-    for sign in end_signs:
-        code_end = code.find(sign, prompt_end)
-        if code_end >= 0:
-            code = code[prompt_start: code_end]
+
+# def filter_java_solution_new_style(code, prompt, old_entry_point, new_entry_point):
+#     if "\\\n" in code:
+#         code = code.replace("\\\n", "\n")
+#     if "\ \n" in code:
+#         code = code.replace("\ \n", "\n")
+#
+#     start_signs = ["<|endoftext|>", "<code>" ]
+#     end_signs = ["public class", "class Solution", "<|endoftext|>", "</code>" ]
+#     if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+#         code = code.replace(new_entry_point, old_entry_point)
+#     prompt_start = code.find(prompt)
+#     if prompt_start < 0:
+#         for sign in start_signs:
+#             sign_pos = code.find(sign)
+#             if 20 > sign_pos > prompt_start:
+#                 prompt_start = sign_pos + len(sign)
+#         prompt_start = max(prompt_start, 0)
+#
+#     prompt_end = prompt_start+len(prompt)
+#     for sign in end_signs:
+#         code_end = code.find(sign, prompt_end)
+#         if code_end >= 0:
+#             code = code[prompt_start: code_end]
+#     return code, code.replace("Solution", "SolutionGenerated")
+
+def eliminate_second_Sollution(sample_java_solution):
+    first_class_pointer = sample_java_solution.find("class Solution")
+    if first_class_pointer < 0:
+        return sample_java_solution
+    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        return sample_java_solution
+    sample_java_solution = sample_java_solution[:second_class_pointer]
+    return sample_java_solution[:sample_java_solution.rfind("}") + 1]
+
+def filter_java_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    solution = code[start_index:end_index]
+
+    if f"</code>" in solution:
+        solution = solution[:solution.find("</code>")]
+    if f"<code>" in solution:
+        solution = solution[solution.find("<code>"):]
+
+    code = eliminate_second_Sollution(solution)
+    # if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+    code = code.replace(new_entry_point, old_entry_point)
     return code, code.replace("Solution", "SolutionGenerated")
 
 def test_java_he(solution, main):
@@ -171,26 +219,109 @@ def test_java_ep(solution_generated, org_solution, main):
         print(e)
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
+def filter_cpp_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
 
-def filter_js_cpp_solution(code, prompt, old_entry_point, new_entry_point):
-    start_signs = ["<|endoftext|>", "<code>" ]
-    end_signs = ["<|endoftext|>", "</code>" , "/*", "#include", "int main()", f"const {new_entry_point}", f"const {old_entry_point}", "console.log("]
-    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
-        code = code.replace(new_entry_point, old_entry_point)
-    prompt_start = code.find(prompt)
-    if prompt_start < 0:
-        for sign in start_signs:
-            sign_pos = code.find(sign)
-            if 20 > sign_pos > prompt_start:
-                prompt_start = sign_pos + len(sign)
-        prompt_start = max(prompt_start, 0)
+    code = code.replace("usingnamespace", "using namespace")
+    code = code.replace("using std;", "using namespace std;")
 
-    prompt_end = prompt_start+len(prompt)
-    for sign in end_signs:
-        code_end = code.find(sign, prompt_end)
-        if code_end >= 0:
-            code = code[prompt_start: code_end]
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    code = code[start_index:end_index]
+
+    if f"</code>" in code:
+        code = code[:code.find("</code>")]
+    if f"<code>" in code:
+        code = code[code.find("<code>"):]
+
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
+    if "int main()" in code:
+        code = code[:code.find("int main()")]
+    # if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+    code = code.replace(new_entry_point, old_entry_point)
     return code, code.replace(old_entry_point, "generatedMethodName")
+
+def filter_js_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    code = code[start_index:end_index]
+    # if "\n}" in code:
+    #     code = code[:1+code.find("\n}")]
+
+    if f"</code>" in code:
+        code = code[:code.find("</code>")]
+    if f"<code>" in code:
+        code = code[code.find("<code>"):]
+
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
+    code = code.replace(" \\\n", "\n")
+
+    if "//" in code:
+        line_cmnt = code.find(f"//", code.find("const"))
+        if line_cmnt > 0:
+            code = code[:line_cmnt]
+
+    # if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+    code = code.replace(new_entry_point, old_entry_point)
+    return code, code.replace(old_entry_point, "generatedMethodName")
+
+# def filter_js_cpp_solution(code, prompt, old_entry_point, new_entry_point):
+#     if "\\\n" in code:
+#         code = code.replace("\\\n", "\n")
+#     if "\ \n" in code:
+#         code = code.replace("\ \n", "\n")
+#     code = code.replace("usingnamespace", "using namespace")
+#     code = code.replace("using std;", "using namespace std;")
+#     start_signs = ["<|endoftext|>", "<code>" ]
+#     end_signs = ["<|endoftext|>", "</code>" , "/*", "#include", "int main()", f"const {new_entry_point}", f"const {old_entry_point}", "console.log("]
+#     if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+#         code = code.replace(new_entry_point, old_entry_point)
+#     prompt_start = code.find(prompt)
+#     if prompt_start < 0:
+#         for sign in start_signs:
+#             sign_pos = code.find(sign)
+#             if 20 > sign_pos > prompt_start:
+#                 prompt_start = sign_pos + len(sign)
+#         prompt_start = max(prompt_start, 0)
+#
+#     prompt_end = prompt_start+len(prompt)
+#     for sign in end_signs:
+#         code_end = code.find(sign, prompt_end)
+#         if code_end >= 0:
+#             code = code[prompt_start: code_end]
+#     return code, code.replace(old_entry_point, "generatedMethodName")
 # def test_js_he(solution, main):
 
 def test_js_he(solution, main):
@@ -322,7 +453,7 @@ def test_file(generated_path, lang):
         if lang == "cpp":
             test_he = generated_data[i]["test"]
             test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
-            solution_gc_he, solution_gc_ep = filter_js_cpp_solution(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
+            solution_gc_he, solution_gc_ep = filter_cpp_solution_old_style(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
 
             passed_status_he, run_status_he = test_cpp_he(solution_gc_he, test_he)
             passed_status_ep, run_status_ep = test_cpp_ep(solution_gc_ep, test_ep)
@@ -331,7 +462,7 @@ def test_file(generated_path, lang):
         elif lang == "java":
             test_he = java_imports + generated_data[i]["test"]
             test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
-            solution_gc_he, solution_gc_ep = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
+            solution_gc_he, solution_gc_ep = filter_java_solution_old_style(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
             solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
 
             passed_status_he, run_status_he = test_java_he(solution_gc_he, test_he)
@@ -341,7 +472,7 @@ def test_file(generated_path, lang):
         elif lang == "js":
             test_he = generated_data[i]["test"]
             test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
-            solution_gc_he, solution_gc_ep = filter_js_cpp_solution(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
+            solution_gc_he, solution_gc_ep = filter_js_solution_old_style(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
 
             passed_status_he, run_status_he = test_js_he(solution_gc_he, test_he)
             passed_status_ep, run_status_ep = test_js_ep(solution_gc_ep, test_ep)
@@ -383,6 +514,14 @@ model_name = sys.argv[1]
 lang_name = sys.argv[2]
 testing_folder = f"testing_dir{sys.argv[3]}"
 print(model_name, lang_name)
-
 datasets_path = f"../datasets/{model_name}/generated_pass5_1"
 test_lang(lang_name, datasets_path)
+
+# testing_folder = "testing_dir5"
+# generated_data = test_file("../tmp/codegen6bnominaljava.jsonl", "java")
+# save_prompts("../tmp/codegen6bnominaljava.jsonl", generated_data)
+#
+# generated_data = test_file("../tmp/codegen2bnominaljava.jsonl", "java")
+# save_prompts("../tmp/codegen2bnominaljava.jsonl", generated_data)
+
+# e.g python calculate_pass_status.py incoder1b java 0

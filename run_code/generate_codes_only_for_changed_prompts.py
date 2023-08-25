@@ -50,9 +50,9 @@ prompts = load_prompts(filepath)
 
 ids = []
 if "/java/" in filepath:
-    ids = ['Java/32', 'Java/39', 'Java/44', 'Java/49', 'Java/55', 'Java/63', 'Java/76', 'Java/91', 'Java/96', 'Java/124', 'Java/125', 'Java/127', 'Java/132', 'Java/139']
+    ids = ['Java/31', 'Java/55', 'Java/63']
 elif "/cpp/" in filepath:
-    ids = ['CPP/32', 'CPP/39', 'CPP/44', 'CPP/49', 'CPP/55', 'CPP/63', 'CPP/76', 'CPP/91', 'CPP/96', 'CPP/124', 'CPP/125', 'CPP/127', 'CPP/132', 'CPP/139']
+    ids = ['CPP/31', 'CPP/39', 'CPP/44', 'CPP/49', 'CPP/55', 'CPP/63', 'CPP/76', 'CPP/91', 'CPP/96', 'CPP/124', 'CPP/125', 'CPP/127', 'CPP/132', 'CPP/139']
 elif "/js/" in filepath:
     ids = ['JavaScript/32', 'JavaScript/39', 'JavaScript/44', 'JavaScript/49', 'JavaScript/55', 'JavaScript/63', 'JavaScript/76', 'JavaScript/91', 'JavaScript/96', 'JavaScript/124', 'JavaScript/125', 'JavaScript/127', 'JavaScript/132', 'JavaScript/139']
 

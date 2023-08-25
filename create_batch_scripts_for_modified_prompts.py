@@ -14,8 +14,8 @@ for model_name in model_names:
         task_command = task_command + f"python generate_codes_only_for_changed_prompts.py ../datasets/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl {model_name}\n\n"
 
         for method_name in os.listdir(dataset_dir):
-            if method_name not in ["natgen","format"]:
-                continue
+            # if method_name not in ["natgen","format"]:
+            #     continue
             method_dir = os.path.join(dataset_dir, method_name)
             for aug_method in os.listdir(method_dir):
                 aug_method_dir = os.path.join(method_dir, aug_method)

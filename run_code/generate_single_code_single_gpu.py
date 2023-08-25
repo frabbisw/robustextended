@@ -21,7 +21,7 @@ from transformers import GPTJForCausalLM
 import torch
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B"}
+models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B"}
 
 checkpoint = models_dict[sys.argv[3]]
 

@@ -1,0 +1,529 @@
+import json
+import pdb
+import pickle
+from tqdm import tqdm as tq
+import os
+import subprocess
+import jsonlines
+from collections import Counter
+from os import listdir
+from os.path import isfile, join
+import sys
+
+CODE_RUN_STATUS = {"PASSED":0, "ASSERTION":1, "COMPILATION":2, "TIMEOUT": 3, "RUNTIME": 4}
+
+def view(filename):
+    prompts = []
+    with open(filename, encoding="utf8") as f:
+        for line in f.readlines():
+            prompts.append(json.loads(line)["prompt"])
+    return prompts
+def full_view(filename):
+    prompts = []
+    with open(filename, encoding="utf8") as f:
+        for line in f.readlines():
+            prompts.append(json.loads(line)["prompt"]+json.loads(line)["canonical_solution"])
+    return prompts
+def load_prompts(filename):
+    prompts = []
+    with open(filename, encoding="utf8") as f:
+        for line in f.readlines():
+            prompts.append(json.loads(line))
+    return prompts
+def save_prompts(filename, prompts):
+    # print(prompts)
+    # exit()
+    with jsonlines.open(filename, mode='w') as writer:
+        for line in prompts:
+            jsonlines.Writer.write(writer, line)
+def get_nominal_prompts(lang):
+    return load_prompts(f"../datasets/nominal/HumanEval_{lang}.jsonl")
+
+
+def get_evalplus_test_cases(task_id, lang):
+    with open(join(join(join(evalplus_dir, lang)), task_id.replace("/", ""), f"main.{lang}"), "r") as f:
+        return f.read()
+def get_evalplus_solution(task_id, lang):
+    with open(join(join(join(evalplus_dir,lang)),task_id.replace("/",""),f"solution.{lang}"), "r") as f:
+        return f.read()
+def get_evalplus_main_class_for_java(task_id):
+    with open(join(join(join(evalplus_dir,"java")),task_id.replace("/",""),f"Main.java"), "r") as f:
+        return f.read()
+def get_evalplus_slution_for_java(task_id):
+    with open(join(join(join(evalplus_dir,"java")),task_id.replace("/",""),f"Solution.java"), "r") as f:
+        return f.read()
+java_imports = "import java.util.ArrayList;\n" \
+           "import java.util.Arrays;\n" \
+           "import java.util.List;\n" \
+           "import java.util.Objects;\n" \
+           "import java.util.Map;\n" \
+           "import java.util.Random;\n" \
+           "import java.util.HashMap;\n" \
+           "import java.util.Optional;\n" \
+           "import java.security.NoSuchAlgorithmException;\n"
+
+
+# def filter_java_solution_new_style(code, prompt, old_entry_point, new_entry_point):
+#     if "\\\n" in code:
+#         code = code.replace("\\\n", "\n")
+#     if "\ \n" in code:
+#         code = code.replace("\ \n", "\n")
+#
+#     start_signs = ["<|endoftext|>", "<code>" ]
+#     end_signs = ["public class", "class Solution", "<|endoftext|>", "</code>" ]
+#     if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+#         code = code.replace(new_entry_point, old_entry_point)
+#     prompt_start = code.find(prompt)
+#     if prompt_start < 0:
+#         for sign in start_signs:
+#             sign_pos = code.find(sign)
+#             if 20 > sign_pos > prompt_start:
+#                 prompt_start = sign_pos + len(sign)
+#         prompt_start = max(prompt_start, 0)
+#
+#     prompt_end = prompt_start+len(prompt)
+#     for sign in end_signs:
+#         code_end = code.find(sign, prompt_end)
+#         if code_end >= 0:
+#             code = code[prompt_start: code_end]
+#     return code, code.replace("Solution", "SolutionGenerated")
+
+def eliminate_second_Sollution(sample_java_solution):
+    first_class_pointer = sample_java_solution.find("class Solution")
+    if first_class_pointer < 0:
+        return sample_java_solution
+    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        return sample_java_solution
+    sample_java_solution = sample_java_solution[:second_class_pointer]
+    return sample_java_solution[:sample_java_solution.rfind("}") + 1]
+
+def filter_java_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    solution = code[start_index:end_index]
+
+    if f"</code>" in solution:
+        solution = solution[:solution.find("</code>")]
+    if f"<code>" in solution:
+        solution = solution[solution.find("<code>"):]
+
+    code = eliminate_second_Sollution(solution)
+    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+        code = code.replace(new_entry_point, old_entry_point)
+    return code, code.replace("Solution", "SolutionGenerated")
+
+def test_java_he(solution, main):
+    with open(f"../{testing_folder}/Main.java", "w") as f:
+        f.write(main)
+    with open(f"../{testing_folder}/Solution.java", "w") as f:
+        f.write(solution)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/Solution.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Solution.class'], capture_output=False)
+        if os.path.exists(f'../{testing_folder}/Main.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Main.class'], capture_output=False)
+    except Exception as e:
+        print(e[:100])
+
+    try:
+        compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            # print(str(compilation_output.stderr).lower()[:100])
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            # print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "exception" in str(output.stderr).lower() or "error" in str(output.stderr).lower():
+            # print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            # print("passed")
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        # print(e)
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
+def test_java_ep(solution_generated, org_solution, main):
+    with open(f"../{testing_folder}/Main.java", "w") as f:
+        f.write(main)
+    with open(f"../{testing_folder}/Solution.java", "w") as f:
+        f.write(org_solution)
+    with open(f"../{testing_folder}/SolutionGenerated.java", "w") as f:
+        f.write(solution_generated)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/Solution.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Solution.class'], capture_output=False)
+        if os.path.exists(f'../{testing_folder}/SolutionGenerated.class'):
+            subprocess.run(['rm', f'../{testing_folder}/SolutionGenerated.class'], capture_output=False)
+        if os.path.exists(f'../{testing_folder}/Main.class'):
+            subprocess.run(['rm', f'../{testing_folder}/Main.class'], capture_output=False)
+    except Exception as e:
+        print(e[:100])
+
+    try:
+        compilation_output = subprocess.run(['javac', 'Solution.java', 'SolutionGenerated.java', 'Main.java'], timeout=20, capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            # print(str(compilation_output.stderr).lower()[:100])
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['java', 'Main'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            # print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "exception" in str(output.stderr).lower() or "error" in str(output.stderr).lower():
+            # print(str(output.stderr))
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            # print("passed")
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        # print(e)
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
+def filter_cpp_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    code = code.replace("usingnamespace", "using namespace")
+    code = code.replace("using std;", "using namespace std;")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    code = code[start_index:end_index]
+
+    if f"</code>" in code:
+        code = code[:code.find("</code>")]
+    if f"<code>" in code:
+        code = code[code.find("<code>"):]
+
+    # second_entry_point = code.find(new_entry_point, code.find(new_entry_point))
+    # if second_entry_point > 0:
+    #     code = code[:code[:second_entry_point].rfind("\n")]
+
+
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
+    if "int main()" in code:
+        code = code[:code.find("int main()")]
+    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+        code = code.replace(new_entry_point, old_entry_point)
+        code = code[:code.find("\n}", code.find(old_entry_point, code.find("*/")))+2]
+        return code, code.replace(old_entry_point, "generatedMethodName")
+    else:
+        code = code[:code.find("\n}", code.find(new_entry_point, code.find("*/")))+2]
+        return code, code.replace(new_entry_point, "generatedMethodName")
+
+
+def filter_js_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    code = code[start_index:end_index]
+    # if "\n}" in code:
+    #     code = code[:1+code.find("\n}")]
+
+    if f"</code>" in code:
+        code = code[:code.find("</code>")]
+    if f"<code>" in code:
+        code = code[code.find("<code>"):]
+
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
+    code = code.replace(" \\\n", "\n")
+
+    if "//" in code:
+        line_cmnt = code.find(f"//", code.find("const"))
+        if line_cmnt > 0:
+            code = code[:line_cmnt]
+
+    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+        code = code.replace(new_entry_point, old_entry_point)
+    return code, code.replace(old_entry_point, "generatedMethodName")
+
+# def filter_js_cpp_solution(code, prompt, old_entry_point, new_entry_point):
+#     if "\\\n" in code:
+#         code = code.replace("\\\n", "\n")
+#     if "\ \n" in code:
+#         code = code.replace("\ \n", "\n")
+#     code = code.replace("usingnamespace", "using namespace")
+#     code = code.replace("using std;", "using namespace std;")
+#     start_signs = ["<|endoftext|>", "<code>" ]
+#     end_signs = ["<|endoftext|>", "</code>" , "/*", "#include", "int main()", f"const {new_entry_point}", f"const {old_entry_point}", "console.log("]
+#     if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero", "make_palindrome", "decode_cyclic", "decode_shift", "find_zero"]:
+#         code = code.replace(new_entry_point, old_entry_point)
+#     prompt_start = code.find(prompt)
+#     if prompt_start < 0:
+#         for sign in start_signs:
+#             sign_pos = code.find(sign)
+#             if 20 > sign_pos > prompt_start:
+#                 prompt_start = sign_pos + len(sign)
+#         prompt_start = max(prompt_start, 0)
+#
+#     prompt_end = prompt_start+len(prompt)
+#     for sign in end_signs:
+#         code_end = code.find(sign, prompt_end)
+#         if code_end >= 0:
+#             code = code[prompt_start: code_end]
+#     return code, code.replace(old_entry_point, "generatedMethodName")
+# def test_js_he(solution, main):
+
+def test_js_he(solution, main):
+    full_code = solution + main
+    with open(f"../{testing_folder}/Sample.js", "w") as f:
+        f.write(full_code)
+    os.chdir(f"../{testing_folder}/")
+    try:
+        output = subprocess.run(['node', 'Sample.js'], timeout=8, capture_output=True)
+        # print(full_code)
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "error" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
+def test_js_ep(solution_generated, main):
+    full_code = main.replace("###GENERATEDCODE###", solution_generated)
+    with open(f"../{testing_folder}/Sample.js", "w") as f:
+        f.write(full_code)
+    os.chdir(f"../{testing_folder}/")
+    try:
+        output = subprocess.run(['node', 'Sample.js'], timeout=8, capture_output=True)
+        # print(full_code)
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "error" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+def test_cpp_he(solution, main):
+    full_code = solution + main
+    with open(f"../{testing_folder}/cpp_code.cpp", "w") as f:
+        f.write(full_code)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/cpp_code'):
+            subprocess.run(['rm', f'../{testing_folder}/cpp_code'], capture_output=False)
+    except Exception as e:
+        print(e)
+    try:
+        compilation_output = subprocess.run(['g++', '-o', 'cpp_code', 'cpp_code.cpp', '-lcrypto', '-lssl'], timeout=30,capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['./cpp_code'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "segmentation fault" in str(output.stderr).lower() or "error" in str(
+                output.stderr).lower() or "terminate" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        print(e)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
+def test_cpp_ep(solution_generated, main):
+    print("*"*100)
+    full_code = main.replace("###GENERATEDCODE###", solution_generated)
+    with open(f"../{testing_folder}/cpp_code.cpp", "w") as f:
+        f.write(full_code)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/cpp_code'):
+            subprocess.run(['rm', f'../{testing_folder}/cpp_code'], capture_output=False)
+    except Exception as e:
+        print(e)
+    try:
+        compilation_output = subprocess.run(['g++', '-o', 'cpp_code', 'cpp_code.cpp', '-lcrypto', '-lssl'], timeout=30,
+                                            capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            print(str(compilation_output.stderr).lower())
+            if "generatedmethodname" in str(compilation_output.stderr).lower():
+                print(full_code)
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['./cpp_code'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            print("assertion")
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "segmentation fault" in str(output.stderr).lower() or "error" in str(
+                output.stderr).lower() or "terminate" in str(output.stderr).lower():
+            print(str(output.stderr).lower())
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            print("passed")
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+        if "generatedmethodname" in str(compilation_output.stderr).lower():
+            print(full_code)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        print("timeout")
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        print(e)
+        if "generatedmethodname" in str(compilation_output.stderr).lower():
+            print(full_code)
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+def test_file(generated_path, lang):
+    generated_data = load_prompts(generated_path)
+    nominal_data = get_nominal_prompts(lang)
+
+    generated_data.sort(key=lambda x: x["task_id"])
+    nominal_data.sort(key=lambda x: x["task_id"])
+
+    result = {}
+    for i in range(164):
+        assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
+        if lang == "cpp":
+            print(generated_data[i]["task_id"])
+            test_he = generated_data[i]["test"]
+            test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
+            solution_gc_he, solution_gc_ep = filter_cpp_solution_old_style(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
+
+            print("-" * 100)
+            print(solution_gc_ep)
+            print("+"*100)
+
+            # passed_status_he, run_status_he = test_cpp_he(solution_gc_he, test_he)
+            # passed_status_ep, run_status_ep = test_cpp_ep(solution_gc_ep, test_ep)
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+
+        elif lang == "java":
+            test_he = java_imports + generated_data[i]["test"]
+            test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
+            solution_gc_he, solution_gc_ep = filter_java_solution_old_style(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
+            solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
+
+            passed_status_he, run_status_he = test_java_he(solution_gc_he, test_he)
+            passed_status_ep, run_status_ep = test_java_ep(solution_gc_ep, solution_org, test_ep)
+
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+        elif lang == "js":
+            test_he = generated_data[i]["test"]
+            test_ep = get_evalplus_test_cases(generated_data[i]["task_id"], lang)
+            solution_gc_he, solution_gc_ep = filter_js_solution_old_style(generated_data[i]["gc"],generated_data[i]["prompt"],nominal_data[i]["entry_point"],generated_data[i]["entry_point"])
+
+            passed_status_he, run_status_he = test_js_he(solution_gc_he, test_he)
+            passed_status_ep, run_status_ep = test_js_ep(solution_gc_ep, test_ep)
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+        # generated_data[i]["passed_he"] = passed_status_he
+        # generated_data[i]["run_status_he"] = run_status_he
+        # generated_data[i]["passed_ep"] = passed_status_ep
+        # generated_data[i]["run_status_ep"] = run_status_ep
+    return generated_data
+
+def test_aug_method(directory, lang):
+    print(directory)
+    file_paths = [f for f in listdir(directory) if isfile(join(directory, f))]
+    for file_name in file_paths:
+        file_path = join(directory, file_name)
+        # print(file_path)
+        generated_data = test_file(file_path, lang)
+        save_prompts(file_path, generated_data)
+
+evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
+testing_folder = "testing_dir5"
+path = "../datasets/codegen2bmulti/generated_pass5_1/cpp/partial/f_s0.jsonl"
+generated_data = test_file(path, "cpp")
+
+print(sum(g["passed_he"] for g in generated_data))
+print(sum(g["passed_ep"] for g in generated_data))

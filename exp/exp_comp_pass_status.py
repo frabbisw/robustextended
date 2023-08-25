@@ -81,7 +81,53 @@ def filter_java_solution(code, prompt, old_entry_point, new_entry_point):
             code = code[prompt_start: code_end]
     return code, code.replace("Solution", "SolutionGenerated")
 
+
+def eliminate_second_Sollution(sample_java_solution):
+    first_class_pointer = sample_java_solution.find("class Solution")
+    if first_class_pointer < 0:
+        return sample_java_solution
+    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        return sample_java_solution
+    sample_java_solution = sample_java_solution[:second_class_pointer]
+    return sample_java_solution[:sample_java_solution.rfind("}") + 1]
+
+
+def filter_java_solution_old_style(code, prompt, old_entry_point, new_entry_point):
+    if "\\\n" in code:
+        code = code.replace("\\\n", "\n")
+    if "\ \n" in code:
+        code = code.replace("\ \n", "\n")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    solution = code[start_index:end_index]
+
+    if f"</code>" in solution:
+        solution = solution[:solution.find("</code>")]
+    if f"<code>" in solution:
+        solution = solution[solution.find("<code>"):]
+
+    code = eliminate_second_Sollution(solution)
+    if old_entry_point not in ["makePalindrome", "decodeCyclic", "decodeShift", "findZero"]:
+        code = code.replace(new_entry_point, old_entry_point)
+    return code, code.replace("Solution", "SolutionGenerated")
+
 def test_java_he(solution, main):
+    if "\\\n" in solution:
+        solution = solution.replace("\\\n", "\n")
+
     with open(f"../{testing_folder}/Main.java", "w") as f:
         f.write(main)
     with open(f"../{testing_folder}/Solution.java", "w") as f:
@@ -125,6 +171,9 @@ def test_java_he(solution, main):
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 def test_java_ep(solution_generated, org_solution, main):
+    if "\\\n" in solution_generated:
+        solution_generated = solution_generated.replace("\\\n", "\n")
+
     with open(f"../{testing_folder}/Main.java", "w") as f:
         f.write(main)
     with open(f"../{testing_folder}/Solution.java", "w") as f:
@@ -337,20 +386,30 @@ def test_file(generated_path, lang):
             # if generated_data[i]["task_id"] not in ["Java/50", "Java/38", "Java/56"]["Java/20", "Java/32", "Java/63"]::
             # if generated_data[i]["task_id"] not in ["Java/20"]:
             #     continue
+
+            # test_he = java_imports + generated_data[i]["test"]
+            # test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
+            # solution_gc_he, solution_gc_ep = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
+            # solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
+
             test_he = java_imports + generated_data[i]["test"]
-            test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
-            solution_gc_he, solution_gc_ep = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"], nominal_data[i]["entry_point"], generated_data[i]["entry_point"])
+            # test_ep = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
+            solution_gc_he_new, solution_gc_ep_new = filter_java_solution(generated_data[i]["gc"], generated_data[i]["prompt"],
+                                                                  nominal_data[i]["entry_point"],
+                                                                  generated_data[i]["entry_point"])
+            solution_gc_he_old, solution_gc_ep_old = filter_java_solution_old_style(generated_data[i]["gc"], generated_data[i]["prompt"],
+                                                                  nominal_data[i]["entry_point"],
+                                                                  generated_data[i]["entry_point"])
+
             solution_org = get_evalplus_slution_for_java(generated_data[i]["task_id"])
-            # print(generated_data[i]["gc"])
-            # print(solution_gc_he)
-            # print("-"*100)
-            # print(solution_gc_ep)
-            # print("=" * 100)
 
-            passed_status_he, run_status_he = test_java_he(solution_gc_he, test_he)
-            passed_status_ep, run_status_ep = test_java_ep(solution_gc_ep, solution_org, test_ep)
+            passed_status_he_new, run_status_he_new = test_java_he(solution_gc_he_new, test_he)
+            passed_status_he_old, run_status_he_old = test_java_he(solution_gc_he_old, test_he)
+            print(passed_status_he_old, passed_status_he_new)
 
-            print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
+
+            # passed_status_ep, run_status_ep = test_java_ep(solution_gc_ep, solution_org, test_ep)
+            # print(generated_data[i]["task_id"], passed_status_he, passed_status_ep)
         elif lang == "js":
             # if generated_data[i]["task_id"] not in ["Java/112", "Java/124", "Java/32", "Java/38"]:
             test_he = generated_data[i]["test"]
@@ -364,9 +423,9 @@ def test_file(generated_path, lang):
         # generated_data[i]["run_status"] = run_status
     return generated_data
 
-lang = "cpp"
+lang = "java"
 testing_folder = "testing_dir5"
-generated_path = "../datasets/codegen6bmulti/generated_pass5_1/cpp/partial/f_s0.jsonl"
+generated_path = "../datasets/codegen6bmulti/generated_pass5_1/java/format/"
 evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
 
 res = test_file(generated_path, lang)

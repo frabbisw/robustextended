@@ -53,11 +53,11 @@ def examine_folderpath(aug_method_path):
         file_path = join(aug_method_path, file_name)
         prompts = load_prompts(file_path)
         for prompt in prompts:
-            status_list.append(prompt["run_status"])
+            status_list.append(prompt["run_status_he"])
     return status_list
 
-langs = ["js","java","cpp"]
-models = ["incoder1b","incoder6b","codegen2bmulti_old","codegen6bmulti_old"]
+langs = ["java","cpp","js"]
+models = ["incoder1b","incoder6b","codegen2bmulti","codegen6bmulti"]
 nominals = ["nominal", "partial"]
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
 methods_dict = {"nlaugmenter":"DocString", "natgen":"Syntax", "format":"Format", "func_name":"Function", "nominal": "Nominal", "partial": "Partial"}

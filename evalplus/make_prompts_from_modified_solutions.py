@@ -60,26 +60,26 @@ def diff_strings(string1, string2):
     diff = difflib.ndiff(string1.splitlines(), string2.splitlines())
     return '\n'.join(diff)
 
+evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
+
 java_nominals = load_prompts("../datasets/nominal/humanevaljava_nominal_f_s0.jsonl")
 cpp_nominals = load_prompts("../datasets/nominal/humanevalcpp_nominal_f_s0.jsonl")
 js_nominals = load_prompts("../datasets/nominal/humanevaljs_nominal_f_s0.jsonl")
 
-java_solutions = load_solutions("/home/frabbi/Desktop/evalplusmodified", "java")
-cpp_solutions = load_solutions("/home/frabbi/Desktop/evalplusmodified", "cpp")
-js_solutions = load_solutions("/home/frabbi/Desktop/evalplusmodified", "js")
+java_solutions = load_solutions(evalplus_dir, "java")
+cpp_solutions = load_solutions(evalplus_dir, "cpp")
+js_solutions = load_solutions(evalplus_dir, "js")
 
 solutions = {"java":java_solutions, "cpp":cpp_solutions, "js":js_solutions}
 nominals = {"java":java_nominals, "cpp":cpp_nominals, "js":js_nominals}
 
-
 def divide_solution(solution, entry_point):
-    if entry_point == "for":
-        print("baal")
-        exit()
     method_line = solution.find("\n", solution.find(entry_point, solution.find("*/")))
-    return solution[:method_line+1], solution[method_line+1:]
+    # method_line = solution.find("\n", solution.find(entry_point))
+    new_prompt = solution[:method_line + 1]
+    new_canonical_solution = solution[method_line + 1:]
 
-    # method_sign = {"java":f"public class {entry_point}","js":f"const {entry_point}","cpp":f"{entry_point}("}
+    return new_prompt, new_canonical_solution
 
 for lang in ["java","cpp","js"]:
     print(solutions[lang].keys())
@@ -87,10 +87,14 @@ for lang in ["java","cpp","js"]:
         # old_solution = partials[lang][task_id]['prompt']+partials[lang][task_id]['canonical_solution']
         # old_prompt = partials[lang][task_id]['canonical_solution']
         new_solution = solutions[lang][task_id]
+
         entry_point = nominals[lang][task_id]['entry_point']
         if entry_point == "for":
             nominals[lang][task_id]['entry_point'] = {"java":"findZero","js":"findZero","cpp":"find_zero"}[lang]
             entry_point = nominals[lang][task_id]['entry_point']
+
+        prompt, canonical_solution = divide_solution(new_solution, entry_point)
+        prompt, canonical_solution = divide_solution(new_solution, entry_point)
         prompt, canonical_solution = divide_solution(new_solution, entry_point)
 
         assert len(prompt) > 10
@@ -99,8 +103,10 @@ for lang in ["java","cpp","js"]:
         nominals[lang][task_id]['prompt'] = prompt
         nominals[lang][task_id]['canonical_solution'] = canonical_solution
 
-# save_prompts("../datasets/nominal/HumanEval_java.jsonl", nominals["java"])
-# save_prompts("../datasets/nominal/HumanEval_cpp.jsonl", nominals["cpp"])
-# save_prompts("../datasets/nominal/HumanEval_js.jsonl", nominals["js"])
+save_prompts("../datasets/nominal/HumanEval_java.jsonl", nominals["java"])
+save_prompts("../datasets/nominal/HumanEval_cpp.jsonl", nominals["cpp"])
+save_prompts("../datasets/nominal/HumanEval_js.jsonl", nominals["js"])
 
-
+save_prompts("../datasets/nominal/humanevaljava_nominal_f_s0.jsonl", nominals["java"])
+save_prompts("../datasets/nominal/humanevalcpp_nominal_f_s0.jsonl", nominals["cpp"])
+save_prompts("../datasets/nominal/humanevaljs_nominal_f_s0.jsonl", nominals["js"])

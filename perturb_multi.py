@@ -325,10 +325,10 @@ def perturb_partial(args, data, recipes):
             if args.data in ["humaneval", "mbpp", "humanevalpy"]:
                 new_code = beautify_python_code(new_code.split()).replace("\\", "")
             if args.data in ["mbjp", "humanevaljava", "mbcp", "humanevalcpp", "mbjsp", "humanevaljs", "humanevalgo", "mbgo"]:
-                print("####",end="")
-
-                print("####",end="")
                 new_code = beautify_cpp_java_js_code(new_code.split(), indent_type).replace("\\", "")
+                if "cpp" in args.data:
+                    new_code = new_code.replace("usingnamespace", "using namespace")
+                    new_code = new_code.replace("using std;", "using namespace std;")
             # import pdb; pdb.set_trace()
             # make doc indent to be \t to match natgen format
             if data in ["humaneval", "mbpp", "humanevalpy"]:

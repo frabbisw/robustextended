@@ -3,31 +3,39 @@ import java.lang.*;
 
 class Solution {
     /**
-    Write a function countNums which takes an array of integers and returns
-    the number of elements which has a sum of digits > 0.
-    If a number is negative, then its first signed digit will be negative:
-    e.g. -123 has signed digits -1, 2, and 3.
-    >>> countNums(Arrays.asList()) == 0
-    >>> countNums(Arrays.asList(-1, 11, -11)) == 1
-    >>> countNums(Arrays.asList(1, 1, 2)) == 3
+    Create a function that takes a value (string) representing a number
+    and returns the closest integer to it. If the number is equidistant
+    from two integers, round it away from zero.
+
+    Examples
+    >>> closest_integer("10")
+    10
+    >>> closest_integer("15.3")
+    15
+
+    Note:
+    Rounding away from zero means that if the given number is equidistant
+    from two integers, the one you should return is the one that is the
+    farthest from zero. For example closest_integer("14.5") should
+    return 15 and closest_integer("-14.5") should return -15.
      */
-    public int countNums(List<Integer> arr) {
-        int count = 0;
-        for (int n: arr) {
-            int neg = 1;
-            if (n < 0) {
-                n = -n;
-                neg = -1;
-            }
-            List<Integer> digits = new ArrayList<>();
-            for (char digit : String.valueOf(n).toCharArray()) {
-                digits.add(digit - '0');
-            }
-            digits.set(0, digits.get(0) * neg);
-            if (digits.stream().reduce(0, Integer::sum) > 0) {
-                count += 1;
+    public int countUpper(String value) {
+        if (value.contains(".")) {
+            while (value.charAt(value.length() - 1) == '0') {
+                value = value.substring(0, value.length() - 1);
             }
         }
-        return count;
+        double num = Double.parseDouble(value);
+        int res = 0;
+        if (value.substring(Math.max(value.length() - 2, 0)).equals(".5")) {
+            if (num > 0) {
+                res = (int) Math.ceil(num);
+            } else {
+                res = (int) Math.floor(num);
+            }
+        } else if(value.length() > 0) {
+            res = (int) Math.round(num);
+        }
+        return res;
     }
 }

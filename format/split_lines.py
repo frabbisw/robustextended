@@ -134,7 +134,7 @@ def longest_splits(code, entry_point, language):
                     new_line = new_line[:string_start] + "@!string!@" + new_line[string_end + 1:]
                     string_start = new_line.find("\"")
 
-            if language in ["python"]:
+            if language in ["python", "py", "humanevalpy"]:
                 words = new_line.split(" ")
                 if len(words) >= 2:
                     # split_pos = random.randint(1, len(words) - 1) # random position split
@@ -227,8 +227,9 @@ def random_splits(code, entry_point, language="python", ratio=0.5):
             line = line[:len(line) - ch_idx + 1]
 
             words = line.split(" ")
+
             if len(words) >= 2:
-                words.insert(random.randint(1, len(words) - 1), " \ \n ")
+                words.insert(random.randint(1, len(words) - 1), " \ \n " if language in ["python", "py", "humanevalpy"] else "\n")
                 new_line = indent + " ".join(words) + post
                 added_splits += 1
         new_lines.append(new_line)
