@@ -7,7 +7,7 @@ for model_name in model_names:
         task_name = f"{lang}_{model_name}_new"
         dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
         generated_dir = f"datasets/{model_name}/generated_pass5_1"
-        with open("run_code/bash_template.sh", "r") as f:
+        with open("run_code/slurm_template.sh", "r") as f:
             template = f.read()
 
         task_command = ""

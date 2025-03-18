@@ -1,19 +1,15 @@
-#!/bin/bash -l
-#$ -N js_incoder1b_new
-#$ -cwd
-#$ -l m_mem_free=50G
-#$ -l g=1
-#$ -j y
-# set modules
-module load anaconda/3.2019.10/default
-module load cuda/11.4/default
-module load python/3.7.3/default
-# activate conda env
-cd /home/f_rabbi/recode/recode_multi/run_code
-source activate ReCode
-export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/ReCode/lib/python3.8/site-packages/nvidia/cublas/lib/:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/home/f_rabbi/.conda/envs/conda_env/lib:$LD_LIBRARY_PATH
-# run job
+#!/bin/bash
+#SBATCH -J js_incoder1b_new # job name
+#SBATCH --account=f_rabbi # indicates username (mandatory parameter)
+#SBATCH --mem=10G # memory reserved (mandatory parameter)
+#SBATCH -o _%x%J.out # output (& error) file name
+source /etc/profile.d/modules.sh # adding module binaries
+module load cuda/12.0.0
+module load python/3.9.6
+module load anaconda/3.2023.03
+conda init
+source /home/f_rabbi/.bashrc
+conda activate ReCode
 python generate_single_code_single_gpu.py ../datasets/nominal/humanevaljs_nominal_f_s0.jsonl ../datasets/incoder1b/generated_pass5_1/js/nominal/ incoder1b
 python generate_single_code_single_gpu.py ../datasets/nominal/humanevaljs_partial_f_s0.jsonl ../datasets/incoder1b/generated_pass5_1/js/partial/ incoder1b
 
@@ -98,7 +94,6 @@ python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full
 python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_TenseTransformationFuture_s0.jsonl ../datasets/incoder1b/generated_pass5_1/js/nlaugmenter/TenseTransformationFuture incoder1b
 python generate_single_code_single_gpu.py ../datasets/perturbed/humanevaljs/full/nlaugmenter/humanevaljs_SwapCharactersPerturbation_s1.jsonl ../datasets/incoder1b/generated_pass5_1/js/nlaugmenter/SwapCharactersPerturbation incoder1b
 
-# clean loaded modules
-module unload anaconda/3.2019.10/default
-module unload cuda/11.4/default
-module unload python/3.7.3/default
+module unload cuda/12.0.0
+module unload python/3.9.6
+module unload anaconda/3.2023.03
