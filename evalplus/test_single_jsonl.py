@@ -306,7 +306,7 @@ lang = sys.argv[2]
 out_path = sys.argv[3]
 testing_folder = f"testing_dir{sys.argv[4]}"
 
-generated_data = test_file(generated_path, lang)
+generated_data = test_file(target_path, lang)
 
 with open(out_path, "w") as f:
     json.dump(generated_data, f, indent=2)
