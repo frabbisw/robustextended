@@ -42,7 +42,9 @@ ext = sys.argv[1][5:].split(".")[0]
 ext = ext[-5:].split("_")[-1]
 #
 outpath = os.path.join(save_dir, f"f_{ext}.jsonl")
-
+if os.path.exists(outpath):
+    print(f"skipping... file exists in {outpath}")
+    exit(1)
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
