@@ -21,11 +21,12 @@ from transformers import GPTJForCausalLM
 import torch
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B"}
+#models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B", "magicoder7b": "ise-uiuc/Magicoder-S-DS-6.7B"}
+models_dict = {"magicoder7b": "/home/f_rabbi/code_trans/models/Magicoder-S-DS-6.7B"}
 
 checkpoint = models_dict[sys.argv[3]]
 
-code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
+code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, torch_dtype=torch.bfloat16).to(device)
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
 
