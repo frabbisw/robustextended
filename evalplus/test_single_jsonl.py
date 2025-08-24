@@ -295,7 +295,7 @@ def test_file(generated_path, lang):
 def get_nominal_prompts(lang):
     return load_prompts(f"/home/f_rabbi/recode/robustextended/datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl")
 
-evalplus_dir = " /home/f_rabbi/recode/evalplus_all"
+evalplus_dir = "/home/f_rabbi/recode/evalplus_all"
 
 if len(sys.argv) < 5:
     print("Usage: python test_single_jsonl <target_path> <language> <out_path> <testing_folder_number>")
