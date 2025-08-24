@@ -12,7 +12,7 @@ else:
 model_names = ["magicoder7b"]
 for model_name in model_names:
     for lang in langs:
-        task_name = f"{lang}_{model_name}_{target_method}"
+        task_name = f"{lang}_{model_name}_{'_'.join(target_methods)}"
         dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
         generated_dir = f"datasets/{model_name}/generated_pass5_1"
         with open("run_code/sbatch_template.sh", "r") as f:
