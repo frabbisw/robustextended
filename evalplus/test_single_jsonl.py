@@ -289,6 +289,7 @@ def test_file(generated_path, lang):
         #     passed_status, run_status = test_java(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         generated_data[i]["passed_evalplus"] = passed_status
+        generated_data[i]["gc"] = gc
         generated_data[i]["run_status_evalplus"] = run_status
     return generated_data
 
