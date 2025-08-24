@@ -260,7 +260,7 @@ def test_file(generated_path, lang):
     nominal_data.sort(key=lambda x: x["task_id"])
 
     result = {}
-    for i in range(164):
+    for i in tq(range(164)):
         # <｜begin▁of▁sentence｜>
         gc = filter_gc(generated_data[i]["gc"])
         if lang == "js":
