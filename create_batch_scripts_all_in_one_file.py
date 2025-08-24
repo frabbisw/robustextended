@@ -9,7 +9,7 @@ if len(sys.argv) < 2:
 TL = sys.argv[1]
 
 if len(sys.argv) == 3:
-    assert sys.argv[1] in ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
+    assert sys.argv[2] in ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
     target_methods = [sys.argv[2]]
 else:
     target_methods = ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
