@@ -24,8 +24,9 @@ for model_name in model_names:
             template = f.read()
 
         task_command = ""
-        task_command = task_command + f"python generate_single_code_single_gpu.py ../datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl ../datasets/{model_name}/generated_pass5_1/{lang}/nominal/ {model_name}\n"
-        task_command = task_command + f"python generate_single_code_single_gpu.py ../datasets/nominal/humaneval{lang}_partial_f_s0.jsonl ../datasets/{model_name}/generated_pass5_1/{lang}/partial/ {model_name}\n\n"
+        if target_methods[0] == "format":
+            task_command = task_command + f"python generate_single_code_single_gpu.py ../datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl ../datasets/{model_name}/generated_pass5_1/{lang}/nominal/ {model_name}\n"
+            task_command = task_command + f"python generate_single_code_single_gpu.py ../datasets/nominal/humaneval{lang}_partial_f_s0.jsonl ../datasets/{model_name}/generated_pass5_1/{lang}/partial/ {model_name}\n\n"
 
         for method_name in os.listdir(dataset_dir):
             if method_name not in target_methods:
