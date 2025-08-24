@@ -293,7 +293,7 @@ def test_file(generated_path, lang):
     return generated_data
 
 def get_nominal_prompts(lang):
-    return load_prompts(f"home/f_rabbi/recode/robustextended/datasets/nominal/ humaneval{lang}_nominal_f_s0.jsonl")
+    return load_prompts(f"home/f_rabbi/recode/robustextended/datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl")
 
 evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
 
