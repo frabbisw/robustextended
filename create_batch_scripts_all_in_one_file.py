@@ -1,10 +1,18 @@
 import os
+import sys
 langs = ["java","cpp","js"]
 #model_names = ["codegen2bmulti", "codegen6bmulti", "incoder1b", "incoder6b"]
+
+if len(sys.argv) == 2:
+    assert sys.argv[1] in ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
+    target_methods = [sys.argv[1]]
+else:
+    target_methods = ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
+    
 model_names = ["magicoder7b"]
 for model_name in model_names:
     for lang in langs:
-        task_name = f"{lang}_{model_name}_new"
+        task_name = f"{lang}_{model_name}_{target_method}"
         dataset_dir = f"datasets/perturbed/humaneval{lang}/full"
         generated_dir = f"datasets/{model_name}/generated_pass5_1"
         with open("run_code/sbatch_template.sh", "r") as f:
@@ -15,7 +23,7 @@ for model_name in model_names:
         task_command = task_command + f"python generate_single_code_single_gpu.py ../datasets/nominal/humaneval{lang}_partial_f_s0.jsonl ../datasets/{model_name}/generated_pass5_1/{lang}/partial/ {model_name}\n\n"
 
         for method_name in os.listdir(dataset_dir):
-            if method_name in ["natgen","format"]:
+            if method_name not in target_methods:
                 continue
             method_dir = os.path.join(dataset_dir, method_name)
             for file_name in os.listdir(method_dir):
