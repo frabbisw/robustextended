@@ -310,3 +310,4 @@ generated_data = test_file(target_path, lang)
 
 with open(out_path, "w") as f:
     json.dump(generated_data, f, indent=2)
+    print(f"saved result to {out_path}")
