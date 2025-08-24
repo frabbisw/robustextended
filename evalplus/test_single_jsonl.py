@@ -307,7 +307,9 @@ out_path = sys.argv[3]
 testing_folder = f"testing_dir{sys.argv[4]}"
 
 generated_data = test_file(target_path, lang)
+save_prompts(out_path, generated_data)
+print(f"saved result to {out_path}")
 
-with open(out_path, "w") as f:
-    json.dump(generated_data, f, indent=2)
-    print(f"saved result to {out_path}")
+# with open(out_path, "w") as f:
+#     json.dump(generated_data, f, indent=2)
+#     print(f"saved result to {out_path}")
