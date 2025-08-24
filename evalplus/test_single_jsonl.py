@@ -299,6 +299,7 @@ evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
 
 if len(sys.argv) < 5:
     print("Usage: python test_single_jsonl <target_path> <language> <out_path> <testing_folder_number>")
+    exit(1)
 
 target_path = sys.argv[1]
 lang = sys.argv[2]
