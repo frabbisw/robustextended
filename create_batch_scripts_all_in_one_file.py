@@ -3,9 +3,14 @@ import sys
 langs = ["java","cpp","js"]
 #model_names = ["codegen2bmulti", "codegen6bmulti", "incoder1b", "incoder6b"]
 
-if len(sys.argv) == 2:
+if len(sys.argv) < 2:
+    exit(1)
+
+TL = sys.argv[1]
+
+if len(sys.argv) == 3:
     assert sys.argv[1] in ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
-    target_methods = [sys.argv[1]]
+    target_methods = [sys.argv[2]]
 else:
     target_methods = ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
     
@@ -38,6 +43,7 @@ for model_name in model_names:
 
         sh_file_contents = template.replace("{command}", task_command)
         sh_file_contents = sh_file_contents.replace("{task_name}", task_name)
+        sh_file_contents = sh_file_contents.replace("<TIME>", TL)
         with open(f"batch_files/{task_name}.sh", "w") as f:
             print(f"qsub {task_name}.sh")
             f.write(sh_file_contents)
