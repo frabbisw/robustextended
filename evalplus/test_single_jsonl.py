@@ -296,6 +296,10 @@ def test_file(generated_path, lang):
 def get_nominal_prompts(lang):
     return load_prompts(f"/home/f_rabbi/recode/robustextended/datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl")
 
+def show_results(out_path):
+    codes = load_prompts(out_path)
+    print(f"Correct: {sum([code['passed_evalplus'] == 0 for code in codes]}/{len(codes)}")        
+
 evalplus_dir = "/home/f_rabbi/recode/evalplus_all"
 
 if len(sys.argv) < 5:
@@ -307,9 +311,15 @@ lang = sys.argv[2]
 out_path = sys.argv[3]
 testing_folder = f"testing_dir{sys.argv[4]}"
 
+if os.path.exists(out_path):
+    show_results(out_path)
+    exit(1)
+
 generated_data = test_file(target_path, lang)
 save_prompts(out_path, generated_data)
 print(f"saved result to {out_path}")
+
+show_results(out_path)
 
 # with open(out_path, "w") as f:
 #     json.dump(generated_data, f, indent=2)
