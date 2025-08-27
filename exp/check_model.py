@@ -46,6 +46,26 @@ int lcs(const string &a, const string &b) {
 def lcs(a, b):
 '''
 
-cpp_code = prompt_to_code(prompt)
+# cpp_code = prompt_to_code(prompt)
+
+buggy_prompt = '''
+// buggy code
+/**
+ * @brief Computes the average of an array of integers.
+ * 
+ * This function should take an array of integers and its size,
+ * and return their arithmetic mean as a double.
+ */
+double average(const int arr[], int size) {
+    // BUG: forgot to divide by size, returns sum instead
+    double sum = 0.0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum; // Wrong: should return sum / size
+}
+// fixed code
+double average(const int arr[], int size) {
+'''
 
 print(cpp_code)
