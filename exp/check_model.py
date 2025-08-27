@@ -68,4 +68,4 @@ double average(const int arr[], int size) {
 double average(const int arr[], int size) {
 '''
 
-print(cpp_code)
+print(prompt_to_code(buggy_prompt))
