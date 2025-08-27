@@ -20,10 +20,21 @@ def prompt_to_code(prompt):
     return code
 
 prompt = '''
-translate this following Python code to C++
+# C++
+#include <iostream>
+using namespace std;
 
-def sum_two(num1, num2):
-  return num1+num2
+// Function to calculate factorial of a number
+int factorial(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+#Python
+def factorial(n):
 '''
 
 cpp_code = prompt_to_code(prompt)
