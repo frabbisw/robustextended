@@ -22,19 +22,28 @@ def prompt_to_code(prompt):
 prompt = '''
 # C++
 #include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
-// Function to calculate factorial of a number
-int factorial(int n) {
-    int result = 1;
-    for (int i = 1; i <= n; i++) {
-        result *= i;
+int lcs(const string &a, const string &b) {
+    int n = a.size(), m = b.size();
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = m - 1; j >= 0; j--) {
+            if (a[i] == b[j]) {
+                dp[i][j] = 1 + dp[i + 1][j + 1];
+            } else {
+                dp[i][j] = max(dp[i + 1][j], dp[i][j + 1]);
+            }
+        }
     }
-    return result;
+    return dp[0][0];
 }
 
 #Python
-def factorial(n):
+def lcs(a, b):
 '''
 
 cpp_code = prompt_to_code(prompt)
