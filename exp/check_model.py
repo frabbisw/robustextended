@@ -58,7 +58,7 @@ perturbed_prompt = '''
  */
 double average(const int arr[], int size) {
 
-// perturb the prompt with typos without adding any new codes
+// perturb the docstring with typos to mislead developers
 // perturbed prompt
 '''
 
