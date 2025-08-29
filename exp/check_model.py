@@ -51,10 +51,10 @@ def lcs(a, b):
 perturbed_prompt = '''
 // original prompt
 /**
- * @brief Comtutes the average of an arsay of integers.
+ * @brief Computes the average of an array of integers.
  * 
  * This function should take an array of integers and its size,
- * and return their agithmetic mean as a double.
+ * and return their arithmetic mean as a double.
  */
 double average(const int arr[], int size) {
 
