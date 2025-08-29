@@ -49,24 +49,17 @@ def lcs(a, b):
 # cpp_code = prompt_to_code(prompt)
 
 perturbed_prompt = '''
-#include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
+// original prompt
+/**
+ * @brief Comtutes the average of an arsay of integers.
+ * 
+ * This function should take an array of integers and its size,
+ * and return their agithmetic mean as a double.
+ */
+double average(const int arr[], int size) {
 
-int lcs(const string &a, const string &b) {
-
-    
-    int n = a.size(), m = b.size(); vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0)); for (int i = n - 1; i >= 0; i--) {
-
-// beautify the code with appropriate newlines, tabs, and spaces. Do not add any new code
-#include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
-
-int lcs(const string &a, const string &b) {
-
+// perturb the prompt with typos without adding any new codes
+// perturbed prompt
 '''
 
 print(prompt_to_code(perturbed_prompt))
