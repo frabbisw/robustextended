@@ -59,7 +59,14 @@ int lcs(const string &a, const string &b) {
     
     int n = a.size(), m = b.size(); vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0)); for (int i = n - 1; i >= 0; i--) {
 
-// reformat the indent and beautify the prompt without modifying any code
+// reformat the indent and beautify the prompt with appropriate tabs and spaces
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int lcs(const string &a, const string &b) {
+
 '''
 
 print(prompt_to_code(perturbed_prompt))
