@@ -49,7 +49,7 @@ def lcs(a, b):
 # cpp_code = prompt_to_code(prompt)
 
 perturbed_prompt = '''
-// inconsistent prompt
+// prompt
 /**
  * @brief Comtutes the average of an arsay of integers.
  * 
@@ -58,7 +58,9 @@ perturbed_prompt = '''
  */
 double average(const int arr[], int size) {
 
-// make the prompt consistent, useful and easy to generate using LLM
+// fix the typos in docstring
+/**
+* 
 '''
 
 print(prompt_to_code(perturbed_prompt))
