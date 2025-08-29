@@ -8,7 +8,7 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 models_dict = {"codegen6bmulti": "/home/f_rabbi/models/codegen-6B-multi", "magicoder7b": "/home/f_rabbi/code_trans/models/Magicoder-S-DS-6.7B"}
 
 # checkpoint = models_dict[sys.argv[1]]
-checkpoint = models_dict["codegen6bmulti"]
+checkpoint = models_dict["magicoder7b"]
 
 code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, torch_dtype=torch.bfloat16).to(device)
 code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
