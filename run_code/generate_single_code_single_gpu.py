@@ -3,6 +3,10 @@ import os
 import jsonlines
 from tqdm import tqdm as tq
 import sys
+#for the code generation model
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import GPTJForCausalLM
+import torch
 
 def load_prompts(filename):
     prompts = []
@@ -15,27 +19,6 @@ def save_prompts(filename, prompts):
         for line in prompts:
             jsonlines.Writer.write(writer, line)
 
-#for the code generation model
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import GPTJForCausalLM
-import torch
-
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
-#models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B", "magicoder7b": "ise-uiuc/Magicoder-S-DS-6.7B"}
-models_dict = {"magicoder7b": "/home/f_rabbi/code_trans/models/Magicoder-S-DS-6.7B"}
-
-checkpoint = models_dict[sys.argv[3]]
-
-code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, torch_dtype=torch.bfloat16).to(device)
-code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-# device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
-
-def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1536,temperature=0.2,top_p=0.95,do_sample = True)
-    code = code_generaton_tokenizer.decode(completion[0])
-    return code
-
-prompts = load_prompts(sys.argv[1])
 save_dir = sys.argv[2]
 ext = sys.argv[1][5:].split(".")[0]
 
@@ -48,6 +31,23 @@ if os.path.exists(outpath):
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
+
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+#models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B", "magicoder7b": "ise-uiuc/Magicoder-S-DS-6.7B"}
+models_dict = {"magicoder7b": "/home/f_rabbi/code_trans/models/Magicoder-S-DS-6.7B"}
+
+checkpoint = models_dict[sys.argv[3]]
+
+code_generaton_model = AutoModelForCausalLM.from_pretrained(checkpoint, torch_dtype=torch.bfloat16).to(device)
+code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+# device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
+
+def prompt_to_code(prompt):
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1024,temperature=0.2,top_p=0.95,do_sample = True)
+    code = code_generaton_tokenizer.decode(completion[0])
+    return code
+
+prompts = load_prompts(sys.argv[1])
 
 for i in tq(range(len(prompts))):
     p = prompts[i]
