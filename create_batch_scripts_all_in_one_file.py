@@ -1,7 +1,7 @@
 import os
 import sys
 langs = ["java","cpp","js"]
-#model_names = ["codegen2bmulti", "codegen6bmulti", "incoder1b", "incoder6b"]
+#model_names = ["codegen2bmulti", "codegen6bmulti", "incoder1b", "incoder6b", "qwencoder"]
 
 if len(sys.argv) < 2:
     exit(1)
@@ -14,7 +14,7 @@ if len(sys.argv) == 3:
 else:
     target_methods = ["nlaugmenter", "func_name", "natgen", "format", "syntax"]
     
-model_names = ["magicoder7b"]
+model_names = ["qwencoder"]
 for model_name in model_names:
     for lang in langs:
         task_name = f"{lang}_{model_name}_{'_'.join(target_methods)}"
