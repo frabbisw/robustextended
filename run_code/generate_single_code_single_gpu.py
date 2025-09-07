@@ -34,7 +34,7 @@ if not os.path.exists(save_dir):
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 #models_dict = {"codegen6bmulti": "Salesforce/codegen-6B-multi", "codegen2bmulti": "Salesforce/codegen-2B-multi", "incoder1b": "facebook/incoder-1B", "incoder6b": "facebook/incoder-6B", "magicoder7b": "ise-uiuc/Magicoder-S-DS-6.7B"}
-models_dict = {"magicoder7b": "/home/f_rabbi/code_trans/models/Magicoder-S-DS-6.7B"}
+models_dict = {"magicoder7b": "/home/f_rabbi/models/Magicoder-S-DS-6.7B", "qwencoder": "/home/f_rabbi/models/Qwen2.5-Coder-7B-Instruct", "codegen6bmulti": "/home/f_rabbi/models/codegen-6B-multi"}
 
 checkpoint = models_dict[sys.argv[3]]
 
