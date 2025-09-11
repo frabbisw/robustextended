@@ -1,6 +1,7 @@
 import sys
 import jsonlines
 import os
+import json
 
 if len(sys.argv) < 2:
   model = "magicoder7b"
