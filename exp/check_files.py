@@ -1,5 +1,5 @@
 import sys
-import jsonl
+import jsonlines
 import os
 
 if len(sys.argv) < 2:
