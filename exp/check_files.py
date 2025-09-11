@@ -10,6 +10,15 @@ else:
 result_root = "/home/f_rabbi/recode/robustextended/datasets"
 BASE_DIR = os.path.join(result_root, model, "generated_pass5_1")
 
+def check_file_completeness(filepath):
+  cnt = 0
+  with open(filepath, "r") as f:
+    for line in f.readlines():
+      data = json.loads(line)
+      if "gc" in data.keys():
+        cnt += 1
+  return cnt
+
 def main():
     languages = ["cpp", "js", "java"]
     single_file_cats = ["nominal", "partial"]
@@ -43,6 +52,7 @@ def main():
                     if file.startswith("f_s") and file.endswith(".jsonl"):
                         abs_path = os.path.abspath(os.path.join(perturb_dir, file))
                         print(abs_path)
+                        print(check_file_completeness(abs_path))
 
 if __name__ == "__main__":
     main()
