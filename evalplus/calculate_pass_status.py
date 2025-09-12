@@ -306,7 +306,7 @@ def test_lang(lang, datasets_path):
             aug_method_path = os.path.join(method_path,aug_method)
             test_aug_method(aug_method_path, lang)
 
-evalplus_dir = "/home/frabbi/Desktop/evalplus_all"
+evalplus_dir = "/home/f_rabbi/recode/evalplus_all"
 
 nominals = ["nominal", "partial"]
 methods = ["nlaugmenter", "natgen", "format", "func_name"]
