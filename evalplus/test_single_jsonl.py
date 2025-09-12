@@ -244,7 +244,7 @@ def test_js(gc, main, entry_point):
         return 0, CODE_RUN_STATUS["TIMEOUT"]
 
 def filter_gc(gc):
-    stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"]]
+    stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
     for st, et in stop_tokens:
         if st in gc:
             gc = gc[gc.find(st)+len(st):]
