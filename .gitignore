@@ -7,13 +7,16 @@ __pycache__/
 .idea/
 evaluate-public-models/human-eval/
 datasets/
-batch_files/
+batch_files
 dataset-release/
 tmp/
 testing_dir5
 testing_dir2
 testing_dir3
 testing_dir1
+testing_dir6
+testing_dir7
+testing_dir8
 natgen/transformations/my-languages_dot.so
 natgen/treesitter/build/
 natgen/treesitter/tree-sitter-python/
