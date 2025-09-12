@@ -242,6 +242,16 @@ def test_js(gc, main, entry_point):
         return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
         return 0, CODE_RUN_STATUS["TIMEOUT"]
+
+def filter_gc(gc):
+    stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
+    for st, et in stop_tokens:
+        if st in gc:
+            gc = gc[gc.find(st)+len(st):]
+        if et in gc:
+            gc = gc[:gc.find(et)]
+    return gc.strip()
+
 def test_file(generated_path, lang):
     generated_data = load_prompts(generated_path)
     nominal_data =  get_nominal_prompts(lang)
@@ -250,11 +260,13 @@ def test_file(generated_path, lang):
     nominal_data.sort(key=lambda x: x["task_id"])
 
     result = {}
-    for i in range(164):
+    for i in tq(range(164)):
+        # <｜begin▁of▁sentence｜>
+        gc = filter_gc(generated_data[i]["gc"])
         if lang == "js":
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
-            passed_status, run_status = test_js(generated_data[i]["gc"], main_method, generated_data[i]["entry_point"])
+            passed_status, run_status = test_js(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "cpp":
             if generated_data[i]["task_id"] == "CPP/32":
                 generated_data[i]["entry_point"] = "find_zero"
@@ -262,14 +274,14 @@ def test_file(generated_path, lang):
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
-            passed_status, run_status = test_cpp(generated_data[i]["gc"], main_method, generated_data[i]["entry_point"])
+            passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "java":
             # if generated_data[i]["task_id"] in ["Java/32", "Java/87", "Java/55", "Java/63"]:
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
             solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
-            passed_status, run_status = test_java(generated_data[i]["gc"], solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         #     passed_status, run_status = test_cpp(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
         # elif lang == "java":
@@ -277,8 +289,10 @@ def test_file(generated_path, lang):
         #     passed_status, run_status = test_java(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         generated_data[i]["passed_evalplus"] = passed_status
+        generated_data[i]["gc"] = gc
         generated_data[i]["run_status_evalplus"] = run_status
     return generated_data
+
 def test_aug_method(directory, lang):
     print(directory)
     file_paths = [f for f in listdir(directory) if isfile(join(directory, f))]
