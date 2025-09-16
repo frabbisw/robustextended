@@ -22,6 +22,6 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-cd ../run_code
+cd ../evalplus
 
 {command}
