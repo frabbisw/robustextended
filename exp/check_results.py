@@ -70,7 +70,7 @@ def get_worst_passatk_dict(directory, K):
 
     for i in range(K):
         for prompt in perturbed_list[i]:
-            passatk_worst[prompt["task_id"]] = passatk_worst[prompt["task_id"]] and prompt["passed"]
+            passatk_worst[prompt["task_id"]] = passatk_worst[prompt["task_id"]] and prompt["passed_evalplus"]
 
     return passatk_worst
 def get_custom_passatk_dict(directory, K, T):
@@ -85,7 +85,7 @@ def get_custom_passatk_dict(directory, K, T):
 
     for i in range(K):
         for prompt in perturbed_list[i]:
-            passatk_custom[prompt["task_id"]] = passatk_custom[prompt["task_id"]] + prompt["passed"]
+            passatk_custom[prompt["task_id"]] = passatk_custom[prompt["task_id"]] + prompt["passed_evalplus"]
             # print(passatk_custom[prompt["task_id"]] + prompt["passed"])
 
     for prompt in perturbed_list[i]:
