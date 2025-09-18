@@ -20,6 +20,10 @@ def check_file_completeness(filepath):
         cnt_gc += 1
       if "passed_evalplus" in data.keys():
         cnt_ep += 1
+      else:
+        print(filepath)
+        print(line)
+        exit(1)
   return cnt_gc, cnt_ep
 
 def main():
