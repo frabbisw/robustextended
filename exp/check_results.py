@@ -56,6 +56,10 @@ def get_nominal_passatk_dict(lang, type, model_name):
     prompts = get_nominal_prompts(lang, type, model_name)
     passatk = {}
     for prompt in prompts:
+        if "passed_evalplus" not in prompt.keys():
+            print(lang, type, model_name)
+            print(prompt)
+            exit(1)
         passatk[prompt["task_id"]] = prompt["passed_evalplus"]
     return passatk
 def get_worst_passatk_dict(directory, K):
