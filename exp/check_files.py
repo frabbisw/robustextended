@@ -8,7 +8,7 @@ if len(sys.argv) < 2:
 else:
   model = sys.argv[1]
 
-result_root = "/home/f_rabbi/recode/robustextended/datasets"
+result_root = "/home/f_rabbi/recode/extended_all_results/datasets"
 BASE_DIR = os.path.join(result_root, model, "generated_pass5_1")
 
 def check_file_completeness(filepath):
