@@ -502,21 +502,21 @@ def prepare_fishers_table(model_dict):
 
     return pvalues
 
-java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
-cpp_sum_6b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen6bmulti")
-js_sum_6b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen6bmulti")
+# java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
+# cpp_sum_6b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen6bmulti")
+# js_sum_6b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen6bmulti")
 
-java_sum_2b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen2bmulti")
-cpp_sum_2b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen2bmulti")
-js_sum_2b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen2bmulti")
+# java_sum_2b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen2bmulti")
+# cpp_sum_2b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen2bmulti")
+# js_sum_2b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen2bmulti")
 
-java_sum_1b, fake_dict = calculate_metrics_summary(K, T, "java", "incoder1b")
-cpp_sum_1b, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder1b")
-js_sum_1b, fake_dict = calculate_metrics_summary(K, T, "js", "incoder1b")
+# java_sum_1b, fake_dict = calculate_metrics_summary(K, T, "java", "incoder1b")
+# cpp_sum_1b, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder1b")
+# js_sum_1b, fake_dict = calculate_metrics_summary(K, T, "js", "incoder1b")
 
-java_sum_in, fake_dict = calculate_metrics_summary(K, T, "java", "incoder6b")
-cpp_sum_in, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder6b")
-js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
+# java_sum_in, fake_dict = calculate_metrics_summary(K, T, "java", "incoder6b")
+# cpp_sum_in, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder6b")
+# js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
 
 java_sum_qn, fake_dict = calculate_metrics_summary(K, T, "java", "qwencoder")
 cpp_sum_qn, fake_dict = calculate_metrics_summary(K, T, "cpp", "qwencoder")
@@ -527,16 +527,16 @@ cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
 js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
 
 
-codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
-incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
-incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
-codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
+# codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
+# incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
+# incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
+# codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
 qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
 magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
 # model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
 # model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table_summary(model_dict)
 
 # prepare_fishers_table(model_dict)
