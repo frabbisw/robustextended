@@ -12,13 +12,15 @@ result_root = "/home/f_rabbi/recode/robustextended/datasets"
 BASE_DIR = os.path.join(result_root, model, "generated_pass5_1")
 
 def check_file_completeness(filepath):
-  cnt = 0
+  cnt_gc, cnt_ep = 0, 0
   with open(filepath, "r") as f:
     for line in f.readlines():
       data = json.loads(line)
       if "gc" in data.keys():
-        cnt += 1
-  return cnt
+        cnt_gc += 1
+      if "passed_evalplus" in data.keys():
+        cnt_ep += 1
+  return cnt_gc, cnt_ep
 
 def main():
     languages = ["cpp", "js", "java"]
