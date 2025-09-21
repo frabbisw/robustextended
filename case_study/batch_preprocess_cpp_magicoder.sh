@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J cpp_pre_doc
+#SBATCH -J cpp_mag_pre_doc
 #SBATCH -n4
 #SBATCH --mem=10GB
 #SBATCH --gpus=1
