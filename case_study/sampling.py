@@ -38,9 +38,9 @@ sampled_prompts = sample(all_prompts, 368)
 
 for sample in sampled_prompts:
     nl = parse_docstring(sample["prompt"], lang)
-    print(nl)
+    # print(nl)
     sample["nl"] = nl
-    print("="*50)
+    # print("="*50)
 
 os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
 save_prompts(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", sampled_prompts)
