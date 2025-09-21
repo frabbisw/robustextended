@@ -22,7 +22,7 @@ sampled_list = sample(all_lines, 368)
 os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
 
 with open(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", "w") as f:
-    f.write("\n".join(sampled_list))
+    f.write("".join(sampled_list))
     print("saved")
 
 # print(len(all_lines))
