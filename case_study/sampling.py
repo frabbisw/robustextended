@@ -7,8 +7,10 @@ model = sys.argv[1]
 lang = sys.argv[2]
 scope = sys.argv[3]
 
-all_lines = []
+def parse_docstring(prompt, lang):
+    pass
 
+all_lines = []
 perturb_dir = f"../datasets/{model}/generated_pass5_1/{lang}/{scope}"
 # datasets/magicoder7b/generated_pass5_1/cpp/format/tab_indent/f_s
 for method in os.listdir(perturb_dir):
@@ -19,8 +21,11 @@ for method in os.listdir(perturb_dir):
 
 sampled_list = sample(all_lines, 368)
 
-os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
+for sample in sampled_list:
+    print(sample["prompt"])
+    print("\n")
 
+os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
 with open(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", "w") as f:
     f.write("".join(sampled_list))
     print("saved")
