@@ -41,8 +41,8 @@ prompts = load_prompts(sys.argv[1])
 for i in tq(range(len(prompts))):
     p = prompts[i]
     p["processed_nl"] = preprocess_nl(p["nl"])
-    print(f"before====>\n{p['nl']}\nafter====>\n{p['processed_nl']}")
-    print("="*50)
+    # print(f"before====>\n{p['nl']}\nafter====>\n{p['processed_nl']}")
+    # print("="*50)
     prompts[i] = p
 
 save_prompts(sys.argv[1], prompts)
