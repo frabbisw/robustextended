@@ -32,7 +32,7 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 def preprocess_nl(nl):
     # prompt = f"Reply with a corrected version of the following code instruction with all grammatical and spelling errors fixed. If there are no errors, reply with a copy of the original text. \n\n Input Instruction: {nl} \n Corrected Instruction: "
     prompt = f"Reply with a corrected version of the following code instruction with all grammatical and spelling errors fixed, with a better, more readable, consistent, coherent, and best version to develop code. If there are no errors, reply with a copy of the original text. \n\n Input Instruction: {nl} \n Corrected Instruction: "
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1024,temperature=0.2,top_p=0.95,do_sample = True)
+    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=512,temperature=0.2,top_p=0.95,do_sample = True)
     processed_nl = code_generaton_tokenizer.decode(completion[0])
     return processed_nl
 
