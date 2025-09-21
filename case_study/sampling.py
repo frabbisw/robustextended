@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+from random import sample
 
 model = sys.argv[1]
 lang = sys.argv[2]
@@ -16,4 +17,10 @@ for method in os.listdir(perturb_dir):
             with open(os.path.join(perturb_dir, method, file_name), "r") as f:
                 all_lines += f.readlines()
 
-print(len(all_lines))
+sampled_list = sample(all_lines, 368)
+
+with open(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", "w") as f:
+    f.write("\n".join(sampled_list))
+    print("saved")
+
+# print(len(all_lines))
