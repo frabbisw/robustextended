@@ -2,32 +2,46 @@ import sys
 import os
 import json
 from random import sample
+import jsonlines
 
 model = sys.argv[1]
 lang = sys.argv[2]
 scope = sys.argv[3]
 
+def save_prompts(filename, prompts):
+    with jsonlines.open(filename, mode='w') as writer:
+        for line in prompts:
+            jsonlines.Writer.write(writer, line)
+
+def load_prompts(filename):
+    prompts = []
+    with open(filename, encoding="utf8") as f:
+        for line in f.readlines():
+            prompts.append(json.loads(line))
+    return prompts
+
 def parse_docstring(prompt, lang):
     pass
 
-all_lines = []
+all_prompts = []
 perturb_dir = f"../datasets/{model}/generated_pass5_1/{lang}/{scope}"
 # datasets/magicoder7b/generated_pass5_1/cpp/format/tab_indent/f_s
 for method in os.listdir(perturb_dir):
     for file_name in os.listdir(os.path.join(perturb_dir, method)):
         if file_name.startswith("f_") and file_name.endswith(".jsonl"):
-            with open(os.path.join(perturb_dir, method, file_name), "r") as f:
-                all_lines += f.readlines()
+            all_prompts += load_prompts(os.path.join(perturb_dir, method, file_name))
 
-sampled_list = sample(all_lines, 368)
+sampled_prompts = sample(all_prompts, 368)
 
-for sample in sampled_list:
+for sample in sampled_prompts:
     print(sample["prompt"])
     print("\n")
 
 os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
-with open(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", "w") as f:
-    f.write("".join(sampled_list))
-    print("saved")
+save_prompts(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", sampled_prompts)
+
+# with open(f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl", "w") as f:
+#     f.write("".join(sampled_list))
+#     print("saved")
 
 # print(len(all_lines))
