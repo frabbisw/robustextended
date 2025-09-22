@@ -19,7 +19,7 @@ model = sys.argv[1]
 lang = sys.argv[2]
 scope = sys.argv[3]
 
-filepath = f"../datasets/{model}/generated_pass5_1/{lang}/{scope}/sample_368.jsonl"
+filepath = f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl"
 
 prompts = load_prompts(filepath)
 
