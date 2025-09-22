@@ -32,7 +32,8 @@ def filter_gc(gc):
             gc = gc[:gc.find(et)]
     if "```" in gc:
         gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
-        # lns = gc.split("\n")
+        lns = gc.split("\n")
+        gc = "\n".join([ln if ln.strip().endswith(":") else "" for ln in lns])
         # gc = "\n".join([ln if "python solution" not in ln.lower() or "corrected version" not in ln.lower() else "" for ln in lns])
         # gc = gc.strip()
         return gc.strip()
