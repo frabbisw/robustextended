@@ -55,4 +55,4 @@ for i, prompt in enumerate(prompts):
     # print("="*50)
     # print("="*50)
     
-save_prompts(filepath)
+save_prompts(filepath, prompts)
