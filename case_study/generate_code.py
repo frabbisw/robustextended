@@ -40,5 +40,5 @@ for i in tq(range(len(prompts))):
     p = prompts[i]
     p["processed_gc"] = prompt_to_code(p["processed_prompt"])
     prompts[i] = p
-save_prompts(outpath, prompts)
-print("saved", outpath)
+save_prompts(sys.argv[1], prompts)
+print("saved", sys.argv[1])
