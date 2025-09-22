@@ -3,10 +3,6 @@ import os
 import jsonlines
 from tqdm import tqdm as tq
 import sys
-#for the code generation model
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import GPTJForCausalLM
-import torch
 
 def load_prompts(filename):
     prompts = []
