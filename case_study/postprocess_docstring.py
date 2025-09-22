@@ -36,7 +36,7 @@ def replace_docstring(new_nl, prompt, lang):
     if lang == "cpp":
         start_index = prompt["prompt"].find("/*")
         end_index = prompt["prompt"].find("*/")
-        return f"/*{new_nl}*/\n{prompt["prompt"][end_index+2:]}"
+        return f"/*{new_nl}*/\n{prompt['prompt'][end_index+2:]}"
       
 for i, prompt in enumerate(prompts):
     processed_nl = filter_gc(prompt["processed_nl"])
