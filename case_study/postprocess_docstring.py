@@ -33,10 +33,10 @@ def filter_gc(gc):
     gc = gc.strip()
     if "```" in gc:
         gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
-        lns = gc.split("\n")
-        gc = "\n".join([ln if "Here" not in ln and "Corrected" else "" for ln in lns ])
-        gc = gc.strip()
-        return gc
+        # lns = gc.split("\n")
+        # gc = "\n".join([ln if "Here" not in ln and "Corrected" else "" for ln in lns ])
+        # gc = gc.strip()
+        return gc.strip()
 
 def replace_docstring(new_nl, prompt, lang):
     if lang == "cpp":
