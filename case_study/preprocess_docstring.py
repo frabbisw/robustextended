@@ -49,4 +49,4 @@ for i in tq(range(len(prompts))):
     prompts[i] = p
 
 save_prompts(sys.argv[1], prompts)
-print("saved", outpath)
+print("saved", sys.argv[1])
