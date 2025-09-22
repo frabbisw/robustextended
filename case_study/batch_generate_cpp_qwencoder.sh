@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J cpp_qwn_pre_doc
+#SBATCH -J cpp_mag_gen
 #SBATCH -n4
 #SBATCH --mem=10GB
 #SBATCH --gpus=1
@@ -22,4 +22,4 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/qwencoder/cpp/nlaugmenter/sample_368.jsonl qwencoder
+python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
