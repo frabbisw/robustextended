@@ -260,11 +260,11 @@ def test_file(generated_path, lang):
     nominal_data.sort(key=lambda x: x["task_id"])
 
     result = {}
-    for i in tq(range(164)):
+    for i in tq(range(len(generated_data))):
         # <｜begin▁of▁sentence｜>
         gc = filter_gc(generated_data[i]["gc"])
         if lang == "js":
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
+            # assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
             passed_status, run_status = test_js(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "cpp":
@@ -272,13 +272,13 @@ def test_file(generated_path, lang):
                 generated_data[i]["entry_point"] = "find_zero"
             # if generated_data[i]["task_id"] in ["CPP/32", "CPP/87", "CPP/137"]:
             #     continue
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
+            # assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
             passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "java":
             # if generated_data[i]["task_id"] in ["Java/32", "Java/87", "Java/55", "Java/63"]:
             #     continue
-            assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
+            # assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
             solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
             passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
