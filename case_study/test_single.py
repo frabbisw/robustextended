@@ -262,7 +262,7 @@ def test_file(generated_path, lang):
     result = {}
     for i in tq(range(164)):
         # <｜begin▁of▁sentence｜>
-        gc = filter_gc(generated_data[i]["gc"])
+        gc = filter_gc(generated_data[i]["processed_gc"])
         if lang == "js":
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
@@ -282,11 +282,6 @@ def test_file(generated_path, lang):
             main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
             solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
             passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
-
-        #     passed_status, run_status = test_cpp(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
-        # elif lang == "java":
-        #     assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-        #     passed_status, run_status = test_java(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         generated_data[i]["passed_evalplus_processed"] = passed_status
         generated_data[i]["gc_processed"] = gc
