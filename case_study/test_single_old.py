@@ -299,7 +299,7 @@ def get_nominal_prompts(lang):
 def show_results(out_path):
     codes = load_prompts(out_path)
     print("result file already exist. loading ...")
-    print(f"Correct: {sum([code['passed_evalplus'] == 0 for code in codes])}/{len(codes)}")        
+    print(f"Correct: {sum([code['passed_evalplus'] == 1 for code in codes])}/{len(codes)}")        
 
 evalplus_dir = "/home/f_rabbi/recode/evalplus_all"
 
