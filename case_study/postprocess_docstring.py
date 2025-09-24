@@ -55,10 +55,12 @@ def replace_docstring(new_nl, prompt, lang):
         return f"/*{new_nl}*/\n{prompt['prompt'][end_index+2:]}"
       
 for i, prompt in enumerate(prompts):
+    print(prompt["processed_nl"])
+    print("-"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     processed_nl = processed_nl[processed_nl.find("Improved Instruction:")+len("Improved Instruction:"):]
     print(processed_nl)
-    print("-"*50)
+    print("=="*50)
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
     # print(prompts[i])
     # print("="*50)
