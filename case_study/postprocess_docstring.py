@@ -38,8 +38,8 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
-    # gc = remove_code_snippets(gc)
-    # if "```" in gc:
+    if "```" in gc:
+        gc = remove_code_snippets(gc)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
     #     gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
