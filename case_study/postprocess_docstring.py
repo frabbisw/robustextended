@@ -23,6 +23,14 @@ filepath = f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl"
 
 prompts = load_prompts(filepath)
 
+def remove_code_snippets(nl):
+    lines = nl.split("\n") + "\n"
+    lines = [for line.strip() in lines if line.strip() != ""] + "\n" 
+    lines = [lines[i] for i range(len(lines)-1) if "```" not in lines[i+1]]
+    nl = "\n".join(lines)
+    nl = nl[len(("```"))+nl.find("```"):nl.rfind("```")]
+    return nl
+
 def filter_gc(gc):
     stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
     for st, et in stop_tokens:
@@ -30,6 +38,7 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
+    gc = remove_code_snippets(gc)
     # if "```" in gc:
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
