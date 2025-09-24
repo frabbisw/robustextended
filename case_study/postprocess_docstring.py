@@ -26,6 +26,8 @@ prompts = load_prompts(filepath)
 def remove_code_snippets(nl):
     lines = nl.split("\n")
     lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
+    if "```" not in nl:
+        return "\n".join(lines)
     lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
     nl = "\n".join(lines)
     nl = nl[len(("```"))+nl.find("```"):nl.rfind("```")]
@@ -38,8 +40,7 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
-    if "```" in gc:
-        gc = remove_code_snippets(gc)
+    gc = remove_code_snippets(gc)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
     #     gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
