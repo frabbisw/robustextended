@@ -24,7 +24,7 @@ filepath = f"../datasets/samples/{model}/{lang}/{scope}/sample_368.jsonl"
 prompts = load_prompts(filepath)
 
 def remove_code_snippets(nl):
-    lines = nl.split("\n") + "\n"
+    lines = nl.split("\n")
     lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
     lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
     nl = "\n".join(lines)
