@@ -30,13 +30,13 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
-    if "```" in gc:
-        gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
-        lns = gc.split("\n")
-        gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
-        # gc = "\n".join([ln if "python solution" not in ln.lower() or "corrected version" not in ln.lower() else "" for ln in lns])
-        # gc = gc.strip()
-        return gc.strip()
+    # if "```" in gc:
+    #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
+    #     lns = gc.split("\n")
+    #     gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
+    #     # gc = "\n".join([ln if "python solution" not in ln.lower() or "corrected version" not in ln.lower() else "" for ln in lns])
+    #     # gc = gc.strip()
+    #     return gc.strip()
     return gc.strip()
 
 def replace_docstring(new_nl, prompt, lang):
@@ -47,7 +47,7 @@ def replace_docstring(new_nl, prompt, lang):
       
 for i, prompt in enumerate(prompts):
     processed_nl = filter_gc(prompt["processed_nl"])
-    processed_nl = processed_nl[processed_nl.find("Corrected Instruction: ")+len("Corrected Instruction: "):]
+    processed_nl = processed_nl[processed_nl.find("Improved Instruction:")+len("Improved Instruction:"):]
     print(processed_nl)
     print("-"*50)
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
