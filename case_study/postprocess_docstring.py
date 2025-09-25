@@ -40,7 +40,7 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
-    gc = gc[gc.find("Improved Instruction:")+len("Improved Instruction:"):]
+    gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
     gc = remove_code_snippets(gc)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
