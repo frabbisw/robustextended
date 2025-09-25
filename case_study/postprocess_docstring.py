@@ -94,20 +94,20 @@ def fix_spaces(text):
 This function works by first replacing all single spaces with underscores. Then it replaces all double underscores with a single dash, and so on, up to four dashes. This ensures that if there are more than two consecutive spaces, they are replaced with a single dash.<｜end▁of▁sentence｜>
 '''
 
-filter_gc(sample)
+# filter_gc(sample)
 
-# for i, prompt in enumerate(prompts):
-#     print(prompt["processed_nl"])
-#     print("-"*50)
-#     processed_nl = filter_gc(prompt["processed_nl"])
-#     if len(processed_nl) < 10:
-#         processed_nl = prompt["processed_nl"]
-#     print(processed_nl)
-#     print("=="*50)
-#     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
-    # print(prompts[i])
-    # print("="*50)
-    # print("="*50)
+for i, prompt in enumerate(prompts):
+    print(prompt["processed_nl"])
+    print("-"*50)
+    processed_nl = filter_gc(prompt["processed_nl"])
+    if len(processed_nl) < 10:
+        processed_nl = prompt["processed_nl"]
+    print(processed_nl)
+    print("=="*50)
+    prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
+    print(prompts[i])
+    print("="*50)
+    print("="*50)
     
 # save_prompts(filepath, prompts)
 
