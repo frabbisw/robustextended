@@ -102,6 +102,6 @@ for i, prompt in enumerate(prompts):
     # print("="*50)
     # print("="*50)
     
-# save_prompts(filepath, prompts)
+save_prompts(filepath, prompts)
 
 
