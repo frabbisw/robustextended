@@ -35,7 +35,7 @@ def remove_code_snippets(nl):
     print("*******")
     print(nl)
     print("*******")
-    nl = nl[len(("```"))+nl.find("```"):nl.rfind("```")]
+    nl = nl[:nl.find("```")] + nl[len(("```"))+nl.rfind("```"):]
     return nl
 
 def filter_gc(gc):
