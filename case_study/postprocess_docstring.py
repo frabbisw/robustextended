@@ -26,18 +26,11 @@ prompts = load_prompts(filepath)
 def remove_code_snippets(nl):
     lines = nl.split("\n")
     lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
-    print("*******")
-    print("\n".join(lines))
     if "```" not in nl:
         return "\n".join(lines)
     lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
     nl = "\n".join(lines)
-    print("*******")
-    print(nl)
-    print("*******")
     nl = nl[:nl.find("```")] + nl[len(("```"))+nl.rfind("```"):]
-    print(nl)
-    print("*******")
     return nl
 
 def filter_gc(gc):
@@ -105,9 +98,9 @@ for i, prompt in enumerate(prompts):
     print(processed_nl)
     print("=="*50)
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
-    print(prompts[i])
-    print("="*50)
-    print("="*50)
+    # print(prompts[i])
+    # print("="*50)
+    # print("="*50)
     
 # save_prompts(filepath, prompts)
 
