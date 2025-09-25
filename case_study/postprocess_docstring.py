@@ -27,7 +27,7 @@ def remove_code_snippets(nl):
     lines = nl.split("\n")
     lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
     print("*******")
-    print(nl)
+    print("\n".join(lines))
     if "```" not in nl:
         return "\n".join(lines)
     lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
