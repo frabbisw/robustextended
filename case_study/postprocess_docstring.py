@@ -47,6 +47,7 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
+    gc = gc[processed_nl.find("Improved Instruction:")+len("Improved Instruction:"):]
     gc = remove_code_snippets(gc)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
@@ -99,13 +100,14 @@ filter_gc(sample)
 #     print(prompt["processed_nl"])
 #     print("-"*50)
 #     processed_nl = filter_gc(prompt["processed_nl"])
-#     processed_nl = processed_nl[processed_nl.find("Improved Instruction:")+len("Improved Instruction:"):]
+#     if len(processed_nl) < 10:
+#         processed_nl = prompt["processed_nl"]
 #     print(processed_nl)
 #     print("=="*50)
 #     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
-#     # print(prompts[i])
-#     # print("="*50)
-#     # print("="*50)
+    # print(prompts[i])
+    # print("="*50)
+    # print("="*50)
     
 # save_prompts(filepath, prompts)
 
