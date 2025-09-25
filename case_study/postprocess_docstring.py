@@ -90,8 +90,8 @@ This function works by first replacing all single spaces with underscores. Then 
 # filter_gc(sample)
 
 for i, prompt in enumerate(prompts):
-    print(prompt["processed_nl"])
-    print("-"*50)
+    # print(prompt["processed_nl"])
+    # print("-"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
         processed_nl = prompt["processed_nl"]
