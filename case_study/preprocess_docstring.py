@@ -31,7 +31,7 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def preprocess_nl(nl):
     # prompt = f"Reply with a corrected version of the following code instruction with all grammatical and spelling errors fixed. If there are no errors, reply with a copy of the original text. \n\n Input Instruction: {nl} \n Corrected Instruction: "
-    prompt = f"""You are a text rewriter. 
+    prompt = f"""You are an expert text rewriter. 
     Rewrite the instruction below by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
     Output only the improved instruction text — no extra words, no code blocks, and don't delete any info.  
     
