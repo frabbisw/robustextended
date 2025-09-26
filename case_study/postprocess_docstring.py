@@ -34,6 +34,7 @@ def remove_code_snippets(nl):
     lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
     nl = "\n".join(lines)
     nl = nl[:nl.find("```")] + nl[len(("```"))+nl.rfind("```"):]
+    nl = nl.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n")
     return nl
 
 def filter_gc(gc):
