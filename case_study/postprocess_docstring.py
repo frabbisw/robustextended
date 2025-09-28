@@ -44,15 +44,15 @@ def filter_gc(gc):
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
-    print(gc)
-    print("*"*50)
+    # print(gc)
+    # print("*"*50)
     gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
-    print(gc)
-    print("#"*50)
+    # print(gc)
+    # print("#"*50)
     if "```" in gc:
         gc = remove_code_snippets(gc)
-    print(gc)
-    print("@"*50)
+    # print(gc)
+    # print("@"*50)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
     #     gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
@@ -67,46 +67,20 @@ def replace_docstring(new_nl, prompt, lang):
         end_index = prompt["prompt"].find("*/")
         return f"/*{new_nl}*/\n{prompt['prompt'][end_index+2:]}"
 
-sample = '''
-<｜begin▁of▁sentence｜>You are an expert code comment writer. 
-    Rewrite the coding instruction below by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
-    Output only the improved instruction text — no extra words, no code blocks, and don't delete any info.  
-    
-    Instruction: 
-Your task is to find the next vowel between two consonants on the right side of the word (case sensitive), and vowels at the beginning and end do not count. You will return an empty string if you have not found a vowel that meets the above condition, and you can assume that the given string contains only English letters.
-
-Example:
-get_closest_vowel("yogurt") ==> "u"
-get_closest_vowel("FULL") ==> "U"
-get_closest_vowel("quick") ==> ""
-get_closest_vowel("ab") ==> ""
-  
-    
-    Improved Instruction: 
-    Given a string, find the next vowel that is on the right side of a consonant and return it. If there is no such vowel, return an empty string. The string will only contain English letters and the first and last vowels do not count.<｜end▁of▁sentence｜>
-'''
-
-# print(sample)
-# print("-"*50)
-# gg = filter_gc(sample)
-# print(gg)
-# print("="*50)
-
-# exit(1)
 for i, prompt in enumerate(prompts):
     # print(prompt["processed_nl"])
     # print("-"*50)
-    print(prompt["processed_nl"])
-    print("--"*50)
+    # print(prompt["processed_nl"])
+    # print("--"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
         processed_nl = prompt["processed_nl"]
     print(processed_nl)
     print("=="*50)
-    print("=="*50)
-    print("=="*50)
-    print()
-    print()
+    # print("=="*50)
+    # print("=="*50)
+    # print()
+    # print()
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
     # print(prompts[i])
     # print("="*50)
