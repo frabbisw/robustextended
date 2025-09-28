@@ -50,6 +50,8 @@ def filter_gc(gc):
     print(gc)
     print("#"*50)
     gc = remove_code_snippets(gc)
+    print(gc)
+    print("@"*50)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
     #     lns = gc.split("\n")
     #     gc = "\n".join([ln if not ln.strip().endswith(":") else "" for ln in lns])
@@ -93,13 +95,16 @@ get_closest_vowel("ab") ==> ""
 for i, prompt in enumerate(prompts):
     # print(prompt["processed_nl"])
     # print("-"*50)
+    print(prompt["processed_nl"])
+    print("--"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
         processed_nl = prompt["processed_nl"]
-    print(prompt["processed_nl"])
-    print("--"*50)
     print(processed_nl)
     print("=="*50)
+    print("=="*50)
+    print("=="*50)
+    print()
     print()
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
     # print(prompts[i])
