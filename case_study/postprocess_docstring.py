@@ -49,7 +49,8 @@ def filter_gc(gc):
     gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
     print(gc)
     print("#"*50)
-    gc = remove_code_snippets(gc)
+    if "```" in gc:
+        gc = remove_code_snippets(gc)
     print(gc)
     print("@"*50)
     #     gc = gc[:gc.find("```")] + gc[3 + gc.rfind("```"):]
