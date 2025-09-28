@@ -83,7 +83,7 @@ get_closest_vowel("ab") ==> ""
     Given a string, find the next vowel that is on the right side of a consonant and return it. If there is no such vowel, return an empty string. The string will only contain English letters and the first and last vowels do not count.<｜end▁of▁sentence｜>
 '''
 
-gg = filter_gc(prompt["processed_nl"])
+gg = filter_gc(sample)
 print(gg)
 print("="*50)
 
