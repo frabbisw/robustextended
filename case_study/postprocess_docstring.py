@@ -89,7 +89,7 @@ get_closest_vowel("ab") ==> ""
 # print(gg)
 # print("="*50)
 
-exit(1)
+# exit(1)
 for i, prompt in enumerate(prompts):
     # print(prompt["processed_nl"])
     # print("-"*50)
