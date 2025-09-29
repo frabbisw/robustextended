@@ -74,7 +74,7 @@ for i, prompt in enumerate(prompts):
     # print("--"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
-        processed_nl = prompt["processed_nl"]
+        processed_nl = prompt["nl"]
     print(processed_nl)
     print("=="*50)
     # print("=="*50)
