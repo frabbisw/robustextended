@@ -26,12 +26,12 @@ prompts = load_prompts(filepath)
 def remove_code_snippets(nl):
     lines = nl.split("\n")
     # lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
-    lines = [line.strip() for line in lines if "here is" not in line.lower() and "python" not in line.lower()] + ["\n"] 
+    lines = [line for line in lines if "here is" not in line.lower() and "python" not in line.lower()] + ["\n"] 
     # lines = [line.strip() for line in lines] + ["\n"] 
     
     if "```" not in nl:
         return "\n".join(lines)
-    lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
+    # lines = [lines[i] for i in range(len(lines)-1) if "```" not in lines[i+1]]
     nl = "\n".join(lines)
     nl = nl[:nl.find("```")] + nl[len(("```"))+nl.rfind("```"):]
     nl = nl.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n")
