@@ -26,7 +26,7 @@ prompts = load_prompts(filepath)
 def remove_code_snippets(nl):
     lines = nl.split("\n")
     # lines = [line.strip() for line in lines if line.strip() != ""] + ["\n"] 
-    lines = [line for line in lines if "here is" not in line.lower() and "python" not in line.lower()] + ["\n"] 
+    lines = [line for line in lines if "here is" not in line.lower() or "python" not in line.lower()] + ["\n"] 
     # lines = [line.strip() for line in lines] + ["\n"] 
     
     if "```" not in nl:
@@ -47,6 +47,7 @@ def filter_gc(gc):
     # print(gc)
     # print("*"*50)
     gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
+    gc = gc.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n")
     # print(gc)
     # print("#"*50)
     if "```" in gc:
