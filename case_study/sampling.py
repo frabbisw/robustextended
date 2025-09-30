@@ -22,9 +22,17 @@ def load_prompts(filename):
 
 def parse_docstring(prompt, lang):
     if lang == "cpp":
-        start_index = prompt.find("/*")
-        end_index = prompt.find("*/")
-        return prompt[start_index + len("/*"): end_index]
+        start_index = prompt.find("/**")
+        l_s = len("/**")
+        if start_index < 0:
+            start_index = prompt.find("/*")
+            l_s = len("/*")
+        end_index = prompt.find("**/")
+        if end_index < 0:
+            end_index = prompt.find("*/")
+        if end_index < 0:
+            end_index = prompt.find("* /")
+        return prompt[start_index + l_s: end_index]
 
 all_prompts = []
 perturb_dir = f"../datasets/{model}/generated_pass5_1/{lang}/{scope}"
