@@ -32,9 +32,9 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 def preprocess_nl(nl):
     nl = nl.replace("Python", "").replace("python", "")
     # prompt = f"Reply with a corrected version of the following code instruction with all grammatical and spelling errors fixed. If there are no errors, reply with a copy of the original text. \n\n Input Instruction: {nl} \n Corrected Instruction: "
-    prompt = f"""You are an expert code comment writer. 
-    Rewrite the coding instruction below by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
-    Output only the improved instruction text — no extra words, no code blocks, and don't delete any info.  
+    prompt = f"""You are an expert docstring writer in C++. 
+    Rewrite the following C++ docstring by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
+    Output only the improved docstring — no extra words, no code blocks, and don't delete any info.  
     
     Instruction: {nl}  
     
