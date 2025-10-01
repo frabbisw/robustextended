@@ -17,7 +17,7 @@ def save_prompts(filename, prompts):
 def bleu(hypothesis, reference):
     return sacrebleu.sentence_bleu(hypothesis, [reference]).score
 
-prompts = load_prompts(filepath)
+prompts = load_prompts(jsonl_path)
 bleu_scores = []
 
 for prompt in prompts:
