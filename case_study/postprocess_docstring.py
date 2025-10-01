@@ -50,7 +50,7 @@ def filter_gc(gc):
     gc = gc.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n")
     # print(gc)
     # print("#"*50)
-    if "```" in gc:
+    if "python```" in gc or "```Python":
         gc = remove_code_snippets(gc)
     # print(gc)
     # print("@"*50)
