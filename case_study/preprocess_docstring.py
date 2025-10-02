@@ -39,13 +39,11 @@ def preprocess_nl(nl):
     # Instruction: {nl}  
     
     # Improved Instruction: """    
-    prompt = f"""You are an expert document writer. 
-    Rewrite the following text by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
-    Please do not add any codes and do not delete any examples.
+    prompt = f"""You are an expert document writer. From the following textfix the grammatical errors, spelling, and typos. Do not change anything else.
     
-    Instruction: {nl}  
+    Text: {nl}  
     
-    Improved Instruction: """    
+    Fixed Text: """    
 
     try:
         completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1024,temperature=0.2,top_p=0.95,do_sample = True)
