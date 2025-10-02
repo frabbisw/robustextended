@@ -41,7 +41,7 @@ def preprocess_nl(nl):
     # Improved Instruction: """    
     prompt = f"""You are an expert document writer. 
     Rewrite the following text by fixing grammar and spelling, improving readability, and ensuring smooth flow. 
-    Output only the improved text — no extra words, and don't delete any info.  
+    Please do not add or delete anything. Do not add any code snippet. Do not delete any test cases.
     
     Instruction: {nl}  
     
