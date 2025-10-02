@@ -30,8 +30,15 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # device_map = infer_auto_device_map(model, no_split_module_classes=["OPTDecoderLayer"])
 
 def prompt_to_code(prompt):
-    completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1024,temperature=0.2,top_p=0.95,do_sample = True)
-    code = code_generaton_tokenizer.decode(completion[0])
+    try:
+        completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1576,temperature=0.2,top_p=0.95,do_sample = True)
+        code = code_generaton_tokenizer.decode(completion[0])
+    except Exception as e:
+        code = "ERROR"
+        print("ERROR WHILE GENERATING")
+        print(e)
+        print()
+        
     return code
 
 prompts = load_prompts(sys.argv[1])
