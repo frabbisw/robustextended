@@ -22,10 +22,10 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-rm -r ../datasets/samples/
-python sampling.py magicoder7b cpp nlaugmenter
-python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
-python postprocess_docstring.py magicoder7b cpp nlaugmenter > process_logs.txt
+# rm -r ../datasets/samples/
+# python sampling.py magicoder7b cpp nlaugmenter
+# python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
+# python postprocess_docstring.py magicoder7b cpp nlaugmenter > process_logs.txt
 python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
 python prepare_orgs.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl ../datasets/magicoder7b/generated_pass5_1/cpp/nominal/f_s0.jsonl ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl
 echo "original correct items"
