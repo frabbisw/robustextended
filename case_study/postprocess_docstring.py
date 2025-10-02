@@ -46,7 +46,8 @@ def filter_gc(gc):
             gc = gc[:gc.find(et)]
     # print(gc)
     # print("*"*50)
-    gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
+    # gc = gc[gc.rfind("Improved Instruction:")+len("Improved Instruction:"):]
+    gc = gc[gc.rfind("Fixed Text:")+len("Fixed Text:"):]
     gc = gc.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n")
     # print(gc)
     # print("#"*50)
