@@ -39,7 +39,7 @@ def preprocess_nl(nl):
     # Instruction: {nl}  
     
     # Improved Instruction: """    
-    prompt = f"""You are an expert document writer. From the following textfix the grammatical errors, spelling, and typos. Do not change anything else.
+    prompt = f"""fix the grammatical errors, spelling, and typos in the following text and reply with the fixed text. Do not delete any information, and do not add any code snippets.
     
     Text: {nl}  
     
