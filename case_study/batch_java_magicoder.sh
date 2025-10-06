@@ -22,12 +22,12 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-rm -r ../datasets/samples/
-python sampling.py magicoder7b java nlaugmenter
-python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl magicoder7b
-python postprocess_docstring.py magicoder7b java nlaugmenter > process_logs_java.txt
-python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl magicoder7b
-python prepare_orgs.py ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl ../datasets/magicoder7b/generated_pass5_1/java/nominal/f_s0.jsonl ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368_org.jsonl
+# rm -r ../datasets/samples/
+# python sampling.py magicoder7b java nlaugmenter
+# python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl magicoder7b
+# python postprocess_docstring.py magicoder7b java nlaugmenter > process_logs_java.txt
+# python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl magicoder7b
+# python prepare_orgs.py ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl ../datasets/magicoder7b/generated_pass5_1/java/nominal/f_s0.jsonl ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368_org.jsonl
 echo "original correct items"
 python test_single_old.py ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368_org.jsonl java ../datasets/samples/magicoder7b/java/nlaugmenter/sample_368_org.jsonl 2
 echo "perturbed correct items"
