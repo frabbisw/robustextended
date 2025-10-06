@@ -254,7 +254,7 @@ def filter_gc(gc):
 
 def test_file(generated_path, lang):
     generated_data = load_prompts(generated_path)
-    nominal_data =  get_nominal_prompts(lang)
+    nominal_data =  get_nominal_prompts(lang, generated_data)
 
     generated_data.sort(key=lambda x: x["task_id"])
     nominal_data.sort(key=lambda x: x["task_id"])
@@ -288,8 +288,10 @@ def test_file(generated_path, lang):
         generated_data[i]["run_status_evalplus_processed"] = run_status
     return generated_data
 
-def get_nominal_prompts(lang):
-    return load_prompts(f"/home/f_rabbi/recode/robustextended/datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl")
+def get_nominal_prompts(lang, generated_data):
+    unique_prompts = load_prompts(f"/home/f_rabbi/recode/robustextended/datasets/nominal/humaneval{lang}_nominal_f_s0.jsonl")
+    nominal_dict = {p["task_id"]: p for p in unique_prompts}
+    return [nominal_dict[p["task_id"]] for p in generated_data]
 
 def show_results(out_path):
     codes = load_prompts(out_path)
