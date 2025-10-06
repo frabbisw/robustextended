@@ -21,4 +21,7 @@ prompts = load_prompts(filepath)
 
 print(len(prompts))
 
-print([p["run_status_evalplus_processed"] for p in prompts])
+# print([p["run_status_evalplus_processed"] for p in prompts])
+
+for p in prompts:
+    print(p['gc_processed'])
