@@ -25,3 +25,4 @@ print(len(prompts))
 
 for p in prompts:
     print(p['gc_processed'])
+    print("*" * 50)
