@@ -21,18 +21,21 @@ def load_prompts(filename):
     return prompts
 
 def parse_docstring(prompt, lang):
-    if lang == "cpp":
+    if lang in ["cpp", "js", "java"]:
         start_index = prompt.find("/**")
         l_s = len("/**")
         if start_index < 0:
             start_index = prompt.find("/*")
             l_s = len("/*")
         end_index = prompt.find("**/")
+        e_s = len("**/")
         if end_index < 0:
             end_index = prompt.find("*/")
+            e_s = len("*/")
         if end_index < 0:
             end_index = prompt.find("* /")
-        return prompt[start_index + l_s: end_index]
+            e_s = len("* /")        
+        return prompt[start_index + l_s: end_index], start_index, end_index+e_s
 
 all_prompts = []
 perturb_dir = f"../datasets/{model}/generated_pass5_1/{lang}/{scope}"
@@ -45,9 +48,11 @@ for method in os.listdir(perturb_dir):
 sampled_prompts = sample(all_prompts, 368)
 
 for sample in sampled_prompts:
-    nl = parse_docstring(sample["prompt"], lang)
+    nl, s_l, e_l = parse_docstring(sample["prompt"], lang)
     # print(nl)
     sample["nl"] = nl
+    sample["s_l"] = s_l
+    sample["e_l"] = e_l
     # print("="*50)
 
 os.makedirs(f"../datasets/samples/{model}/{lang}/{scope}", exist_ok=True)
