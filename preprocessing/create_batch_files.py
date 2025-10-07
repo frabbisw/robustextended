@@ -48,7 +48,7 @@ lang = sys.argv[1]
 part = sys.argv[2]
 tm = sys.argv[3]
 
-folder_path = f"/home/f_rabbi/recode/robustextended/datasets/magicoder7b/generated_pass5_1/{lang}/nlaugmenter/"
+folder_path = f"/home/f_rabbi/recode/robustextended/datasets/magicoder7b/backup/{lang}/nlaugmenter/"
 
 all_blocks = ""
 for pert in part_dict[part]:
