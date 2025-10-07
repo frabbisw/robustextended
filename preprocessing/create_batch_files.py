@@ -1,5 +1,4 @@
-template = '''
-#!/bin/bash
+template = '''#!/bin/bash
 
 #SBATCH -J ##batch_name##
 #SBATCH -n4
