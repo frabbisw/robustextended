@@ -39,6 +39,7 @@ python pre_docstring.py {file_path} magicoder7b
 python post_docstring.py {file_path} 
 python generate_code.py {file_path} magicoder7b
 python test_single.py {file_path} {lang} {int(part)}
+echo "done {file_path}"
     '''
 
 
