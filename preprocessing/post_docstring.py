@@ -16,6 +16,7 @@ def save_prompts(filename, prompts):
             jsonlines.Writer.write(writer, line)
 
 filepath = sys.argv[1]
+lang = sys.argv[2]
 
 prompts = load_prompts(filepath)
 
@@ -68,18 +69,18 @@ def replace_docstring(new_nl, prompt, lang):
 for i, prompt in enumerate(prompts):
     # print(prompt["processed_nl"])
     # print("-"*50)
-    print(prompt["processed_nl"])
-    print("--"*50)
+    # print(prompt["processed_nl"])
+    # print("--"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
         processed_nl = prompt["nl"]
     prompts[i]["filtered_nl"] = processed_nl
     print(processed_nl)
     print("=="*50)
-    print("=="*50)
-    print("=="*50)
-    print()
-    print()
+    # print("=="*50)
+    # print("=="*50)
+    # print()
+    # print()
     prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
     # print(prompts[i])
     # print("="*50)
