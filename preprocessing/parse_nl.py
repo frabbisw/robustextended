@@ -5,6 +5,7 @@ from random import sample
 import jsonlines
 
 filepath = sys.argv[1]
+lang = sys.argv[2]
 
 def save_prompts(filename, prompts):
     with jsonlines.open(filename, mode='w') as writer:
