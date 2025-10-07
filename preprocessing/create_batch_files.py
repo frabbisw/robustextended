@@ -34,11 +34,11 @@ import sys
 
 def prep_block(file_path, lang, part):
     return f'''
-    python parse_nl.py {file_path} {lang}
-    python pre_docstring.py {file_path} magicoder7b
-    python post_docstring.py {file_path} 
-    python generate_code.py {file_path} magicoder7b
-    python test_single.py {file_path} {lang} {int(part)}
+python parse_nl.py {file_path} {lang}
+python pre_docstring.py {file_path} magicoder7b
+python post_docstring.py {file_path} 
+python generate_code.py {file_path} magicoder7b
+python test_single.py {file_path} {lang} {int(part)}
     '''
 
 
