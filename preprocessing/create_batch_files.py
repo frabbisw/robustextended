@@ -33,7 +33,7 @@ from tqdm import tqdm as tq
 import sys
 
 def prep_block(file_path, lang, part):
-    return = f'''
+    return f'''
     python parse_nl.py {file_path} {lang}
     python pre_docstring.py {file_path} magicoder7b
     python post_docstring.py {file_path} 
