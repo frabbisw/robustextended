@@ -31,7 +31,7 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
     try:
-        completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1576,temperature=0.2,top_p=0.95,do_sample = True)
+        completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1200,temperature=0.2,top_p=0.95,do_sample = True)
         code = code_generaton_tokenizer.decode(completion[0])
     except Exception as e:
         code = "###ERROR###"
@@ -45,6 +45,8 @@ prompts = load_prompts(sys.argv[1])
 
 for i in tq(range(len(prompts))):
     p = prompts[i]
+    if "processed_gc" in p.keys():
+        continue
     p["processed_gc"] = prompt_to_code(p["processed_prompt"])
     prompts[i] = p
 save_prompts(sys.argv[1], prompts)
