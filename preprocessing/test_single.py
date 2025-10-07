@@ -309,9 +309,9 @@ lang = sys.argv[2]
 out_path = target_path
 testing_folder = f"testing_dir{sys.argv[3]}"
 
-if os.path.exists(out_path):
-    show_results(out_path)
-    exit(1)
+# if os.path.exists(out_path):
+#     show_results(out_path)
+#     exit(1)
 
 generated_data = test_file(target_path, lang)
 save_prompts(out_path, generated_data)
