@@ -34,7 +34,7 @@ def prompt_to_code(prompt):
         completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1576,temperature=0.2,top_p=0.95,do_sample = True)
         code = code_generaton_tokenizer.decode(completion[0])
     except Exception as e:
-        code = "ERROR"
+        code = "###ERROR###"
         print("ERROR WHILE GENERATING")
         print(e)
         print()
