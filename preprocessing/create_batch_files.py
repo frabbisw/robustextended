@@ -42,7 +42,7 @@ echo "done {file_path}"
     '''
 
 
-part_dict = {"1": ["BackTranslation", "SynonymInsertion"], "2": ["ButterFingersPerturbation", "SynonymSubstitution"], "3": ["ChangeCharCase", "TenseTransformationFuture"], "4": ["EnglishInflectionalVariation", "TenseTransformationPast"], "5": ["SwapCharactersPerturbation, WhitespacePerturbation"]}
+part_dict = {"1": ["BackTranslation", "SynonymInsertion"], "2": ["ButterFingersPerturbation", "SynonymSubstitution"], "3": ["ChangeCharCase", "TenseTransformationFuture"], "4": ["EnglishInflectionalVariation", "TenseTransformationPast"], "5": ["SwapCharactersPerturbation", "WhitespacePerturbation"]}
 
 lang = sys.argv[1]
 part = sys.argv[2]
