@@ -40,7 +40,8 @@ prompts = load_prompts(filepath)
 
 for sample in prompts:
     nl, s_l, e_l = parse_docstring(sample["prompt"], lang)
-    # print(nl)
+    if "nl" in sample.keys():
+        continue
     sample["nl"] = nl
     sample["s_l"] = s_l
     sample["e_l"] = e_l
