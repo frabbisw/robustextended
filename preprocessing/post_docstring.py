@@ -67,6 +67,8 @@ def replace_docstring(new_nl, prompt, lang):
         return f"/*{new_nl}*/\n{prompt['prompt'][end_index+2:]}"
 
 for i, prompt in enumerate(prompts):
+    if "processed_prompt" in prompts[i].keys():
+        continue
     # print(prompt["processed_nl"])
     # print("-"*50)
     # print(prompt["processed_nl"])
