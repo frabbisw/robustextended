@@ -39,9 +39,9 @@ def parse_docstring(prompt, lang):
 prompts = load_prompts(filepath)
 
 for sample in prompts:
-    nl, s_l, e_l = parse_docstring(sample["prompt"], lang)
-    if "nl" in sample.keys():
+    if "e_l" in sample.keys():
         continue
+    nl, s_l, e_l = parse_docstring(sample["prompt"], lang)
     sample["nl"] = nl
     sample["s_l"] = s_l
     sample["e_l"] = e_l
