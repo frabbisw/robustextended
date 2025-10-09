@@ -65,26 +65,31 @@ def filter_gc(gc):
 
 def replace_docstring(new_nl, prompt, lang):
     if lang in ["cpp", "js", "java"]:
-        start_index = prompt["prompt"].find("/*")
-        end_index = prompt["prompt"].find("*/")
-        return f"/*{new_nl}*/\n{prompt['prompt'][end_index+2:]}"
-
+        start_index = prompt.find("/*")
+        end_index = prompt.find("*/")
+        processed_prompt = f"/*{new_nl}*/\n{prompt[end_index+2:]}"
+        print(prompt)
+        print("-"*50)
+        print(processed_prompt)
+        print("="*50)
+        print()
+        return processed_prompt
 for i, prompt in enumerate(prompts):
     # print(prompt["processed_nl"])
     # print("-"*50)
-    print(prompt["processed_nl"])
-    print("--"*50)
+    # print(prompt["processed_nl"])
+    # print("--"*50)
     processed_nl = filter_gc(prompt["processed_nl"])
     if len(processed_nl) < 10:
         processed_nl = prompt["nl"]
     prompts[i]["filtered_nl"] = processed_nl
-    print(processed_nl)
-    print("=="*50)
-    print("=="*50)
-    print("=="*50)
-    print()
-    print()
-    prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt, lang)
+    # print(processed_nl)
+    # print("=="*50)
+    # print("=="*50)
+    # print("=="*50)
+    # print()
+    # print()
+    prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt["prompt"], lang)
     # print(prompts[i])
     # print("="*50)
     # print("="*50)
