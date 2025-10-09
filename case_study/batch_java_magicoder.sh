@@ -22,7 +22,7 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-rm -r ../datasets/samples/
+rm -r ../datasets/samples/magicoder7b/java/
 python sampling.py magicoder7b java nlaugmenter
 python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/java/nlaugmenter/sample_368.jsonl magicoder7b
 python postprocess_docstring.py magicoder7b java nlaugmenter > process_logs_java.txt
