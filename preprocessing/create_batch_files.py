@@ -2,7 +2,7 @@ template = '''#!/bin/bash
 
 #SBATCH -J ##batch_name##
 #SBATCH -n4
-#SBATCH --mem=10GB
+#SBATCH --mem=30GB
 #SBATCH --gpus=1
 #SBATCH --time=##TIME##
 #SBATCH -o _%x%J.out
