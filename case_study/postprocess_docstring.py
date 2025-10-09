@@ -65,6 +65,8 @@ def filter_gc(gc):
 
 def replace_docstring(new_nl, prompt, lang, s_l, e_l):
     if lang in ["cpp", "js", "java"]:
+        if lang in ["java"]:
+            new_nl = "\n".join(["    " + l if not l.startswith("    ") else l for l in new_nl.split("\n")])
         processed_prompt = f"{prompt[:s_l]}/*{new_nl}*/\n{prompt[e_l:]}"
         print(prompt)
         print("-"*50)
