@@ -31,7 +31,7 @@ code_generaton_tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 def prompt_to_code(prompt):
     try:
-        completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1200,temperature=0.2,top_p=0.95,do_sample = True)
+        completion = code_generaton_model.generate(**code_generaton_tokenizer(prompt, return_tensors="pt").to(device), max_length=1576,temperature=0.2,top_p=0.95,do_sample = True)
         code = code_generaton_tokenizer.decode(completion[0])
     except Exception as e:
         code = "###ERROR###"
