@@ -264,6 +264,7 @@ def test_file(generated_path, lang):
     result = {}
     for i in tq(range(len(generated_data))):
         if "passed_evalplus_processed" in generated_data[i].keys():
+            print("passed_evalplus_processed here")
             continue
         gc = filter_gc(generated_data[i]["processed_gc"])
         if lang == "js":
@@ -279,6 +280,7 @@ def test_file(generated_path, lang):
             main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
             passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "java":
+            print("entering java")
             # if generated_data[i]["task_id"] in ["Java/32", "Java/87", "Java/55", "Java/63"]:
             #     continue
             # assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
