@@ -90,7 +90,8 @@ def test_java(solution, org_sol, main, new_entry_point, old_entry_point):
     with open(f"../{testing_folder}/SolutionGenerated.java", "w") as f:
         f.write(solution)
     os.chdir(f"../{testing_folder}/")
-    exit(1)
+    # exit(1)
+    print("hello")
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java', 'SolutionGenerated.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
@@ -297,7 +298,7 @@ def get_nominal_prompts(lang, generated_data):
 
 def show_results(out_path):
     codes = load_prompts(out_path)
-    print("result file already exist. loading ...")
+    # print("result file already exist. loading ...")
     print(f"Correct: {sum([code['passed_evalplus_processed'] == 1 for code in codes])}/{len(codes)}")        
 
 evalplus_dir = "/home/f_rabbi/recode/evalplus_all"
