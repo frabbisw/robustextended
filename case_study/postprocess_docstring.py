@@ -63,11 +63,11 @@ def filter_gc(gc):
     #     return gc.strip()
     return gc.strip()
 
-def replace_docstring(new_nl, prompt, lang):
+def replace_docstring(new_nl, prompt, lang, s_l, e_l):
     if lang in ["cpp", "js", "java"]:
         start_index = prompt.find("/*")
         end_index = prompt.find("*/")
-        processed_prompt = f"/*{new_nl}*/\n{prompt[end_index+2:]}"
+        processed_prompt = f"{prompt[:start_index]}/*{new_nl}*/\n{prompt[end_index+2:]}"
         print(prompt)
         print("-"*50)
         print(processed_prompt)
