@@ -87,7 +87,7 @@ for i, prompt in enumerate(prompts):
     # print("=="*50)
     # print()
     # print()
-    prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt["prompt"], lang, s_l, e_l)
+    prompts[i]["processed_prompt"] = replace_docstring(processed_nl, prompt["prompt"], lang, prompt["s_l"], prompt["e_l"])
     # print(prompts[i])
     # print("="*50)
     # print("="*50)
