@@ -90,6 +90,7 @@ def test_java(solution, org_sol, main, new_entry_point, old_entry_point):
     with open(f"../{testing_folder}/SolutionGenerated.java", "w") as f:
         f.write(solution)
     os.chdir(f"../{testing_folder}/")
+    exit(1)
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java', 'SolutionGenerated.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
