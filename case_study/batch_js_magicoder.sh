@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J js_mag_gen
+#SBATCH -J js_prep
 #SBATCH -n4
 #SBATCH --mem=10GB
 #SBATCH --gpus=1
@@ -23,6 +23,7 @@ source ~/.bashrc
 eval "$(conda shell.bash hook)"
 
 conda activate code_trans
+pip install jsonlines
 
 rm -r ../datasets/samples/magicoder7b/js/
 python sampling.py magicoder7b js nlaugmenter
