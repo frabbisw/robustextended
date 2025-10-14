@@ -13,6 +13,8 @@ import  numpy as np
 from scipy.stats import fisher_exact
 from scipy.stats import chisquare
 
+DATASET_PATH = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
+
 def view(filename):
     prompts = []
     with open(filename, encoding="utf8") as f:
@@ -519,8 +521,6 @@ def prepare_fishers_table(model_dict):
         print("\\\\")
 
     return pvalues
-
-DATASET_PATH = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
 
 print("="*100)
 
