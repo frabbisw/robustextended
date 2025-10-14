@@ -374,8 +374,9 @@ def prepare_overleaf_table_summary(model_dict):
                     if method_map[method] not in method_dict.keys():
                         method_dict[method_map[method]] = {"rpk":[], "rdk":[], "rrk":[]}
                 except Exception as e:
-                    print(method)
                     print(e)
+                    print("-"*50)
+                    print(method)
                     exit()
                 passatk_worst, robust_drop, robust_relative = lang_dict[method]
                 method_dict[method_map[method]]["rpk"].append(passatk_worst)
