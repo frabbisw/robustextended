@@ -507,21 +507,21 @@ def prepare_fishers_table(model_dict):
 
     return pvalues
 
-# java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
-# cpp_sum_6b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen6bmulti")
-# js_sum_6b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen6bmulti")
+java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
+cpp_sum_6b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen6bmulti")
+js_sum_6b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen6bmulti")
 
-# java_sum_2b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen2bmulti")
-# cpp_sum_2b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen2bmulti")
-# js_sum_2b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen2bmulti")
+java_sum_2b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen2bmulti")
+cpp_sum_2b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen2bmulti")
+js_sum_2b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen2bmulti")
 
-# java_sum_1b, fake_dict = calculate_metrics_summary(K, T, "java", "incoder1b")
-# cpp_sum_1b, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder1b")
-# js_sum_1b, fake_dict = calculate_metrics_summary(K, T, "js", "incoder1b")
+java_sum_1b, fake_dict = calculate_metrics_summary(K, T, "java", "incoder1b")
+cpp_sum_1b, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder1b")
+js_sum_1b, fake_dict = calculate_metrics_summary(K, T, "js", "incoder1b")
 
-# java_sum_in, fake_dict = calculate_metrics_summary(K, T, "java", "incoder6b")
-# cpp_sum_in, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder6b")
-# js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
+java_sum_in, fake_dict = calculate_metrics_summary(K, T, "java", "incoder6b")
+cpp_sum_in, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder6b")
+js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
 
 java_sum_qn, fake_dict = calculate_metrics_summary(K, T, "java", "qwencoder")
 cpp_sum_qn, fake_dict = calculate_metrics_summary(K, T, "cpp", "qwencoder")
