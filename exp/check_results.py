@@ -525,13 +525,13 @@ java_sum_in, fake_dict = calculate_metrics_summary(K, T, "java", "incoder6b")
 cpp_sum_in, fake_dict = calculate_metrics_summary(K, T, "cpp", "incoder6b")
 js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
 
-java_sum_qn, fake_dict = calculate_metrics_summary(K, T, "java", "qwencoder")
-cpp_sum_qn, fake_dict = calculate_metrics_summary(K, T, "cpp", "qwencoder")
-js_sum_qn, fake_dict = calculate_metrics_summary(K, T, "js", "qwencoder")
+# java_sum_qn, fake_dict = calculate_metrics_summary(K, T, "java", "qwencoder")
+# cpp_sum_qn, fake_dict = calculate_metrics_summary(K, T, "cpp", "qwencoder")
+# js_sum_qn, fake_dict = calculate_metrics_summary(K, T, "js", "qwencoder")
 
-java_sum_mg, fake_dict = calculate_metrics_summary(K, T, "java", "magicoder7b")
-cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
-js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
+# java_sum_mg, fake_dict = calculate_metrics_summary(K, T, "java", "magicoder7b")
+# cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
+# js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
 
 DATASET_PATH = extended_all_results/datasets-backup
 
@@ -539,8 +539,8 @@ codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
 incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
 incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
 codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
-qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
-magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
+# qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
+# magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
 model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
 # model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
