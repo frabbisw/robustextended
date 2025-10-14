@@ -247,30 +247,41 @@ def prepare_overleaf_table(model_dict):
 K = 5
 T = 3
 
-# java_sum_6b, fake_dict = calculate_metrics(K, T, "java", "codegen6bmulti")
-# cpp_sum_6b, fake_dict = calculate_metrics(K, T, "cpp", "codegen6bmulti")
-# js_sum_6b, fake_dict = calculate_metrics(K, T, "js", "codegen6bmulti")
-#
-# java_sum_2b, fake_dict = calculate_metrics(K, T, "java", "codegen2bmulti")
-# cpp_sum_2b, fake_dict = calculate_metrics(K, T, "cpp", "codegen2bmulti")
-# js_sum_2b, fake_dict = calculate_metrics(K, T, "js", "codegen2bmulti")
-#
-# java_sum_1b, fake_dict = calculate_metrics(K, T, "java", "incoder1b")
-# cpp_sum_1b, fake_dict = calculate_metrics(K, T, "cpp", "incoder1b")
-# js_sum_1b, fake_dict = calculate_metrics(K, T, "js", "incoder1b")
-# 
-# java_sum_in, fake_dict = calculate_metrics(K, T, "java", "incoder6b")
-# cpp_sum_in, fake_dict = calculate_metrics(K, T, "cpp", "incoder6b")
-# js_sum_in, fake_dict = calculate_metrics(K, T, "js", "incoder6b")
-#
-# codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
-# incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
-# incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
-# codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
-#
-# # model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+java_sum_6b, fake_dict = calculate_metrics(K, T, "java", "codegen6bmulti")
+cpp_sum_6b, fake_dict = calculate_metrics(K, T, "cpp", "codegen6bmulti")
+js_sum_6b, fake_dict = calculate_metrics(K, T, "js", "codegen6bmulti")
+
+java_sum_2b, fake_dict = calculate_metrics(K, T, "java", "codegen2bmulti")
+cpp_sum_2b, fake_dict = calculate_metrics(K, T, "cpp", "codegen2bmulti")
+js_sum_2b, fake_dict = calculate_metrics(K, T, "js", "codegen2bmulti")
+
+java_sum_1b, fake_dict = calculate_metrics(K, T, "java", "incoder1b")
+cpp_sum_1b, fake_dict = calculate_metrics(K, T, "cpp", "incoder1b")
+js_sum_1b, fake_dict = calculate_metrics(K, T, "js", "incoder1b")
+
+java_sum_in, fake_dict = calculate_metrics(K, T, "java", "incoder6b")
+cpp_sum_in, fake_dict = calculate_metrics(K, T, "cpp", "incoder6b")
+js_sum_in, fake_dict = calculate_metrics(K, T, "js", "incoder6b")
+
+java_sum_qn, fake_dict = calculate_metrics(K, T, "java", "qwencoder")
+cpp_sum_qn, fake_dict = calculate_metrics(K, T, "cpp", "qwencoder")
+js_sum_qn, fake_dict = calculate_metrics(K, T, "js", "qwencoder")
+
+java_sum_mg, fake_dict = calculate_metrics(K, T, "java", "magicoder7b")
+cpp_sum_mg, fake_dict = calculate_metrics(K, T, "cpp", "magicoder7b")
+js_sum_mg, fake_dict = calculate_metrics(K, T, "js", "magicoder7b")
+
+codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
+incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
+incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
+codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
+qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
+magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
+
+# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
 # model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# prepare_overleaf_table(model_dict)
+model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+prepare_overleaf_table(model_dict)
 
 # java_dict_6b, fake_dict = calculate_metrics(K, T, "java", "codegen6bmulti")
 # cpp_dict_6b, _ = calculate_metrics(K, T, "cpp", "codegen6bmulti")
@@ -510,6 +521,8 @@ def prepare_fishers_table(model_dict):
     return pvalues
 
 DATASET_PATH = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
+
+print("="*100)
 
 
 java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
