@@ -509,6 +509,9 @@ def prepare_fishers_table(model_dict):
 
     return pvalues
 
+DATASET_PATH = "extended_all_results/datasets-backup"
+
+
 java_sum_6b, fake_dict = calculate_metrics_summary(K, T, "java", "codegen6bmulti")
 cpp_sum_6b, fake_dict = calculate_metrics_summary(K, T, "cpp", "codegen6bmulti")
 js_sum_6b, fake_dict = calculate_metrics_summary(K, T, "js", "codegen6bmulti")
@@ -532,8 +535,6 @@ js_sum_in, fake_dict = calculate_metrics_summary(K, T, "js", "incoder6b")
 # java_sum_mg, fake_dict = calculate_metrics_summary(K, T, "java", "magicoder7b")
 # cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
 # js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
-
-DATASET_PATH = extended_all_results/datasets-backup
 
 codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
 incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
