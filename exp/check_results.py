@@ -46,9 +46,9 @@ def save_prompts(filename, prompts):
 
 def get_nominal_prompts(lang, type, model_name):
     if type == "nominal":
-        return load_prompts(f"../datasets/{model_name}/generated_pass5_1/{lang}/nominal/f_s0.jsonl")
+        return load_prompts(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/nominal/f_s0.jsonl")
     elif type == "partial":
-        return load_prompts(f"../datasets/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl")
+        return load_prompts(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl")
 
 def calculate_passatk(data):
     return sum(data.values()) / len(data)
@@ -135,7 +135,7 @@ def calculate_metrics(K, T, lang, model_name):
     fake_dict = {}
     result_dict["aug_method"] = ["RP@k", "RD@k", "RR@k"]
     fake_dict["aug_method"] = ["RP@k", "RD@k", "RR@k"]
-    datasets_path = f"../datasets/{model_name}/generated_pass5_1"
+    datasets_path = f"{DATASET_PATH}/{model_name}/generated_pass5_1"
     methods = ["nlaugmenter", "natgen", "format", "func_name"]
     # langs = ["java"]
     nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal", model_name)
@@ -296,7 +296,7 @@ def calculate_metrics_summary(K, T, lang, model_name):
     fake_dict = {}
     result_dict["method"] = ["RP@k", "RD@k", "RR@k"]
     fake_dict["method"] = ["RP@k", "RD@k", "RR@k"]
-    datasets_path = f"../datasets/{model_name}/generated_pass5_1"
+    datasets_path = f"{DATASET_PATH}/{model_name}/generated_pass5_1"
     methods = ["nlaugmenter", "natgen", "format", "func_name"]
     # langs = ["java"]
     nominal_passatk_dict = get_nominal_passatk_dict(lang, "nominal", model_name)
@@ -533,6 +533,7 @@ java_sum_mg, fake_dict = calculate_metrics_summary(K, T, "java", "magicoder7b")
 cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
 js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
 
+DATASET_PATH = extended_all_results/datasets-backup
 
 codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
 incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
@@ -541,8 +542,8 @@ codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
 qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
 magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
-# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+# model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 # model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table_summary(model_dict)
 
