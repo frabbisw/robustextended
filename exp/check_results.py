@@ -245,7 +245,7 @@ def prepare_overleaf_table(model_dict):
         # print("*"*100)
 
 K = 5
-T = 3
+T = 5
 
 java_sum_6b, fake_dict = calculate_metrics(K, T, "java", "codegen6bmulti")
 cpp_sum_6b, fake_dict = calculate_metrics(K, T, "cpp", "codegen6bmulti")
