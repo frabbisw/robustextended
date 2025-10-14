@@ -381,15 +381,20 @@ def prepare_overleaf_table_summary(model_dict):
                 method_dict[method_map[method]]["rdk"].append(robust_drop)
                 method_dict[method_map[method]]["rrk"].append(robust_relative)
 
-                # passatk_worst, robust_drop, robust_relative = lang_dict[aug_method]
-                # print("\\multirow{3}{*}{\\centering aug_method} & RP{\\footnotesize5}@1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\\")
-    print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
+    # print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
+    # print("\t\\hline")
+    # print("\tHumanEval-X & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} \\\\")
+    # print("\t\\hline")
+    # print("\tPerturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
+    # print("\t\\hline")
+    print("\\resizebox{\\textwidth}{!}{\\begin{tabular}{|p{6cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}")
     print("\t\\hline")
-    print("\tHumanEval-X & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} \\\\")
+    print("\tHumanEval-X & Model & \\multicolumn{3}{|p{4cm}|}{\\centering Incoder-1B} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-2B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering CodeGen-6B-multi} & \\multicolumn{3}{|p{4cm}|}{\\centering Magicoder7B} & \\multicolumn{3}{|p{4cm}|}{\\centering QwenCode}\\\\")
     print("\t\\hline")
-    print("\tPerturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
+    print("\tPerturbation & Metric & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS & Java & CPP & JS \\\\")
     print("\t\\hline")
 
+    
     print("\tNominal & RP{\\footnotesize5}@1 ", end = "")
     for v in nominal_dict["nominal"]:
         try:
@@ -527,16 +532,16 @@ cpp_sum_mg, fake_dict = calculate_metrics_summary(K, T, "cpp", "magicoder7b")
 js_sum_mg, fake_dict = calculate_metrics_summary(K, T, "js", "magicoder7b")
 
 
-# codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
-# incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
-# incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
-# codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
+codegen6bmulti = [java_sum_6b, cpp_sum_6b, js_sum_6b]
+incoder1b = [java_sum_1b, cpp_sum_1b, js_sum_1b]
+incoder6b = [java_sum_in, cpp_sum_in, js_sum_in]
+codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
 qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
 magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
 # model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+# model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table_summary(model_dict)
 
 # prepare_fishers_table(model_dict)
