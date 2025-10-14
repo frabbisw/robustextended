@@ -543,8 +543,8 @@ codegen2bmulti = [java_sum_2b, cpp_sum_2b, js_sum_2b]
 # qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
 # magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
-model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+# model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
+model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 # model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table_summary(model_dict)
 
