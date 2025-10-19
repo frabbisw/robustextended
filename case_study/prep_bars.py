@@ -56,3 +56,7 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
             stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus"])
             stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus_processed"])
         
+
+
+
+print(stat)
