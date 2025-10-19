@@ -39,7 +39,11 @@ lang = sys.argv[1]
 model_name = "magicoder7b"
 pert_type = "nlaugmenter"
 
-nominal_map = (lang, "nominal", model_name)
+nominal_map = get_nominal_map(lang, "nominal", model_name)
+
+# print(nominal_map[pert_prompts[i]["CPP/99"]])
+
+# exit(0)
 
 stat = {}
 for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
