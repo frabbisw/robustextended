@@ -36,7 +36,7 @@ def get_nominal_map(lang, type, model_name):
     return {p["task_id"]: p for p in prompts}
         
 lang = sys.argv[1]
-model = "magicoder7b"
+model_name = "magicoder7b"
 pert_type = "nlaugmenter"
 
 nominal_map = (lang, "nominal", model_name)
