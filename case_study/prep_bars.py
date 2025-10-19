@@ -64,34 +64,35 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
 
 
 def show_plot(data, lang):
-    # Extract data
+    # Prepare data
     perturbations = list(data.keys())
-    n = len(perturbations)
-    x = np.arange(n)
-    width = 0.35
+    x = np.arange(len(perturbations))
+    width = 0.25
+    total = 450
     
-    total = 450  # Total number of prompts
+    nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
     perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
     fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
-    nominal_pct = data[perturbations[0]]['nominal'] / total * 100  # Same for all
     
-    # Create plot
+    # Plot
     fig, ax = plt.subplots(figsize=(12, 6))
-    rects1 = ax.bar(x - width/2, perturbed_pct, width, label='Perturbed', color='#4c72b0')
-    rects2 = ax.bar(x + width/2, fixed_pct, width, label='Fixed', color='#55a868')
     
-    # Add baseline reference line
-    ax.axhline(nominal_pct, color='gray', linestyle='--', linewidth=1.5, label='Nominal Baseline')
+    ax.bar(x - width, nominal_pct, width, label='Nominal', color='#8172b2')
+    ax.bar(x, perturbed_pct, width, label='Perturbed', color='#4c72b0')
+    ax.bar(x + width, fixed_pct, width, label='Fixed', color='#55a868')
     
-    # Customize chart
+    # Customize
     ax.set_ylabel('Pass Rate (%)')
-    ax.set_title('Pass Rate for Perturbed and Fixed Prompts by Perturbation Type')
+    ax.set_title('Pass Rate Comparison: Nominal vs Perturbed vs Fixed Prompts')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
     ax.set_ylim(0, 100)
     ax.yaxis.set_major_formatter(PercentFormatter())
     ax.legend()
     fig.tight_layout()
+    
+    # Save as high-resolution figure
+    plt.savefig("perturbation_pass_rates_three_bars.png", dpi=300, bbox_inches='tight')
     
     plt.savefig(f"figures/{lang}.png", dpi=300, bbox_inches='tight')
 
