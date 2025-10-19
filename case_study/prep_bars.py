@@ -10,6 +10,11 @@ from os import listdir
 from os.path import isfile, join
 import sys
 
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.ticker import PercentFormatter
+
+
 CODE_RUN_STATUS = {"PASSED":0, "ASSERTION":1, "COMPILATION":2, "TIMEOUT": 3, "RUNTIME": 4}
 
 def load_prompts(filename):
@@ -48,17 +53,47 @@ nominal_map = get_nominal_map(lang, "nominal", model_name)
 stat = {}
 for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
     stat[aug_type] = {"nominal": 0, "perturbed": 0, "fixed": 0}
-    for i in range(5):
-        aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{i}.jsonl"
+    for ind in range(5):
+        aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{ind}.jsonl"
         pert_prompts = load_prompts(aug_filepath)
-        for i, p in enumerate(pert_prompts):
-            stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[i]["task_id"]]["passed_evalplus"])
-            stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus"])
-            stat[aug_type]["fixed"] += int(pert_prompts[i]["passed_evalplus_processed"])
-            # stat[aug_type]["fixed"] += int(pert_prompts[i]["run_status_evalplus_processed"])
+        for j, p in enumerate(pert_prompts):
             
-        
+    stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"])
+    stat[aug_type]["perturbed"] += int(pert_prompts[j]["passed_evalplus"])
+    stat[aug_type]["fixed"] += int(pert_prompts[j]["passed_evalplus_processed"])
+    
 
 
+def show_plot(data, lang):
+    # Extract data
+    perturbations = list(data.keys())
+    n = len(perturbations)
+    x = np.arange(n)
+    width = 0.35
+    
+    total = 450  # Total number of prompts
+    perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
+    fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
+    nominal_pct = data[perturbations[0]]['nominal'] / total * 100  # Same for all
+    
+    # Create plot
+    fig, ax = plt.subplots(figsize=(12, 6))
+    rects1 = ax.bar(x - width/2, perturbed_pct, width, label='Perturbed', color='#4c72b0')
+    rects2 = ax.bar(x + width/2, fixed_pct, width, label='Fixed', color='#55a868')
+    
+    # Add baseline reference line
+    ax.axhline(nominal_pct, color='gray', linestyle='--', linewidth=1.5, label='Nominal Baseline')
+    
+    # Customize chart
+    ax.set_ylabel('Pass Rate (%)')
+    ax.set_title('Pass Rate for Perturbed and Fixed Prompts by Perturbation Type')
+    ax.set_xticks(x)
+    ax.set_xticklabels(perturbations, rotation=45, ha='right')
+    ax.set_ylim(0, 100)
+    ax.yaxis.set_major_formatter(PercentFormatter())
+    ax.legend()
+    fig.tight_layout()
+    
+    plt.savefig(f"figures/{lang}.png", dpi=300, bbox_inches='tight')
 
-print(stat)
+show_plot(stat, lang)
