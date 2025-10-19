@@ -54,7 +54,9 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
         for i, p in enumerate(pert_prompts):
             stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[i]["task_id"]]["passed_evalplus"])
             stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus"])
-            stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus_processed"])
+            # stat[aug_type]["perturbed"] += int(pert_prompts[i]["passed_evalplus_processed"])
+            stat[aug_type]["perturbed"] += int(pert_prompts[i]["run_status_evalplus_processed"])
+            
         
 
 
