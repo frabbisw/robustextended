@@ -56,11 +56,10 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
     for ind in range(5):
         aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{ind}.jsonl"
         pert_prompts = load_prompts(aug_filepath)
-        for j, p in enumerate(pert_prompts):
-            
-    stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"])
-    stat[aug_type]["perturbed"] += int(pert_prompts[j]["passed_evalplus"])
-    stat[aug_type]["fixed"] += int(pert_prompts[j]["passed_evalplus_processed"])
+        for j, p in enumerate(pert_prompts):            
+            stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"])
+            stat[aug_type]["perturbed"] += int(pert_prompts[j]["passed_evalplus"])
+            stat[aug_type]["fixed"] += int(pert_prompts[j]["passed_evalplus_processed"])
     
 
 
