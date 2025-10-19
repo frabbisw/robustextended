@@ -92,8 +92,5 @@ def show_plot(data, lang):
     fig.tight_layout()
     
     # Save as high-resolution figure
-    plt.savefig("perturbation_pass_rates_three_bars.png", dpi=300, bbox_inches='tight')
-    
     plt.savefig(f"figures/{lang}.png", dpi=300, bbox_inches='tight')
-
-show_plot(stat, lang)
+    show_plot(stat, lang)
