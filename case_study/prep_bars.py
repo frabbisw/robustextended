@@ -93,4 +93,5 @@ def show_plot(data, lang):
     
     # Save as high-resolution figure
     plt.savefig(f"figures/{lang}.png", dpi=300, bbox_inches='tight')
-    show_plot(stat, lang)
+
+show_plot(stat, lang)
