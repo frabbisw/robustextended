@@ -77,7 +77,7 @@ def show_plot(stat, lang, K):
         data[aug_type] = {"nominal": 0, "perturbed": 0, "fixed": 0}
         for j in stat[aug_type].keys():
             for t in stat[aug_type][j].keys():
-                data[aug_type][t] += int(data[aug_type][j][t] >= K)
+                data[aug_type][t] += int(sum(stat[aug_type][j][t]) >= K)
             
     print(data)
     # Prepare data
