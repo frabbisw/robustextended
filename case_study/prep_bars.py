@@ -55,7 +55,7 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
     stat[aug_type] = {"nominal": 0, "perturbed": 0, "fixed": 0}
     for ind in range(5):
         aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{ind}.jsonl"
-        if not os.path.exist(aug_filepath):
+        if not os.path.exists(aug_filepath):
             print(f"not exists: {aug_filepath}")
             continue
         pert_prompts = load_prompts(aug_filepath)
