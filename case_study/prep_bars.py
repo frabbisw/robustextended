@@ -71,11 +71,14 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
     
 
 
-def show_plot(data, lang, K):
-    for aug_type in data.keys():
-        for j in data[aug_type].keys():
-            for t in data[aug_type][j].keys():
-                data[aug_type][j][t] = int(sum(data[aug_type][j][t]) >= K)
+def show_plot(stat, lang, K):
+    data = {}
+    for aug_type in stat.keys():
+        for j in stat[aug_type].keys():
+            for t in stat[aug_type][j].keys():
+                if t not in data[aug_type].keys():
+                    data[aug_type][t] = 0
+                data[aug_type][t] += int(data[aug_type][j][t] >= K)
             
     print(data)
     # Prepare data
