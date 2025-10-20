@@ -74,6 +74,7 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
 def show_plot(stat, lang, K):
     data = {}
     for aug_type in stat.keys():
+        data[aug_type] = None
         for j in stat[aug_type].keys():
             for t in stat[aug_type][j].keys():
                 if t not in data[aug_type].keys():
