@@ -52,7 +52,7 @@ nominal_map = get_nominal_map(lang, "nominal", model_name)
 
 stat = {}
 for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
-    # stat[aug_type] = {"nominal": {}, "perturbed": {}, "fixed": {}}
+    stat[aug_type] = {}
     for ind in range(5):
         aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{ind}.jsonl"
         pert_prompts = load_prompts(aug_filepath)
@@ -64,8 +64,9 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
                 stat[aug_type][j]["nominal"].append(int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"]))
                 stat[aug_type][j]["perturbed"].append(int(pert_prompts[j]["passed_evalplus"]))
                 stat[aug_type][j]["fixed"].append(int(pert_prompts[j]["passed_evalplus_processed"]))
-            except:
-                print("does not exist:", aug_filepath)
+            except Exception as e:
+                print(e)
+                print(aug_filepath)
                 exit(0)
     
 
