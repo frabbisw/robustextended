@@ -84,7 +84,7 @@ def show_plot(stat, lang, K):
     perturbations = list(data.keys())
     x = np.arange(len(perturbations))
     width = 0.25
-    total = 164 * 5
+    total = 164
     
     nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
     perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
