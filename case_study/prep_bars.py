@@ -65,7 +65,7 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
                 stat[aug_type][j]["perturbed"].append(int(pert_prompts[j]["passed_evalplus"]))
                 stat[aug_type][j]["fixed"].append(int(pert_prompts[j]["passed_evalplus_processed"]))
             except:
-                print(aug_filepath)
+                print("does not exist:", aug_filepath)
                 exit(0)
     
 
