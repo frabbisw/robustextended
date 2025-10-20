@@ -97,6 +97,6 @@ def show_plot(data, lang):
     fig.tight_layout()
     
     # Save as high-resolution figure
-    plt.savefig(f"figures/{lang}.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"figures/{lang}_prep_bar.png", dpi=300, bbox_inches='tight')
 
 show_plot(stat, lang)
