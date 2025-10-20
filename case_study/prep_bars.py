@@ -52,22 +52,30 @@ nominal_map = get_nominal_map(lang, "nominal", model_name)
 
 stat = {}
 for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
-    stat[aug_type] = {"nominal": 0, "perturbed": 0, "fixed": 0}
+    # stat[aug_type] = {"nominal": {}, "perturbed": {}, "fixed": {}}
     for ind in range(5):
         aug_filepath = f"{DATASET_PATH}/{model_name}/backup/{lang}/{pert_type}/{aug_type}/f_s{ind}.jsonl"
         pert_prompts = load_prompts(aug_filepath)
         for j, p in enumerate(pert_prompts):            
             try:
-                stat[aug_type]["nominal"] += int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"])
-                stat[aug_type]["perturbed"] += int(pert_prompts[j]["passed_evalplus"])
-                stat[aug_type]["fixed"] += int(pert_prompts[j]["passed_evalplus_processed"])
+                if j not in stat[aug_type].keys():
+                    stat[aug_type][j] = {"nominal": [], "perturbed": [], "fixed": []}
+                    
+                stat[aug_type][j]["nominal"].append(int(nominal_map[pert_prompts[j]["task_id"]]["passed_evalplus"]))
+                stat[aug_type][j]["perturbed"].append(int(pert_prompts[j]["passed_evalplus"]))
+                stat[aug_type][j]["fixed"].append(int(pert_prompts[j]["passed_evalplus_processed"]))
             except:
                 print(aug_filepath)
                 exit(0)
     
 
 
-def show_plot(data, lang):
+def show_plot(data, lang, K):
+    for aug_type in data.keys():
+        for j in data[aug_type].keys():
+            for t in data[aug_type][j].keys():
+                data[aug_type][j][t] = int(sum(data[aug_type][j][t]) >= K)
+            
     print(data)
     # Prepare data
     perturbations = list(data.keys())
@@ -99,4 +107,4 @@ def show_plot(data, lang):
     # Save as high-resolution figure
     plt.savefig(f"figures/{lang}_prep_bar.png", dpi=300, bbox_inches='tight')
 
-show_plot(stat, lang)
+show_plot(stat, lang, 3)
