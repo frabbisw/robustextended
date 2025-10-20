@@ -68,11 +68,12 @@ for aug_type in os.listdir(f"{DATASET_PATH}/{model_name}/generated_pass5_1/{lang
 
 
 def show_plot(data, lang):
+    print(data)
     # Prepare data
     perturbations = list(data.keys())
     x = np.arange(len(perturbations))
     width = 0.25
-    total = 450
+    total = 164 * 5
     
     nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
     perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
@@ -86,8 +87,8 @@ def show_plot(data, lang):
     ax.bar(x + width, fixed_pct, width, label='Fixed', color='#55a868')
     
     # Customize
-    ax.set_ylabel('Pass Rate (%)')
-    ax.set_title('Pass Rate Comparison: Nominal vs Perturbed vs Fixed Prompts')
+    ax.set_ylabel('Pass3@5 (%)')
+    # ax.set_title('Pass Rate Comparison: Nominal vs Perturbed vs Fixed Prompts')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
     ax.set_ylim(0, 100)
