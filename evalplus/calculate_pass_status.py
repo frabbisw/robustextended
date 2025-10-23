@@ -350,10 +350,12 @@ def test_file(generated_path, lang):
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
+                print("entering to ep")
                 main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
                 solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
                 passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
             elif test_case == "he":
+                print("entering to he")
                 main_class = generated_data[i]["test"]
                 passed_status, run_status = test_java_he(gc, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
