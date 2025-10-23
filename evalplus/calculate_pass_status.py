@@ -298,20 +298,20 @@ def test_js(gc, main, entry_point):
 
 def filter_gc(gc):
     print(gc)
-    print("--")
+    print("301")
     stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
     for st, et in stop_tokens:
         if st in gc:
             gc = gc[gc.find(st)+len(st):]
             print(gc)
-            print("--")
+            print("307")
         if et in gc:
             gc = gc[:gc.find(et)]
             print(gc)
-            print("--")
+            print("311")
 
     print(gc)
-    print("--")
+    print("314")
     exit(1)
     return gc.strip()
 
