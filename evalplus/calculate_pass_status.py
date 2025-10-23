@@ -335,7 +335,7 @@ def test_file(generated_path, lang):
     result = {}
     for i in tq(range(164)):
         # <｜begin▁of▁sentence｜>
-        print(gc)
+        print(generated_data[i]["gc"])
         print("**")
         gc = filter_gc(generated_data[i]["gc"])
         print(gc)
