@@ -13,7 +13,7 @@ if test_case is None or len(test_case) < 2:
     test_case = "ep"
 
 task_name = f"{lang}_{model_name}"
-task_command = f"python calculate_pass_status.py {model_name} {lang} {testing_folder_number}"
+task_command = f"python calculate_pass_status.py {model_name} {lang} {testing_folder_number} {task_name}"
 
 with open("evalplus/sbatch_template.sh", "r") as f:
   template = f.read()
