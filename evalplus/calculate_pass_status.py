@@ -168,15 +168,17 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
 
     except subprocess.CalledProcessError as e:
         print("170 --")
-        print("here is error")
         print(str(e))
-        exit(1)
         return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
-        print(170)
+        print(str(e))
+        print(175)
+        exit(1)
         return 0, CODE_RUN_STATUS["TIMEOUT"]
     except Exception as e:
-        print(170)
+        print(str(e))
+        print(180)
+        exit(1)
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 
