@@ -115,6 +115,58 @@ def test_java(solution, org_sol, main, new_entry_point, old_entry_point):
     except Exception as e:
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
+def test_java_he(solution, main, new_entry_point, old_entry_point):
+    backup = solution
+    start_index = solution.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = solution.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(solution)
+
+    solution = solution[start_index:end_index]
+
+    if f"</code>" in solution:
+        solution = solution[:solution.find("</code>")]
+    if f"<code>" in solution:
+        solution = solution[solution.find("<code>"):]
+
+    solution = eliminate_second_Sollution(solution)
+    solution = solution.replace(new_entry_point, old_entry_point)
+    with open(f"../{testing_folder}/Main.java", "w") as f:
+        f.write(main)
+    with open(f"../{testing_folder}/Solution.java", "w") as f:
+        f.write(solution)
+    os.chdir(f"../{testing_folder}/")
+    try:
+        compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['java', 'Main'], timeout=5, capture_output=True)
+        try:
+            subprocess.run(['rm', f'../{testing_folder}/Solution.class', f'../{testing_folder}/Main.class'], capture_output=False)
+
+        except:
+            None
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif len(output.stderr) > 10:
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+
 
 def test_cpp(code, main, entry_point):
     code = code.replace("usingnamespace", "using namespace")
@@ -265,7 +317,10 @@ def test_file(generated_path, lang):
         gc = filter_gc(generated_data[i]["gc"])
         if lang == "js":
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-            main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+            if test_case == "ep":
+                main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+            elif test_case == "he":
+                main_method = generated_data[i]["test"]
             passed_status, run_status = test_js(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "cpp":
             if generated_data[i]["task_id"] == "CPP/32":
@@ -273,15 +328,22 @@ def test_file(generated_path, lang):
             # if generated_data[i]["task_id"] in ["CPP/32", "CPP/87", "CPP/137"]:
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-            main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+            if test_case == "ep":
+                main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+            elif test_case == "he":
+                main_method = generated_data[i]["test"]
             passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "java":
             # if generated_data[i]["task_id"] in ["Java/32", "Java/87", "Java/55", "Java/63"]:
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
-            main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
-            solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
-            passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            if test_case == "ep":
+                main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
+                solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
+                passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+            elif test_case == "he":
+                main_class = generated_data[i]["test"]
+                passed_status, run_status = test_java(gc, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         #     passed_status, run_status = test_cpp(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
         # elif lang == "java":
@@ -328,6 +390,9 @@ methods = ["nlaugmenter", "natgen", "format", "func_name"]
 model_name = sys.argv[1]
 lang_name = sys.argv[2]
 testing_folder = f"testing_dir{sys.argv[3]}"
+test_case = sys.argv[4]
+if test_case in None or len(test_case) < 2:
+    test_case = "ep"
 print(model_name, lang_name)
 
 datasets_path = f"../datasets/{model_name}/generated_pass5_1"
