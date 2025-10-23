@@ -191,6 +191,12 @@ def test_cpp(code, main, entry_point):
     if f"<code>" in code:
         code = code[code.find("<code>"):]
 
+    print(code)
+    print("----")
+    print(main)
+    print("===")
+    
+    
     cmnt_index = code.find("/*")
     cmnt_index = code.find("/*", cmnt_index + 5)
     if cmnt_index > 0:
