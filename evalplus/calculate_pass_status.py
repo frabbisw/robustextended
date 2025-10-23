@@ -116,9 +116,6 @@ def test_java(solution, org_sol, main, new_entry_point, old_entry_point):
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 def test_java_he(solution, main, new_entry_point, old_entry_point):
-    print(solution)
-    print("---")
-
     backup = solution
     start_index = solution.find("<|endoftext|>")
     if start_index < 0:
@@ -140,9 +137,6 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
 
     solution = eliminate_second_Sollution(solution)
 
-    print(solution)
-    print("---")
-    
     solution = solution.replace(new_entry_point, old_entry_point)
     with open(f"../{testing_folder}/Main.java", "w") as f:
         f.write(main)
@@ -152,13 +146,6 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
-            print("148")
-            print(solution)
-            print("---")
-            print(main)
-            print("===")
-            print(str(compilation_output.stderr).lower())
-            exit(1)
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
         output = subprocess.run(['java', 'Main'], timeout=5, capture_output=True)
@@ -168,24 +155,17 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
         except:
             None
         if "assertion" in str(output.stderr).lower():
-            print(159)
-            print(str(output.stderr).lower())
             return 0, CODE_RUN_STATUS["ASSERTION"]
         elif len(output.stderr) > 10:
-            print(163)
-            print(str(output.stderr).lower())
             return 0, CODE_RUN_STATUS["RUNTIME"]
         else:
             return 1, CODE_RUN_STATUS["PASSED"]
 
     except subprocess.CalledProcessError as e:
-        print(str(e))
         return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
-        print(str(e))
         return 0, CODE_RUN_STATUS["TIMEOUT"]
     except Exception as e:
-        print(str(e))
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 
@@ -317,12 +297,16 @@ def test_js(gc, main, entry_point):
         return 0, CODE_RUN_STATUS["TIMEOUT"]
 
 def filter_gc(gc):
+    print(gc)
+    print("--")
     stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
     for st, et in stop_tokens:
         if st in gc:
             gc = gc[gc.find(st)+len(st):]
         if et in gc:
             gc = gc[:gc.find(et)]
+    print(gc)
+    exit(1)
     return gc.strip()
 
 def test_file(generated_path, lang):
@@ -335,11 +319,7 @@ def test_file(generated_path, lang):
     result = {}
     for i in tq(range(164)):
         # <｜begin▁of▁sentence｜>
-        print(generated_data[i]["gc"])
-        print("**")
         gc = filter_gc(generated_data[i]["gc"])
-        print(gc)
-        print("**")
         if lang == "js":
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
@@ -376,7 +356,7 @@ def test_file(generated_path, lang):
         #     assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
         #     passed_status, run_status = test_java(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
-        generated_data[i]["gc"] = gc
+        # generated_data[i]["gc"] = gc
         if test_case == "ep":
             generated_data[i]["passed_evalplus"] = passed_status
             generated_data[i]["run_status_evalplus"] = run_status
