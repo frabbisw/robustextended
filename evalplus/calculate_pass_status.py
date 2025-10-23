@@ -350,9 +350,13 @@ def test_file(generated_path, lang):
         #     assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
         #     passed_status, run_status = test_java(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
-        generated_data[i]["passed_evalplus"] = passed_status
         generated_data[i]["gc"] = gc
-        generated_data[i]["run_status_evalplus"] = run_status
+        if test_case == "ep":
+            generated_data[i]["passed_evalplus"] = passed_status
+            generated_data[i]["run_status_evalplus"] = run_status
+        elif test_case == "he":
+            generated_data[i]["passed_he"] = passed_status
+            generated_data[i]["run_status_he"] = run_status
     return generated_data
 
 def test_aug_method(directory, lang):
