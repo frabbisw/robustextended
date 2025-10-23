@@ -190,12 +190,6 @@ def test_cpp(code, main, entry_point):
         code = code[:code.find("</code>")]
     if f"<code>" in code:
         code = code[code.find("<code>"):]
-
-    print(code)
-    print("----")
-    print(main)
-    print("===")
-    
     
     cmnt_index = code.find("/*")
     cmnt_index = code.find("/*", cmnt_index + 5)
@@ -244,6 +238,71 @@ def test_cpp(code, main, entry_point):
     except Exception as e:
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
+def test_cpp_he(code, main, entry_point):
+    code = code.replace("usingnamespace", "using namespace")
+    code = code.replace("using std;", "using namespace std;")
+
+    start_index = code.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = code.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(code)
+
+    code = code[start_index:end_index]
+
+    if f"</code>" in code:
+        code = code[:code.find("</code>")]
+    if f"<code>" in code:
+        code = code[code.find("<code>"):]
+    
+    cmnt_index = code.find("/*")
+    cmnt_index = code.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        code = code[:cmnt_index]
+    if "int main()" in code:
+        code = code[:code.find("int main()")]
+
+    main = code + "\n\n" + main
+    
+    # print(code)
+    # print(main)
+
+    with open(f"../{testing_folder}/cpp_code.cpp", "w") as f:
+        f.write(main)
+    os.chdir(f"../{testing_folder}/")
+
+    try:
+        if os.path.exists(f'../{testing_folder}/cpp_code'):
+            subprocess.run(['rm', f'../{testing_folder}/cpp_code'], capture_output=False)
+    except:
+        None
+
+    try:
+        compilation_output = subprocess.run(['g++', '-o', 'cpp_code', 'cpp_code.cpp', '-lcrypto', '-lssl'], timeout=60, capture_output=True)
+        if "error" in str(compilation_output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+
+        output = subprocess.run(['./cpp_code'], timeout=8, capture_output=True)
+
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "segmentation fault" in str(output.stderr).lower() or "error" in str(output.stderr).lower() or "terminate" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["RUNTIME"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+    except Exception as e:
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+        
 def test_js(gc, main, entry_point):
     start_index = gc.find("<|endoftext|>")
     if start_index < 0:
@@ -281,6 +340,61 @@ def test_js(gc, main, entry_point):
     else:
         gc = gc.replace(entry_point, "generatedMethodName")
     main = main.replace("###GENERATEDCODE###", gc)
+
+    with open(f"../{testing_folder}/Sample.js", "w") as f:
+        f.write(main)
+    os.chdir(f"../{testing_folder}/")
+    try:
+        # if task_id == "JavaScript/162":
+        #     subprocess.run(['npm', ' install', 'ts-md5', '--save'], capture_output=True)
+        output = subprocess.run(['node', 'Sample.js'], timeout=8, capture_output=True)
+        # print(full_code)
+        if "assertion" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["ASSERTION"]
+        elif "error" in str(output.stderr).lower():
+            return 0, CODE_RUN_STATUS["COMPILATION"]
+        else:
+            return 1, CODE_RUN_STATUS["PASSED"]
+
+    except subprocess.CalledProcessError as e:
+        return 0, CODE_RUN_STATUS["COMPILATION"]
+    except subprocess.TimeoutExpired as e:
+        return 0, CODE_RUN_STATUS["TIMEOUT"]
+
+def test_js_he(gc, main, entry_point):
+    start_index = gc.find("<|endoftext|>")
+    if start_index < 0:
+        start_index = 0
+    elif start_index < 5:
+        start_index = start_index + len("<|endoftext|>")
+    else:
+        start_index = 0
+    end_index = gc.rfind("<|endoftext|>")
+    if end_index < 5:
+        end_index = len(gc)
+
+    gc = gc[start_index:end_index]
+    # if "\n}" in gc:
+    #     gc = gc[:1+gc.find("\n}")]
+
+    if f"</code>" in gc:
+        gc = gc[:gc.find("</code>")]
+    if f"<code>" in gc:
+        gc = gc[gc.find("<code>"):]
+
+    cmnt_index = gc.find("/*")
+    cmnt_index = gc.find("/*", cmnt_index + 5)
+    if cmnt_index > 0:
+        gc = gc[:cmnt_index]
+    gc = gc.replace(" \\\n", "\n")
+
+    if "//" in gc:
+        if "/*" and "*/" not in gc:
+            line_cmnt = gc.find(f"//", gc.find("const"))
+            if line_cmnt > 0:
+                gc = gc[:line_cmnt]
+
+    main = gc + "\n\n" + main
 
     with open(f"../{testing_folder}/Sample.js", "w") as f:
         f.write(main)
