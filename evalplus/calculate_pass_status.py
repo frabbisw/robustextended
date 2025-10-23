@@ -303,9 +303,15 @@ def filter_gc(gc):
     for st, et in stop_tokens:
         if st in gc:
             gc = gc[gc.find(st)+len(st):]
+            print(gc)
+            print("--")
         if et in gc:
             gc = gc[:gc.find(et)]
+            print(gc)
+            print("--")
+
     print(gc)
+    print("--")
     exit(1)
     return gc.strip()
 
