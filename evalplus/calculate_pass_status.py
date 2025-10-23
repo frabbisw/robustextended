@@ -441,9 +441,10 @@ def test_file(generated_path, lang):
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
                 main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+                passed_status, run_status = test_js(gc, main_method, generated_data[i]["entry_point"])
             elif test_case == "he":
                 main_method = generated_data[i]["test"]
-            passed_status, run_status = test_js(gc, main_method, generated_data[i]["entry_point"])
+                passed_status, run_status = test_js_he(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "cpp":
             if generated_data[i]["task_id"] == "CPP/32":
                 generated_data[i]["entry_point"] = "find_zero"
@@ -452,9 +453,10 @@ def test_file(generated_path, lang):
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
                 main_method = get_evalplus_test_cases(lang, generated_data[i]["task_id"])
+                passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
             elif test_case == "he":
                 main_method = generated_data[i]["test"]
-            passed_status, run_status = test_cpp(gc, main_method, generated_data[i]["entry_point"])
+                passed_status, run_status = test_cpp_he(gc, main_method, generated_data[i]["entry_point"])
         elif lang == "java":
             # if generated_data[i]["task_id"] in ["Java/32", "Java/87", "Java/55", "Java/63"]:
             #     continue
