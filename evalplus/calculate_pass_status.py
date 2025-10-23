@@ -167,7 +167,7 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
             return 1, CODE_RUN_STATUS["PASSED"]
 
     except subprocess.CalledProcessError as e:
-        print(170)
+        print("170 --")
         print("here is error")
         print(str(e))
         exit(1)
