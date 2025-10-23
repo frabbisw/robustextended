@@ -2,7 +2,7 @@
 
 #SBATCH -J {task_name}
 #SBATCH -n4
-#SBATCH --mem=10GB
+#SBATCH --mem=25GB
 #SBATCH --gpus=0
 #SBATCH --time=<TIME>
 #SBATCH -o _%x%J.out
