@@ -395,7 +395,8 @@ model_name = sys.argv[1]
 lang_name = sys.argv[2]
 testing_folder = f"testing_dir{sys.argv[3]}"
 test_case = sys.argv[4]
-if test_case in None or len(test_case) < 2:
+if test_case is None or len(test_case) < 2:
+    print("no test_case is selected. selecting ep by default")
     test_case = "ep"
 print(model_name, lang_name)
 
