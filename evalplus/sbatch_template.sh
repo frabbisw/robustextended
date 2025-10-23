@@ -18,6 +18,8 @@ module load python/3.11.6
 module load cuda/12.3.2
 module load anaconda/3.2024.10.1
 
+export PATH="$HOME/my-nodejs/bin:$PATH"
+
 eval "$(conda shell.bash hook)"
 
 conda activate code_trans
