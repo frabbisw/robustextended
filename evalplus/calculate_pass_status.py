@@ -116,6 +116,9 @@ def test_java(solution, org_sol, main, new_entry_point, old_entry_point):
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 def test_java_he(solution, main, new_entry_point, old_entry_point):
+    print(solution)
+    print("---")
+
     backup = solution
     start_index = solution.find("<|endoftext|>")
     if start_index < 0:
@@ -136,6 +139,10 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
         solution = solution[solution.find("<code>"):]
 
     solution = eliminate_second_Sollution(solution)
+
+    print(solution)
+    print("---")
+    
     solution = solution.replace(new_entry_point, old_entry_point)
     with open(f"../{testing_folder}/Main.java", "w") as f:
         f.write(main)
