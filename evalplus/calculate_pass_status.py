@@ -304,9 +304,6 @@ def filter_gc(gc):
         if st in gc:
             gc = gc[gc.find(st)+len(st):]
 
-    print(gc)
-    print("314")
-    exit(1)
     return gc.strip()
 
 def test_file(generated_path, lang):
