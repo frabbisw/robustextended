@@ -335,7 +335,11 @@ def test_file(generated_path, lang):
     result = {}
     for i in tq(range(164)):
         # <｜begin▁of▁sentence｜>
+        print(gc)
+        print("**")
         gc = filter_gc(generated_data[i]["gc"])
+        print(gc)
+        print("**")
         if lang == "js":
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
