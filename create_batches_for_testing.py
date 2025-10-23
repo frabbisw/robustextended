@@ -13,7 +13,7 @@ if test_case not in ["he", "ep"]:
     test_case = "ep"
 
 task_name = f"{lang}_{model_name}"
-task_command = f"python calculate_pass_status.py {model_name} {lang} {testing_folder_number} {task_name} {test_case}"
+task_command = f"python calculate_pass_status.py {model_name} {lang} {testing_folder_number} {test_case}"
 
 with open("evalplus/sbatch_template.sh", "r") as f:
   template = f.read()
