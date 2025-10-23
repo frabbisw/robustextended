@@ -146,7 +146,12 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
             print("148")
+            print(solution)
+            print("---")
+            print(main)
+            print("===")
             print(str(compilation_output.stderr).lower())
+            exit(1)
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
         output = subprocess.run(['java', 'Main'], timeout=5, capture_output=True)
@@ -167,18 +172,13 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
             return 1, CODE_RUN_STATUS["PASSED"]
 
     except subprocess.CalledProcessError as e:
-        print("170 --")
         print(str(e))
         return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
         print(str(e))
-        print(175)
-        exit(1)
         return 0, CODE_RUN_STATUS["TIMEOUT"]
     except Exception as e:
         print(str(e))
-        print(180)
-        exit(1)
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 
@@ -352,7 +352,6 @@ def test_file(generated_path, lang):
             #     continue
             assert generated_data[i]["task_id"] == nominal_data[i]["task_id"]
             if test_case == "ep":
-                print("entering to ep")
                 main_class = get_evalplus_main_class_for_java(generated_data[i]["task_id"])
                 solution_class = get_evalplus_slution_for_java(generated_data[i]["task_id"])
                 passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
