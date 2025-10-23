@@ -8,6 +8,9 @@ TL = sys.argv[1]
 model_name = sys.argv[2]
 lang = sys.argv[3]
 testing_folder_number = sys.argv[4]
+test_case = sys.argv[4]
+if test_case is None or len(test_case) < 2:
+    test_case = "ep"
 
 task_name = f"{lang}_{model_name}"
 task_command = f"python calculate_pass_status.py {model_name} {lang} {testing_folder_number}"
