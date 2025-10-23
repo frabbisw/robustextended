@@ -145,6 +145,8 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
     try:
         compilation_output = subprocess.run(['javac', 'Main.java', 'Solution.java'], timeout=20, capture_output=True)
         if "error" in str(compilation_output.stderr).lower():
+            print("148")
+            print(str(compilation_output.stderr).lower())
             return 0, CODE_RUN_STATUS["COMPILATION"]
 
         output = subprocess.run(['java', 'Main'], timeout=5, capture_output=True)
@@ -154,17 +156,24 @@ def test_java_he(solution, main, new_entry_point, old_entry_point):
         except:
             None
         if "assertion" in str(output.stderr).lower():
+            print(159)
+            print(str(output.stderr).lower())
             return 0, CODE_RUN_STATUS["ASSERTION"]
         elif len(output.stderr) > 10:
+            print(163)
+            print(str(output.stderr).lower())
             return 0, CODE_RUN_STATUS["RUNTIME"]
         else:
             return 1, CODE_RUN_STATUS["PASSED"]
 
     except subprocess.CalledProcessError as e:
+        print(170)
         return 0, CODE_RUN_STATUS["COMPILATION"]
     except subprocess.TimeoutExpired as e:
+        print(170)
         return 0, CODE_RUN_STATUS["TIMEOUT"]
     except Exception as e:
+        print(170)
         return 0, CODE_RUN_STATUS["COMPILATION"]
 
 
