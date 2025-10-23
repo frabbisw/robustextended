@@ -343,7 +343,7 @@ def test_file(generated_path, lang):
                 passed_status, run_status = test_java(gc, solution_class, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
             elif test_case == "he":
                 main_class = generated_data[i]["test"]
-                passed_status, run_status = test_java(gc, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
+                passed_status, run_status = test_java_he(gc, main_class, generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
 
         #     passed_status, run_status = test_cpp(generated_data[i]["gc"], generated_data[i]["test"], generated_data[i]["entry_point"], nominal_data[i]["entry_point"])
         # elif lang == "java":
