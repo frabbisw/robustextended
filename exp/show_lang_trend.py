@@ -230,9 +230,48 @@ qwencoder = [java_sum_qn, cpp_sum_qn, js_sum_qn]
 magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 
 # model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
+# model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 # model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 
-print(magicoder7b)
+import matplotlib.pyplot as plt
+
+# Example structure (replace with your actual 6 datasets)
+models = [incoder1b, incoder6b, codegen2b, codegen6b, qwencode, magicoder7b]
+model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi", "QwenCode", "Magicoder-7B"]
+
+languages = ["Java", "C++", "JS"]
+perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
+colors = ["#0072B2", "#D55E00", "#009E73", "#CC79A7"]
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+axes = axes.flatten()
+
+for i, (ax, model_data, model_name) in enumerate(zip(axes, models, model_names)):
+    for lang_data, lang_label in zip(model_data, languages):
+        nominal = lang_data["nominal"]
+        for pert, color in zip(perturbations, colors):
+            rd_val = lang_data[pert][1]  # RD@k
+            ax.scatter(nominal, rd_val, color=color, s=60, alpha=0.8)
+            ax.text(nominal + 0.005, rd_val, lang_label, fontsize=7)
+
+    ax.plot([0, 1], [0, 1], "k--", alpha=0.4)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.set_title(model_name, fontsize=12)
+    ax.set_xlabel("Nominal", fontsize=10)
+    ax.set_ylabel("RD@k", fontsize=10)
+    ax.grid(alpha=0.3)
+
+# Single legend for all subplots
+handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=p, markersize=8)
+           for c, p in zip(colors, perturbations)]
+fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
+
+fig.suptitle("Nominal vs Robustness (RD@k) Across Models and Languages", fontsize=14, y=1.02)
+plt.tight_layout()
+plt.savefig("figures/nominal_vs_rd_all_models.png", dpi=300, bbox_inches="tight")
+plt.close()
+
+# print(magicoder7b)
 
 # prepare_fishers_table(model_dict)
