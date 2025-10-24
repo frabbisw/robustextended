@@ -298,7 +298,7 @@ def show_24_plots(models, model_names):
     
             # Labels and formatting
             if row == 0:
-                ax.set_title(pert, fontsize=12, fontweight="bold")
+                ax.set_title(perturbation_names[col], fontsize=12, fontweight="bold")
             if col == 0:
                 ax.set_ylabel(model_name, fontsize=11, fontweight="bold")
     
