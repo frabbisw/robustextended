@@ -322,4 +322,59 @@ def show_24_plots(models, model_names):
     plt.savefig("figures/nominal_vs_rd_6models_4perturbations.png", dpi=300, bbox_inches="tight")
     plt.close()
 
-show_24_plots(models, model_names)
+def show_24_bar_plots_rd(models, model_names):
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    languages = ["Java", "C++", "JS"]
+    perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
+    perturbation_names = ["DocString", "Syntax", "Format", "FuncName"]
+    colors = ["#0072B2", "#D55E00", "#009E73"]  # one per language
+
+    fig, axes = plt.subplots(6, 4, figsize=(16, 18), sharex=True, sharey=True)
+    plt.subplots_adjust(hspace=0.4, wspace=0.25)
+
+    width = 0.25  # width of bars
+
+    for row, (model_data, model_name) in enumerate(zip(models, model_names)):
+        for col, pert in enumerate(perturbations):
+            ax = axes[row, col]
+            x = np.arange(len(languages))  # 3 languages per group
+
+            # Collect robustness drop values (RD@k)
+            rd_values = [lang_data[pert][1] for lang_data in model_data]
+
+            # Bar chart for each language
+            bars = ax.bar(x, rd_values, color=colors, width=width, alpha=0.85)
+
+            # Annotate bars with values
+            for bar in bars:
+                height = bar.get_height()
+                ax.text(bar.get_x() + bar.get_width()/2, height + 0.01,
+                        f"{height:.2f}", ha='center', va='bottom', fontsize=7)
+
+            # Formatting
+            if row == 0:
+                ax.set_title(perturbation_names[col], fontsize=12, fontweight="bold")
+            if col == 0:
+                ax.set_ylabel(model_name, fontsize=11, fontweight="bold")
+
+            ax.set_xticks(x)
+            ax.set_xticklabels(languages, fontsize=9)
+            ax.set_ylim(0, 1)
+            ax.grid(alpha=0.3, axis="y")
+
+    # Common Y label
+    fig.text(0.04, 0.5, "Robustness Drop (RD5@1)", va="center", rotation="vertical",
+             fontsize=12, fontweight="bold")
+
+    # Shared legend
+    handles = [plt.Rectangle((0, 0), 1, 1, color=c, label=l) for c, l in zip(colors, languages)]
+    fig.legend(handles=handles, loc='lower center', ncol=3, fontsize=10, frameon=False)
+
+    plt.tight_layout(rect=[0.05, 0.05, 1, 0.97])
+    plt.savefig("figures/robustness_drop_grid_6models_4perturbations.png",
+                dpi=300, bbox_inches="tight")
+    plt.close()
+
+show_24_bar_plots_rd(models, model_names)
