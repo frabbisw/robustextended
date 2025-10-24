@@ -275,12 +275,6 @@ def show_six_plots(models, model_names):
     plt.close()
     
 def show_24_plots(models, model_names):
-    import matplotlib.pyplot as plt
-    
-    # Replace with your actual data and names
-    models = [incoder1b, incoder6b, codegen2b, codegen6b, qwencode, magicoder7b]
-    model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi", "QwenCode", "Magicoder-7B"]
-    
     languages = ["Java", "C++", "JS"]
     perturbations = ["DocString", "Syntax", "Format", "FuncName"]
     colors = ["#0072B2", "#D55E00", "#009E73"]  # one per language
