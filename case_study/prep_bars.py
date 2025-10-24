@@ -111,6 +111,6 @@ def show_plot(stat, lang, K):
     # Save as high-resolution figure
     plt.savefig(f"figures/{lang}_prep_bar.png", dpi=300, bbox_inches='tight')
 
-show_plot(get_stat(lang, model_name), "cpp", 5)
-show_plot(get_stat(lang, model_name), "java", 5)
-show_plot(get_stat(lang, model_name), "js", 5)
+show_plot(get_stat("cpp", model_name), "cpp", 5)
+show_plot(get_stat("java", model_name), "java", 5)
+show_plot(get_stat("js", model_name), "js", 5)
