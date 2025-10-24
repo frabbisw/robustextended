@@ -193,6 +193,8 @@ def calculate_metrics_summary(K, T, lang, model_name):
 
     return result_dict, fake_dict
 
+K = 5
+T = 5
 
 sample_size = 164
 
