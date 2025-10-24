@@ -236,7 +236,7 @@ magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 import matplotlib.pyplot as plt
 
 # Example structure (replace with your actual 6 datasets)
-models = [incoder1b, incoder6b, codegen2b, codegen6b, qwencode, magicoder7b]
+models = [incoder1b, incoder6b, codegen2bmulti, codegen6bmulti, qwencoder, magicoder7b]
 model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi", "QwenCode", "Magicoder-7B"]
 
 languages = ["Java", "C++", "JS"]
