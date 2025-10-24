@@ -239,39 +239,92 @@ import matplotlib.pyplot as plt
 models = [incoder1b, incoder6b, codegen2bmulti, codegen6bmulti, qwencoder, magicoder7b]
 model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi", "QwenCode", "Magicoder-7B"]
 
-languages = ["Java", "C++", "JS"]
-perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
-colors = ["#0072B2", "#D55E00", "#009E73", "#CC79A7"]
+def show_six_plots(models, model_names):
+    languages = ["Java", "C++", "JS"]
+    # perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
+    perturbations = ["DocString", "Syntax", "Format", "FuncName"]
+    colors = ["#0072B2", "#D55E00", "#009E73", "#CC79A7"]
+    
+    fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+    axes = axes.flatten()
+    
+    for i, (ax, model_data, model_name) in enumerate(zip(axes, models, model_names)):
+        for lang_data, lang_label in zip(model_data, languages):
+            nominal = lang_data["nominal"]
+            for pert, color in zip(perturbations, colors):
+                rd_val = lang_data[pert][1]  # RD@k
+                ax.scatter(nominal, rd_val, color=color, s=60, alpha=0.8)
+                ax.text(nominal + 0.005, rd_val, lang_label, fontsize=7)
+    
+        ax.plot([0, 1], [0, 1], "k--", alpha=0.4)
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.set_title(model_name, fontsize=12)
+        ax.set_xlabel("Nominal", fontsize=10)
+        ax.set_ylabel("RD@k", fontsize=10)
+        ax.grid(alpha=0.3)
+    
+    # Single legend for all subplots
+    handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=p, markersize=8)
+               for c, p in zip(colors, perturbations)]
+    fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
+    
+    fig.suptitle("Nominal vs Robustness (RD@k) Across Models and Languages", fontsize=14, y=1.02)
+    plt.tight_layout()
+    plt.savefig("figures/nominal_vs_rd_all_models.png", dpi=300, bbox_inches="tight")
+    plt.close()
+    
+def show_24_plots(models, model_names):
+    import matplotlib.pyplot as plt
+    
+    # Replace with your actual data and names
+    models = [incoder1b, incoder6b, codegen2b, codegen6b, qwencode, magicoder7b]
+    model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi", "QwenCode", "Magicoder-7B"]
+    
+    languages = ["Java", "C++", "JS"]
+    perturbations = ["DocString", "Syntax", "Format", "FuncName"]
+    colors = ["#0072B2", "#D55E00", "#009E73"]  # one per language
+    
+    fig, axes = plt.subplots(6, 4, figsize=(16, 18), sharex=True, sharey=True)
+    plt.subplots_adjust(hspace=0.4, wspace=0.25)
+    
+    for row, (model_data, model_name) in enumerate(zip(models, model_names)):
+        for col, pert in enumerate(perturbations):
+            ax = axes[row, col]
+    
+            for lang_data, lang_label, color in zip(model_data, languages, colors):
+                nominal = lang_data["nominal"]
+                rd_val = lang_data[pert][1]  # RD@k
+                ax.scatter(nominal, rd_val, color=color, label=lang_label, s=60)
+                ax.text(nominal + 0.005, rd_val, lang_label, fontsize=7)
+    
+            # Diagonal line for reference
+            ax.plot([0, 1], [0, 1], "k--", alpha=0.3)
+    
+            # Labels and formatting
+            if row == 0:
+                ax.set_title(pert, fontsize=12, fontweight="bold")
+            if col == 0:
+                ax.set_ylabel(model_name, fontsize=11, fontweight="bold")
+    
+            ax.set_xlim(0, 1)
+            ax.set_ylim(0, 1)
+            ax.grid(alpha=0.3)
+    
+    # Common X/Y labels
+    fig.text(0.5, 0.04, "Nominal", ha="center", fontsize=12, fontweight="bold")
+    fig.text(0.04, 0.5, "RD@k", va="center", rotation="vertical", fontsize=12, fontweight="bold")
+    
+    # Shared legend for languages
+    handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=l, markersize=8)
+               for c, l in zip(colors, languages)]
+    fig.legend(handles=handles, loc='lower center', ncol=3, fontsize=10, frameon=False)
+    
+    fig.suptitle("Nominal vs Robustness (RD@k) Across Models, Perturbations, and Languages", fontsize=14, y=0.995)
+    plt.tight_layout(rect=[0.05, 0.05, 1, 0.97])
+    
+    # Save to file
+    plt.savefig("nominal_vs_rd_6models_4perturbations.png", dpi=300, bbox_inches="tight")
+    plt.close()
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 8))
-axes = axes.flatten()
-
-for i, (ax, model_data, model_name) in enumerate(zip(axes, models, model_names)):
-    for lang_data, lang_label in zip(model_data, languages):
-        nominal = lang_data["nominal"]
-        for pert, color in zip(perturbations, colors):
-            rd_val = lang_data[pert][1]  # RD@k
-            ax.scatter(nominal, rd_val, color=color, s=60, alpha=0.8)
-            ax.text(nominal + 0.005, rd_val, lang_label, fontsize=7)
-
-    ax.plot([0, 1], [0, 1], "k--", alpha=0.4)
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.set_title(model_name, fontsize=12)
-    ax.set_xlabel("Nominal", fontsize=10)
-    ax.set_ylabel("RD@k", fontsize=10)
-    ax.grid(alpha=0.3)
-
-# Single legend for all subplots
-handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=p, markersize=8)
-           for c, p in zip(colors, perturbations)]
-fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
-
-fig.suptitle("Nominal vs Robustness (RD@k) Across Models and Languages", fontsize=14, y=1.02)
-plt.tight_layout()
-plt.savefig("figures/nominal_vs_rd_all_models.png", dpi=300, bbox_inches="tight")
-plt.close()
-
-# print(magicoder7b)
-
-# prepare_fishers_table(model_dict)
+show_24_plots(models, model_names)
