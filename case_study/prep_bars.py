@@ -40,7 +40,7 @@ def get_nominal_map(lang, type, model_name):
     
     return {p["task_id"]: p for p in prompts}
         
-lang = sys.argv[1]
+# lang = sys.argv[1]
 model_name = "magicoder7b"
 pert_type = "nlaugmenter"
 
@@ -110,4 +110,6 @@ def show_plot(stat, lang, K):
     # Save as high-resolution figure
     plt.savefig(f"figures/{lang}_prep_bar.png", dpi=300, bbox_inches='tight')
 
-show_plot(stat, lang, 3)
+show_plot(stat, "cpp", 5)
+show_plot(stat, "java", 5)
+show_plot(stat, "js", 5)
