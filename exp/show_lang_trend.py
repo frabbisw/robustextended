@@ -261,7 +261,7 @@ def show_six_plots(models, model_names):
         ax.set_ylim(0, 1)
         ax.set_title(model_name, fontsize=12)
         ax.set_xlabel("Nominal", fontsize=10)
-        ax.set_ylabel("RD@k", fontsize=10)
+        ax.set_ylabel("RD5@1", fontsize=10)
         ax.grid(alpha=0.3)
     
     # Single legend for all subplots
@@ -269,7 +269,7 @@ def show_six_plots(models, model_names):
                for c, p, pn in zip(colors, perturbations, perturbation_names)]
     fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
     
-    fig.suptitle("Nominal vs Robustness (RD@k) Across Models and Languages", fontsize=14, y=1.02)
+    fig.suptitle("Nominal vs Robustness (RD5@1) Across Models and Languages", fontsize=14, y=1.02)
     plt.tight_layout()
     plt.savefig("figures/nominal_vs_rd_all_models.png", dpi=300, bbox_inches="tight")
     plt.close()
@@ -308,14 +308,14 @@ def show_24_plots(models, model_names):
     
     # Common X/Y labels
     fig.text(0.5, 0.04, "Nominal", ha="center", fontsize=12, fontweight="bold")
-    fig.text(0.04, 0.5, "RD@k", va="center", rotation="vertical", fontsize=12, fontweight="bold")
+    fig.text(0.04, 0.5, "RD5@1", va="center", rotation="vertical", fontsize=12, fontweight="bold")
     
     # Shared legend for languages
     handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=l, markersize=8)
                for c, l in zip(colors, languages)]
     fig.legend(handles=handles, loc='lower center', ncol=3, fontsize=10, frameon=False)
     
-    fig.suptitle("Nominal vs Robustness (RD@k) Across Models, Perturbations, and Languages", fontsize=14, y=0.995)
+    fig.suptitle("Nominal vs Robustness (RD5@1) Across Models, Perturbations, and Languages", fontsize=14, y=0.995)
     plt.tight_layout(rect=[0.05, 0.05, 1, 0.97])
     
     # Save to file
