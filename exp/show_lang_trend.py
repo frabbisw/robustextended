@@ -241,8 +241,8 @@ model_names = ["Incoder-1B", "Incoder-6B", "CodeGen-2B-Multi", "CodeGen-6B-Multi
 
 def show_six_plots(models, model_names):
     languages = ["Java", "C++", "JS"]
-    # perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
-    perturbations = ["DocString", "Syntax", "Format", "FuncName"]
+    perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
+    # perturbations = ["DocString", "Syntax", "Format", "FuncName"]
     colors = ["#0072B2", "#D55E00", "#009E73", "#CC79A7"]
     
     fig, axes = plt.subplots(2, 3, figsize=(15, 8))
@@ -265,8 +265,8 @@ def show_six_plots(models, model_names):
         ax.grid(alpha=0.3)
     
     # Single legend for all subplots
-    handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=p, markersize=8)
-               for c, p in zip(colors, perturbations)]
+    handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=pn, markersize=8)
+               for c, p, pn in zip(colors, perturbations, perturbation_names)]
     fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
     
     fig.suptitle("Nominal vs Robustness (RD@k) Across Models and Languages", fontsize=14, y=1.02)
@@ -276,7 +276,8 @@ def show_six_plots(models, model_names):
     
 def show_24_plots(models, model_names):
     languages = ["Java", "C++", "JS"]
-    perturbations = ["DocString", "Syntax", "Format", "FuncName"]
+    perturbations = ["nlaugmenter", "natgen", "format", "func_name"]
+    perturbation_names = ["DocString", "Syntax", "Format", "FuncName"]
     colors = ["#0072B2", "#D55E00", "#009E73"]  # one per language
     
     fig, axes = plt.subplots(6, 4, figsize=(16, 18), sharex=True, sharey=True)
