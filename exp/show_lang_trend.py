@@ -319,7 +319,7 @@ def show_24_plots(models, model_names):
     plt.tight_layout(rect=[0.05, 0.05, 1, 0.97])
     
     # Save to file
-    plt.savefig("nominal_vs_rd_6models_4perturbations.png", dpi=300, bbox_inches="tight")
+    plt.savefig("figures/nominal_vs_rd_6models_4perturbations.png", dpi=300, bbox_inches="tight")
     plt.close()
 
 show_24_plots(models, model_names)
