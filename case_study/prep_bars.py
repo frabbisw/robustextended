@@ -95,10 +95,10 @@ def show_plot(stat, lang, K):
     
     ax.bar(x - width, nominal_pct, width, label='Nominal', color='#8172b2')
     ax.bar(x, perturbed_pct, width, label='Perturbed', color='#4c72b0')
-    ax.bar(x + width, fixed_pct, width, label='Fixed', color='#55a868')
+    ax.bar(x + width, fixed_pct, width, label='Pre-processed', color='#55a868')
     
     # Customize
-    ax.set_ylabel('Pass3@5 (%)')
+    ax.set_ylabel('Pass5@5 (%)')
     # ax.set_title('Pass Rate Comparison: Nominal vs Perturbed vs Fixed Prompts')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
