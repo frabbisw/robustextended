@@ -269,7 +269,7 @@ def show_six_plots(models, model_names):
                for c, p, pn in zip(colors, perturbations, perturbation_names)]
     fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=10)
     
-    fig.suptitle("Nominal vs Robustness (RD5@1) Across Models and Languages", fontsize=14, y=1.02)
+    # fig.suptitle("Nominal vs Robustness (RD5@1) Across Models and Languages", fontsize=14, y=1.02)
     plt.tight_layout()
     plt.savefig("figures/nominal_vs_rd_all_models.png", dpi=300, bbox_inches="tight")
     plt.close()
@@ -315,7 +315,7 @@ def show_24_plots(models, model_names):
                for c, l in zip(colors, languages)]
     fig.legend(handles=handles, loc='lower center', ncol=3, fontsize=10, frameon=False)
     
-    fig.suptitle("Nominal vs Robustness (RD5@1) Across Models, Perturbations, and Languages", fontsize=14, y=0.995)
+    # fig.suptitle("Nominal vs Robustness (RD5@1) Across Models, Perturbations, and Languages", fontsize=14, y=0.995)
     plt.tight_layout(rect=[0.05, 0.05, 1, 0.97])
     
     # Save to file
