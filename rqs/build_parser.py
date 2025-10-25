@@ -1,13 +1,18 @@
+import os
 from tree_sitter import Language
 
-# Build the shared library with three grammars
+# Force modern C++ standard for the compilation
+os.environ["CFLAGS"] = "-std=c++17"
+
 Language.build_library(
-    'my-languages.so',
+    # Output path
+    "my-languages.so",
+    # List of language grammars
     [
-        'tree-sitter-cpp',
-        'tree-sitter-java',
-        'tree-sitter-javascript'
+        "tree-sitter-cpp",
+        "tree-sitter-java",
+        "tree-sitter-javascript"
     ]
 )
 
-print("✅ Successfully built my-languages.so with C++, Java, and JavaScript parsers.")
+print("✅ Successfully rebuilt my-languages.so using C++17 standard.")
