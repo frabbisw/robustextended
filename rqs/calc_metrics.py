@@ -28,9 +28,11 @@ if not os.path.exists("my-languages.so"):
         ],
     )
 
-LANG_CPP = Language("my-languages.so", "cpp")
-LANG_JAVA = Language("my-languages.so", "java")
-LANG_JS = Language("my-languages.so", "javascript")
+LIB_PATH = os.path.join(os.path.dirname(__file__), "my-languages.so")
+
+LANG_CPP = Language(LIB_PATH, "cpp")
+LANG_JAVA = Language(LIB_PATH, "java")
+LANG_JS = Language(LIB_PATH, "javascript")
 
 PARSERS = {"cpp": LANG_CPP, "java": LANG_JAVA, "js": LANG_JS}
 
