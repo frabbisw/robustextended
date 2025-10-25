@@ -10,32 +10,32 @@ from tree_sitter import Language, Parser
 from tiktoken import get_encoding
 
 # ---------------- SETUP ---------------- #
+import os
+from tree_sitter import Language, Parser
+import nltk
+from sentence_transformers import SentenceTransformer
+
+# 1. Import the individual tree-sitter language packages
+import tree_sitter_cpp as tscpp
+import tree_sitter_java as tsjava
+import tree_sitter_javascript as tsjs
+
 # Ensure NLTK data
 nltk.download("punkt", quiet=True)
 
 # Sentence-BERT model for semantic similarity
 model_emb = SentenceTransformer("all-MiniLM-L6-v2")
 
-# ---- Build or load Tree-Sitter multi-language library ---- #
-# Create once: my-languages.so with Java, C++, JS grammars
-if not os.path.exists("my-languages.so"):
-    Language.build_library(
-        "my-languages.so",
-        [
-            "tree-sitter-cpp",
-            "tree-sitter-java",
-            "tree-sitter-javascript",
-        ],
-    )
+LANG_CPP = Language(tscpp.language())
+LANG_JAVA = Language(tsjava.language())
+LANG_JS = Language(tsjs.language())
 
-LIB_PATH = os.path.join(os.path.dirname(__file__), "my-languages.so")
-
-LANG_CPP = Language(LIB_PATH, "cpp")
-LANG_JAVA = Language(LIB_PATH, "java")
-LANG_JS = Language(LIB_PATH, "javascript")
-
-PARSERS = {"cpp": LANG_CPP, "java": LANG_JAVA, "js": LANG_JS}
-
+# Store the language objects in your PARSERS dictionary
+PARSERS = {
+    "cpp": LANG_CPP,
+    "java": LANG_JAVA,
+    "js": LANG_JS
+}
 # ---------------- UTILITIES ---------------- #
 
 def tokenize_code(code: str):
