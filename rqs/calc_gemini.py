@@ -40,7 +40,7 @@ def calculate_percentage_change(nominal_value: int, perturbed_value: int) -> flo
 def calculate_token_level_change(nominal_prompt: str, perturbed_prompt: str) -> float:
     """
     Metric 1.1: Token-level Change Ratio (1.0 = identical, 0.0 = completely different)
-    Measures the similarity between the nominal and perturbed prompts.
+    Measures the similarity between the nominal and perturbed prompts based on token comparison.
     """
     nominal_tokens = simple_tokenize(nominal_prompt)
     perturbed_tokens = simple_tokenize(perturbed_prompt)
@@ -53,13 +53,8 @@ def separate_prompt_sections(prompt: str) -> Dict[str, str]:
     Separates a typical code generation prompt into structured components:
     (Docstring/Comment, Function Name, Code Part)
 
-    The 'func_name' extraction targets the primary function defined in the prompt,
-    which is the focus of the LLM completion task.
-    
-    NOTE: In the analyze_robustness function, the token length for 'func_name'
-    is now overridden by the explicitly passed nominal_func_name and 
-    perturbed_func_name strings. This function is still used to isolate 
-    the 'comment' and 'code_part' for token counting.
+    This function extracts the comment and code parts for later token counting
+    and dissimilarity calculation.
     """
     sections = {
         'func_name': '',
@@ -78,24 +73,13 @@ def separate_prompt_sections(prompt: str) -> Dict[str, str]:
     # 2. Isolate Code Part (Everything that is NOT a comment)
     code_part = comment_pattern.sub('', prompt).strip()
     sections['code_part'] = code_part
-
-    # 3. Isolate Function Name (for completeness, though overridden later)
-    signature_match = re.search(
-        r'(?:class\s+\w+\s*|public\s+|private\s+|static\s+|def\s*|function\s*)\s*(\w+)\s*\(.*?\)', 
-        code_part, 
-        re.IGNORECASE | re.DOTALL
-    )
-
-    if signature_match:
-        sections['func_name'] = signature_match.group(1)
     
     return sections
 
 def calculate_prompt_section_metrics(nominal_prompt: str, perturbed_prompt: str) -> Dict[str, Union[float, int]]:
     """
-    Calculates initial metrics for comment, code_part, and total prompt length.
-    Note: Function name tokens are handled directly in analyze_robustness using
-    the provided nominal_func_name and perturbed_func_name arguments.
+    Calculates initial metrics for comment, code_part, and total prompt length,
+    as well as Similarity and Dissimilarity Ratios for the whole prompt.
     """
     
     nominal_sections = separate_prompt_sections(nominal_prompt)
@@ -126,10 +110,11 @@ def calculate_prompt_section_metrics(nominal_prompt: str, perturbed_prompt: str)
         metrics[f"Prompt_Tokens_Perturbed_{key}"] = token_lengths_perturbed[key]
         metrics[f"Prompt_Tokens_Pct_Change_{key}"] = round(change, 4)
         
-    # Calculate core similarity metrics
-    metrics["Prompt_Token_Similarity_Ratio"] = round(
-        calculate_token_level_change(nominal_prompt, perturbed_prompt), 4
-    )
+    # Calculate core similarity metrics for the TOTAL prompt
+    similarity_ratio = calculate_token_level_change(nominal_prompt, perturbed_prompt)
+    
+    metrics["Prompt_Token_Similarity_Ratio"] = round(similarity_ratio, 4)
+    metrics["Prompt_Token_Dissimilarity_Ratio"] = round(1.0 - similarity_ratio, 4)
     
     # TER (Tokenization Efficiency Ratio) - ratio of total lengths
     if token_lengths_nominal['total'] == 0:
@@ -148,7 +133,6 @@ def calculate_prompt_section_metrics(nominal_prompt: str, perturbed_prompt: str)
 def calculate_cyclomatic_complexity(code: str, language: str = 'python') -> int:
     """
     Metric 2.1: Cyclomatic Complexity (CC) calculated ONLY by keyword counting.
-    This provides a robust, language-agnostic metric across C++, Java, and JavaScript.
     CC is calculated as 1 + total decision points.
     
     Decision Points: if, for, while, else, elif, case, switch, try, catch, finally, &&, ||.
@@ -193,10 +177,10 @@ def calculate_structural_similarity(nominal_code: str, perturbed_code: str) -> f
 def analyze_robustness(
     nominal_prompt: str,
     perturbed_prompt: str,
-    nominal_func_name: str,       # ADDED: Explicit nominal function name
+    nominal_func_name: str,       
     nominal_code: str,
     perturbed_code: str,
-    perturbed_func_name: str,     # ADDED: Explicit perturbed function name
+    perturbed_func_name: str,     
     language: str = 'python',
 ) -> Dict[str, Union[float, int, None]]:
     """
@@ -206,13 +190,14 @@ def analyze_robustness(
     print(f"--- Analyzing Robustness for Language: {language.upper()} ---")
 
     # BEFORE GENERATION METRICS (Metric 1)
-    # Calculate base metrics for total, comment, and code_part
+    # Calculate base metrics for total, comment, and code_part length change
     input_metrics = calculate_prompt_section_metrics(nominal_prompt, perturbed_prompt)
     
-    # Override/Calculate function name token metrics using the provided names
+    # --- Function Name Metrics (Explicitly Provided) ---
     token_lengths_nominal_func_name = calculate_total_token_length(nominal_func_name)
     token_lengths_perturbed_func_name = calculate_total_token_length(perturbed_func_name)
     
+    # 1. Length Change
     change_func_name = calculate_percentage_change(
         token_lengths_nominal_func_name,
         token_lengths_perturbed_func_name
@@ -221,6 +206,28 @@ def analyze_robustness(
     input_metrics["Prompt_Tokens_Nominal_func_name"] = token_lengths_nominal_func_name
     input_metrics["Prompt_Tokens_Perturbed_func_name"] = token_lengths_perturbed_func_name
     input_metrics["Prompt_Tokens_Pct_Change_func_name"] = round(change_func_name, 4)
+
+    # 2. Content Dissimilarity (New Addition)
+    dissimilarity_func_name = 1.0 - calculate_token_level_change(nominal_func_name, perturbed_func_name)
+    input_metrics["Prompt_Token_Dissimilarity_Ratio_func_name"] = round(dissimilarity_func_name, 4)
+    
+    
+    # --- Comment and Code Part Dissimilarity (New Addition) ---
+    nominal_sections = separate_prompt_sections(nominal_prompt)
+    perturbed_sections = separate_prompt_sections(perturbed_prompt)
+    
+    # Comment Dissimilarity
+    dissimilarity_comment = 1.0 - calculate_token_level_change(
+        nominal_sections['docstring_comment'], perturbed_sections['docstring_comment']
+    )
+    input_metrics["Prompt_Token_Dissimilarity_Ratio_comment"] = round(dissimilarity_comment, 4)
+
+    # Code Part Dissimilarity
+    dissimilarity_code_part = 1.0 - calculate_token_level_change(
+        nominal_sections['code_part'], perturbed_sections['code_part']
+    )
+    input_metrics["Prompt_Token_Dissimilarity_Ratio_code_part"] = round(dissimilarity_code_part, 4)
+    
 
     # AFTER GENERATION METRICS (Metric 2 + Others)
     cc_nominal = calculate_cyclomatic_complexity(nominal_code, language)
@@ -251,11 +258,18 @@ def analyze_robustness(
     
     # Print analysis and findings
     print("\n[Type 1: BEFORE GENERATION (Input Analysis)]")
-    print(f"  Similarity Ratio (1.0 is identical): {metrics['Prompt_Token_Similarity_Ratio']}")
+    
+    print("\n  --- Token Content Dissimilarity (Perturbation Shock) ---")
+    print(f"  Total Prompt Dissimilarity Ratio:  {metrics['Prompt_Token_Dissimilarity_Ratio']}")
+    print(f"  Func Name Dissimilarity Ratio:     {metrics['Prompt_Token_Dissimilarity_Ratio_func_name']}")
+    print(f"  Comment Dissimilarity Ratio:       {metrics['Prompt_Token_Dissimilarity_Ratio_comment']}")
+    print(f"  Code Part Dissimilarity Ratio:     {metrics['Prompt_Token_Dissimilarity_Ratio_code_part']}")
+    print("-" * 40)
+    print(f"  Token Similarity Ratio (1.0 is identical): {metrics['Prompt_Token_Similarity_Ratio']}")
+    
+    print("\n  --- Token Length Percentage Change (Length Shock) ---")
     print(f"  Length Ratio (TER) (1.0 is stable): {metrics['Prompt_Length_Ratio (TER)']}")
-    print("\n  --- Token Length Percentage Change (Perturbed vs. Nominal) ---")
     print(f"  Total Prompt Tokens Change: {metrics['Prompt_Tokens_Pct_Change_total']}%")
-    # Display func_name metric using the explicitly passed names
     print(f"  Func Name Tokens Change:    {metrics['Prompt_Tokens_Pct_Change_func_name']}%")
     print(f"  Comment Tokens Change:      {metrics['Prompt_Tokens_Pct_Change_comment']}%")
     print(f"  Code Part Tokens Change:    {metrics['Prompt_Tokens_Pct_Change_code_part']}%")
