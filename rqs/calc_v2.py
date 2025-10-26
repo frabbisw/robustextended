@@ -66,7 +66,12 @@ def token_length_change(code_nom, code_pert):
 def semantic_similarity(text1, text2):
     """Cosine similarity between embeddings."""
     emb1, emb2 = model_emb.encode([text1, text2], convert_to_tensor=True)
-    sim = float(np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2)))
+    
+    # Move tensors to the CPU before using with NumPy
+    emb1_cpu = emb1.cpu()
+    emb2_cpu = emb2.cpu()
+
+    sim = float(np.dot(emb1_cpu, emb2_cpu) / (np.linalg.norm(emb1_cpu) * np.linalg.norm(emb2_cpu)))
     return sim
 
 def parse_with_treesitter(code: str, lang_key: str):
