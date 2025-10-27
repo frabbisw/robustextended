@@ -260,10 +260,10 @@ if __name__ == "__main__":
     res = []
     for lang in langs:
         local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
-        print(local_list)
+        print(len(local_list))
         res += local_list
 
-    visualize_metrics(column_names, res, "func_name")
+    visualize_metrics(res, column_names, "func_name")
     # print(len(res))
     # print(res[0])
   
