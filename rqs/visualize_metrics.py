@@ -304,28 +304,47 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
                 continue
             # change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
             # ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
-            
-            change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
-            ret_list.append([change["nominal_complexity"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+            change_pre = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
+            change_post = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
+            change = change_pre | change_post            
+            ret_list.append(change | {"run_status": RUN_STATUS_MAP[p["run_status_evalplus"]], "lang": lang})
+            # ret_list.append([change[keys[0]], change[keys[1]], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
     return ret_list
 
+def get_a_short_list(stat_list, key_metrics, key_columns):
+    ret_list = []
+    for s stat_list:
+        row = []
+        for m in key_metrics:
+            row.append(s[m])
+        for c in key_columns:
+            row.append(s[c])
+        ret_list.append(row)
+    return ret_list        
+            
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
     dataset_path = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
     model_name = sys.argv[1]
     pert_type = sys.argv[2]
-    aug_type = "FuncRenameButterFinger"
     langs = ["cpp", "java", "js"]
-    column_names = ["nominal_complexity", "perturbed_complexity", "Status", "Language"]
     
-    res = []
-    for lang in langs:
-        local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
-        print(len(local_list))
-        res += local_list
+    stat_list = []
+    for aug_type in os.listdir(f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):        
+        for lang in langs:
+            local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type, )
+            print(len(local_list))
+            stat_list += local_list
 
-    visualize_metrics(res, column_names, "func_name")
+    key_metrics = ["nominal_complexity", "perturbed_complexity"]
+    key_columns = ["run_status", "lang"]
+    column_names = key_metrics + key_columns 
+    small_list = get_a_short_list(stat_list, ["nominal_complexity", "perturbed_complexity"], ["run_status", "lang"])
+    print(len(small_list))
+    print(len(small_list[0]))
+    
+    # visualize_metrics(small_list, column_names, "func_name")
     # print(len(res))
     # print(res[0])
   
