@@ -314,7 +314,7 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
 
 def get_a_short_list(stat_list, key_metrics, key_columns):
     ret_list = []
-    for s stat_list:
+    for s in stat_list:
         row = []
         for m in key_metrics:
             row.append(s[m])
