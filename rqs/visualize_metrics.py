@@ -24,7 +24,7 @@ def load_prompts(filename):
     return prompts
 
 # Visualize
-def visualize_metrics(data_points, column_names, title="Metrics Relationship", filepath=None):
+def visualize_metrics(data_points, column_names, filename, title="Metrics Relationship"):
     """
     Visualize relationships between two metrics, colored by pass status and shaped by language.
     
@@ -86,10 +86,9 @@ def visualize_metrics(data_points, column_names, title="Metrics Relationship", f
     plt.tight_layout()
 
     # Save figure if requested
-    if save_path:
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        plt.savefig(f"figures/{filepath}", dpi=300, bbox_inches="tight")
-        print(f"✅ Figure saved at: figures/{filepath}")
+    os.makedirs(os.path.dirname(f"figures/{filename}.png"), exist_ok=True)
+    plt.savefig(f"figures/{filename}.png", dpi=300, bbox_inches="tight")
+    print(f"✅ Figure saved at: figures/{filename}.png")
 
 # Example
 # data = [
@@ -242,7 +241,7 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
         pert_path = f"{pert_folder}/f_s{i}.jsonl"
         pert_prompts = load_prompts(pert_path)
         for p in pert_prompts:
-            print(f"{p['task_id']}")
+            # print(f"{p['task_id']}")
             if nominal_dict[p["task_id"]]["passed_evalplus"] == 0:
                 continue
             change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
@@ -256,13 +255,15 @@ if __name__ == "__main__":
     pert_type = sys.argv[2]
     aug_type = "FuncRenameButterFinger"
     langs = ["cpp", "java", "js"]
-
+    column_names = ["Function Name Change", "Prompt Change", "Status", "Language"]
+    
     res = []
     for lang in langs:
        res += get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
 
-    print(len(res))
-    print(res[0])
+    visualize_metrics(column_names, res, filepath="func_name")
+    # print(len(res))
+    # print(res[0])
   
 
   
