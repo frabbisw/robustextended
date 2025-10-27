@@ -53,10 +53,9 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
 
     # Define markers for language
     marker_map = {
-        "java": "1",     # circle
-        "cpp": "2",      # square
-        "python": "3",   # diamond
-        "js": "4"        # triangle
+        "java": "|",     # circle
+        "cpp": "_",      # square
+        "js": "x"        # triangle
     }
 
     plt.figure(figsize=(8, 6))
@@ -65,7 +64,9 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     for x, y, status, lang in zip(x_vals, y_vals, statuses, langs):
         color = color_map.get(status, "gray")
         marker = marker_map.get(lang, "x")
-        plt.scatter(x, y, c=color, marker=marker, s=80, edgecolors="black", alpha=0.8)
+        # plt.scatter(x, y, c=color, marker=marker, s=80, edgecolors="black", alpha=0.8)
+        plt.scatter(x, y, c=color, marker=marker, s=80, alpha=0.8)
+
 
     # Labels and title
     plt.xlabel(metric1_name, fontsize=12)
