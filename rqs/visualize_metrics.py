@@ -24,22 +24,28 @@ def load_prompts(filename):
     return prompts
 
 # Visualize
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+import os
+
 def visualize_metrics(data_points, column_names, filename, title="Metrics Relationship"):
     """
     Visualize relationships between two metrics, colored by pass status and shaped by language.
-    
+    Adds big average dots for each language.
+
     Parameters:
         data_points: list of [metric1, metric2, pass_status, language]
         column_names: ["Metric 1 Name", "Metric 2 Name", "Pass Status Label", "Language Label"]
+        filename: name for saving the figure
         title: optional plot title
-        save_path: optional path to save figure (e.g., 'figures/plot.png')
     """
-    
+
     # Extract columns
     metric1_name, metric2_name, _, _ = column_names
     x_vals = [d[0] for d in data_points]
     y_vals = [d[1] for d in data_points]
-    statuses = [d[2] for d in data_points]
+    statuses = [d[2].upper() for d in data_points]
     langs = [d[3].lower() for d in data_points]
 
     # Define colors for pass status
@@ -53,32 +59,58 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
 
     # Define markers for language
     marker_map = {
-        "java": "|",     # circle
-        "cpp": "_",      # square
-        "js": "x"        # triangle
+        "java": "|",
+        "cpp": "_",
+        "js": "x"
     }
 
     plt.figure(figsize=(8, 6))
 
-    # Plot each point
+    # Plot each individual point
     for x, y, status, lang in zip(x_vals, y_vals, statuses, langs):
         color = color_map.get(status, "gray")
         marker = marker_map.get(lang, "x")
-        # plt.scatter(x, y, c=color, marker=marker, s=80, edgecolors="black", alpha=0.8)
         plt.scatter(x, y, c=color, marker=marker, s=80, alpha=0.8)
 
+    # ---- Plot average points per language ----
+    for lang in sorted(set(langs)):
+        indices = [i for i, l in enumerate(langs) if l == lang]
+        if not indices:
+            continue
+        avg_x = np.mean([x_vals[i] for i in indices])
+        avg_y = np.mean([y_vals[i] for i in indices])
 
-    # Labels and title
+        plt.scatter(
+            avg_x, avg_y,
+            s=400,                # Large size for average dot
+            c="gold",             # Gold to make it pop
+            edgecolor="black",
+            alpha=0.9,
+            label=f"{lang.upper()} avg"
+        )
+        plt.text(
+            avg_x, avg_y,
+            lang.upper(),
+            fontsize=9,
+            ha="center",
+            va="center",
+            color="black",
+            fontweight="bold"
+        )
+
+    # ---- Labels and title ----
     plt.xlabel(metric1_name, fontsize=12)
     plt.ylabel(metric2_name, fontsize=12)
     plt.title(title, fontsize=14, fontweight="bold")
 
-    # Legends
+    # ---- Legends ----
     color_patches = [mpatches.Patch(color=v, label=k.capitalize()) for k, v in color_map.items()]
-    marker_patches = [plt.Line2D([0], [0], marker=v, color="w", label=k.capitalize(),
-                                 markerfacecolor="gray", markersize=10, markeredgecolor="black")
-                      for k, v in marker_map.items()]
-    
+    marker_patches = [
+        plt.Line2D([0], [0], marker=v, color="w", label=k.capitalize(),
+                   markerfacecolor="gray", markersize=10, markeredgecolor="black")
+        for k, v in marker_map.items()
+    ]
+
     legend1 = plt.legend(handles=color_patches, title="Pass Status", loc="upper right")
     plt.gca().add_artist(legend1)
     plt.legend(handles=marker_patches, title="Language", loc="lower right")
@@ -86,7 +118,7 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
 
-    # Save figure if requested
+    # ---- Save figure ----
     os.makedirs(os.path.dirname(f"figures/{filename}.png"), exist_ok=True)
     plt.savefig(f"figures/{filename}.png", dpi=300, bbox_inches="tight")
     print(f"✅ Figure saved at: figures/{filename}.png")
@@ -270,8 +302,8 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
             # print(f"{p['task_id']}")
             if nominal_dict[p["task_id"]]["passed_evalplus"] == 0:
                 continue
-            change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
-            ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+            # change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
+            # ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
             change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
             ret_list.append([change["generated_code_change"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
