@@ -344,7 +344,7 @@ if __name__ == "__main__":
     print(len(small_list))
     print(len(small_list[0]))
     
-    # visualize_metrics(small_list, column_names, "func_name")
+    visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
     # print(len(res))
     # print(res[0])
   
