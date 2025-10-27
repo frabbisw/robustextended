@@ -233,14 +233,14 @@ def get_a_list(dataset_path, model_name, lang, pert_type):
     nominal_dict = {p["task_id"]: p for p in nominal_prompts}
 
     for i in range(5):
-    pert_path = f"{pert_folder}/f_s{i}.jsonl"
-    pert_prompts = load_prompts(pert_path)
-    for p in pert_prompts:
-        if nominal_dict[p["task_id"]]["passed_evalplus"] == 0:
-            continue
-        change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
-        ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
-        
+        pert_path = f"{pert_folder}/f_s{i}.jsonl"
+        pert_prompts = load_prompts(pert_path)
+        for p in pert_prompts:
+            if nominal_dict[p["task_id"]]["passed_evalplus"] == 0:
+                continue
+            change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
+            ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+    return ret_list
 
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
@@ -254,6 +254,7 @@ if __name__ == "__main__":
        res += get_a_list(dataset_path, model_name, lang, pert_type)
 
     print(len(res))
+    print(res[0])
   
 
   
