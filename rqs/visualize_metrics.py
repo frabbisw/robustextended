@@ -224,18 +224,23 @@ def compute_post_generation_metrics(nominal_code: str, perturbed_code: str):
     }
 
 def get_a_list(dataset_path, model_name, lang, pert_type):
+    print("preparing files ...")
     pert_folder=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"
     if pert_type in ["natgen", "format"]:
-      nominal_path=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl"
-  
+        nominal_path=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl"
+    else:
+        nominal_path=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/nominal/f_s0.jsonl"
+
     ret_list = []
     nominal_prompts = load_prompts(nominal_path)
     nominal_dict = {p["task_id"]: p for p in nominal_prompts}
 
+    print("preparing metrics from perturbed files ...")
     for i in range(5):
         pert_path = f"{pert_folder}/f_s{i}.jsonl"
         pert_prompts = load_prompts(pert_path)
         for p in pert_prompts:
+            print(f"{p['task_id']}")
             if nominal_dict[p["task_id"]]["passed_evalplus"] == 0:
                 continue
             change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
