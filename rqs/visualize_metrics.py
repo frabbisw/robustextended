@@ -225,9 +225,9 @@ def compute_post_generation_metrics(nominal_code: str, perturbed_code: str):
         "perturbed_complexity": cyclomatic_complexity(perturbed_code),
     }
 
-def get_a_list(dataset_path, model_name, lang, pert_type):
+def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
     print("preparing files ...")
-    pert_folder=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"
+    pert_folder=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}/{aug_type}"
     if pert_type in ["natgen", "format"]:
         nominal_path=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl"
     else:
@@ -254,11 +254,12 @@ if __name__ == "__main__":
     dataset_path = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
     model_name = sys.argv[1]
     pert_type = sys.argv[2]
+    aug_type = "FuncRenameButterFinger"
     langs = ["cpp", "java", "js"]
 
     res = []
     for lang in langs:
-       res += get_a_list(dataset_path, model_name, lang, pert_type)
+       res += get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
 
     print(len(res))
     print(res[0])
