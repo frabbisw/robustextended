@@ -306,7 +306,7 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
             # ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
             change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
-            ret_list.append([change["generated_code_change"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+            ret_list.append([change["nominal_complexity"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
     return ret_list
 
@@ -317,7 +317,7 @@ if __name__ == "__main__":
     pert_type = sys.argv[2]
     aug_type = "FuncRenameButterFinger"
     langs = ["cpp", "java", "js"]
-    column_names = ["generated_code_change", "perturbed_complexity", "Status", "Language"]
+    column_names = ["nominal_complexity", "perturbed_complexity", "Status", "Language"]
     
     res = []
     for lang in langs:
