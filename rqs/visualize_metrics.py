@@ -39,7 +39,7 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     metric1_name, metric2_name, _, _ = column_names
     x_vals = [d[0] for d in data_points]
     y_vals = [d[1] for d in data_points]
-    statuses = [d[2].lower() for d in data_points]
+    statuses = [d[2] for d in data_points]
     langs = [d[3].lower() for d in data_points]
 
     # Define colors for pass status
