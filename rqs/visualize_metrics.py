@@ -333,7 +333,7 @@ if __name__ == "__main__":
     stat_list = []
     for lang in langs:
         for aug_type in os.listdir(f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):        
-            local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type, )
+            local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
             print(len(local_list))
             stat_list += local_list
 
