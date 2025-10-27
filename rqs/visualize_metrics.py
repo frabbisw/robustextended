@@ -273,7 +273,7 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
             change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
             ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
-            change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"]), filter_gc(p["gc"]))
+            change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
             ret_list.append([change["generated_code_change"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
     return ret_list
