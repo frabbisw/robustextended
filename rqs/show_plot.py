@@ -67,7 +67,7 @@ def visualize_metrics(data_points, column_names, title="Metrics Relationship", s
         plt.savefig(save_path, dpi=300, bbox_inches="tight")
         print(f"✅ Figure saved at: {save_path}")
 
-    plt.show()
+    # plt.show()
 
 data = [
     [5.3, 0.12, "pass", "java"],
