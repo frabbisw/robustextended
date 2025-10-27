@@ -216,7 +216,7 @@ def compute_pre_generation_metrics(nominal_prompt: str, perturbed_prompt: str, n
 def compute_post_generation_metrics(nominal_code: str, perturbed_code: str):
     """Metrics comparing generated codes and their complexity."""
     return {
-        "generated_code_change%": calc_change_percent(nominal_code, perturbed_code),
+        "generated_code_change": calc_change_percent(nominal_code, perturbed_code),
         "nominal_LOC": count_loc(nominal_code),
         "perturbed_LOC": count_loc(perturbed_code),
         "nominal_tokens": token_length(nominal_code),
@@ -224,6 +224,31 @@ def compute_post_generation_metrics(nominal_code: str, perturbed_code: str):
         "nominal_complexity": cyclomatic_complexity(nominal_code),
         "perturbed_complexity": cyclomatic_complexity(perturbed_code),
     }
+
+def eliminate_second_Sollution(sample_java_solution):
+    ##eliminate 2nd solution class
+    first_class_pointer = sample_java_solution.find("class Solution")
+    if first_class_pointer < 0:
+        return sample_java_solution
+    second_class_pointer = sample_java_solution.find("class Solution", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        second_class_pointer = sample_java_solution.find("public class", first_class_pointer + 5)
+    if second_class_pointer < 0:
+        return sample_java_solution
+    sample_java_solution = sample_java_solution[:second_class_pointer]
+    return sample_java_solution[:sample_java_solution.rfind("}")+1]
+
+def filter_gc(gc, lang):
+    stop_tokens = [["<｜begin▁of▁sentence｜>", "<｜end▁of▁sentence｜>"], ["<|endoftext|>", "<|endoftext|>"], ["<code>", "</code>"], ["<|im_start|>", "<|im_end|>"]]
+    for st, et in stop_tokens:
+        if st in gc:
+            gc = gc[gc.find(st)+len(st):]
+        if et in gc:
+            gc = gc[:gc.find(et)]
+    gc = gc.strip()
+    if lang == "java":
+        gc = eliminate_second_Sollution(gc)
+    return gc
 
 def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
     print("preparing files ...")
@@ -247,6 +272,10 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
                 continue
             change = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
             ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+            
+            change = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"]), filter_gc(p["gc"]))
+            ret_list.append([change["generated_code_change"], change["perturbed_complexity"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
+            
     return ret_list
 
 # ---------- EXAMPLE USAGE ----------
@@ -256,7 +285,7 @@ if __name__ == "__main__":
     pert_type = sys.argv[2]
     aug_type = "FuncRenameButterFinger"
     langs = ["cpp", "java", "js"]
-    column_names = ["Function Name Change", "Prompt Change", "Status", "Language"]
+    column_names = ["generated_code_change", "perturbed_complexity", "Status", "Language"]
     
     res = []
     for lang in langs:
