@@ -53,10 +53,10 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
 
     # Define markers for language
     marker_map = {
-        "java": "o",     # circle
-        "cpp": "s",      # square
-        "python": "D",   # diamond
-        "js": "^"        # triangle
+        "java": "1",     # circle
+        "cpp": "2",      # square
+        "python": "3",   # diamond
+        "js": "4"        # triangle
     }
 
     plt.figure(figsize=(8, 6))
