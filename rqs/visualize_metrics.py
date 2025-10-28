@@ -411,9 +411,9 @@ if __name__ == "__main__":
     # print(small_list[0])
     # print(small_list[100])
 
-    print(Counter([s["run_status"] for s in small_list if s["lang"] == "cpp"]))
-    print(Counter([s["run_status"] for s in small_list if s["lang"] == "java"]))
-    print(Counter([s["run_status"] for s in small_list if s["lang"] == "js"]))
+    print(Counter([s[-2] for s in small_list if s[-1] == "cpp"]))
+    print(Counter([s[-2] for s in small_list if s[-1] == "java"]))
+    print(Counter([s[-2] for s in small_list if s[-1] == "js"]))
     
 
     # print(analyze_language_and_status(small_list))
