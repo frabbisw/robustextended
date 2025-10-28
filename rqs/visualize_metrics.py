@@ -335,6 +335,12 @@ def analyze_language_trends(data):
           - avg_by_lang_status: DataFrame showing mean values per language & status
           - diff_pass_fail: DataFrame showing (pass - fail) difference per language
     """    
+    cols = [
+        "func_name_change","docstring_change","code_change","prompt_change",
+        "generated_code_change","nominal_LOC","perturbed_LOC",
+        "nominal_tokens","perturbed_tokens","nominal_complexity",
+        "perturbed_complexity","run_status","language"
+    ]
     df = pd.DataFrame(data, columns=cols)
     
     # numeric columns
