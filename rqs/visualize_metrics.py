@@ -457,54 +457,10 @@ if __name__ == "__main__":
     print(small_list[100])
 
     # print(analyze_language_and_status(small_list))
-    # analyze_robustness_statistics(
-    #     small_list,
-    #     heatmap_filename="figures/language_correlation_heatmap.png" 
-    # )
+    analyze_robustness_statistics(
+        small_list,
+        heatmap_filename="figures/language_correlation_heatmap.png" 
+    )
     
     # visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
     
-
-
-
-
-    # print(len(res))
-    # print(res[0])
-  
-
-  
-    # nominal_prompt = """
-    # /** Add two numbers */
-    # int add(int a, int b) {
-    #     return a + b;
-    # }
-    # """
-
-    # perturbed_prompt = """
-    # // Function to sum two integers
-    # int addNumbers(int x, int y) {
-    #     return x + y;
-    # }
-    # """
-
-    # nominal_code = """
-    # int result = add(3, 4);
-    # if (result > 0) {
-    #     printf("Positive");
-    # }
-    # """
-
-    # perturbed_code = """
-    # int result = addNumbers(3, 4);
-    # if (result > 0) {
-    #     printf("Positive");
-    # } else {
-    #     printf("Zero or Negative");
-    # }
-    # """
-
-    # print("Pre-generation metrics:")
-    # print(compute_pre_generation_metrics(nominal_prompt, perturbed_prompt, func_name="add"))
-
-    # print("\nPost-generation metrics:")
-    # print(compute_post_generation_metrics(nominal_code, perturbed_code))
