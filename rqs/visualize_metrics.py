@@ -326,110 +326,58 @@ def get_a_short_list(stat_list, key_metrics, key_columns):
     return ret_list        
 
 import pandas as pd
-import numpy as np
-from typing import List, Any, Tuple
 
-# Headers for the input data structure
-FULL_HEADERS = [
-    "func_name_change", "docstring_change", "code_change", "prompt_change", 
-    "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", 
-    "perturbed_tokens", "nominal_complexity", "perturbed_complexity", 
-    "run_status", "language"
-]
-
-def analyze_correlation_stats(raw_data: List[List[Any]]) -> None:
+def analyze_language_trends(data):
     """
-    Loads raw data, performs preprocessing (feature engineering, binary outcome creation), 
-    and prints the correlation between all numerical features and failure ('is_failure').
-
-    The analysis is performed both on the combined dataset and for each language subset.
-    """
-    if not raw_data:
-        print("Error: Input raw_data list is empty.")
-        return
+    Analyze language-wise differences in pass/fail behavior.    
+    Returns:
+        dict with:
+          - avg_by_lang_status: DataFrame showing mean values per language & status
+          - diff_pass_fail: DataFrame showing (pass - fail) difference per language
+    """    
+    df = pd.DataFrame(data, columns=cols)
     
-    # --- 1. Load and Preprocess Data ---
-    df = pd.DataFrame(raw_data, columns=FULL_HEADERS)
+    # numeric columns
+    num_cols = cols[:-2]
+    for c in num_cols:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
     
-    # Convert metric columns to numeric
-    numeric_cols_to_convert = FULL_HEADERS[:11]
-    for col in numeric_cols_to_convert:
-        df[col] = pd.to_numeric(df[col], errors='coerce') 
-
-    # Feature Engineering: Calculate difference metrics
-    df['cc_diff'] = df['nominal_complexity'] - df['perturbed_complexity']
-    df['token_diff'] = df['nominal_tokens'] - df['perturbed_tokens']
-    df['loc_diff'] = df['nominal_LOC'] - df['perturbed_LOC']
+    df["run_status"] = df["run_status"].str.upper()
+    df["language"] = df["language"].str.lower()
     
-    # Convert categorical status to a usable binary outcome (Pass=0 / Fail=1)
-    df['is_failure'] = np.where(
-        df['run_status'].astype(str).str.strip().str.lower().str.contains('pass'), 
-        0, 
-        1
+    # average metrics per (language, status)
+    avg_by_lang_status = (
+        df.groupby(["language", "run_status"])[num_cols]
+        .mean()
+        .round(3)
     )
-
-    # Handle potential NaN/Infinity values and drop rows where 'is_failure' couldn't be determined
-    df = df.replace([np.inf, -np.inf], np.nan).dropna(subset=['is_failure'])
-
-    # Select only the numerical features we need for correlation
-    CORRELATION_FEATURES = [
-        'is_failure', 'cc_diff', 'token_diff', 'loc_diff', 
-        'func_name_change', 'docstring_change', 'code_change', 'prompt_change', 
-        'generated_code_change', 'nominal_LOC', 'nominal_complexity'
-    ]
     
-    df = df[df.columns.intersection(CORRELATION_FEATURES + ['language'])].copy()
-
-    if df.empty:
-        print("Error: Preprocessed DataFrame is empty after cleaning.")
-        return
-
-    # --- 2. Core Correlation Logic (Internal Function) ---
-    def _calculate_and_print_correlation(data_df: pd.DataFrame, title_suffix: str) -> None:
-        """Calculates and prints the correlation of features with 'is_failure'."""
-        print(f"\n--- Correlation Analysis: {title_suffix} ---")
-        
-        numeric_df = data_df.select_dtypes(include=[np.number])
-        
-        # CRITICAL CHECK: Ensure the dependent variable is not constant
-        if 'is_failure' not in numeric_df.columns or numeric_df['is_failure'].nunique() < 2:
-            print(f"Skipping Analysis: Dependent variable 'is_failure' is constant (only one outcome state present) or missing. Correlation is undefined.")
-            print(f"Current 'is_failure' distribution: {numeric_df['is_failure'].value_counts().to_dict()}")
-            return
-
-        # Remove columns with zero variance (constant columns)
-        non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
-        filtered_df = numeric_df[non_constant_cols]
-        
-        if filtered_df.shape[1] < 2:
-            print("Warning: After removing constants, only one or zero non-constant feature columns remain. Cannot calculate meaningful correlation.")
-            return
-
-        # Calculate the correlation matrix
-        correlation_matrix = filtered_df.corr()
-        
-        # Extract the correlation values of metrics with 'is_failure'
-        failure_correlation = correlation_matrix['is_failure'].sort_values(ascending=False)
-        
-        print("\nCorrelation with 'is_failure' (Higher value = Stronger link to Failure):")
-        # Drop 'is_failure' from the output list itself for cleaner display
-        print(failure_correlation.drop('is_failure', errors='ignore'))
-        
-    # --- 3. Run Overall Correlation Analysis ---
-    _calculate_and_print_correlation(df, title_suffix="All Languages Combined")
+    # calculate difference between PASSED and others for each language
+    diff_pass_fail = {}
+    for lang in df["language"].unique():
+        lang_df = avg_by_lang_status.loc[lang]
+        if "PASSED" in lang_df.index:
+            passed_vals = lang_df.loc["PASSED"]
+            other_mean = lang_df.drop("PASSED", errors="ignore").mean()
+            diff_pass_fail[lang] = (passed_vals - other_mean).round(3)
+    diff_pass_fail = pd.DataFrame(diff_pass_fail).T
     
-    # --- 4. Run Language-Specific Correlation Analysis ---
-    print("\n" + "="*70)
-    print("LANGUAGE-SPECIFIC CORRELATION ANALYSIS")
-    print("="*70)
+    print("\n=== Average Metrics by Language & Run Status ===")
+    print(avg_by_lang_status)
     
-    for lang in df['language'].str.lower().unique():
-        lang_df = df[df['language'].str.lower() == lang]
-        
-        if len(lang_df) > 1:
-            _calculate_and_print_correlation(lang_df, title_suffix=f"{lang.upper()}")
-        else:
-            print(f"Skipping correlation for {lang.upper()}: Insufficient data points.")
+    print("\n=== Difference (Passed - Failed) per Language ===")
+    print(diff_pass_fail)
+    
+    print("\nInterpretation Tips:")
+    print(" - Larger positive differences mean that passes had higher values for that metric.")
+    print(" - Negative values mean that failures had higher metric values.")
+    print(" - Compare across languages to see which ones are more sensitive to specific factors.")
+    
+    return {
+        "df": df,
+        "avg_by_lang_status": avg_by_lang_status,
+        "diff_pass_fail": diff_pass_fail
+    }
 
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
@@ -457,9 +405,7 @@ if __name__ == "__main__":
     print(small_list[100])
 
     # print(analyze_language_and_status(small_list))
-    analyze_correlation_stats(
-        small_list,
-    )
+    analyze_language_trends(small_list)
     
     # visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
     
