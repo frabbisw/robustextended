@@ -391,15 +391,17 @@ def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall
     # Exclude non-numeric columns for correlation
     numeric_df = df.select_dtypes(include=[np.number])
     
+    # CRITICAL CHECK 1: Ensure the dependent variable is not constant
+    if numeric_df['is_failure'].nunique() < 2:
+        print(f"Skipping Correlation Analysis: Dependent variable 'is_failure' is constant (only one outcome state present). Correlation is undefined.")
+        return
+
     # CRITICAL FIX FOR NAN CORRELATION: Remove columns with zero variance (constant columns)
     # Correlation is undefined when a variable is constant.
     non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
     filtered_df = numeric_df[non_constant_cols]
     
-    # Check if 'is_failure' still exists and is non-constant
-    if 'is_failure' not in filtered_df.columns:
-        print("Warning: 'is_failure' column is constant or missing. Cannot calculate correlation.")
-        return
+    # At this point, 'is_failure' should be present due to the check above
     
     if filtered_df.shape[1] < 2:
         print("Warning: After removing constants, only one or zero columns remain. Cannot calculate correlation.")
@@ -456,6 +458,11 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
     # Define the dependent variable (Y) and independent variables (X)
     Y = subset_df['is_failure']
     
+    # CRITICAL CHECK 2: Ensure the dependent variable for the subset is not constant
+    if Y.nunique() < 2:
+        print(f"Skipping {language.upper()}: Dependent variable 'is_failure' is constant (all 0s or all 1s). Logistic Regression requires both outcome states to be present.")
+        return
+    
     # Drop columns that are constants, the outcome itself, or not predictors
     X_cols = subset_df.select_dtypes(include=[np.number]).columns.tolist()
     
@@ -480,8 +487,14 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
         Y = combined_data['is_failure']
         X = combined_data.drop('is_failure', axis=1)
         
+        # Re-check the length after dropping NaNs
         if len(Y) < 10:
             print(f"Skipping {language.upper()}: Not enough non-NaN data points.")
+            return
+
+        # Re-check the dependent variable constancy after dropping NaNs
+        if Y.nunique() < 2:
+            print(f"Skipping {language.upper()}: Dependent variable 'is_failure' became constant after dropping NaNs.")
             return
 
         
@@ -509,7 +522,10 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
 
     except Exception as e:
         print(f"An error occurred during Logistic Regression for {language.upper()}: {e}")
-        print("Check if the dependent variable 'is_failure' is constant (e.g., all 0s or all 1s) in this subset.")
+        # The most common reason now will be near-perfect separation (where some event only happens 
+        # when a specific predictor is non-zero), but the explicit constancy check should catch the 
+        # previous 'Singular matrix' error.
+        print("This may be due to perfect or near-perfect separation in the data. Review your data distribution.")
 
 
 # ---
