@@ -412,6 +412,9 @@ if __name__ == "__main__":
     # print(small_list[100])
 
     print(Counter([s["run_status"] for s in small_list if s["lang"] == "cpp"]))
+    print(Counter([s["run_status"] for s in small_list if s["lang"] == "java"]))
+    print(Counter([s["run_status"] for s in small_list if s["lang"] == "js"]))
+    
 
     # print(analyze_language_and_status(small_list))
     analyze_language_trends(small_list)
