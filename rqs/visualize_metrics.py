@@ -29,15 +29,20 @@ import matplotlib.patches as mpatches
 import numpy as np
 import os
 
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+import os
+
 def visualize_metrics(data_points, column_names, filename, title="Metrics Relationship"):
     """
     Visualize relationships between two metrics, colored by pass status and shaped by language.
-    Adds big average dots for each language.
+    Adds big average dots for PASSED and FAILED cases per language.
 
     Parameters:
         data_points: list of [metric1, metric2, pass_status, language]
         column_names: ["Metric 1 Name", "Metric 2 Name", "Pass Status Label", "Language Label"]
-        filename: name for saving the figure
+        filename: output image name (without extension)
         title: optional plot title
     """
 
@@ -66,44 +71,52 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
 
     plt.figure(figsize=(8, 6))
 
-    # Plot each individual point
+    # Plot individual points
     for x, y, status, lang in zip(x_vals, y_vals, statuses, langs):
         color = color_map.get(status, "gray")
         marker = marker_map.get(lang, "x")
         plt.scatter(x, y, c=color, marker=marker, s=80, alpha=0.8)
 
-    # ---- Plot average points per language ----
-    for lang in sorted(set(langs)):
-        indices = [i for i, l in enumerate(langs) if l == lang]
-        if not indices:
+    # --- Compute and plot averages per language for PASSED and FAILED --- #
+    languages = sorted(set(langs))
+    for lang in languages:
+        lang_indices = [i for i, l in enumerate(langs) if l == lang]
+        if not lang_indices:
             continue
-        avg_x = np.mean([x_vals[i] for i in indices])
-        avg_y = np.mean([y_vals[i] for i in indices])
 
-        plt.scatter(
-            avg_x, avg_y,
-            s=400,                # Large size for average dot
-            c="gold",             # Gold to make it pop
-            edgecolor="black",
-            alpha=0.9,
-            label=f"{lang.upper()} avg"
-        )
-        plt.text(
-            avg_x, avg_y,
-            lang.upper(),
-            fontsize=9,
-            ha="center",
-            va="center",
-            color="black",
-            fontweight="bold"
-        )
+        # Separate PASSED and FAILED
+        pass_indices = [i for i in lang_indices if statuses[i] == "PASSED"]
+        fail_indices = [i for i in lang_indices if statuses[i] != "PASSED"]
 
-    # ---- Labels and title ----
+        # Compute averages if present
+        if pass_indices:
+            avg_pass_x = np.mean([x_vals[i] for i in pass_indices])
+            avg_pass_y = np.mean([y_vals[i] for i in pass_indices])
+            plt.scatter(
+                avg_pass_x, avg_pass_y,
+                s=400, c="limegreen", edgecolor="black", alpha=0.9,
+                marker="o", label=f"{lang.upper()} PASSED avg"
+            )
+            plt.text(avg_pass_x, avg_pass_y, f"{lang.upper()}✓",
+                     fontsize=9, ha="center", va="center", color="black", fontweight="bold")
+
+        if fail_indices:
+            avg_fail_x = np.mean([x_vals[i] for i in fail_indices])
+            avg_fail_y = np.mean([y_vals[i] for i in fail_indices])
+            plt.scatter(
+                avg_fail_x, avg_fail_y,
+                s=400, c="tomato", edgecolor="black", alpha=0.9,
+                marker="X", label=f"{lang.upper()} FAIL avg"
+            )
+            plt.text(avg_fail_x, avg_fail_y, f"{lang.upper()}×",
+                     fontsize=9, ha="center", va="center", color="black", fontweight="bold")
+
+    # --- Labels and title --- #
     plt.xlabel(metric1_name, fontsize=12)
     plt.ylabel(metric2_name, fontsize=12)
     plt.title(title, fontsize=14, fontweight="bold")
 
-    # ---- Legends ----
+    # --- Legends --- #
     color_patches = [mpatches.Patch(color=v, label=k.capitalize()) for k, v in color_map.items()]
     marker_patches = [
         plt.Line2D([0], [0], marker=v, color="w", label=k.capitalize(),
@@ -118,7 +131,7 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
 
-    # ---- Save figure ----
+    # --- Save figure --- #
     os.makedirs(os.path.dirname(f"figures/{filename}.png"), exist_ok=True)
     plt.savefig(f"figures/{filename}.png", dpi=300, bbox_inches="tight")
     print(f"✅ Figure saved at: figures/{filename}.png")
