@@ -530,7 +530,7 @@ if __name__ == "__main__":
 
     # print(analyze_language_and_status(small_list))
     analyze_robustness_statistics(
-        simulated_raw_data,
+        small_list,
         heatmap_filename="figures/language_correlation_heatmap.png" 
     )
     
