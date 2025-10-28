@@ -370,11 +370,11 @@ def analyze_language_trends(data):
     diff_pass_fail = pd.DataFrame(diff_pass_fail).T
     
     save = "\n=== Average Metrics by Language & Run Status ===\n"
-    save += avg_by_lang_status + "\n"
+    save += str(avg_by_lang_status) + "\n"
     
     
     save += "\n=== Difference (Passed - Failed) per Language ===\n"
-    save += diff_pass_fail
+    save += str(diff_pass_fail)
     save += "\n"
         
     return {
