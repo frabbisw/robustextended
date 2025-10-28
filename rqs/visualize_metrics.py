@@ -136,17 +136,126 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     plt.savefig(f"figures/{filename}.png", dpi=300, bbox_inches="tight")
     print(f"✅ Figure saved at: figures/{filename}.png")
 
-# Example
-# data = [
-#     [5.3, 0.12, "pass", "java"],
-#     [4.1, 0.32, "compilation", "cpp"],
-#     [6.8, 0.15, "assertion", "python"],
-#     [5.5, 0.08, "pass", "cpp"],
-# ]
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 
-# cols = ["Cyclomatic Complexity", "Change %", "Pass Status", "Language"]
+def analyze_language_and_status(small_list, show_plots=True):
+    """
+    Analyze which metrics differ across languages and pass/fail outcomes.
 
-# visualize_metrics(data, cols, title="Cyclomatic Complexity vs Change%", save_path="figures/complexity_vs_change.png")
+    Args:
+        small_list: list of lists where each row is:
+            [func_name_change, docstring_change, code_change, prompt_change,
+             generated_code_change, nominal_LOC, perturbed_LOC,
+             nominal_tokens, perturbed_tokens, nominal_complexity,
+             perturbed_complexity, run_status, language]
+
+        show_plots: bool, whether to show plots
+
+    Returns:
+        dict with:
+          - df: processed DataFrame
+          - per_language_means: DataFrame with average metrics per language
+          - per_status_means: DataFrame with average metrics per run_status
+          - feature_importance_status: logistic regression feature importance
+    """
+
+    cols = [
+        "func_name_change","docstring_change","code_change","prompt_change",
+        "generated_code_change","nominal_LOC","perturbed_LOC",
+        "nominal_tokens","perturbed_tokens","nominal_complexity",
+        "perturbed_complexity","run_status","language"
+    ]
+
+    df = pd.DataFrame(small_list, columns=cols)
+
+    # --- Clean numeric columns ---
+    num_cols = cols[:-2]
+    for c in num_cols:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+
+    df["run_status"] = df["run_status"].astype(str).str.upper()
+    df["language"] = df["language"].astype(str).str.lower()
+
+    # --- Derived metrics ---
+    df["LOC_change"] = df["perturbed_LOC"] - df["nominal_LOC"]
+    df["token_change"] = df["perturbed_tokens"] - df["nominal_tokens"]
+    df["complexity_change"] = df["perturbed_complexity"] - df["nominal_complexity"]
+    df["passed"] = (df["run_status"] == "PASSED").astype(int)
+
+    # --- Averages per language and per status ---
+    per_language_means = df.groupby("language")[num_cols + ["LOC_change","token_change","complexity_change"]].mean().round(3)
+    per_status_means = df.groupby("run_status")[num_cols + ["LOC_change","token_change","complexity_change"]].mean().round(3)
+
+    print("\n=== Average Metrics per Language ===")
+    print(per_language_means)
+    print("\n=== Average Metrics per Run Status ===")
+    print(per_status_means)
+
+    # --- Correlation matrix ---
+    corr = df[num_cols + ["LOC_change","token_change","complexity_change","passed"]].corr(numeric_only=True)
+    print("\n=== Correlation with Pass Status ===")
+    print(corr["passed"].sort_values(ascending=False).round(3))
+
+    # --- Logistic Regression (which metrics predict pass/fail) ---
+    feature_cols = ["func_name_change","docstring_change","code_change","prompt_change",
+                    "generated_code_change","LOC_change","token_change","complexity_change"]
+    X = df[feature_cols].fillna(0.0)
+    y = df["passed"]
+
+    if y.nunique() > 1:
+        scaler = StandardScaler()
+        Xs = scaler.fit_transform(X)
+        model = LogisticRegression(max_iter=500)
+        model.fit(Xs, y)
+        coefs = pd.Series(model.coef_[0], index=feature_cols).sort_values(key=abs, ascending=False)
+        print("\n=== Feature Importance for Pass/Fail (Logistic Regression Coefficients) ===")
+        print(coefs.round(3))
+    else:
+        coefs = None
+        print("\n⚠️ Only one run_status value — cannot train regression model.")
+
+    # --- Visualizations ---
+    if show_plots:
+        sns.set(style="whitegrid")
+
+        # 1. Distribution of pass/fail across languages
+        plt.figure(figsize=(6,4))
+        sns.countplot(data=df, x="language", hue="run_status")
+        plt.title("Pass/Fail Distribution by Language")
+        plt.tight_layout()
+        plt.savefig(f"figures/plot1.png", dpi=300, bbox_inches="tight")
+        # plt.show()
+
+        # 2. Scatter of complexity change vs token change colored by run status
+        plt.figure(figsize=(7,5))
+        sns.scatterplot(
+            data=df, x="complexity_change", y="token_change",
+            hue="run_status", style="language", s=70, alpha=0.8
+        )
+        plt.title("Complexity vs Token Change (by Language and Run Status)")
+        plt.tight_layout()
+        plt.savefig(f"figures/plot2.png", dpi=300, bbox_inches="tight")
+        
+        # 3. Heatmap of correlations
+        plt.figure(figsize=(10,8))
+        sns.heatmap(corr, annot=True, fmt=".2f", cmap="vlag", center=0)
+        plt.title("Correlation Matrix of All Numeric Features")
+        plt.tight_layout()
+        plt.savefig(f"figures/plot3.png", dpi=300, bbox_inches="tight")
+        
+    # --- Return structured results ---
+    return {
+        "df": df,
+        "per_language_means": per_language_means,
+        "per_status_means": per_status_means,
+        "feature_importance_status": coefs,
+        "correlations": corr
+    }
 
 
 # ---------- TOKENIZATION & BASIC UTILITIES ----------
@@ -345,19 +454,28 @@ if __name__ == "__main__":
     
     stat_list = []
     for lang in langs:
-        for aug_type in os.listdir(f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):        
+        for aug_type in os.listdir(f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
             local_list = get_a_list(dataset_path, model_name, lang, pert_type, aug_type)
             print(len(local_list))
             stat_list += local_list
 
-    key_metrics = ["nominal_complexity", "perturbed_complexity"]
+    # key_metrics = ["nominal_complexity", "perturbed_complexity"]
+    key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", "perturbed_tokens", "nominal_complexity", "perturbed_complexity"]
     key_columns = ["run_status", "lang"]
     column_names = key_metrics + key_columns 
-    small_list = get_a_short_list(stat_list, ["nominal_complexity", "perturbed_complexity"], ["run_status", "lang"])
+    small_list = get_a_short_list(stat_list, key_metrics, key_columns)
     print(len(small_list))
     print(len(small_list[0]))
+
+
+    print(analyze_language_and_status(small_list))
     
-    visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
+    # visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
+    
+
+
+
+
     # print(len(res))
     # print(res[0])
   
