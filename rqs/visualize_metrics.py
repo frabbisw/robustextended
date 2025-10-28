@@ -457,9 +457,8 @@ if __name__ == "__main__":
     print(small_list[100])
 
     # print(analyze_language_and_status(small_list))
-    analyze_robustness_statistics(
+    analyze_correlation_stats(
         small_list,
-        heatmap_filename="figures/language_correlation_heatmap.png" 
     )
     
     # visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
