@@ -378,7 +378,7 @@ def analyze_language_trends(data):
     save += "\n"
 
     with open("stat.txt", "w") as f:
-        r.write(save)
+        f.write(save)
         
     return {
         "df": df,
