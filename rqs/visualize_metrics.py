@@ -325,12 +325,8 @@ def get_a_short_list(stat_list, key_metrics, key_columns):
         ret_list.append(row)
     return ret_list        
 
-
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
 from typing import List, Any, Tuple
 
 # Headers for the input data structure
@@ -341,227 +337,99 @@ FULL_HEADERS = [
     "run_status", "language"
 ]
 
-def load_and_preprocess_data(raw_data: List[List[Any]]) -> pd.DataFrame:
-    """Loads raw data into a DataFrame and performs essential preprocessing."""
+def analyze_correlation_stats(raw_data: List[List[Any]]) -> None:
+    """
+    Loads raw data, performs preprocessing (feature engineering, binary outcome creation), 
+    and prints the correlation between all numerical features and failure ('is_failure').
+
+    The analysis is performed both on the combined dataset and for each language subset.
+    """
+    if not raw_data:
+        print("Error: Input raw_data list is empty.")
+        return
     
+    # --- 1. Load and Preprocess Data ---
     df = pd.DataFrame(raw_data, columns=FULL_HEADERS)
     
-    # Ensure all change/metric columns are truly numeric
-    # This prevents errors where pandas might infer a float column as 'object' due to mixed types
-    numeric_cols_to_convert = FULL_HEADERS[:11] # first 11 columns are metrics
+    # Convert metric columns to numeric
+    numeric_cols_to_convert = FULL_HEADERS[:11]
     for col in numeric_cols_to_convert:
-        # Coerce non-numeric values to NaN
         df[col] = pd.to_numeric(df[col], errors='coerce') 
 
-    # 1. Feature Engineering: Calculate differences and ratios
+    # Feature Engineering: Calculate difference metrics
     df['cc_diff'] = df['nominal_complexity'] - df['perturbed_complexity']
     df['token_diff'] = df['nominal_tokens'] - df['perturbed_tokens']
     df['loc_diff'] = df['nominal_LOC'] - df['perturbed_LOC']
     
-    # 2. Convert categorical status to a usable binary outcome (Pass/Fail)
-    # 1 (Failure/Error) vs 0 (Pass)
-    # This is necessary for standard correlation and Logistic Regression
-    df['is_failure'] = np.where(df['run_status'].str.lower() == 'pass', 0, 1)
+    # Convert categorical status to a usable binary outcome (Pass=0 / Fail=1)
+    df['is_failure'] = np.where(
+        df['run_status'].astype(str).str.strip().str.lower().str.contains('pass'), 
+        0, 
+        1
+    )
 
-    # 3. Handle potential NaN/Infinity values (which can arise from divisions/preprocessing)
+    # Handle potential NaN/Infinity values and drop rows where 'is_failure' couldn't be determined
     df = df.replace([np.inf, -np.inf], np.nan).dropna(subset=['is_failure'])
 
-    # Select only the numerical features we want to correlate/predict with
+    # Select only the numerical features we need for correlation
     CORRELATION_FEATURES = [
         'is_failure', 'cc_diff', 'token_diff', 'loc_diff', 
         'func_name_change', 'docstring_change', 'code_change', 'prompt_change', 
         'generated_code_change', 'nominal_LOC', 'nominal_complexity'
     ]
     
-    return df[df.columns.intersection(CORRELATION_FEATURES + ['language', 'run_status'])].copy()
+    df = df[df.columns.intersection(CORRELATION_FEATURES + ['language'])].copy()
 
-# ---
-## 1. Correlation Heatmap Function
-# ---
-
-def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall", save_filename: str = None) -> None:
-    """
-    Generates a correlation heatmap to visualize the linear relationship 
-    between all numerical metrics and the 'is_failure' outcome.
-    
-    If save_filename is provided, the figure is saved instead of displayed.
-    """
-    print(f"\n--- Correlation Analysis: {title_suffix} ---")
-    
-    # Exclude non-numeric columns for correlation
-    numeric_df = df.select_dtypes(include=[np.number])
-    
-    # CRITICAL CHECK 1: Ensure the dependent variable is not constant
-    if numeric_df['is_failure'].nunique() < 2:
-        print(f"Skipping Correlation Analysis: Dependent variable 'is_failure' is constant (only one outcome state present). Correlation is undefined.")
-        return
-
-    # CRITICAL FIX FOR NAN CORRELATION: Remove columns with zero variance (constant columns)
-    # Correlation is undefined when a variable is constant.
-    non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
-    filtered_df = numeric_df[non_constant_cols]
-    
-    # At this point, 'is_failure' should be present due to the check above
-    
-    if filtered_df.shape[1] < 2:
-        print("Warning: After removing constants, only one or zero columns remain. Cannot calculate correlation.")
-        return
-
-    # Calculate the correlation matrix
-    correlation_matrix = filtered_df.corr()
-    
-    # Extract the correlation values of metrics with 'is_failure'
-    failure_correlation = correlation_matrix['is_failure'].sort_values(ascending=False)
-    
-    print("\nCorrelation with 'is_failure' (Higher value = Stronger link to Failure):")
-    # Drop 'is_failure' from the output list itself for cleaner display
-    print(failure_correlation.drop('is_failure', errors='ignore'))
-
-    # Plotting the full correlation heatmap
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(
-        correlation_matrix, 
-        annot=True, 
-        cmap='coolwarm', 
-        fmt=".2f",
-        linewidths=.5,
-        cbar_kws={'label': 'Pearson Correlation Coefficient'},
-        ax=ax,
-        robust=True # Added robust=True to potentially help with the Numpy/Seaborn version issue
-    )
-    plt.title(f"Correlation Heatmap ({title_suffix})", fontsize=14)
-    
-    # Logic to save or show the figure
-    plt.tight_layout() 
-    if save_filename:
-        # Save figure at 300 dpi for high-quality publication/report use
-        plt.savefig(save_filename, dpi=300)
-        plt.close(fig) # Close the figure to free up memory
-        print(f"Correlation Heatmap saved to: {save_filename}")
-    else:
-        plt.show()
-
-# ---
-## 2. Logistic Regression Function (The answer to RQ2)
-# ---
-
-def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
-    """
-    Runs a Logistic Regression model to find which features statistically predict 
-    the probability of failure (is_failure=1) for a specific language.
-    """
-    print(f"\n--- Logistic Regression Analysis for {language.upper()} ---")
-    
-    # Filter data for the specific language
-    subset_df = df[df['language'].str.lower() == language.lower()]
-    
-    # Define the dependent variable (Y) and independent variables (X)
-    Y = subset_df['is_failure']
-    
-    # CRITICAL CHECK 2: Ensure the dependent variable for the subset is not constant
-    if Y.nunique() < 2:
-        print(f"Skipping {language.upper()}: Dependent variable 'is_failure' is constant (all 0s or all 1s). Logistic Regression requires both outcome states to be present.")
-        return
-    
-    # Drop columns that are constants, the outcome itself, or not predictors
-    X_cols = subset_df.select_dtypes(include=[np.number]).columns.tolist()
-    
-    predictors = [col for col in X_cols if col not in ['is_failure']]
-    
-    # CRITICAL FIX FOR LOGISTIC REGRESSION: Remove constant predictors in the subset
-    subset_X = subset_df[predictors]
-    non_constant_predictors = subset_X.columns[subset_X.nunique() > 1]
-    
-    X = subset_X[non_constant_predictors]
-    
-    # Add a constant term for the intercept
-    X = sm.add_constant(X, prepend=False)
-    
-    if len(Y) < 10:
-        print(f"Skipping {language.upper()}: Not enough data points (<10).")
-        return
-
-    if X.isnull().any().any():
-        # Drop rows with NaN values if they exist, to ensure sm.Logit runs
-        combined_data = pd.concat([Y, X], axis=1).dropna()
-        Y = combined_data['is_failure']
-        X = combined_data.drop('is_failure', axis=1)
-        
-        # Re-check the length after dropping NaNs
-        if len(Y) < 10:
-            print(f"Skipping {language.upper()}: Not enough non-NaN data points.")
-            return
-
-        # Re-check the dependent variable constancy after dropping NaNs
-        if Y.nunique() < 2:
-            print(f"Skipping {language.upper()}: Dependent variable 'is_failure' became constant after dropping NaNs.")
-            return
-
-        
-    try:
-        # Run the logistic model
-        model = sm.Logit(Y, X).fit(disp=False)
-        
-        # Display the results summary
-        print(model.summary())
-        
-        print(f"\nInterpretation for {language.upper()}:")
-        
-        # We need to iterate over the predictors actually used in the model
-        final_predictors = [col for col in X.columns if col != 'const']
-        
-        for predictor in final_predictors:
-            p_value = model.pvalues[predictor]
-            odds_ratio = np.exp(model.params[predictor])
-            
-            if p_value < 0.05:
-                print(f"-> {predictor}: Statistically Significant (p={p_value:.3f}). Odds Ratio = {odds_ratio:.2f}")
-                print(f"   A one-unit increase in {predictor} is associated with a {odds_ratio:.2f}x increase in the odds of failure.")
-            elif p_value < 0.10:
-                 print(f"-> {predictor}: Marginally Significant (p={p_value:.3f}). Odds Ratio = {odds_ratio:.2f}")
-
-    except Exception as e:
-        print(f"An error occurred during Logistic Regression for {language.upper()}: {e}")
-        # The most common reason now will be near-perfect separation (where some event only happens 
-        # when a specific predictor is non-zero), but the explicit constancy check should catch the 
-        # previous 'Singular matrix' error.
-        print("This may be due to perfect or near-perfect separation in the data. Review your data distribution.")
-
-
-# ---
-## MAIN ANALYSIS FUNCTION
-# ---
-
-def analyze_robustness_statistics(raw_data: List[List[Any]], heatmap_filename: str = None) -> None:
-    """
-    Main function to run the full statistical analysis for RQ2.
-    
-    Args:
-        raw_data: The list of lists containing all metric values.
-        heatmap_filename: If provided, the correlation heatmap will be saved 
-                          to this path (e.g., 'heatmap.png') instead of shown.
-    """
-    if not raw_data:
-        print("Error: Input raw_data list is empty.")
-        return
-        
-    df = load_and_preprocess_data(raw_data)
-    
     if df.empty:
         print("Error: Preprocessed DataFrame is empty after cleaning.")
         return
 
-    # 1. Correlation Analysis (Overall View) - Now accepts save_filename
-    calculate_correlation_heatmap(df, title_suffix="All Languages Combined", save_filename=heatmap_filename)
+    # --- 2. Core Correlation Logic (Internal Function) ---
+    def _calculate_and_print_correlation(data_df: pd.DataFrame, title_suffix: str) -> None:
+        """Calculates and prints the correlation of features with 'is_failure'."""
+        print(f"\n--- Correlation Analysis: {title_suffix} ---")
+        
+        numeric_df = data_df.select_dtypes(include=[np.number])
+        
+        # CRITICAL CHECK: Ensure the dependent variable is not constant
+        if 'is_failure' not in numeric_df.columns or numeric_df['is_failure'].nunique() < 2:
+            print(f"Skipping Analysis: Dependent variable 'is_failure' is constant (only one outcome state present) or missing. Correlation is undefined.")
+            print(f"Current 'is_failure' distribution: {numeric_df['is_failure'].value_counts().to_dict()}")
+            return
+
+        # Remove columns with zero variance (constant columns)
+        non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
+        filtered_df = numeric_df[non_constant_cols]
+        
+        if filtered_df.shape[1] < 2:
+            print("Warning: After removing constants, only one or zero non-constant feature columns remain. Cannot calculate meaningful correlation.")
+            return
+
+        # Calculate the correlation matrix
+        correlation_matrix = filtered_df.corr()
+        
+        # Extract the correlation values of metrics with 'is_failure'
+        failure_correlation = correlation_matrix['is_failure'].sort_values(ascending=False)
+        
+        print("\nCorrelation with 'is_failure' (Higher value = Stronger link to Failure):")
+        # Drop 'is_failure' from the output list itself for cleaner display
+        print(failure_correlation.drop('is_failure', errors='ignore'))
+        
+    # --- 3. Run Overall Correlation Analysis ---
+    _calculate_and_print_correlation(df, title_suffix="All Languages Combined")
     
-    # 2. Language-Specific Logistic Regression (Direct Answer to RQ2)
-    print("\n" + "="*80)
-    print("LOGISTIC REGRESSION: PREDICTING FAILURE PROBABILITY BY LANGUAGE")
-    print("="*80)
+    # --- 4. Run Language-Specific Correlation Analysis ---
+    print("\n" + "="*70)
+    print("LANGUAGE-SPECIFIC CORRELATION ANALYSIS")
+    print("="*70)
     
     for lang in df['language'].str.lower().unique():
-        run_logistic_regression_analysis(df, lang)
-
+        lang_df = df[df['language'].str.lower() == lang]
+        
+        if len(lang_df) > 1:
+            _calculate_and_print_correlation(lang_df, title_suffix=f"{lang.upper()}")
+        else:
+            print(f"Skipping correlation for {lang.upper()}: Insufficient data points.")
 
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
