@@ -4,6 +4,7 @@ import nltk
 from nltk import word_tokenize
 import json
 import jsonlines
+from collections import Counter
 
 import os
 import sys
@@ -11,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 # Ensure tokenizers are available
-nltk.download("punkt", quiet=True)
+# nltk.download("punkt", quiet=True)
 
 CODE_RUN_STATUS = {"PASSED":0, "ASSERTION":1, "COMPILATION":2, "TIMEOUT": 3, "RUNTIME": 4}
 RUN_STATUS_MAP = {v: k for k, v in CODE_RUN_STATUS.items()}
@@ -404,11 +405,13 @@ if __name__ == "__main__":
     key_columns = ["run_status", "lang"]
     column_names = key_metrics + key_columns 
     small_list = get_a_short_list(stat_list, key_metrics, key_columns)
-    print(len(small_list))
-    print(len(small_list[0]))
+    # print(len(small_list))
+    # print(len(small_list[0]))
 
-    print(small_list[0])
-    print(small_list[100])
+    # print(small_list[0])
+    # print(small_list[100])
+
+    print(Counter([s["run_status"] for s in small_list if s["lang"] == "cpp"]))
 
     # print(analyze_language_and_status(small_list))
     analyze_language_trends(small_list)
