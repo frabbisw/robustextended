@@ -346,6 +346,13 @@ def load_and_preprocess_data(raw_data: List[List[Any]]) -> pd.DataFrame:
     
     df = pd.DataFrame(raw_data, columns=FULL_HEADERS)
     
+    # Ensure all change/metric columns are truly numeric
+    # This prevents errors where pandas might infer a float column as 'object' due to mixed types
+    numeric_cols_to_convert = FULL_HEADERS[:11] # first 11 columns are metrics
+    for col in numeric_cols_to_convert:
+        # Coerce non-numeric values to NaN
+        df[col] = pd.to_numeric(df[col], errors='coerce') 
+
     # 1. Feature Engineering: Calculate differences and ratios
     df['cc_diff'] = df['nominal_complexity'] - df['perturbed_complexity']
     df['token_diff'] = df['nominal_tokens'] - df['perturbed_tokens']
@@ -372,7 +379,7 @@ def load_and_preprocess_data(raw_data: List[List[Any]]) -> pd.DataFrame:
 ## 1. Correlation Heatmap Function
 # ---
 
-def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall", save_filename: str = "figures/gemini.png") -> None:
+def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall", save_filename: str = None) -> None:
     """
     Generates a correlation heatmap to visualize the linear relationship 
     between all numerical metrics and the 'is_failure' outcome.
@@ -384,14 +391,29 @@ def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall
     # Exclude non-numeric columns for correlation
     numeric_df = df.select_dtypes(include=[np.number])
     
+    # CRITICAL FIX FOR NAN CORRELATION: Remove columns with zero variance (constant columns)
+    # Correlation is undefined when a variable is constant.
+    non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
+    filtered_df = numeric_df[non_constant_cols]
+    
+    # Check if 'is_failure' still exists and is non-constant
+    if 'is_failure' not in filtered_df.columns:
+        print("Warning: 'is_failure' column is constant or missing. Cannot calculate correlation.")
+        return
+    
+    if filtered_df.shape[1] < 2:
+        print("Warning: After removing constants, only one or zero columns remain. Cannot calculate correlation.")
+        return
+
     # Calculate the correlation matrix
-    correlation_matrix = numeric_df.corr()
+    correlation_matrix = filtered_df.corr()
     
     # Extract the correlation values of metrics with 'is_failure'
     failure_correlation = correlation_matrix['is_failure'].sort_values(ascending=False)
     
     print("\nCorrelation with 'is_failure' (Higher value = Stronger link to Failure):")
-    print(failure_correlation.drop('is_failure'))
+    # Drop 'is_failure' from the output list itself for cleaner display
+    print(failure_correlation.drop('is_failure', errors='ignore'))
 
     # Plotting the full correlation heatmap
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -402,7 +424,8 @@ def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall
         fmt=".2f",
         linewidths=.5,
         cbar_kws={'label': 'Pearson Correlation Coefficient'},
-        ax=ax
+        ax=ax,
+        robust=True # Added robust=True to potentially help with the Numpy/Seaborn version issue
     )
     plt.title(f"Correlation Heatmap ({title_suffix})", fontsize=14)
     
@@ -438,14 +461,29 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
     
     predictors = [col for col in X_cols if col not in ['is_failure']]
     
-    X = subset_df[predictors]
+    # CRITICAL FIX FOR LOGISTIC REGRESSION: Remove constant predictors in the subset
+    subset_X = subset_df[predictors]
+    non_constant_predictors = subset_X.columns[subset_X.nunique() > 1]
+    
+    X = subset_X[non_constant_predictors]
     
     # Add a constant term for the intercept
     X = sm.add_constant(X, prepend=False)
     
-    if len(Y) < 10 or X.isnull().any().any():
-        print(f"Skipping {language.upper()}: Not enough data points or data contains missing values.")
+    if len(Y) < 10:
+        print(f"Skipping {language.upper()}: Not enough data points (<10).")
         return
+
+    if X.isnull().any().any():
+        # Drop rows with NaN values if they exist, to ensure sm.Logit runs
+        combined_data = pd.concat([Y, X], axis=1).dropna()
+        Y = combined_data['is_failure']
+        X = combined_data.drop('is_failure', axis=1)
+        
+        if len(Y) < 10:
+            print(f"Skipping {language.upper()}: Not enough non-NaN data points.")
+            return
+
         
     try:
         # Run the logistic model
@@ -455,7 +493,11 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
         print(model.summary())
         
         print(f"\nInterpretation for {language.upper()}:")
-        for predictor in predictors:
+        
+        # We need to iterate over the predictors actually used in the model
+        final_predictors = [col for col in X.columns if col != 'const']
+        
+        for predictor in final_predictors:
             p_value = model.pvalues[predictor]
             odds_ratio = np.exp(model.params[predictor])
             
@@ -467,7 +509,7 @@ def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
 
     except Exception as e:
         print(f"An error occurred during Logistic Regression for {language.upper()}: {e}")
-        print("This often happens if some predictor columns are constant or perfectly collinear.")
+        print("Check if the dependent variable 'is_failure' is constant (e.g., all 0s or all 1s) in this subset.")
 
 
 # ---
