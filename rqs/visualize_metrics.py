@@ -376,6 +376,9 @@ def analyze_language_trends(data):
     save += "\n=== Difference (Passed - Failed) per Language ===\n"
     save += str(diff_pass_fail)
     save += "\n"
+
+    with open("stat.txt", "w") as f:
+        r.write(save)
         
     return {
         "df": df,
