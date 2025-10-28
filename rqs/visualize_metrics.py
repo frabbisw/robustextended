@@ -136,126 +136,6 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
     plt.savefig(f"figures/{filename}.png", dpi=300, bbox_inches="tight")
     print(f"✅ Figure saved at: figures/{filename}.png")
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-
-def analyze_language_and_status(small_list, show_plots=True):
-    """
-    Analyze which metrics differ across languages and pass/fail outcomes.
-
-    Args:
-        small_list: list of lists where each row is:
-            [func_name_change, docstring_change, code_change, prompt_change,
-             generated_code_change, nominal_LOC, perturbed_LOC,
-             nominal_tokens, perturbed_tokens, nominal_complexity,
-             perturbed_complexity, run_status, language]
-
-        show_plots: bool, whether to show plots
-
-    Returns:
-        dict with:
-          - df: processed DataFrame
-          - per_language_means: DataFrame with average metrics per language
-          - per_status_means: DataFrame with average metrics per run_status
-          - feature_importance_status: logistic regression feature importance
-    """
-
-    cols = [
-        "func_name_change","docstring_change","code_change","prompt_change",
-        "generated_code_change","nominal_LOC","perturbed_LOC",
-        "nominal_tokens","perturbed_tokens","nominal_complexity",
-        "perturbed_complexity","run_status","language"
-    ]
-
-    df = pd.DataFrame(small_list, columns=cols)
-
-    # --- Clean numeric columns ---
-    num_cols = cols[:-2]
-    for c in num_cols:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-
-    df["run_status"] = df["run_status"].astype(str).str.upper()
-    df["language"] = df["language"].astype(str).str.lower()
-
-    # --- Derived metrics ---
-    df["LOC_change"] = df["perturbed_LOC"] - df["nominal_LOC"]
-    df["token_change"] = df["perturbed_tokens"] - df["nominal_tokens"]
-    df["complexity_change"] = df["perturbed_complexity"] - df["nominal_complexity"]
-    df["passed"] = (df["run_status"] == "PASSED").astype(int)
-
-    # --- Averages per language and per status ---
-    per_language_means = df.groupby("language")[num_cols + ["LOC_change","token_change","complexity_change"]].mean().round(3)
-    per_status_means = df.groupby("run_status")[num_cols + ["LOC_change","token_change","complexity_change"]].mean().round(3)
-
-    print("\n=== Average Metrics per Language ===")
-    print(per_language_means)
-    print("\n=== Average Metrics per Run Status ===")
-    print(per_status_means)
-
-    # --- Correlation matrix ---
-    corr = df[num_cols + ["LOC_change","token_change","complexity_change","passed"]].corr(numeric_only=True)
-    print("\n=== Correlation with Pass Status ===")
-    print(corr["passed"].sort_values(ascending=False).round(3))
-
-    # --- Logistic Regression (which metrics predict pass/fail) ---
-    feature_cols = ["func_name_change","docstring_change","code_change","prompt_change",
-                    "generated_code_change","LOC_change","token_change","complexity_change"]
-    X = df[feature_cols].fillna(0.0)
-    y = df["passed"]
-
-    if y.nunique() > 1:
-        scaler = StandardScaler()
-        Xs = scaler.fit_transform(X)
-        model = LogisticRegression(max_iter=500)
-        model.fit(Xs, y)
-        coefs = pd.Series(model.coef_[0], index=feature_cols).sort_values(key=abs, ascending=False)
-        print("\n=== Feature Importance for Pass/Fail (Logistic Regression Coefficients) ===")
-        print(coefs.round(3))
-    else:
-        coefs = None
-        print("\n⚠️ Only one run_status value — cannot train regression model.")
-
-    # --- Visualizations ---
-    if show_plots:
-        sns.set(style="whitegrid")
-
-        # 1. Distribution of pass/fail across languages
-        plt.figure(figsize=(6,4))
-        sns.countplot(data=df, x="language", hue="run_status")
-        plt.title("Pass/Fail Distribution by Language")
-        plt.tight_layout()
-        plt.savefig(f"figures/plot1.png", dpi=300, bbox_inches="tight")
-        # plt.show()
-
-        # 2. Scatter of complexity change vs token change colored by run status
-        plt.figure(figsize=(7,5))
-        sns.scatterplot(
-            data=df, x="complexity_change", y="token_change",
-            hue="run_status", style="language", s=70, alpha=0.8
-        )
-        plt.title("Complexity vs Token Change (by Language and Run Status)")
-        plt.tight_layout()
-        plt.savefig(f"figures/plot2.png", dpi=300, bbox_inches="tight")
-        
-        # 3. Heatmap of correlations
-        plt.figure(figsize=(10,8))
-        sns.heatmap(corr, annot=True, fmt=".2f", cmap="vlag", center=0)
-        plt.title("Correlation Matrix of All Numeric Features")
-        plt.tight_layout()
-        plt.savefig(f"figures/plot3.png", dpi=300, bbox_inches="tight")
-        
-    # --- Return structured results ---
-    return {
-        "df": df,
-        "per_language_means": per_language_means,
-        "per_status_means": per_status_means,
-        "feature_importance_status": coefs,
-        "correlations": corr
-    }
 
 
 # ---------- TOKENIZATION & BASIC UTILITIES ----------
@@ -444,7 +324,187 @@ def get_a_short_list(stat_list, key_metrics, key_columns):
             row.append(s[c])
         ret_list.append(row)
     return ret_list        
+
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+from typing import List, Any, Tuple
+
+# Headers for the input data structure
+FULL_HEADERS = [
+    "func_name_change", "docstring_change", "code_change", "prompt_change", 
+    "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", 
+    "perturbed_tokens", "nominal_complexity", "perturbed_complexity", 
+    "run_status", "language"
+]
+
+def load_and_preprocess_data(raw_data: List[List[Any]]) -> pd.DataFrame:
+    """Loads raw data into a DataFrame and performs essential preprocessing."""
+    
+    df = pd.DataFrame(raw_data, columns=FULL_HEADERS)
+    
+    # 1. Feature Engineering: Calculate differences and ratios
+    df['cc_diff'] = df['nominal_complexity'] - df['perturbed_complexity']
+    df['token_diff'] = df['nominal_tokens'] - df['perturbed_tokens']
+    df['loc_diff'] = df['nominal_LOC'] - df['perturbed_LOC']
+    
+    # 2. Convert categorical status to a usable binary outcome (Pass/Fail)
+    # 1 (Failure/Error) vs 0 (Pass)
+    # This is necessary for standard correlation and Logistic Regression
+    df['is_failure'] = np.where(df['run_status'].str.lower() == 'pass', 0, 1)
+
+    # 3. Handle potential NaN/Infinity values (which can arise from divisions/preprocessing)
+    df = df.replace([np.inf, -np.inf], np.nan).dropna(subset=['is_failure'])
+
+    # Select only the numerical features we want to correlate/predict with
+    CORRELATION_FEATURES = [
+        'is_failure', 'cc_diff', 'token_diff', 'loc_diff', 
+        'func_name_change', 'docstring_change', 'code_change', 'prompt_change', 
+        'generated_code_change', 'nominal_LOC', 'nominal_complexity'
+    ]
+    
+    return df[df.columns.intersection(CORRELATION_FEATURES + ['language', 'run_status'])].copy()
+
+# ---
+## 1. Correlation Heatmap Function
+# ---
+
+def calculate_correlation_heatmap(df: pd.DataFrame, title_suffix: str = "Overall", save_filename: str = "figures/gemini.png") -> None:
+    """
+    Generates a correlation heatmap to visualize the linear relationship 
+    between all numerical metrics and the 'is_failure' outcome.
+    
+    If save_filename is provided, the figure is saved instead of displayed.
+    """
+    print(f"\n--- Correlation Analysis: {title_suffix} ---")
+    
+    # Exclude non-numeric columns for correlation
+    numeric_df = df.select_dtypes(include=[np.number])
+    
+    # Calculate the correlation matrix
+    correlation_matrix = numeric_df.corr()
+    
+    # Extract the correlation values of metrics with 'is_failure'
+    failure_correlation = correlation_matrix['is_failure'].sort_values(ascending=False)
+    
+    print("\nCorrelation with 'is_failure' (Higher value = Stronger link to Failure):")
+    print(failure_correlation.drop('is_failure'))
+
+    # Plotting the full correlation heatmap
+    fig, ax = plt.subplots(figsize=(10, 8))
+    sns.heatmap(
+        correlation_matrix, 
+        annot=True, 
+        cmap='coolwarm', 
+        fmt=".2f",
+        linewidths=.5,
+        cbar_kws={'label': 'Pearson Correlation Coefficient'},
+        ax=ax
+    )
+    plt.title(f"Correlation Heatmap ({title_suffix})", fontsize=14)
+    
+    # Logic to save or show the figure
+    plt.tight_layout() 
+    if save_filename:
+        # Save figure at 300 dpi for high-quality publication/report use
+        plt.savefig(save_filename, dpi=300)
+        plt.close(fig) # Close the figure to free up memory
+        print(f"Correlation Heatmap saved to: {save_filename}")
+    else:
+        plt.show()
+
+# ---
+## 2. Logistic Regression Function (The answer to RQ2)
+# ---
+
+def run_logistic_regression_analysis(df: pd.DataFrame, language: str) -> None:
+    """
+    Runs a Logistic Regression model to find which features statistically predict 
+    the probability of failure (is_failure=1) for a specific language.
+    """
+    print(f"\n--- Logistic Regression Analysis for {language.upper()} ---")
+    
+    # Filter data for the specific language
+    subset_df = df[df['language'].str.lower() == language.lower()]
+    
+    # Define the dependent variable (Y) and independent variables (X)
+    Y = subset_df['is_failure']
+    
+    # Drop columns that are constants, the outcome itself, or not predictors
+    X_cols = subset_df.select_dtypes(include=[np.number]).columns.tolist()
+    
+    predictors = [col for col in X_cols if col not in ['is_failure']]
+    
+    X = subset_df[predictors]
+    
+    # Add a constant term for the intercept
+    X = sm.add_constant(X, prepend=False)
+    
+    if len(Y) < 10 or X.isnull().any().any():
+        print(f"Skipping {language.upper()}: Not enough data points or data contains missing values.")
+        return
+        
+    try:
+        # Run the logistic model
+        model = sm.Logit(Y, X).fit(disp=False)
+        
+        # Display the results summary
+        print(model.summary())
+        
+        print(f"\nInterpretation for {language.upper()}:")
+        for predictor in predictors:
+            p_value = model.pvalues[predictor]
+            odds_ratio = np.exp(model.params[predictor])
             
+            if p_value < 0.05:
+                print(f"-> {predictor}: Statistically Significant (p={p_value:.3f}). Odds Ratio = {odds_ratio:.2f}")
+                print(f"   A one-unit increase in {predictor} is associated with a {odds_ratio:.2f}x increase in the odds of failure.")
+            elif p_value < 0.10:
+                 print(f"-> {predictor}: Marginally Significant (p={p_value:.3f}). Odds Ratio = {odds_ratio:.2f}")
+
+    except Exception as e:
+        print(f"An error occurred during Logistic Regression for {language.upper()}: {e}")
+        print("This often happens if some predictor columns are constant or perfectly collinear.")
+
+
+# ---
+## MAIN ANALYSIS FUNCTION
+# ---
+
+def analyze_robustness_statistics(raw_data: List[List[Any]], heatmap_filename: str = None) -> None:
+    """
+    Main function to run the full statistical analysis for RQ2.
+    
+    Args:
+        raw_data: The list of lists containing all metric values.
+        heatmap_filename: If provided, the correlation heatmap will be saved 
+                          to this path (e.g., 'heatmap.png') instead of shown.
+    """
+    if not raw_data:
+        print("Error: Input raw_data list is empty.")
+        return
+        
+    df = load_and_preprocess_data(raw_data)
+    
+    if df.empty:
+        print("Error: Preprocessed DataFrame is empty after cleaning.")
+        return
+
+    # 1. Correlation Analysis (Overall View) - Now accepts save_filename
+    calculate_correlation_heatmap(df, title_suffix="All Languages Combined", save_filename=heatmap_filename)
+    
+    # 2. Language-Specific Logistic Regression (Direct Answer to RQ2)
+    print("\n" + "="*80)
+    print("LOGISTIC REGRESSION: PREDICTING FAILURE PROBABILITY BY LANGUAGE")
+    print("="*80)
+    
+    for lang in df['language'].str.lower().unique():
+        run_logistic_regression_analysis(df, lang)
+
+
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
     dataset_path = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
@@ -468,7 +528,11 @@ if __name__ == "__main__":
     print(len(small_list[0]))
 
 
-    print(analyze_language_and_status(small_list))
+    # print(analyze_language_and_status(small_list))
+    analyze_robustness_statistics(
+        simulated_raw_data,
+        heatmap_filename="figures/language_correlation_heatmap.png" 
+    )
     
     # visualize_metrics(small_list, column_names, f"{model_name}_{pert_type}")
     
