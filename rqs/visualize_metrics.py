@@ -369,17 +369,14 @@ def analyze_language_trends(data):
             diff_pass_fail[lang] = (passed_vals - other_mean).round(3)
     diff_pass_fail = pd.DataFrame(diff_pass_fail).T
     
-    print("\n=== Average Metrics by Language & Run Status ===")
-    print(avg_by_lang_status)
+    save = "\n=== Average Metrics by Language & Run Status ===\n"
+    save += avg_by_lang_status + "\n"
     
-    print("\n=== Difference (Passed - Failed) per Language ===")
-    print(diff_pass_fail)
     
-    print("\nInterpretation Tips:")
-    print(" - Larger positive differences mean that passes had higher values for that metric.")
-    print(" - Negative values mean that failures had higher metric values.")
-    print(" - Compare across languages to see which ones are more sensitive to specific factors.")
-    
+    save += "\n=== Difference (Passed - Failed) per Language ===\n"
+    save += diff_pass_fail
+    save += "\n"
+        
     return {
         "df": df,
         "avg_by_lang_status": avg_by_lang_status,
