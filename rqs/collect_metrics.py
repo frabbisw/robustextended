@@ -415,8 +415,8 @@ def analyze_language_trends(data):
 # ---------- EXAMPLE USAGE ----------
 if __name__ == "__main__":
     dataset_path = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
-    model_name = sys.argv[1]
-    pert_type = sys.argv[2]
+    # model_name = sys.argv[1]
+    # pert_type = sys.argv[2]
 
     key_identity = ["model_name", "pert_type"]
     key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", "perturbed_tokens", "nominal_complexity", "perturbed_complexity"]
