@@ -152,14 +152,28 @@ columns = data_with_robust[0]
 rows = data_with_robust[1:]
 df = pd.DataFrame(rows, columns=columns)
 
-print(columns)
-print(df.columns)
+df_java = get_df(df, "java", "func_name")
+df_cpp = get_df(df, "cpp", "func_name")
+df_js = get_df(df, "js", "func_name")
 
-print()
+df_java['language'] = 'JAVA'
+df_cpp['language'] = 'CPP'
+df_js['language'] = 'JS'
 
-analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
-print(f"done java func_name")
-analyze_robustness_drop_correlation(get_df(df, "cpp", "func_name"), "Java", "func_name", "figures/cpp_heat.png")
-print(f"done java func_name")
-analyze_robustness_drop_correlation(get_df(df, "js", "func_name"), "Java", "func_name", "figures/js_heat.png")
-print(f"done java func_name")
+# 2. Combine them into one main DataFrame
+# ignore_index=True is important for a clean index
+main_df = pd.concat([df_java, df_cpp, df_js], ignore_index=True)
+
+# 3. Now, call the function with the combined DataFrame
+analyze_and_plot_combined_correlation(
+    main_df=main_df,
+    perturbation_type="Function Name",  # Or whatever perturbation this is
+    save_filename="func_name_heatmap.png"
+)
+
+# analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
+# print(f"done java func_name")
+# analyze_robustness_drop_correlation(get_df(df, "cpp", "func_name"), "Java", "func_name", "figures/cpp_heat.png")
+# print(f"done java func_name")
+# analyze_robustness_drop_correlation(get_df(df, "js", "func_name"), "Java", "func_name", "figures/js_heat.png")
+# print(f"done java func_name")
