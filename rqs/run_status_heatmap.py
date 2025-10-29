@@ -178,7 +178,7 @@ df = get_whole_df()
 # df_filtered = df[(df['lang'] == 'java') & (df['score'] > 90)]
 df_filtered = df[(df['lang'] == 'java') & (df['pert_type'] == 'syntax')]
 
-print(Counter(df_filtered['run_status'])
+print(Counter(df_filtered['run_status']))
 
 exit(1)
 # print(df.columns)
