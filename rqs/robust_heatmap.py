@@ -7,138 +7,126 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from typing import List, Any
 
-def plot_correlation_bar_chart(correlation_series: pd.Series, title: str, save_filename: str) -> None:
+def analyze_and_plot_combined_correlation(
+    main_df: pd.DataFrame, 
+    perturbation_type: str, 
+    save_filename: str
+) -> None:
     """
-    Generates and saves a horizontal bar chart visualizing the correlation 
-    of each feature with the target variable ('robust_drop').
-    
+    Analyzes correlation with 'robust_drop' for each language found in the 
+    'language' column, then plots a single, combined heatmap 
+    stacking the results vertically for comparison.
+
     Args:
-        correlation_series: A pandas Series of correlations (features vs. target).
-        title: The descriptive title for the plot.
-        save_filename: The required filename to save the generated plot.
+        main_df: DataFrame containing features, 'robust_drop', and 'language' columns.
+        perturbation_type: Type of perturbation (e.g., 'Function Name') for the title.
+        save_filename: Required filename to save the generated plot.
     """
+    
+    if 'robust_drop' not in main_df.columns or 'language' not in main_df.columns:
+        print("Error: DataFrame must contain 'robust_drop' and 'language' columns.")
+        return
     if not save_filename:
         print("Error: save_filename must be provided to save the plot.")
         return
+
+    languages = sorted(main_df['language'].unique())
+    all_correlation_series = {}
     
-    # Drop the correlation of the target with itself for plotting
-    plot_data = correlation_series.drop('robust_drop', errors='ignore')
-    
-    # Sort by correlation strength (absolute value) for better visual impact
-    plot_data = plot_data.reindex(plot_data.abs().sort_values(ascending=False).index)
-    
-    fig, ax = plt.subplots(figsize=(10, len(plot_data) * 0.5 + 1)) # Dynamic height
-    
-    # Use different colors for positive and negative correlations
-    colors = ['#1f77b4' if c >= 0 else '#d62728' for c in plot_data.values]
-    
-    ax.barh(plot_data.index, plot_data.values, color=colors)
-    
-    # Add correlation values (annotations)
-    for index, value in enumerate(plot_data.values):
-        ax.text(value, index, f'{value:.2f}', 
-                ha='left' if value < 0 else 'right', 
-                va='center', 
-                fontsize=10, 
-                color='black')
+    analysis_title = f"Feature Correlation with Robustness Drop / {perturbation_type.title()} Perturbation"
+    print("="*60)
+    print(f"Running Analysis for: {analysis_title}")
+    print(f"Found languages: {languages}")
+    print("="*60)
+
+    # --- 1. Calculate Correlation for Each Language ---
+    for lang in languages:
+        print(f"\nAnalyzing {lang.upper()}...")
+        df_lang = main_df[main_df['language'] == lang].copy()
         
-    ax.axvline(0, color='grey', linestyle='--', linewidth=1) # Zero line
-    ax.set_xlabel("Pearson Correlation Coefficient with 'robust_drop'")
-    ax.set_title(f"Feature Correlation with Robustness Drop ({title})", fontsize=14)
-    ax.grid(axis='x', linestyle=':', alpha=0.6)
+        numeric_df = df_lang.select_dtypes(include=[np.number]).copy()
+        
+        if 'robust_drop' not in numeric_df.columns:
+            print(f"Skipping {lang}: 'robust_drop' column is not numeric.")
+            continue
+            
+        numeric_df = numeric_df.replace([np.inf, -np.inf], np.nan).dropna(axis=0, how='any')
+        non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
+        filtered_df = numeric_df[non_constant_cols]
+        
+        if 'robust_drop' not in filtered_df.columns or filtered_df.shape[1] < 2:
+            print(f"Skipping {lang}: Insufficient variance in features or 'robust_drop' column.")
+            continue
+            
+        correlation_matrix = filtered_df.corr()
+        robust_drop_correlation = correlation_matrix['robust_drop']
+        all_correlation_series[lang.upper()] = robust_drop_correlation
+        
+        # Print stats for this language
+        result_df = pd.DataFrame({
+            'Correlation': robust_drop_correlation,
+            'Absolute_Correlation': np.abs(robust_drop_correlation)
+        }).sort_values(by='Absolute_Correlation', ascending=False)
+        print(f"Top correlations for {lang.upper()}:\n", result_df.drop('robust_drop', errors='ignore').head(5))
+
+    if not all_correlation_series:
+        print("Error: No valid correlation data was generated for any language.")
+        return
+
+    # --- 2. Combine DataFrames for Plotting ---
     
+    # This automatically aligns all feature names (columns) and fills missing ones with NaN
+    combined_corr_df = pd.DataFrame(all_correlation_series)
+    
+    # Transpose so languages are rows and features are columns
+    plot_df = combined_corr_df.transpose()
+    
+    # CRITICAL: Sort columns (features) alphabetically for consistent ordering
+    plot_df = plot_df.sort_index(axis=1, ascending=True)
+    
+    # Drop 'robust_drop' column from the plot
+    plot_df = plot_df.drop('robust_drop', axis=1, errors='ignore')
+
+    print("\n" + "="*60)
+    print("Combined Correlation Matrix (Languages vs. Features):")
+    print(plot_df)
+    print("="*60)
+
+    # --- 3. Plot Combined 1D Heatmap ---
+    
+    # Adjust size based on number of features and languages
+    fig_width = max(12, plot_df.shape[1] * 0.9) # Width based on num features
+    fig_height = max(4, plot_df.shape[0] * 0.8 + 2) # Height based on num languages
+    
+    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+    
+    sns.heatmap(
+        plot_df,
+        annot=True,          # Show the correlation values
+        fmt=".2f",           # Format to 2 decimal places
+        cmap='coolwarm',     # Use a diverging colormap
+        vmin=-1.0,           # Standardize scale from -1
+        vmax=1.0,            # to +1
+        cbar=True,           # Show the color bar
+        cbar_kws={'label': "Pearson Correlation", 'shrink': 0.8, 'aspect': 15, 'pad': 0.05},
+        linewidths=.5,
+        ax=ax,
+        annot_kws={"size": 10} # Adjust annotation font size
+    )
+    
+    ax.set_title(analysis_title, fontsize=16, pad=20)
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=12) # Language names
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10) # Feature names
+    ax.set_ylabel("") # Remove 'None' ylabel
+
     fig.tight_layout() 
     
-    # Save figure at 300 dpi for high-quality publication/report use
+    # Save figure at 300 dpi
     plt.savefig(save_filename, dpi=300, bbox_inches='tight') 
-    print(f"\nBar chart saved successfully to: {save_filename}")
+    print(f"\nCombined heatmap saved successfully to: {save_filename}")
     
     plt.close(fig)
 
-
-def analyze_robustness_drop_correlation(
-    df: pd.DataFrame, 
-    language_name: str, 
-    perturbation_type: str, 
-    save_heatmap_filename: str
-) -> None:
-    """
-    Analyzes the correlation of all numerical features in the DataFrame 
-    with the 'robust_drop' column and generates a correlation bar chart.
-    
-    Args:
-        df: DataFrame containing features and the 'robust_drop' column.
-        language_name: Name of the language being analyzed (e.g., 'JAVA', 'CPP').
-        perturbation_type: Type of perturbation being analyzed (e.g., 'Function Name', 'DocString').
-        save_heatmap_filename: Required filename to save the generated plot.
-    """
-    
-    if 'robust_drop' not in df.columns:
-        print("Error: DataFrame must contain a column named 'robust_drop'.")
-        return
-
-    # --- 1. Preprocessing and Feature Selection ---
-    
-    # Ensure all columns are suitable for correlation (numeric)
-    numeric_df = df.select_dtypes(include=[np.number]).copy()
-    
-    # Check if 'robust_drop' is still present after filtering (it should be)
-    if 'robust_drop' not in numeric_df.columns:
-        print("Error: 'robust_drop' column is not numeric. Please ensure it is cast to float or int.")
-        return
-
-    # Handle NaNs and columns with zero variance (correlation is undefined)
-    # Note: Using dropna(axis=0, how='any') removes rows with any NaN value in the numeric subset
-    numeric_df = numeric_df.replace([np.inf, -np.inf], np.nan).dropna(axis=0, how='any')
-    
-    # Filter out columns that have no variance (i.e., all values are the same)
-    non_constant_cols = numeric_df.columns[numeric_df.nunique() > 1]
-    filtered_df = numeric_df[non_constant_cols]
-    
-    if filtered_df.shape[1] < 2:
-        print("Warning: Insufficient variance in features or 'robust_drop' column. Cannot calculate meaningful correlation.")
-        print(f"Current 'robust_drop' unique values: {filtered_df['robust_drop'].nunique()}")
-        return
-
-    # --- 2. Calculate Correlation Matrix ---
-
-    # Calculate the correlation matrix
-    correlation_matrix = filtered_df.corr()
-    
-    # Extract the correlation values of metrics with 'robust_drop'
-    robust_drop_correlation = correlation_matrix['robust_drop']
-    
-    # --- 3. Print Statistical Results ---
-    
-    analysis_title = f"{language_name.upper()} / {perturbation_type.title()} Perturbation"
-    
-    print("="*60)
-    print(f"Correlation Analysis: Feature Impact on Robustness Drop ({analysis_title})")
-    print("="*60)
-    
-    print("Correlation with 'robust_drop' (Higher absolute value indicates stronger linear relationship):\n")
-    
-    # Print the absolute correlation values to emphasize strength
-    result_df = pd.DataFrame({
-        'Correlation': robust_drop_correlation,
-        'Absolute_Correlation': np.abs(robust_drop_correlation)
-    }).sort_values(by='Absolute_Correlation', ascending=False)
-    
-    # Drop the 'robust_drop' row itself for cleaner output
-    print(result_df.drop('robust_drop', errors='ignore'))
-    
-    print("\nInterpretation:")
-    print(" - A Positive Correlation means that as the feature value increases (e.g., larger change in function name), the robustness drop also increases (worse performance).")
-    print(" - A Negative Correlation means that as the feature value increases, the robustness drop decreases (better performance/less drop).")
-    
-    # --- 4. Plot Visualization ---
-    
-    # Call the new bar chart function with the single correlation series
-    plot_correlation_bar_chart(
-        robust_drop_correlation, 
-        title=analysis_title,
-        save_filename=save_heatmap_filename
-    )
 
 def get_df(df, lang, pert_type):
 	filtered_df = df[(df["lang"] == lang) & (df["pert_type"] == pert_type)]
