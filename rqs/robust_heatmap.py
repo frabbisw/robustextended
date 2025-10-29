@@ -7,73 +7,53 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from typing import List, Any
 
-def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_filename: str) -> None:
+def plot_correlation_bar_chart(correlation_series: pd.Series, title: str, save_filename: str) -> None:
     """
-    Generates and saves a heatmap for the given correlation matrix using Matplotlib
-    to bypass known dependency issues with Seaborn's heatmap function.
+    Generates and saves a horizontal bar chart visualizing the correlation 
+    of each feature with the target variable ('robust_drop').
     
     Args:
-        correlation_matrix: The pandas DataFrame containing the correlation results.
+        correlation_series: A pandas Series of correlations (features vs. target).
         title: The descriptive title for the plot.
-        save_filename: The required filename (e.g., 'java_func_name_heatmap.png') 
-                       to save the generated plot.
+        save_filename: The required filename to save the generated plot.
     """
     if not save_filename:
         print("Error: save_filename must be provided to save the plot.")
         return
+    
+    # Drop the correlation of the target with itself for plotting
+    plot_data = correlation_series.drop('robust_drop', errors='ignore')
+    
+    # Sort by correlation strength (absolute value) for better visual impact
+    plot_data = plot_data.reindex(plot_data.abs().sort_values(ascending=False).index)
+    
+    fig, ax = plt.subplots(figsize=(10, len(plot_data) * 0.5 + 1)) # Dynamic height
+    
+    # Use different colors for positive and negative correlations
+    colors = ['#1f77b4' if c >= 0 else '#d62728' for c in plot_data.values]
+    
+    ax.barh(plot_data.index, plot_data.values, color=colors)
+    
+    # Add correlation values (annotations)
+    for index, value in enumerate(plot_data.values):
+        ax.text(value, index, f'{value:.2f}', 
+                ha='left' if value < 0 else 'right', 
+                va='center', 
+                fontsize=10, 
+                color='black')
         
-    fig, ax = plt.subplots(figsize=(10, 8))
-    
-    # --- Matplotlib-based Heatmap Generation ---
-    # Using plt.pcolormesh to bypass the problematic sns.heatmap function
-    
-    # Prepare data for pcolormesh
-    data = correlation_matrix.values
-    
-    # Define colors and normalization
-    cmap = plt.cm.get_cmap('coolwarm')
-    vmin = -1.0 # Correlation ranges from -1 to 1
-    vmax = 1.0
-    
-    cax = ax.pcolormesh(
-        data, 
-        cmap=cmap, 
-        vmin=vmin, 
-        vmax=vmax
-    )
-    
-    # Add color bar
-    fig.colorbar(cax, ax=ax, label='Pearson Correlation Coefficient')
-    
-    # Set ticks and labels
-    ax.set_xticks(np.arange(data.shape[1]) + 0.5, minor=False)
-    ax.set_yticks(np.arange(data.shape[0]) + 0.5, minor=False)
-    ax.set_xticklabels(correlation_matrix.columns, rotation=90)
-    ax.set_yticklabels(correlation_matrix.index)
-    
-    # Add annotation (correlation values)
-    for i in range(data.shape[0]):
-        for j in range(data.shape[1]):
-            # Use white or black text depending on cell color for contrast
-            text_color = 'white' if abs(data[i, j]) > 0.6 else 'black'
-            ax.text(j + 0.5, i + 0.5, f'{data[i, j]:.2f}',
-                    ha='center', va='center', color=text_color, fontsize=10)
-    
-    # Set plot title and limits
-    ax.set_title(f"Feature Correlation Heatmap: {title}", fontsize=14)
-    ax.set_xlim(0, data.shape[1])
-    ax.set_ylim(0, data.shape[0])
-    ax.invert_yaxis() # Heatmaps usually have y-axis inverted
-    
-    # --- End Matplotlib-based Heatmap Generation ---
+    ax.axvline(0, color='grey', linestyle='--', linewidth=1) # Zero line
+    ax.set_xlabel("Pearson Correlation Coefficient with 'robust_drop'")
+    ax.set_title(f"Feature Correlation with Robustness Drop ({title})", fontsize=14)
+    ax.grid(axis='x', linestyle=':', alpha=0.6)
     
     fig.tight_layout() 
     
     # Save figure at 300 dpi for high-quality publication/report use
     plt.savefig(save_filename, dpi=300, bbox_inches='tight') 
-    print(f"\nHeatmap saved successfully to: {save_filename}")
+    print(f"\nBar chart saved successfully to: {save_filename}")
     
-    plt.close(fig) # Close the figure using the figure object for safety
+    plt.close(fig)
 
 
 def analyze_robustness_drop_correlation(
@@ -84,7 +64,7 @@ def analyze_robustness_drop_correlation(
 ) -> None:
     """
     Analyzes the correlation of all numerical features in the DataFrame 
-    with the 'robust_drop' column and generates a correlation heatmap.
+    with the 'robust_drop' column and generates a correlation bar chart.
     
     Args:
         df: DataFrame containing features and the 'robust_drop' column.
@@ -126,7 +106,7 @@ def analyze_robustness_drop_correlation(
     correlation_matrix = filtered_df.corr()
     
     # Extract the correlation values of metrics with 'robust_drop'
-    robust_drop_correlation = correlation_matrix['robust_drop'].sort_values(ascending=False)
+    robust_drop_correlation = correlation_matrix['robust_drop']
     
     # --- 3. Print Statistical Results ---
     
@@ -152,8 +132,10 @@ def analyze_robustness_drop_correlation(
     print(" - A Negative Correlation means that as the feature value increases, the robustness drop decreases (better performance/less drop).")
     
     # --- 4. Plot Visualization ---
-    plot_correlation_heatmap(
-        correlation_matrix, 
+    
+    # Call the new bar chart function with the single correlation series
+    plot_correlation_bar_chart(
+        robust_drop_correlation, 
         title=analysis_title,
         save_filename=save_heatmap_filename
     )
