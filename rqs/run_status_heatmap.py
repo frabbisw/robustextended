@@ -173,10 +173,10 @@ def get_pert_df(df, pert_type):
 
 
 df = get_whole_df()
-main_df = get_pert_df(df, pert_type)
 
 pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "syntax": "Syntax"}
 for pert_type in ["func_name", "nlaugmenter", "format", "syntax"]:
+	main_df = get_pert_df(df, pert_type)
 	print(pert_type)
 	plot_feature_by_status_heatmap(
 	    main_df=main_df,
