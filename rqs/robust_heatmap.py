@@ -113,7 +113,8 @@ def analyze_robustness_drop_correlation(df: pd.DataFrame, language_name: str, pe
 def get_df(df, lang, pert_type):
 	filtered_df = df[(df["lang"] == lang) & (df["pert_type"] == pert_type)]
 	filtered_df = filtered_df.drop(columns=["lang", "pert_type", "run_status", "model_name"])
-	
+	return filtered_df
+
 with open("data_with_robust.pkl", "rb") as f:
 	data_with_robust = pickle.load(f)
 
