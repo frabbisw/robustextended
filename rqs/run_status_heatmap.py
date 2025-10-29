@@ -13,14 +13,18 @@ def plot_feature_by_status_heatmap(
     save_filename: str
 ) -> None:
     """
-    Analyzes feature averages across different 'run_status' (categorical)
-    and 'language' groups.
+    Analyzes feature averages for FAILED cases, comparing them across
+    different 'language' groups.
     
-    It calculates the Z-score (standard deviation from the overall mean) for
-    each feature, for each group, and plots this as a heatmap.
+    It first calculates the overall mean/std dev from ALL samples (including
+    passes) to get a baseline.
+    
+    It then groups all FAILED cases (e.g., "ASSERTION", "COMPILATION") by
+    language, calculates their average feature values, and computes the Z-score
+    (standard deviation from the overall mean) for each.
     
     This helps identify which features are unusually high or low for
-    specific outcomes (e.g., "COMPILATION" errors).
+    failures in a specific language.
 
     Args:
         main_df: DataFrame containing features, 'run_status', and 'language' columns.
@@ -36,7 +40,6 @@ def plot_feature_by_status_heatmap(
         return
 
     # --- 1. Identify Numeric Features ---
-    # Exclude any old target vars and non-numeric cols
     numeric_features = main_df.select_dtypes(include=[np.number]).columns.tolist()
     if not numeric_features:
         print("Error: No numeric features found in the DataFrame.")
@@ -45,46 +48,54 @@ def plot_feature_by_status_heatmap(
     print(f"Analyzing features: {numeric_features}")
 
     # --- 2. Standardization ---
-    # First, calculate the *overall* mean and std dev for each feature
-    # This will be our "baseline" for comparison
+    # First, calculate the *overall* mean and std dev from ALL samples.
+    # This is our "baseline" for comparison.
     overall_mean = main_df[numeric_features].mean()
     overall_std = main_df[numeric_features].std()
 
     # Handle features with zero variance (e.g., if a feature is constant)
     overall_std = overall_std.replace(0, 1) # Avoid division by zero
 
-    # --- 3. Group and Calculate Mean Values ---
-    # Group by both language and run_status, then get the mean of all features
-    grouped_df = main_df.groupby(['language', 'run_status'])[numeric_features].mean()
+    # --- 3. Group and Calculate Mean Values for FAILED Cases ---
+    
+    # Filter to *only* failed cases
+    failed_df = main_df[main_df['run_status'].str.upper() != 'PASSED'].copy()
+    
+    if failed_df.empty:
+        print("Error: No FAILED cases (e.g., 'ASSERTION', 'COMPILATION') found in the dataset.")
+        return
+
+    # Group *only* by language
+    grouped_df = failed_df.groupby('language')[numeric_features].mean()
     
     # --- 4. Calculate Z-Scores ---
     # (Group Mean - Overall Mean) / Overall Standard Deviation
     normalized_df = (grouped_df - overall_mean) / overall_std
     
-    # Sort the index for a cleaner plot (optional, but good practice)
+    # Sort the index for a cleaner plot (alphabetical by language)
     normalized_df = normalized_df.sort_index()
 
-    # Fill any NaN (e.g., if a language had 0 "TIMEOUT" errors)
+    # Fill any NaN (e.g., if a language had 0 failures)
     # A Z-score of 0 is appropriate as it represents "no deviation"
     plot_df = normalized_df.fillna(0)
 
     print("\n" + "="*60)
-    print("Standardized Mean Feature Values (Z-Scores) by Group:")
+    print("Standardized Mean Feature Values (Z-Scores) for FAILED Cases:")
     print(plot_df)
     print("="*60)
-    print("\nInterpretation: High positive (red) means this group's average is")
-    print("significantly *higher* than the overall average for that feature.")
+    print("\nInterpretation: High positive (red) means a FAILED case in this language")
+    print("has a feature value significantly *higher* than the overall average sample.")
     print("High negative (blue) means it's significantly *lower*.")
     print("-"*60)
 
 
     # --- 5. Plot Combined Heatmap (Pure Matplotlib) ---
     
-    analysis_title = f"Standardized Feature Averages by Outcome / {perturbation_type.title()} Perturbation"
+    analysis_title = f"Standardized Feature Averages for FAILED Cases / {perturbation_type.title()} Perturbation"
     
     # Adjust size
     fig_width = max(12, plot_df.shape[1] * 1.0)
-    fig_height = max(6, plot_df.shape[0] * 0.9)
+    fig_height = max(4, plot_df.shape[0] * 1.5 + 2) # More vertical space per row
     
     fig, ax = plt.subplots(figsize=(fig_width, fig_height))
     
@@ -94,6 +105,9 @@ def plot_feature_by_status_heatmap(
     cmap = plt.get_cmap('coolwarm')
     # Center the colormap at 0. Find the max absolute value for symmetric range.
     v_max = np.nanmax(np.abs(plot_data))
+    # Handle case where v_max might be 0
+    if v_max == 0:
+        v_max = 1 
     v_min = -v_max
     
     im = ax.imshow(plot_data, cmap=cmap, vmin=v_min, vmax=v_max, aspect='auto')
@@ -104,20 +118,20 @@ def plot_feature_by_status_heatmap(
     ax.set_xticks(np.arange(plot_df.shape[1]))
     ax.set_yticks(np.arange(plot_df.shape[0]))
     
-    # Use the MultiIndex for Y-axis labels
-    y_labels = [f"{lang} / {status}" for lang, status in plot_df.index]
+    # Use the DataFrame index (language names) for Y-axis labels
     ax.set_xticklabels(plot_df.columns, rotation=45, ha='right', fontsize=10)
-    ax.set_yticklabels(y_labels, rotation=0, fontsize=10)
+    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=12) # Updated this line
 
     # Loop over data and create text annotations
     for i in range(plot_df.shape[0]):
         for j in range(plot_df.shape[1]):
             value = plot_data[i, j]
             text_label = f"{value:.2f}"
-            text_color = "black" if np.abs(value) < (v_max * 0.5) else "white"
+            # Use a threshold to decide text color (light/dark)
+            text_color = "white" if np.abs(value) > (v_max * 0.5) else "black"
                 
             ax.text(j, i, text_label,
-                    ha="center", va="center", color=text_color, size=9)
+                    ha="center", va="center", color=text_color, size=10)
 
     ax.set_title(analysis_title, fontsize=16, pad=20)
     ax.set_ylabel("")
@@ -128,7 +142,6 @@ def plot_feature_by_status_heatmap(
     print(f"\nCombined feature/status heatmap saved successfully to: {save_filename}")
     
     plt.close(fig)
-
 
 def get_df(df, lang, pert_type):
 	filtered_df = df[(df["lang"] == lang) & (df["pert_type"] == pert_type)]
