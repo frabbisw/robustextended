@@ -171,17 +171,18 @@ def get_pert_df(df, pert_type):
 	main_df = pd.concat([df_java, df_cpp, df_js], ignore_index=True)
 	return main_df
 
-pert_type = "func_name"
 
 df = get_whole_df()
 main_df = get_pert_df(df, pert_type)
 
-# 3. Now, call the function with the combined DataFrame
-plot_feature_by_status_heatmap(
-    main_df=main_df,
-    perturbation_type=f"{pert_type}",  # Or whatever perturbation this is
-    save_filename=f"figures/{pert_type}_heatmap.png"
-)
+pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "syntax": "Syntax"}
+for pert_type in ["func_name", "nlaugmenter", "format", "syntax"]:
+	print(pert_type)
+	plot_feature_by_status_heatmap(
+	    main_df=main_df,
+	    perturbation_type=f"{pert_map[pert_type]}",  # Or whatever perturbation this is
+	    save_filename=f"figures/{pert_type}_heatmap.png"
+	)
 
 # analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
 # print(f"done java func_name")
