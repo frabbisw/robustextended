@@ -155,7 +155,7 @@ def analyze_robustness_drop_correlation(
     plot_correlation_heatmap(
         correlation_matrix, 
         title=analysis_title,
-        save_heatmap_filename=save_heatmap_filename
+        save_filename=save_heatmap_filename
     )
 
 def get_df(df, lang, pert_type):
