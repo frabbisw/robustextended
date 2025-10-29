@@ -281,7 +281,7 @@ def get_a_short_list(stat_list, keys):
         ret_list.append(row)
     return ret_list
 
-data_with_robust = get_a_short_list(stat_list, column_names)
+data_with_robust = [column_names] + get_a_short_list(stat_list, column_names)
 
 with open("stat_with_robust.pkl", "wb") as f:
     pickle.dump(stat_list, f)
