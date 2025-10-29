@@ -234,6 +234,24 @@ def extract_function_parts(code: str, func_name: str):
     body = "\n".join(body_lines)
     return docstring, signature, body
 
+def calc_comment_percent(p_doc, p_sig, p_body):
+    combined = "\n".join([p_doc, p_sig, p_body])
+    lines = [line.strip() for line in combined.splitlines() if line.strip()]
+
+    if not lines:
+        return 0.0
+
+    comment_lines = [
+        line for line in lines
+        if line.startswith("//") or line.startswith("/*") or line.startswith("*") or line.startswith("#")
+    ]
+
+    return (len(comment_lines) / len(lines)) * 100 
+    
+def calc_braces_count(code: str) -> int:
+    braces = ['(', ')', '{', '}', '[', ']']
+    return sum(code.count(b) for b in braces)
+
 # ---------- METRICS WRAPPERS ----------
 
 def compute_pre_generation_metrics(nominal_prompt: str, perturbed_prompt: str, nominal_func_name: str, perturbed_func_name: str):
@@ -246,18 +264,25 @@ def compute_pre_generation_metrics(nominal_prompt: str, perturbed_prompt: str, n
         "docstring_change": calc_change_percent(n_doc, p_doc),
         "code_change": calc_change_percent(n_body, p_body),
         "prompt_change": calc_change_percent(nominal_prompt, perturbed_prompt),
+        "comment_percentage": calc_comment_percent(p_doc, p_sig, p_body),
+        "braces_count": calc_braces_count(perturbed_prompt),
     }
 
-def compute_post_generation_metrics(nominal_code: str, perturbed_code: str):
+def compute_post_generation_metrics(nominal_code: str, perturbed_code: str, reference_code: str):
     """Metrics comparing generated codes and their complexity."""
     return {
         "generated_code_change": calc_change_percent(nominal_code, perturbed_code),
+        "nominal_code_change": calc_change_percent(reference_code, nominal_code),
+        "perturbed_code_change": calc_change_percent(reference_code, perturbed_code),
         "nominal_LOC": count_loc(nominal_code),
         "perturbed_LOC": count_loc(perturbed_code),
+        "reference_LOC": count_loc(reference_code),
         "nominal_tokens": token_length(nominal_code),
         "perturbed_tokens": token_length(perturbed_code),
+        "reference_tokens": token_length(reference_code),
         "nominal_complexity": cyclomatic_complexity(nominal_code),
         "perturbed_complexity": cyclomatic_complexity(perturbed_code),
+        "reference_complexity": cyclomatic_complexity(reference_code),
     }
 
 def eliminate_second_Sollution(sample_java_solution):
