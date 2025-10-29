@@ -9,7 +9,8 @@ from typing import List, Any
 
 def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_filename: str) -> None:
     """
-    Generates and saves a heatmap for the given correlation matrix.
+    Generates and saves a heatmap for the given correlation matrix using Matplotlib
+    to bypass known dependency issues with Seaborn's heatmap function.
     
     Args:
         correlation_matrix: The pandas DataFrame containing the correlation results.
@@ -18,26 +19,53 @@ def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_
                        to save the generated plot.
     """
     if not save_filename:
-        # Enforce saving behavior as requested by the user
         print("Error: save_filename must be provided to save the plot.")
         return
         
     fig, ax = plt.subplots(figsize=(10, 8))
     
-    # Attempting to explicitly set mask=None to bypass internal Seaborn mask calculation 
-    # that uses the deprecated np.bool object, which is causing the AttributeError.
-    sns.heatmap(
-        correlation_matrix, 
-        annot=True, 
-        cmap='coolwarm', 
-        fmt=".2f",
-        linewidths=.5,
-        cbar_kws={'label': 'Pearson Correlation Coefficient'},
-        ax=ax,
-        robust=True, 
-        mask=None # Explicitly setting mask to None
+    # --- Matplotlib-based Heatmap Generation ---
+    # Using plt.pcolormesh to bypass the problematic sns.heatmap function
+    
+    # Prepare data for pcolormesh
+    data = correlation_matrix.values
+    
+    # Define colors and normalization
+    cmap = plt.cm.get_cmap('coolwarm')
+    vmin = -1.0 # Correlation ranges from -1 to 1
+    vmax = 1.0
+    
+    cax = ax.pcolormesh(
+        data, 
+        cmap=cmap, 
+        vmin=vmin, 
+        vmax=vmax
     )
-    plt.title(f"Feature Correlation Heatmap: {title}", fontsize=14)
+    
+    # Add color bar
+    fig.colorbar(cax, ax=ax, label='Pearson Correlation Coefficient')
+    
+    # Set ticks and labels
+    ax.set_xticks(np.arange(data.shape[1]) + 0.5, minor=False)
+    ax.set_yticks(np.arange(data.shape[0]) + 0.5, minor=False)
+    ax.set_xticklabels(correlation_matrix.columns, rotation=90)
+    ax.set_yticklabels(correlation_matrix.index)
+    
+    # Add annotation (correlation values)
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            # Use white or black text depending on cell color for contrast
+            text_color = 'white' if abs(data[i, j]) > 0.6 else 'black'
+            ax.text(j + 0.5, i + 0.5, f'{data[i, j]:.2f}',
+                    ha='center', va='center', color=text_color, fontsize=10)
+    
+    # Set plot title and limits
+    ax.set_title(f"Feature Correlation Heatmap: {title}", fontsize=14)
+    ax.set_xlim(0, data.shape[1])
+    ax.set_ylim(0, data.shape[0])
+    ax.invert_yaxis() # Heatmaps usually have y-axis inverted
+    
+    # --- End Matplotlib-based Heatmap Generation ---
     
     fig.tight_layout() 
     
@@ -45,8 +73,7 @@ def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_
     plt.savefig(save_filename, dpi=300, bbox_inches='tight') 
     print(f"\nHeatmap saved successfully to: {save_filename}")
     
-    # Use plt.close() without the figure object for robustness
-    plt.close()
+    plt.close(fig) # Close the figure using the figure object for safety
 
 
 def analyze_robustness_drop_correlation(
@@ -128,7 +155,7 @@ def analyze_robustness_drop_correlation(
     plot_correlation_heatmap(
         correlation_matrix, 
         title=analysis_title,
-        save_filename=save_heatmap_filename
+        save_heatmap_filename=save_heatmap_filename
     )
 
 def get_df(df, lang, pert_type):
