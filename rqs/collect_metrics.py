@@ -337,20 +337,20 @@ def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
             # ret_list.append([change["func_name_change"], change["prompt_change"], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             change_pre = compute_pre_generation_metrics(nominal_dict[p["task_id"]]["prompt"], p["prompt"], nominal_dict[p["task_id"]]["entry_point"], p["entry_point"])
             change_post = compute_post_generation_metrics(filter_gc(nominal_dict[p["task_id"]]["gc"], lang), filter_gc(p["gc"], lang))
-            change = change_pre | change_post            
-            ret_list.append(change | {"run_status": RUN_STATUS_MAP[p["run_status_evalplus"]], "lang": lang})
+            change = change_pre | change_post           
+            ret_list.append({"model_name": model_name, "pert_type": pert_type} | change | {"run_status": RUN_STATUS_MAP[p["run_status_evalplus"]], "lang": lang})
             # ret_list.append([change[keys[0]], change[keys[1]], RUN_STATUS_MAP[p["run_status_evalplus"]], lang])
             
     return ret_list
 
-def get_a_short_list(stat_list, key_metrics, key_columns):
+def get_a_short_list(stat_list, keys):
     ret_list = []
     for s in stat_list:
         row = []
-        for m in key_metrics:
+        for k in keys:
             row.append(s[m])
-        for c in key_columns:
-            row.append(s[c])
+        # for c in key_columns:
+        #     row.append(s[c])
         ret_list.append(row)
     return ret_list        
 
@@ -418,9 +418,10 @@ if __name__ == "__main__":
     model_name = sys.argv[1]
     pert_type = sys.argv[2]
 
+    key_identity = ["model_name", "pert_type"]
     key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", "perturbed_tokens", "nominal_complexity", "perturbed_complexity"]
     key_columns = ["run_status", "lang"]
-    column_names = key_metrics + key_columns 
+    column_names = key_identity + key_metrics + key_columns 
 
     stat_list = []
     all_data = [column_names]
@@ -434,10 +435,11 @@ if __name__ == "__main__":
                     # print(len(local_list))
                     stat_list += local_list
 
-    small_list = get_a_short_list(stat_list, key_metrics, key_columns)
-
+    small_list = get_a_short_list(stat_list, column_names)
+    all_data += small_list
+    
     with open("all_data.pkl", "wb") as f:
-        pickle.dump(small_list, f)
+        pickle.dump(all_data, f)
         
 # for lang in langs:
 #         for aug_type in os.listdir(f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}"):
