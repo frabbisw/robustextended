@@ -148,30 +148,39 @@ def get_df(df, lang, pert_type):
 	filtered_df = filtered_df.drop(columns=["lang", "pert_type", "model_name"])
 	return filtered_df
 
-with open("all_data.pkl", "rb") as f:
-	data = pickle.load(f)
+def get_df():
+	with open("all_data.pkl", "rb") as f:
+		data = pickle.load(f)
+	
+	columns = data[0]
+	rows = data[1:]
+	df = pd.DataFrame(rows, columns=columns)
+	return df
 
-columns = data[0]
-rows = data[1:]
-df = pd.DataFrame(rows, columns=columns)
+def get_pert_df(pert_type):
+	df_java = get_df(df, "java", pert_type)
+	df_cpp = get_df(df, "cpp", pert_type)
+	df_js = get_df(df, "js", pert_type)
 
-df_java = get_df(df, "java", "func_name")
-df_cpp = get_df(df, "cpp", "func_name")
-df_js = get_df(df, "js", "func_name")
+	df_java['language'] = 'JAVA'
+	df_cpp['language'] = 'CPP'
+	df_js['language'] = 'JS'
 
-df_java['language'] = 'JAVA'
-df_cpp['language'] = 'CPP'
-df_js['language'] = 'JS'
+	# 2. Combine them into one main DataFrame
+	# ignore_index=True is important for a clean index
+	main_df = pd.concat([df_java, df_cpp, df_js], ignore_index=True)
+	return main_df
 
-# 2. Combine them into one main DataFrame
-# ignore_index=True is important for a clean index
-main_df = pd.concat([df_java, df_cpp, df_js], ignore_index=True)
+pert_type = "func_name"
+
+df = get_df()
+main_df = get_pert_df(pert_type)
 
 # 3. Now, call the function with the combined DataFrame
 plot_feature_by_status_heatmap(
     main_df=main_df,
-    perturbation_type="Function Name",  # Or whatever perturbation this is
-    save_filename="feature_by_status_heatmap.png"
+    perturbation_type=f"{pert_type}",  # Or whatever perturbation this is
+    save_filename=f"figures/{pert_type}_heatmap.png"
 )
 
 # analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
