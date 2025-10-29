@@ -438,7 +438,10 @@ if __name__ == "__main__":
 
     small_list = get_a_short_list(stat_list, column_names)
     all_data += small_list
-    
+
+    with open("stat_list.pkl", "wb") as f:
+        pickle.dump(stat_list, f)
+        
     with open("all_data.pkl", "wb") as f:
         pickle.dump(all_data, f)
         
