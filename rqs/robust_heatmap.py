@@ -117,6 +117,8 @@ def get_df(df, lang, pert_type):
 with open("data_with_robust.pkl", "rb") as f:
 	data_with_robust = pickle.load(f)
 
+print(columns)
+
 columns = data_with_robust[0]
 rows = data_with_robust[1:]
 df = pd.DataFrame(rows, columns=columns)
