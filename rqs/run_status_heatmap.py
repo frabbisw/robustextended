@@ -6,6 +6,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from typing import List, Any
+from collections import Counter
 
 def plot_feature_by_status_heatmap(
     main_df: pd.DataFrame, 
@@ -173,6 +174,15 @@ def get_pert_df(df, pert_type):
 
 
 df = get_whole_df()
+
+# df_filtered = df[(df['lang'] == 'java') & (df['score'] > 90)]
+df_filtered = df[(df['lang'] == 'java') & (df['pert_type'] == 'syntax')]
+
+print(Counter(df_filtered['run_status'])
+
+exit(1)
+# print(df.columns)
+
 
 pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "syntax": "Syntax"}
 for pert_type in ["func_name", "nlaugmenter", "format", "syntax"]:
