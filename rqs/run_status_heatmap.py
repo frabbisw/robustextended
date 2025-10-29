@@ -133,7 +133,7 @@ def plot_feature_by_status_heatmap(
             ax.text(j, i, text_label,
                     ha="center", va="center", color=text_color, size=10)
 
-    ax.set_title(analysis_title, fontsize=16, pad=20)
+    # ax.set_title(analysis_title, fontsize=16, pad=20)
     ax.set_ylabel("")
 
     fig.tight_layout() 
