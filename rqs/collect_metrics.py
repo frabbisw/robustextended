@@ -349,7 +349,7 @@ def get_a_short_list(stat_list, keys):
     for s in stat_list:
         row = []
         for k in keys:
-            row.append(s[m])
+            row.append(s[k])
         # for c in key_columns:
         #     row.append(s[c])
         ret_list.append(row)
