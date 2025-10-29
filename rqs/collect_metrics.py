@@ -315,7 +315,7 @@ def filter_gc(gc, lang):
 
 def get_a_list(dataset_path, model_name, lang, pert_type, aug_type):
     print("preparing files ...")
-    print(dataset_path, model_name, lang, pert_type, aug_type)
+    print(model_name, lang, pert_type, aug_type)
     pert_folder=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/{pert_type}/{aug_type}"
     if pert_type in ["natgen", "format"]:
         nominal_path=f"{dataset_path}/{model_name}/generated_pass5_1/{lang}/partial/f_s0.jsonl"
