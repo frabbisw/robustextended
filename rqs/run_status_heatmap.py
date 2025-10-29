@@ -176,16 +176,16 @@ def get_pert_df(df, pert_type):
 df = get_whole_df()
 
 # df_filtered = df[(df['lang'] == 'java') & (df['score'] > 90)]
-df_filtered = df[(df['lang'] == 'java') & (df['pert_type'] == 'syntax')]
+# df_filtered = df[(df['lang'] == 'java') & (df['pert_type'] == 'natgen')]
 
-print(list(df_filtered['run_status']))
+# print(list(df_filtered['run_status']))
 
-exit(1)
+# exit(1)
 # print(df.columns)
 
 
-pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "syntax": "Syntax"}
-for pert_type in ["func_name", "nlaugmenter", "format", "syntax"]:
+pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "natgen": "Syntax"}
+for pert_type in ["func_name", "nlaugmenter", "format", "natgen"]:
 	main_df = get_pert_df(df, pert_type)
 	print(pert_type)
 	plot_feature_by_status_heatmap(
