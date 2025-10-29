@@ -143,12 +143,12 @@ def plot_feature_by_status_heatmap(
     
     plt.close(fig)
 
-def get_df(df, lang, pert_type):
+def get_lang_df(df, lang, pert_type):
 	filtered_df = df[(df["lang"] == lang) & (df["pert_type"] == pert_type)]
 	filtered_df = filtered_df.drop(columns=["lang", "pert_type", "model_name"])
 	return filtered_df
 
-def get_df():
+def get_whole_df():
 	with open("all_data.pkl", "rb") as f:
 		data = pickle.load(f)
 	
@@ -157,10 +157,10 @@ def get_df():
 	df = pd.DataFrame(rows, columns=columns)
 	return df
 
-def get_pert_df(pert_type):
-	df_java = get_df(df, "java", pert_type)
-	df_cpp = get_df(df, "cpp", pert_type)
-	df_js = get_df(df, "js", pert_type)
+def get_pert_df(df, pert_type):
+	df_java = get_lang_df(df, "java", pert_type)
+	df_cpp = get_lang_df(df, "cpp", pert_type)
+	df_js = get_lang_df(df, "js", pert_type)
 
 	df_java['language'] = 'JAVA'
 	df_cpp['language'] = 'CPP'
@@ -173,8 +173,8 @@ def get_pert_df(pert_type):
 
 pert_type = "func_name"
 
-df = get_df()
-main_df = get_pert_df(pert_type)
+df = get_whole_df()
+main_df = get_pert_df(df, pert_type)
 
 # 3. Now, call the function with the combined DataFrame
 plot_feature_by_status_heatmap(
