@@ -121,9 +121,11 @@ columns = data_with_robust[0]
 rows = data_with_robust[1:]
 df = pd.DataFrame(rows, columns=columns)
 
-analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
-print(f"done java func_name")
-analyze_robustness_drop_correlation(get_df(df, "cpp", "func_name"), "Java", "func_name", "figures/cpp_heat.png")
-print(f"done java func_name")
-analyze_robustness_drop_correlation(get_df(df, "js", "func_name"), "Java", "func_name", "figures/js_heat.png")
-print(f"done java func_name")
+print(df.columns)
+
+# analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
+# print(f"done java func_name")
+# analyze_robustness_drop_correlation(get_df(df, "cpp", "func_name"), "Java", "func_name", "figures/cpp_heat.png")
+# print(f"done java func_name")
+# analyze_robustness_drop_correlation(get_df(df, "js", "func_name"), "Java", "func_name", "figures/js_heat.png")
+# print(f"done java func_name")
