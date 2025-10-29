@@ -24,6 +24,8 @@ def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_
         
     fig, ax = plt.subplots(figsize=(10, 8))
     
+    # Attempting to explicitly set mask=None to bypass internal Seaborn mask calculation 
+    # that uses the deprecated np.bool object, which is causing the AttributeError.
     sns.heatmap(
         correlation_matrix, 
         annot=True, 
@@ -32,7 +34,8 @@ def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_
         linewidths=.5,
         cbar_kws={'label': 'Pearson Correlation Coefficient'},
         ax=ax,
-        robust=True 
+        robust=True, 
+        mask=None # Explicitly setting mask to None
     )
     plt.title(f"Feature Correlation Heatmap: {title}", fontsize=14)
     
@@ -41,10 +44,28 @@ def plot_correlation_heatmap(correlation_matrix: pd.DataFrame, title: str, save_
     # Save figure at 300 dpi for high-quality publication/report use
     plt.savefig(save_filename, dpi=300, bbox_inches='tight') 
     print(f"\nHeatmap saved successfully to: {save_filename}")
-    plt.close(fig) # Close the figure to free up memory
+    
+    # Use plt.close() without the figure object for robustness
+    plt.close()
 
 
-def analyze_robustness_drop_correlation(df: pd.DataFrame, language_name: str, perturbation_type: str, save_heatmap_filename: str) -> None:
+def analyze_robustness_drop_correlation(
+    df: pd.DataFrame, 
+    language_name: str, 
+    perturbation_type: str, 
+    save_heatmap_filename: str
+) -> None:
+    """
+    Analyzes the correlation of all numerical features in the DataFrame 
+    with the 'robust_drop' column and generates a correlation heatmap.
+    
+    Args:
+        df: DataFrame containing features and the 'robust_drop' column.
+        language_name: Name of the language being analyzed (e.g., 'JAVA', 'CPP').
+        perturbation_type: Type of perturbation being analyzed (e.g., 'Function Name', 'DocString').
+        save_heatmap_filename: Required filename to save the generated plot.
+    """
+    
     if 'robust_drop' not in df.columns:
         print("Error: DataFrame must contain a column named 'robust_drop'.")
         return
