@@ -15,17 +15,16 @@ def plot_feature_by_status_heatmap(
 ) -> None:
     """
     Analyzes feature averages for FAILED cases, comparing them across
-    different 'language' groups.
+    different 'language' groups using a LOCAL baseline.
     
-    It first calculates the overall mean/std dev from ALL samples (including
-    passes) to get a baseline.
+    For each language (e.g., "JAVA"), it first calculates the mean/std dev
+    from ALL "JAVA" samples (passed and failed) to get a "local Java baseline".
     
-    It then groups all FAILED cases (e.g., "ASSERTION", "COMPILATION") by
-    language, calculates their average feature values, and computes the Z-score
-    (standard deviation from the overall mean) for each.
+    It then calculates the mean feature values for FAILED "JAVA" cases and
+    computes the Z-score (standard deviation from the "local Java baseline").
     
     This helps identify which features are unusually high or low for
-    failures in a specific language.
+    failures *relative to other samples in that same language*.
 
     Args:
         main_df: DataFrame containing features, 'run_status', and 'language' columns.
@@ -48,51 +47,76 @@ def plot_feature_by_status_heatmap(
 
     print(f"Analyzing features: {numeric_features}")
 
-    # --- 2. Standardization ---
-    # First, calculate the *overall* mean and std dev from ALL samples.
-    # This is our "baseline" for comparison.
-    overall_mean = main_df[numeric_features].mean()
-    overall_std = main_df[numeric_features].std()
-
-    # Handle features with zero variance (e.g., if a feature is constant)
-    overall_std = overall_std.replace(0, 1) # Avoid division by zero
-
-    # --- 3. Group and Calculate Mean Values for FAILED Cases ---
+    # --- 2. Calculate Z-Scores using LOCAL (per-language) baselines ---
     
-    # Filter to *only* failed cases
-    failed_df = main_df[main_df['run_status'].str.upper() != 'PASSED'].copy()
-    
-    if failed_df.empty:
-        print("Error: No FAILED cases (e.g., 'ASSERTION', 'COMPILATION') found in the dataset.")
+    languages = sorted(main_df['language'].unique())
+    z_score_rows = []
+
+    print("\nCalculating Z-Scores using a LOCAL (per-language) baseline...")
+
+    for lang in languages:
+        # Get all samples for this language
+        lang_df = main_df[main_df['language'] == lang]
+        
+        if lang_df.empty:
+            print(f"Skipping {lang}: No data found.")
+            continue
+
+        # Calculate the "local baseline" mean and std dev from ALL samples in this language
+        local_mean = lang_df[numeric_features].mean()
+        local_std = lang_df[numeric_features].std()
+
+        # Handle features with zero variance (e.g., if a feature is constant *within* this language)
+        local_std = local_std.replace(0, 1) # Avoid division by zero
+
+        # Get *only* the failed cases for this language
+        failed_lang_df = lang_df[lang_df['run_status'].str.upper() != 'PASSED']
+        
+        if failed_lang_df.empty:
+            print(f"Skipping {lang}: No FAILED cases found to analyze.")
+            # We can append a row of NaNs or 0s if we want to show it in the plot
+            z_score_row = pd.Series(index=numeric_features, data=np.nan, name=lang)
+        else:
+            # Calculate the mean of the features for the failed cases
+            failed_mean = failed_lang_df[numeric_features].mean()
+            
+            # Calculate the Z-score for this language's failed cases
+            # (Failed Mean - Local Baseline Mean) / Local Baseline Std
+            z_score_row = (failed_mean - local_mean) / local_std
+            z_score_row.name = lang
+        
+        z_score_rows.append(z_score_row)
+
+    if not z_score_rows:
+        print("Error: No data processed. Ending analysis.")
         return
 
-    # Group *only* by language
-    grouped_df = failed_df.groupby('language')[numeric_features].mean()
+    # --- 3. Combine and Plot ---
     
-    # --- 4. Calculate Z-Scores ---
-    # (Group Mean - Overall Mean) / Overall Standard Deviation
-    normalized_df = (grouped_df - overall_mean) / overall_std
+    # Create the final DataFrame for plotting
+    normalized_df = pd.DataFrame(z_score_rows)
     
-    # Sort the index for a cleaner plot (alphabetical by language)
-    normalized_df = normalized_df.sort_index()
-
     # Fill any NaN (e.g., if a language had 0 failures)
     # A Z-score of 0 is appropriate as it represents "no deviation"
     plot_df = normalized_df.fillna(0)
 
     print("\n" + "="*60)
     print("Standardized Mean Feature Values (Z-Scores) for FAILED Cases:")
+    print("(Calculated relative to the average of *all* samples in that *same* language)")
     print(plot_df)
     print("="*60)
     print("\nInterpretation: High positive (red) means a FAILED case in this language")
-    print("has a feature value significantly *higher* than the overall average sample.")
+    print("has a feature value significantly *higher* than the average for that language.")
     print("High negative (blue) means it's significantly *lower*.")
     print("-"*60)
 
 
-    # --- 5. Plot Combined Heatmap (Pure Matplotlib) ---
+    # --- 4. Plot Combined Heatmap (Pure Matplotlib) ---
     
-    analysis_title = f"Standardized Feature Averages for FAILED Cases / {perturbation_type.title()} Perturbation"
+    analysis_title = (
+        f"Standardized Feature Averages for FAILED Cases (vs. Local Language Average)\n"
+        f"{perturbation_type.title()} Perturbation"
+    )
     
     # Adjust size
     fig_width = max(12, plot_df.shape[1] * 1.0)
@@ -114,14 +138,14 @@ def plot_feature_by_status_heatmap(
     im = ax.imshow(plot_data, cmap=cmap, vmin=v_min, vmax=v_max, aspect='auto')
 
     cbar = fig.colorbar(im, ax=ax, shrink=0.8, aspect=15, pad=0.05)
-    cbar.set_label("Z-Score (Standard Deviations from Overall Mean)", rotation=-90, va="bottom")
+    cbar.set_label("Z-Score (Standard Deviations from Local Language Mean)", rotation=-90, va="bottom")
 
     ax.set_xticks(np.arange(plot_df.shape[1]))
     ax.set_yticks(np.arange(plot_df.shape[0]))
     
     # Use the DataFrame index (language names) for Y-axis labels
     ax.set_xticklabels(plot_df.columns, rotation=45, ha='right', fontsize=10)
-    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=12) # Updated this line
+    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=12) 
 
     # Loop over data and create text annotations
     for i in range(plot_df.shape[0]):
@@ -134,7 +158,7 @@ def plot_feature_by_status_heatmap(
             ax.text(j, i, text_label,
                     ha="center", va="center", color=text_color, size=10)
 
-    # ax.set_title(analysis_title, fontsize=16, pad=20)
+    ax.set_title(analysis_title, fontsize=16, pad=20)
     ax.set_ylabel("")
 
     fig.tight_layout() 
