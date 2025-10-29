@@ -89,10 +89,11 @@ def analyze_and_plot_combined_correlation(
 
     print("\n" + "="*60)
     print("Combined Correlation Matrix (Languages vs. Features):")
-    print(plot_df)
+    # Fill NaN with a placeholder for printing, but use np.nan for plotting
+    print(plot_df.fillna("N/A"))
     print("="*60)
 
-    # --- 3. Plot Combined 1D Heatmap ---
+    # --- 3. Plot Combined 1D Heatmap (Pure Matplotlib implementation) ---
     
     # Adjust size based on number of features and languages
     fig_width = max(12, plot_df.shape[1] * 0.9) # Width based on num features
@@ -100,23 +101,38 @@ def analyze_and_plot_combined_correlation(
     
     fig, ax = plt.subplots(figsize=(fig_width, fig_height))
     
-    sns.heatmap(
-        plot_df,
-        annot=True,          # Show the correlation values
-        fmt=".2f",           # Format to 2 decimal places
-        cmap='coolwarm',     # Use a diverging colormap
-        vmin=-1.0,           # Standardize scale from -1
-        vmax=1.0,            # to +1
-        cbar=True,           # Show the color bar
-        cbar_kws={'label': "Pearson Correlation", 'shrink': 0.8, 'aspect': 15, 'pad': 0.05},
-        linewidths=.5,
-        ax=ax,
-        annot_kws={"size": 10} # Adjust annotation font size
-    )
+    # Get the data values
+    plot_data = plot_df.values
     
+    # Create the heatmap plot using imshow
+    cmap = plt.get_cmap('coolwarm')
+    im = ax.imshow(plot_data, cmap=cmap, vmin=-1.0, vmax=1.0, aspect='auto')
+
+    # Create the color bar
+    cbar = fig.colorbar(im, ax=ax, shrink=0.8, aspect=15, pad=0.05)
+    cbar.set_label("Pearson Correlation", rotation=-90, va="bottom")
+
+    # Set ticks and labels
+    ax.set_xticks(np.arange(plot_df.shape[1]))
+    ax.set_yticks(np.arange(plot_df.shape[0]))
+    ax.set_xticklabels(plot_df.columns, rotation=45, ha='right', fontsize=10)
+    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=12)
+
+    # Loop over data dimensions and create text annotations.
+    for i in range(plot_df.shape[0]): # Loop over languages (rows)
+        for j in range(plot_df.shape[1]): # Loop over features (columns)
+            value = plot_data[i, j]
+            if pd.isna(value):
+                text_label = "N/A"
+                text_color = "grey"
+            else:
+                text_label = f"{value:.2f}"
+                text_color = "black" # coolwarm is light in the middle
+                
+            ax.text(j, i, text_label,
+                    ha="center", va="center", color=text_color, size=10)
+
     ax.set_title(analysis_title, fontsize=16, pad=20)
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=12) # Language names
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10) # Feature names
     ax.set_ylabel("") # Remove 'None' ylabel
 
     fig.tight_layout() 
@@ -126,6 +142,38 @@ def analyze_and_plot_combined_correlation(
     print(f"\nCombined heatmap saved successfully to: {save_filename}")
     
     plt.close(fig)
+
+# --- Example of how to call the new function ---
+if __name__ == '__main__':
+    # Create some dummy data to simulate your main DataFrame
+    
+    # Features: func_name_change, code_change, complexity, robust_drop, language
+    data = {
+        'func_name_change': np.random.rand(300),
+        'code_change': np.random.rand(300),
+        'complexity': np.random.randint(1, 10, 300),
+        'extra_feature_js': np.random.rand(300), # Feature only in JS
+        'robust_drop': np.random.rand(300),
+        'language': ['JAVA'] * 100 + ['CPP'] * 100 + ['JS']* 100
+    }
+    
+    # Make correlations different for each language
+    data['robust_drop'][:100] = data['robust_drop'][:100] + data['func_name_change'][:100] * 0.8 # JAVA
+    data['robust_drop'][100:200] = data['robust_drop'][100:200] - data['code_change'][100:200] * 0.6 # CPP
+    data['robust_drop'][200:] = data['robust_drop'][200:] + data['extra_feature_js'][200:] * 0.5 # JS
+
+    main_df = pd.DataFrame(data)
+    
+    # Drop the extra feature for non-JS languages to simulate missing data
+    main_df.loc[main_df['language'] != 'JS', 'extra_feature_js'] = np.nan
+
+    print("--- Running Example ---")
+    analyze_and_plot_combined_correlation(
+        main_df=main_df,
+        perturbation_type="Function Name (Example)",
+        save_filename="combined_correlation_heatmap.png"
+    )
+    print("--- Example Complete ---")
 
 
 def get_df(df, lang, pert_type):
