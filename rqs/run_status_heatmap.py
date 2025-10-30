@@ -150,8 +150,7 @@ def plot_feature_by_status_heatmap(
     # if v_max == 0:
     #     v_max = 1 
     # v_min = -v_max
-
-	v_max = .2
+	v_max = 0.2
 	v_min = -v_max
 	
     im = ax.imshow(plot_data, cmap=cmap, vmin=v_min, vmax=v_max, aspect='auto')
