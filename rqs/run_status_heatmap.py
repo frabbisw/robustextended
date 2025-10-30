@@ -15,16 +15,19 @@ def plot_feature_by_status_heatmap(
 ) -> None:
     """
     Analyzes feature averages for FAILED cases, comparing them across
-    different 'language' groups using a LOCAL baseline.
+    different 'language' groups using a LOCAL baseline and weighting
+    by the failure rate.
     
-    For each language (e.g., "JAVA"), it first calculates the mean/std dev
-    from ALL "JAVA" samples (passed and failed) to get a "local Java baseline".
+    This calculates an "Impact Score" = Z-Score * Failure Rate
     
-    It then calculates the mean feature values for FAILED "JAVA" cases and
-    computes the Z-score (standard deviation from the "local Java baseline").
+    1. For each language (e.g., "JAVA"), it calculates the mean/std dev
+       from ALL "JAVA" samples (passed/failed) to get a "local Java baseline".
+    2. It calculates the Z-score for FAILED "JAVA" cases (how "weird" failures are).
+    3. It calculates the "Failure Rate" for "JAVA" (how *often* failures happen).
+    4. It multiplies (Z-Score * Failure Rate) to get the "Impact Score".
     
-    This helps identify which features are unusually high or low for
-    failures *relative to other samples in that same language*.
+    This helps identify which features are *impactful* (both unusual and common)
+    for failures in a specific language.
 
     Args:
         main_df: DataFrame containing features, 'run_status', and 'language' columns.
@@ -47,12 +50,12 @@ def plot_feature_by_status_heatmap(
 
     print(f"Analyzing features: {numeric_features}")
 
-    # --- 2. Calculate Z-Scores using LOCAL (per-language) baselines ---
+    # --- 2. Calculate "Impact Scores" (Z-Score * Failure Rate) ---
     
     languages = sorted(main_df['language'].unique())
-    z_score_rows = []
+    impact_score_rows = []
 
-    print("\nCalculating Z-Scores using a LOCAL (per-language) baseline...")
+    print("\nCalculating Impact Scores (Z-Score * Failure Rate) using a LOCAL baseline...")
 
     for lang in languages:
         # Get all samples for this language
@@ -62,20 +65,30 @@ def plot_feature_by_status_heatmap(
             print(f"Skipping {lang}: No data found.")
             continue
 
+        # --- A. Calculate Failure Rate ---
+        total_samples = len(lang_df)
+        failed_lang_df = lang_df[lang_df['run_status'].str.upper() != 'PASSED']
+        failed_samples = len(failed_lang_df)
+
+        if total_samples == 0:
+            print(f"Skipping {lang}: No samples found.")
+            continue
+        
+        failure_rate = failed_samples / total_samples
+        print(f"  {lang}: Failure Rate = {failed_samples} / {total_samples} = {failure_rate:.4f}")
+
+        # --- B. Calculate Local Baseline & Z-Score ---
         # Calculate the "local baseline" mean and std dev from ALL samples in this language
         local_mean = lang_df[numeric_features].mean()
         local_std = lang_df[numeric_features].std()
 
-        # Handle features with zero variance (e.g., if a feature is constant *within* this language)
+        # Handle features with zero variance
         local_std = local_std.replace(0, 1) # Avoid division by zero
-
-        # Get *only* the failed cases for this language
-        failed_lang_df = lang_df[lang_df['run_status'].str.upper() != 'PASSED']
         
-        if failed_lang_df.empty:
-            print(f"Skipping {lang}: No FAILED cases found to analyze.")
-            # We can append a row of NaNs or 0s if we want to show it in the plot
-            z_score_row = pd.Series(index=numeric_features, data=np.nan, name=lang)
+        if failed_samples == 0:
+            print(f"  {lang}: No FAILED cases found. Impact Score for all features will be 0.")
+            # Z-Score is technically undefined, but impact is 0
+            z_score_row = pd.Series(index=numeric_features, data=0.0)
         else:
             # Calculate the mean of the features for the failed cases
             failed_mean = failed_lang_df[numeric_features].mean()
@@ -83,38 +96,41 @@ def plot_feature_by_status_heatmap(
             # Calculate the Z-score for this language's failed cases
             # (Failed Mean - Local Baseline Mean) / Local Baseline Std
             z_score_row = (failed_mean - local_mean) / local_std
-            z_score_row.name = lang
         
-        z_score_rows.append(z_score_row)
+        # --- C. Calculate Impact Score ---
+        impact_score_row = z_score_row * failure_rate
+        impact_score_row.name = lang
+        
+        impact_score_rows.append(impact_score_row)
 
-    if not z_score_rows:
+    if not impact_score_rows:
         print("Error: No data processed. Ending analysis.")
         return
 
     # --- 3. Combine and Plot ---
     
     # Create the final DataFrame for plotting
-    normalized_df = pd.DataFrame(z_score_rows)
+    normalized_df = pd.DataFrame(impact_score_rows)
     
     # Fill any NaN (e.g., if a language had 0 failures)
-    # A Z-score of 0 is appropriate as it represents "no deviation"
+    # An Impact Score of 0 is appropriate as it represents "no deviation"
     plot_df = normalized_df.fillna(0)
 
     print("\n" + "="*60)
-    print("Standardized Mean Feature Values (Z-Scores) for FAILED Cases:")
-    print("(Calculated relative to the average of *all* samples in that *same* language)")
+    print("Feature Impact Score (Z-Score * Failure Rate) for FAILED Cases:")
+    print("(Z-Score is calculated relative to the average of *all* samples in that *same* language)")
     print(plot_df)
     print("="*60)
-    print("\nInterpretation: High positive (red) means a FAILED case in this language")
-    print("has a feature value significantly *higher* than the average for that language.")
-    print("High negative (blue) means it's significantly *lower*.")
+    print("\nInterpretation: High positive (red) means this feature is *both*")
+    print("significantly *higher* than the language average AND failures are common.")
+    print("High negative (blue) means it's *lower* AND failures are common.")
     print("-"*60)
 
 
     # --- 4. Plot Combined Heatmap (Pure Matplotlib) ---
     
     analysis_title = (
-        f"Standardized Feature Averages for FAILED Cases (vs. Local Language Average)\n"
+        f"Feature Impact Score (Z-Score * Failure Rate) for FAILED Cases\n"
         f"{perturbation_type.title()} Perturbation"
     )
     
@@ -138,7 +154,7 @@ def plot_feature_by_status_heatmap(
     im = ax.imshow(plot_data, cmap=cmap, vmin=v_min, vmax=v_max, aspect='auto')
 
     cbar = fig.colorbar(im, ax=ax, shrink=0.8, aspect=15, pad=0.05)
-    cbar.set_label("Z-Score (Standard Deviations from Local Language Mean)", rotation=-90, va="bottom")
+    cbar.set_label("Impact Score (Z-Score × Failure Rate)", rotation=-90, va="bottom")
 
     ax.set_xticks(np.arange(plot_df.shape[1]))
     ax.set_yticks(np.arange(plot_df.shape[0]))
