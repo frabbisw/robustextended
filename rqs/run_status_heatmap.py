@@ -139,13 +139,13 @@ def plot_feature_by_status_heatmap(
     fig_height = max(4, plot_df.shape[0] * 1.5 + 2) # More vertical space per row
     
     fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-    
+    v_min, v_max = -.2, .2
     plot_data = plot_df.values
     
     # Use a diverging colormap centered at 0
     cmap = plt.get_cmap('coolwarm')
-	v_max = 0.2
-	v_min = -v_max
+	# v_max = 0.2
+	# v_min = -v_max
     # Center the colormap at 0. Find the max absolute value for symmetric range.
     # v_max = np.nanmax(np.abs(plot_data))
     # Handle case where v_max might be 0
