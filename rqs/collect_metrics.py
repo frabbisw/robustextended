@@ -420,7 +420,8 @@ if __name__ == "__main__":
     # pert_type = sys.argv[2]
 
     key_identity = ["model_name", "pert_type"]
-    key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", "perturbed_tokens", "nominal_complexity", "perturbed_complexity"]
+    # key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "generated_code_change", "nominal_LOC", "perturbed_LOC", "nominal_tokens", "perturbed_tokens", "nominal_complexity", "perturbed_complexity"]
+    key_metrics = ["func_name_change", "docstring_change", "code_change", "prompt_change", "comment_percentage_p_prompt", "braces_count_p_prompt", "generated_code_change", "nominal_code_change", "perturbed_code_change", "nominal_LOC", "perturbed_LOC", "reference_LOC", "nominal_tokens", "perturbed_tokens", "reference_tokens", "nominal_complexity", "perturbed_complexity", "reference_complexity"]
     key_columns = ["run_status", "lang"]
     column_names = key_identity + key_metrics + key_columns 
 
