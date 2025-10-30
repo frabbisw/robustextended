@@ -217,6 +217,16 @@ def get_pert_df_by_model_name(df, pert_type, model_name):
 df = get_whole_df()
 
 pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "natgen": "Syntax"}
+
+for pert_type in ["func_name", "nlaugmenter", "format", "natgen"]:
+	main_df = get_pert_df(df, pert_type)
+	print(pert_type)
+	plot_feature_by_status_heatmap(
+		main_df=main_df,
+		perturbation_type=f"{pert_map[pert_type]}",  # Or whatever perturbation this is
+		save_filename=f"figures/XX_{pert_type}_heatmap.png"
+	)
+
 for model_name in ["incoder1b", "incoder6b", "codegen2bmulti", "codegen6bmulti", "magicoder7b", "qwencoder"]:
 	for pert_type in ["func_name", "nlaugmenter", "format", "natgen"]:
 		main_df = get_pert_df_by_model_name(df, pert_type, model_name)
@@ -224,7 +234,7 @@ for model_name in ["incoder1b", "incoder6b", "codegen2bmulti", "codegen6bmulti",
 		plot_feature_by_status_heatmap(
 		    main_df=main_df,
 		    perturbation_type=f"{pert_map[pert_type]}",  # Or whatever perturbation this is
-		    save_filename=f"figures/{model_name}_{pert_type}_heatmap.png"
+		    save_filename=f"figures/YY_{model_name}_{pert_type}_heatmap.png"
 		)
 
 # analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
