@@ -191,32 +191,25 @@ def get_pert_df(df, pert_type):
 	df_cpp['language'] = 'CPP'
 	df_js['language'] = 'JS'
 
-	# 2. Combine them into one main DataFrame
-	# ignore_index=True is important for a clean index
 	main_df = pd.concat([df_java, df_cpp, df_js], ignore_index=True)
 	return main_df
 
+def get_pert_df_by_model_name(df, pert_type, model_name):
+	filtered_df = df[df["model_name"] == model_name]
+	return get_pert_df(filtered_df, pert_type)
 
 df = get_whole_df()
 
-# df_filtered = df[(df['lang'] == 'java') & (df['score'] > 90)]
-# df_filtered = df[(df['lang'] == 'java') & (df['pert_type'] == 'natgen')]
-
-# print(list(df_filtered['run_status']))
-
-# exit(1)
-# print(df.columns)
-
-
 pert_map = {"func_name": "FunctionName", "nlaugmenter": "DocString", "format": "Format", "natgen": "Syntax"}
-for pert_type in ["func_name", "nlaugmenter", "format", "natgen"]:
-	main_df = get_pert_df(df, pert_type)
-	print(pert_type)
-	plot_feature_by_status_heatmap(
-	    main_df=main_df,
-	    perturbation_type=f"{pert_map[pert_type]}",  # Or whatever perturbation this is
-	    save_filename=f"figures/{pert_type}_heatmap.png"
-	)
+for model_name in ["incoder1b", "incoder6b", "codegen2bmulti", "codegen6bmulti", "magicoder7b", "qwencoder"]:
+	for pert_type in ["func_name", "nlaugmenter", "format", "natgen"]:
+		main_df = get_pert_df_by_model_name(df, pert_type, model_name)
+		print(pert_type, model_name)
+		plot_feature_by_status_heatmap(
+		    main_df=main_df,
+		    perturbation_type=f"{pert_map[pert_type]}",  # Or whatever perturbation this is
+		    save_filename=f"figures/{model_name}_{pert_type}_heatmap.png"
+		)
 
 # analyze_robustness_drop_correlation(get_df(df, "java", "func_name"), "Java", "func_name", "figures/java_heat.png")
 # print(f"done java func_name")
