@@ -1,10 +1,12 @@
 import re
 import difflib
 import nltk
-from nltk import word_tokenize
+# from nltk import word_tokenize
 import json
 import jsonlines
 from collections import Counter
+
+from nltk.tokenize import word_tokenize
 
 import os
 import sys
@@ -144,10 +146,27 @@ def visualize_metrics(data_points, column_names, filename, title="Metrics Relati
 
 # ---------- TOKENIZATION & BASIC UTILITIES ----------
 
+# def tokenize_code(code: str):
+#     """Tokenize code using NLTK; language-agnostic but good for Java/C++/JS."""
+#     code = re.sub(r"([^\w])", r" \1 ", code)
+#     return word_tokenize(code)
+
 def tokenize_code(code: str):
-    """Tokenize code using NLTK; language-agnostic but good for Java/C++/JS."""
-    code = re.sub(r"([^\w])", r" \1 ", code)
-    return word_tokenize(code)
+    """Tokenize code and split camelCase, PascalCase, and snake_case names."""
+    # Split PascalCase / camelCase (e.g., ThisIsAFunc -> This Is A Func)
+    code = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', code)     # between a lowercase and uppercase
+    code = re.sub(r'(?<=[A-Z])(?=[A-Z][a-z])', ' ', code) # between capital sequences like XMLParser
+    
+    # Replace underscores with spaces (snake_case)
+    code = code.replace('_', ' ')
+    
+    # Add spaces around non-word chars (symbols, etc.)
+    code = re.sub(r'([^\w])', r' \1 ', code)
+    
+    # Tokenize
+    tokens = word_tokenize(code.lower())  # lowercase for normalization
+    return tokens
+
 
 def calc_change_percent(text1: str, text2: str) -> float:
     """Compute change % between two code snippets using token-based comparison."""
