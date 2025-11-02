@@ -271,8 +271,9 @@ def calc_comment_percent(p_doc, p_sig, p_body):
     return (len(comment_lines) / len(lines)) * 100 
     
 def calc_braces_count(code: str) -> int:
-    braces = ['(', ')', '{', '}', '[', ']']
-    return sum(code.count(b) for b in braces)
+    # braces = ['(', ')', '{', '}', '[', ']']
+    # return sum(code.count(b) for b in braces)
+    return code.count("{") - code.count("}")
 
 # ---------- METRICS WRAPPERS ----------
 
