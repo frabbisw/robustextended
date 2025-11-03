@@ -22,16 +22,16 @@ eval "$(conda shell.bash hook)"
 
 conda activate code_trans
 
-rm -r ../datasets/samples/
+rm -r ../datasets/samples/magicoder7b/cpp/
 python sampling.py magicoder7b cpp nlaugmenter
 python preprocess_docstring.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
 python postprocess_docstring.py magicoder7b cpp nlaugmenter > process_logs.txt
 python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl magicoder7b
 python prepare_orgs.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl ../datasets/magicoder7b/generated_pass5_1/cpp/nominal/f_s0.jsonl ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl
 echo "original correct items"
-python test_single_old.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl 2
+python test_single_old.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_org.jsonl 1
 echo "perturbed correct items"
-python test_single_old.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl 2
+python test_single_old.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl 1
 echo "processed correct items"
-python test_single.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_r.jsonl 2
+python test_single.py ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368.jsonl cpp ../datasets/samples/magicoder7b/cpp/nlaugmenter/sample_368_r.jsonl 1
 echo "Done!"
