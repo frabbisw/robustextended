@@ -64,7 +64,7 @@ for pert in part_dict[part]:
         block = prep_block(file_path, lang, part)
         all_blocks += (block + "\n")
 
-template = template.replace("##TIME##", tm).replace("##batch_name##", f"allpre_{lang}_{part}").replace("###COMMANDS###", all_blocks).replace("##GPU##", all_blocks)
+template = template.replace("##TIME##", tm).replace("##batch_name##", f"allpre_{lang}_{part}").replace("###COMMANDS###", all_blocks).replace("##GPU##", gpu)
 
 with open(f"allpre_{lang}_{part}.sh", "w") as f:
     f.write(template)
