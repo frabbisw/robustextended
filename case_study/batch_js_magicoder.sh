@@ -32,7 +32,7 @@ python postprocess_docstring.py magicoder7b js nlaugmenter > process_logs_js.txt
 python generate_code.py /home/f_rabbi/recode/robustextended/datasets/samples/magicoder7b/js/nlaugmenter/sample_368.jsonl magicoder7b
 python prepare_orgs.py ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368.jsonl ../datasets/magicoder7b/generated_pass5_1/js/nominal/f_s0.jsonl ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368_org.jsonl
 echo "original correct items"
-python test_single_old.py ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368_org.jsonl js ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368_org.jsonl 2
+python test_single_old.py ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368_org.jsonl js ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368_org.jsonl 3
 echo "perturbed correct items"
 python test_single_old.py ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368.jsonl js ../datasets/samples/magicoder7b/js/nlaugmenter/sample_368.jsonl 3
 echo "processed correct items"
