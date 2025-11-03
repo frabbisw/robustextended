@@ -3,7 +3,7 @@ template = '''#!/bin/bash
 #SBATCH -J ##batch_name##
 #SBATCH -n4
 #SBATCH --mem=30GB
-#SBATCH --gpus=1
+#SBATCH --gpus=##GPU##
 #SBATCH --time=##TIME##
 #SBATCH -o _%x%J.out
 #SBATCH --mail-type=BEGIN,END
@@ -49,6 +49,10 @@ part_dict = {"1": ["BackTranslation", "SynonymInsertion"], "2": ["ButterFingersP
 lang = sys.argv[1]
 part = sys.argv[2]
 tm = sys.argv[3]
+gpu = sys.argv[4]
+
+if len(gpu) is None or len(gpu) < 1:
+    gpu = 0
 
 folder_path = f"/home/f_rabbi/recode/robustextended/datasets/magicoder7b/backup/{lang}/nlaugmenter/"
 
@@ -60,7 +64,7 @@ for pert in part_dict[part]:
         block = prep_block(file_path, lang, part)
         all_blocks += (block + "\n")
 
-template = template.replace("##TIME##", tm).replace("##batch_name##", f"allpre_{lang}_{part}").replace("###COMMANDS###", all_blocks)
+template = template.replace("##TIME##", tm).replace("##batch_name##", f"allpre_{lang}_{part}").replace("###COMMANDS###", all_blocks).replace("##GPU##", all_blocks)
 
 with open(f"allpre_{lang}_{part}.sh", "w") as f:
     f.write(template)
