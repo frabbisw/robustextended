@@ -269,8 +269,8 @@ def test_file(generated_path, lang):
 
     result = {}
     for i in tq(range(len(generated_data))):
-        if "passed_evalplus_processed" in generated_data[i].keys():
-            continue
+        # if "passed_evalplus_processed" in generated_data[i].keys():
+        #     continue
         # gc = filter_gc(generated_data[i]["processed_gc"])
         gc = filter_gc(generated_data[i]["processed_gc"])
         
