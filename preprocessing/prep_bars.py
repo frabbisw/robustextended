@@ -119,6 +119,23 @@ def show_plot(stat, lang, K):
             for t in stat[aug_type][j].keys():
                 data[aug_type][t] += int(sum(stat[aug_type][j][t]) >= K)
             
+    print(f"--- Raw Counts for {lang} (K={K}) ---")
+    print(data)
+    
+    # Prepare data
+    perturbations = list(data.keys())
+    x = np.arange(len(perturbations))
+    width = 0.25
+    total = 164
+    
+    nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
+    perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
+    fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
+
+    # --- ADDITION: Calculate and print differences ---
+    robust_drop_pct = [(n - p) for n, p in zip(nominal_pct, perturbed_pct)]
+    recovery_pct = [(f - p) for f, p in zip(fixed_pct, perturbed_pct)]
+    
     print(f"\n--- Robustness Analysis (Pass@{K}) for {lang} ---")
     print(f"Total Problems: {total}\n")
     for i, pert in enumerate(perturbations):
@@ -134,16 +151,6 @@ def show_plot(stat, lang, K):
     print("--------------------------------------------------\n")
     # -----------------------------------------------
 
-    # Prepare data
-    perturbations = list(data.keys())
-    x = np.arange(len(perturbations))
-    width = 0.25
-    total = 164
-    
-    nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
-    perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
-    fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
-    
     # Plot
     fig, ax = plt.subplots(figsize=(12, 6))
     
@@ -153,7 +160,7 @@ def show_plot(stat, lang, K):
     rects3 = ax.bar(x + width, fixed_pct, width, label='Pre-processed', color='#55a868')
     
     # Customize
-    ax.set_ylabel('Pass5@5 (%)')
+    ax.set_ylabel(f'Pass@{K} (%)') # Updated to use K dynamically
     # ax.set_title('Pass Rate Comparison: Nominal vs Perturbed vs Fixed Prompts')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
@@ -164,6 +171,7 @@ def show_plot(stat, lang, K):
     # --- ADDITION: Add labels on top of each bar ---
     # The 'fmt' parameter formats the label to one decimal place
     # 'padding' adds a small space above the bar
+    # 'fontsize' controls the font size of the label (e.g., 8)
     ax.bar_label(rects1, padding=3, fmt='%.1f', fontsize=8)
     ax.bar_label(rects2, padding=3, fmt='%.1f', fontsize=8)
     ax.bar_label(rects3, padding=3, fmt='%.1f', fontsize=8)
@@ -172,12 +180,11 @@ def show_plot(stat, lang, K):
     fig.tight_layout()
     
     # Ensure the 'figures' directory exists before saving
-    import os
     os.makedirs('figures', exist_ok=True)
     
     # Save as high-resolution figure
-    plt.savefig(f"figures/{lang}_prep_bar.png", dpi=300, bbox_inches='tight')
-    print(f"Figure saved to figures/{lang}_prep_bar.png")
+    plt.savefig(f"figures/{lang}_prep_bar_pass@{K}.png", dpi=300, bbox_inches='tight')
+    print(f"Figure saved to figures/{lang}_prep_bar_pass@{K}.png")
 
 show_plot(get_stat("cpp", model_name), "cpp", 5)
 show_plot(get_stat("java", model_name), "java", 5)
