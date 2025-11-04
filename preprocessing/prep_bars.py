@@ -119,7 +119,21 @@ def show_plot(stat, lang, K):
             for t in stat[aug_type][j].keys():
                 data[aug_type][t] += int(sum(stat[aug_type][j][t]) >= K)
             
-    print(data)
+    print(f"\n--- Robustness Analysis (Pass@{K}) for {lang} ---")
+    print(f"Total Problems: {total}\n")
+    for i, pert in enumerate(perturbations):
+        print(f"  {pert}:")
+        print(f"    Robust Drop (Nominal - Perturbed): {nominal_pct[i]:.1f}% - {perturbed_pct[i]:.1f}% = {robust_drop_pct[i]:.1f}%")
+        print(f"    Recovery (Pre-processed - Perturbed): {fixed_pct[i]:.1f}% - {perturbed_pct[i]:.1f}% = {recovery_pct[i]:.1f}%")
+        
+    print("\n  --- Summary Statistics ---")
+    print(f"    Max Robust Drop: {max(robust_drop_pct):.1f}%")
+    print(f"    Min Robust Drop: {min(robust_drop_pct):.1f}%")
+    print(f"    Max Recovery: {max(recovery_pct):.1f}%")
+    print(f"    Min Recovery: {min(recovery_pct):.1f}%")
+    print("--------------------------------------------------\n")
+    # -----------------------------------------------
+
     # Prepare data
     perturbations = list(data.keys())
     x = np.arange(len(perturbations))
