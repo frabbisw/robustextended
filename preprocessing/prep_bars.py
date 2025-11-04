@@ -150,9 +150,9 @@ def show_plot(stat, lang, K):
     # --- ADDITION: Add labels on top of each bar ---
     # The 'fmt' parameter formats the label to one decimal place
     # 'padding' adds a small space above the bar
-    ax.bar_label(rects1, padding=3, fmt='%.1f')
-    ax.bar_label(rects2, padding=3, fmt='%.1f')
-    ax.bar_label(rects3, padding=3, fmt='%.1f')
+    ax.bar_label(rects1, padding=3, fmt='%.1f', fontsize=8)
+    ax.bar_label(rects2, padding=3, fmt='%.1f', fontsize=8)
+    ax.bar_label(rects3, padding=3, fmt='%.1f', fontsize=8)
     # -----------------------------------------------
 
     fig.tight_layout()
