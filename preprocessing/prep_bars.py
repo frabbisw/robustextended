@@ -146,6 +146,17 @@ def show_plot(stat, lang, K):
             ax.text(x[i] + width, already_fixed_pct[i] + newly_fixed_pct[i]/2 + 1.0, f"{newly_fixed_pct[i]:.1f}",
                     ha='center', va='center', fontsize=8, color='white', fontweight='bold')
 
+    # --- Summary statistics for paper reporting ---
+    print(f"=== {lang} (Pass@{K}) ===")
+    for label, values in [
+        ("Nominal", nominal_pct),
+        ("Perturbed: Newly Failed", newly_failed_pct),
+        ("Perturbed: Still Passed", still_passed_pct),
+        ("Fixed: Already Fixed", already_fixed_pct),
+        ("Fixed: Newly Fixed", newly_fixed_pct),
+    ]:
+        print(f"{label}: max={max(values):.2f}%, min={min(values):.2f}%, mean={np.mean(values):.2f}%")
+    
     # Axis & style
     ax.set_ylabel(f'Pass@{K} (%)')
     ax.set_xticks(x)
