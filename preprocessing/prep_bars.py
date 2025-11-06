@@ -77,8 +77,7 @@ def get_stat(lang, model_name):
 
 def show_plot(stat, lang, K):
     # ------------------------------
-    # Example: simplified data extraction from your logic
-    # (ensure 'newly_fixed' and 'newly_failed' are computed properly in your actual loop)
+    # Simplified example aggregation (keep your own logic)
     # ------------------------------
     data = {}
     for aug_type in stat.keys():
@@ -96,7 +95,6 @@ def show_plot(stat, lang, K):
             data[aug_type]["perturbed"] += passed_perturbed
             data[aug_type]["fixed"] += passed_fixed
 
-            # transitions
             if passed_fixed and not passed_perturbed:
                 data[aug_type]["newly_fixed"] += 1
             if passed_fixed and passed_perturbed:
@@ -118,7 +116,6 @@ def show_plot(stat, lang, K):
     perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
     fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
 
-    # stacked components
     newly_fixed_pct = [data[k]['newly_fixed'] / total * 100 for k in perturbations]
     already_fixed_pct = [data[k]['already_fixed'] / total * 100 for k in perturbations]
     newly_failed_pct = [data[k]['newly_failed'] / total * 100 for k in perturbations]
@@ -126,27 +123,61 @@ def show_plot(stat, lang, K):
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    # Nominal (single color)
+    # --- Bars ---
     rects1 = ax.bar(x - width, nominal_pct, width, label='Nominal', color='#8172b2')
 
-    # Perturbed (stacked)
     rects2a = ax.bar(x, still_passed_pct, width, label='Perturbed: Passed→Passed', color='#4c72b0')
     rects2b = ax.bar(x, newly_failed_pct, width, bottom=still_passed_pct,
                      label='Perturbed: Passed→Failed', color='#dd8452')
 
-    # Fixed (stacked)
     rects3a = ax.bar(x + width, already_fixed_pct, width, label='Fixed: Passed→Passed', color='#55a868')
     rects3b = ax.bar(x + width, newly_fixed_pct, width, bottom=already_fixed_pct,
                      label='Fixed: Failed→Passed', color='#c44e52')
 
-    # Customize
+    # --- Add bar labels (values on all parts) ---
+    def autolabel_stacked(rects, values, bottoms=None):
+        """Attach text labels to stacked bar segments."""
+        for rect, val in zip(rects, values):
+            height = rect.get_height()
+            bottom = rect.get_y() if bottoms is None else bottoms
+            if val > 0:
+                ax.text(
+                    rect.get_x() + rect.get_width()/2,
+                    bottom + height/2,
+                    f"{val:.1f}",
+                    ha='center', va='center',
+                    fontsize=8, color='white', fontweight='bold'
+                )
+
+    # Labels for nominal
+    ax.bar_label(rects1, labels=[f"{v:.1f}" for v in nominal_pct],
+                 padding=3, fontsize=8, fmt='%.1f')
+
+    # Labels for stacked perturbed bars
+    for i in range(len(x)):
+        if still_passed_pct[i] > 0:
+            ax.text(x[i], still_passed_pct[i]/2, f"{still_passed_pct[i]:.1f}",
+                    ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+        if newly_failed_pct[i] > 0:
+            ax.text(x[i], still_passed_pct[i] + newly_failed_pct[i]/2, f"{newly_failed_pct[i]:.1f}",
+                    ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+
+    # Labels for stacked fixed bars
+    for i in range(len(x)):
+        if already_fixed_pct[i] > 0:
+            ax.text(x[i] + width, already_fixed_pct[i]/2, f"{already_fixed_pct[i]:.1f}",
+                    ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+        if newly_fixed_pct[i] > 0:
+            ax.text(x[i] + width, already_fixed_pct[i] + newly_fixed_pct[i]/2, f"{newly_fixed_pct[i]:.1f}",
+                    ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+
+    # --- Formatting ---
     ax.set_ylabel(f'Pass@{K} (%)')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
     ax.set_ylim(0, 100)
     ax.yaxis.set_major_formatter(PercentFormatter())
 
-    # Combine legend to avoid duplicate labels
     handles, labels = ax.get_legend_handles_labels()
     by_label = dict(zip(labels, handles))
     ax.legend(by_label.values(), by_label.keys(), ncol=2, loc='upper right')
