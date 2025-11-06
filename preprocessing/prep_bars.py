@@ -246,5 +246,8 @@ def show_plot(stat, lang, K):
     # plt.show()
 
 show_plot(get_stat("cpp", model_name), "cpp", 5)
+print("cpp done")
 show_plot(get_stat("java", model_name), "java", 5)
+print("java done")
 show_plot(get_stat("js", model_name), "js", 5)
+print("js done")
