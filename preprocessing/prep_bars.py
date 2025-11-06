@@ -76,9 +76,6 @@ def get_stat(lang, model_name):
     return stat
 
 def show_plot(stat, lang, K):
-    # ------------------------------
-    # Simplified example aggregation (keep your own logic)
-    # ------------------------------
     data = {}
     for aug_type in stat.keys():
         data[aug_type] = {
@@ -104,18 +101,12 @@ def show_plot(stat, lang, K):
             if passed_perturbed and passed_fixed:
                 data[aug_type]["still_passed"] += 1
 
-    # ------------------------------
-    # Plotting
-    # ------------------------------
     perturbations = list(data.keys())
     x = np.arange(len(perturbations))
     width = 0.25
     total = 164
 
     nominal_pct = [data[k]['nominal'] / total * 100 for k in perturbations]
-    perturbed_pct = [data[k]['perturbed'] / total * 100 for k in perturbations]
-    fixed_pct = [data[k]['fixed'] / total * 100 for k in perturbations]
-
     newly_fixed_pct = [data[k]['newly_fixed'] / total * 100 for k in perturbations]
     already_fixed_pct = [data[k]['already_fixed'] / total * 100 for k in perturbations]
     newly_failed_pct = [data[k]['newly_failed'] / total * 100 for k in perturbations]
@@ -123,7 +114,7 @@ def show_plot(stat, lang, K):
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    # --- Bars ---
+    # Bars
     rects1 = ax.bar(x - width, nominal_pct, width, label='Nominal', color='#8172b2')
 
     rects2a = ax.bar(x, still_passed_pct, width, label='Perturbed: Passed→Passed', color='#4c72b0')
@@ -134,44 +125,28 @@ def show_plot(stat, lang, K):
     rects3b = ax.bar(x + width, newly_fixed_pct, width, bottom=already_fixed_pct,
                      label='Fixed: Failed→Passed', color='#c44e52')
 
-    # --- Add bar labels (values on all parts) ---
-    def autolabel_stacked(rects, values, bottoms=None):
-        """Attach text labels to stacked bar segments."""
-        for rect, val in zip(rects, values):
-            height = rect.get_height()
-            bottom = rect.get_y() if bottoms is None else bottoms
-            if val > 0:
-                ax.text(
-                    rect.get_x() + rect.get_width()/2,
-                    bottom + height/2,
-                    f"{val:.1f}",
-                    ha='center', va='center',
-                    fontsize=8, color='white', fontweight='bold'
-                )
-
-    # Labels for nominal
+    # --- Add bar labels ---
     ax.bar_label(rects1, labels=[f"{v:.1f}" for v in nominal_pct],
                  padding=3, fontsize=8, fmt='%.1f')
 
-    # Labels for stacked perturbed bars
     for i in range(len(x)):
+        # Perturbed labels (slightly shifted DOWN)
         if still_passed_pct[i] > 0:
-            ax.text(x[i], still_passed_pct[i]/2, f"{still_passed_pct[i]:.1f}",
+            ax.text(x[i], still_passed_pct[i]/2 - 1.0, f"{still_passed_pct[i]:.1f}",
                     ha='center', va='center', fontsize=8, color='white', fontweight='bold')
         if newly_failed_pct[i] > 0:
-            ax.text(x[i], still_passed_pct[i] + newly_failed_pct[i]/2, f"{newly_failed_pct[i]:.1f}",
+            ax.text(x[i], still_passed_pct[i] + newly_failed_pct[i]/2 - 1.0, f"{newly_failed_pct[i]:.1f}",
                     ha='center', va='center', fontsize=8, color='white', fontweight='bold')
 
-    # Labels for stacked fixed bars
-    for i in range(len(x)):
+        # Fixed labels (slightly shifted UP)
         if already_fixed_pct[i] > 0:
-            ax.text(x[i] + width, already_fixed_pct[i]/2, f"{already_fixed_pct[i]:.1f}",
+            ax.text(x[i] + width, already_fixed_pct[i]/2 + 1.0, f"{already_fixed_pct[i]:.1f}",
                     ha='center', va='center', fontsize=8, color='white', fontweight='bold')
         if newly_fixed_pct[i] > 0:
-            ax.text(x[i] + width, already_fixed_pct[i] + newly_fixed_pct[i]/2, f"{newly_fixed_pct[i]:.1f}",
+            ax.text(x[i] + width, already_fixed_pct[i] + newly_fixed_pct[i]/2 + 1.0, f"{newly_fixed_pct[i]:.1f}",
                     ha='center', va='center', fontsize=8, color='white', fontweight='bold')
 
-    # --- Formatting ---
+    # Axis & style
     ax.set_ylabel(f'Pass@{K} (%)')
     ax.set_xticks(x)
     ax.set_xticklabels(perturbations, rotation=45, ha='right')
