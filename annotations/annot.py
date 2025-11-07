@@ -71,7 +71,7 @@ def get_lists(lang):
     with open(f"{lang}_1.txt", "r") as f:
         contents_1 = f.read()
     with open(f"{lang}_2.txt", "r") as f:
-        contents_1 = f.read()
+        contents_2 = f.read()
     
     lst_1 = process_lang(contents_1)
     lst_2 = process_lang(contents_2)
