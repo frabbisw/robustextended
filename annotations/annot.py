@@ -58,13 +58,18 @@ def process_lang(contents):
     for group in groups:
         if group == "":
             continue
-        task_id, nom, pert, sem  = group.split("\n")
-        task_id = task_id.split(":")[-1].strip()
-        pert = float(pert.split(":")[-1].strip())
-        nom = float(nom.split(":")[-1].strip())
-        sem = float(sem.split(":")[-1].strip())
-        lang_group.append([pert, nom, sem])
-
+        try:
+            task_id, nom, pert, sem  = group.split("\n")
+            task_id = task_id.split(":")[-1].strip()
+            pert = float(pert.split(":")[-1].strip())
+            nom = float(nom.split(":")[-1].strip())
+            sem = float(sem.split(":")[-1].strip())
+            lang_group.append([pert, nom, sem])
+        except Exception as e:
+            print(e)
+            print(group)
+            print("==========")
+            
     return lang_group
 
 def get_lists(lang):
