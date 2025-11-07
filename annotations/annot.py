@@ -43,7 +43,7 @@ def evaluate_annotations(lang):
     # Sanity check: both must have the same number of samples
     if len(annotator1) != len(annotator2):
         print(len(annotator1), len(annotator2))
-        print(annotator1[-1], len(annotator2)[-1])
+        print(annotator1[-1], annotator2[-1])
         
         raise ValueError("Annotator files have different number of samples")
     
