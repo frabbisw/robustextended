@@ -1,53 +1,46 @@
 from sklearn.metrics import cohen_kappa_score
 import numpy as np
 
-def bin_scores(scores):
-    # Bin continuous scores into discrete categories (0, 0.25, 0.5, 0.75, 1.0)
-    bins = [0, 0.125, 0.375, 0.625, 0.875, 1.01]
-    labels = [0, 0.25, 0.5, 0.75, 1.0]
-    binned_indices = np.digitize(scores, bins) - 1
-    return np.array([labels[i] for i in binned_indices])
+def discretize(values):
+    """
+    Convert float values [0, 0.25, 0.5, 0.75, 1.0]
+    to integer categories [0, 1, 2, 3, 4] for kappa calculation.
+    """
+    mapping = {0.0: 0, 0.25: 1, 0.5: 2, 0.75: 3, 1.0: 4}
+    rounded = [round(v * 4) / 4 for v in values]  # fix small float deviations
+    return np.array([mapping.get(v, 4) for v in rounded], dtype=int)
 
 def evaluate_annotation_lists(ann1, ann2):
     """
-    ann1, ann2: lists of samples, each sample is [naturalness_nominal, naturalness_perturbed, similarity]
-    Example:
-    ann1 = [[1, 0.75, 1], [0.5, 0.25, 0.5], ...]
-    ann2 = [[1, 0.75, 1], [0.5, 0.5, 0.5], ...]
-    
-    Returns:
-    avg_scores: dict with average scores per key across both annotators
-    kappas: dict with Cohen's kappa per key after binning
-    explanation: string describing methodology
+    ann1, ann2: lists of samples, each sample = [naturalness_nominal, naturalness_perturbed, similarity]
     """
     if len(ann1) != len(ann2):
-        raise ValueError("Annotation lists must have the same length")
-    
+        raise ValueError("Both annotator lists must have the same number of samples")
+
     ann1 = np.array(ann1)
     ann2 = np.array(ann2)
-    
     keys = ['naturalness_nominal', 'naturalness_perturbed', 'similarity']
-    avg_scores = {}
-    kappas = {}
-    
+
+    avg_scores, kappas = {}, {}
+
     for i, key in enumerate(keys):
-        scores1 = ann1[:, i]
-        scores2 = ann2[:, i]
-        
-        avg_scores[key] = float(np.mean(np.concatenate([scores1, scores2])))
-        
-        binned1 = bin_scores(scores1)
-        binned2 = bin_scores(scores2)
-        
-        kappas[key] = cohen_kappa_score(binned1, binned2)
-    
+        vals1 = ann1[:, i].astype(float)
+        vals2 = ann2[:, i].astype(float)
+
+        # Average across annotators
+        avg_scores[key] = float(np.mean(np.concatenate([vals1, vals2])))
+
+        # Convert to discrete categories for Cohen’s kappa
+        d1, d2 = discretize(vals1), discretize(vals2)
+        kappas[key] = cohen_kappa_score(d1, d2)
+
     explanation = (
-        "Scores are averaged over the two annotators to summarize the annotation values. "
-        "Since the annotations are given on a discrete scale (0, 0.25, 0.5, 0.75, 1), "
-        "scores are binned accordingly before calculating Cohen's Kappa to measure inter-annotator agreement, "
-        "which accounts for agreement occurring by chance."
+        "Scores are averaged across both annotators. "
+        "Cohen’s kappa is computed after discretizing ratings into five ordinal bins "
+        "(0, 0.25, 0.5, 0.75, 1.0), ensuring categorical consistency. "
+        "This measures inter-annotator agreement beyond chance."
     )
-    
+
     return avg_scores, kappas, explanation
 
 def process_lang(contents):
