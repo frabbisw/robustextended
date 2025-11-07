@@ -8,8 +8,7 @@ def bin_scores(scores):
     binned_indices = np.digitize(scores, bins) - 1
     return np.array([labels[i] for i in binned_indices])
 
-def evaluate_annotation_lists(anns):
-    ann1, ann2 = anns
+def evaluate_annotation_lists(ann1, ann2):
     """
     ann1, ann2: lists of samples, each sample is [naturalness_nominal, naturalness_perturbed, similarity]
     Example:
@@ -105,7 +104,11 @@ def get_lists(lang):
 
 # exit(0)
 print("CPP")
-avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("cpp"))
+lst_1, lst_2 = get_lists("cpp")
+print(lst_1)
+print(lst_2)
+
+avg_scores, kappas, explanation = evaluate_annotation_lists(lst_1, lst_2)
 print(avg_scores)
 print("------------")
 print(kappas)
