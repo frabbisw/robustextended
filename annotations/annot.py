@@ -8,89 +8,95 @@ def bin_scores(scores):
     binned_indices = np.digitize(scores, bins) - 1
     return np.array([labels[i] for i in binned_indices])
 
-def parse_annotation_file(filename):
-    samples = []
-    with open(filename, 'r') as f:
-        lines = [line.strip() for line in f if line.strip()]  # ignore blank lines
+def evaluate_annotation_lists(ann1, ann2):
+    """
+    ann1, ann2: lists of samples, each sample is [naturalness_nominal, naturalness_perturbed, similarity]
+    Example:
+    ann1 = [[1, 0.75, 1], [0.5, 0.25, 0.5], ...]
+    ann2 = [[1, 0.75, 1], [0.5, 0.5, 0.5], ...]
     
-    # We process in chunks of 4 lines: ignore 1st line (ID), parse next 3 lines
-    for i in range(0, len(lines), 4):
-        if i + 3 >= len(lines):
-            break  # incomplete sample at end
-        
-        # Parse values from lines i+1, i+2, i+3
-        try:
-            perturbed = float(lines[i+1].split(':')[1].strip())
-        except:
-            perturbed = .75
-        try:
-            nominal = float(lines[i+2].split(':')[1].strip())
-        except:
-            nominal = .75
-        try:
-            semantic = float(lines[i+3].split(':')[1].strip())
-        except:    
-            semantic = 0.75
-            
-        samples.append({
-            'naturalness_perturbed': perturbed,
-            'naturalness_nominal': nominal,
-            'similarity': semantic
-        })
-    return samples
-
-def evaluate_annotations(lang):
-    file1 = f"{lang}_1.txt"
-    file2 = f"{lang}_2.txt"
+    Returns:
+    avg_scores: dict with average scores per key across both annotators
+    kappas: dict with Cohen's kappa per key after binning
+    explanation: string describing methodology
+    """
+    if len(ann1) != len(ann2):
+        raise ValueError("Annotation lists must have the same length")
     
-    annotator1 = parse_annotation_file(file1)
-    annotator2 = parse_annotation_file(file2)
-    
-    if len(annotator1) != len(annotator2):
-        raise ValueError("Annotator files have different number of samples")
+    ann1 = np.array(ann1)
+    ann2 = np.array(ann2)
     
     keys = ['naturalness_nominal', 'naturalness_perturbed', 'similarity']
+    avg_scores = {}
     kappas = {}
     
-    for key in keys:
-        scores1 = np.array([sample[key] for sample in annotator1])
-        scores2 = np.array([sample[key] for sample in annotator2])
+    for i, key in enumerate(keys):
+        scores1 = ann1[:, i]
+        scores2 = ann2[:, i]
+        
+        avg_scores[key] = float(np.mean(np.concatenate([scores1, scores2])))
         
         binned1 = bin_scores(scores1)
         binned2 = bin_scores(scores2)
         
-        kappa = cohen_kappa_score(binned1, binned2)
-        kappas[key] = kappa
+        kappas[key] = cohen_kappa_score(binned1, binned2)
     
     explanation = (
-        "Scores were binned into five discrete categories matching the annotation scale. "
-        "Cohen's Kappa was computed on these binned values to assess inter-annotator agreement, "
-        "accounting for chance agreement and providing a reliable consistency measure."
+        "Scores are averaged over the two annotators to summarize the annotation values. "
+        "Since the annotations are given on a discrete scale (0, 0.25, 0.5, 0.75, 1), "
+        "scores are binned accordingly before calculating Cohen's Kappa to measure inter-annotator agreement, "
+        "which accounts for agreement occurring by chance."
     )
     
-    return kappas, explanation
+    return avg_scores, kappas, explanation
 
-# Example:
-# kappas, explanation = evaluate_annotations('cpp')
+def process_lang(contents):
+    stop_token = "="*25+"\n"+"="*25+"\n\n\n\n"
+
+    lang_group = []
+    groups = contents.split(stop_token)
+    for group in groups:
+        if group == "":
+            continue
+        task_id, _, _, _, nom, pert, sem, _  = group.split("-"*22)
+        task_id = task_id.split(":")[-1].strip()
+        pert = float(pert.split(":")[-1].strip())
+        nom = float(nom.split(":")[-1].strip())
+        sem = float(sem.split(":")[-1].strip())
+        lang_group.append([pert, nom, sem])
+
+    return lang_group
+
+def get_lists(lang):
+    with open(f"{lang}_1.txt", "r") as f:
+        contents_1 = f.read()
+    with open(f"{lang}_2.txt", "r") as f:
+        contents_1 = f.read()
+    
+    lst_1 = process_lang(contents_1)
+    lst_2 = process_lang(contents_2)
+    
+    print(pen(lst_1))    
+    print(pen(lst_2))    
+
+# Example usage:
+# ann1 = [[1, 0.75, 1], [0.5, 0.25, 0.5], ...]
+# ann2 = [[1, 0.75, 1], [0.5, 0.5, 0.5], ...]
+# avg_scores, kappas, explanation = evaluate_annotation_lists(ann1, ann2)
+# print(avg_scores)
 # print(kappas)
 # print(explanation)
 
 
 # Example usage:
 print("CPP")
-kappas, explanation = evaluate_annotations('cpp')
-print(kappas)
-print(explanation)
+get_lists("cpp")
 print("============")
 
 print("Java")
-kappas, explanation = evaluate_annotations('java')
-print(kappas)
-print(explanation)
+get_lists("java")
 print("============")
 
 print("JS")
-kappas, explanation = evaluate_annotations('js')
-print(kappas)
-print(explanation)
+get_lists("js")
 print("============")
