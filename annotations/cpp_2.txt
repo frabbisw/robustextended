@@ -1,0 +1,499 @@
+CPP/24
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/22
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/78
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/157
+Perturbed prompt:0.5
+Nominal prompt:1.0
+Semantic:0.5
+
+CPP/102
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/18
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/93
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/84
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.5
+
+CPP/118
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/126
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/15
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.5
+
+CPP/6
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/92
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/61
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/49
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/118
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/110
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/111
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/65
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/111
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/142
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.5
+
+CPP/48
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/150
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/92
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/27
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/66
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/3
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/86
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/53
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/32
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/130
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/41
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/24
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/9
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/134
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/63
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/150
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/5
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/147
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/47
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/25
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/129
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/1
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/111
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/45
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/92
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/84
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/154
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/155
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/104
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/19
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/104
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/3
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/121
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/141
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/63
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/94
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/115
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/88
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/162
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/153
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/69
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/95
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/14
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/103
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/134
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.5
+
+CPP/63
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/5
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/157
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/121
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/79
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/82
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/32
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/49
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/156
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/103
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/136
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/67
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/72
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/86
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/49
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/138
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/90
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/15
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/142
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/33
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/14
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/136
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/19
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/117
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/35
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/136
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/21
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/27
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/37
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/61
+Perturbed prompt:0.75
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/23
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
+
+CPP/144
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/79
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
+CPP/147
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
