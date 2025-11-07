@@ -1,0 +1,499 @@
+java/62
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:0.5
+
+java/13
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+java/152
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/1
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+java/39
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/129
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/112
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/28
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/125
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+also
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+java/38
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/53
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/155
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/88
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+java/130
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/80
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/80
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/52
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/151
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/52
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/127
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/31
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+java/126
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/73
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/137
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.5
+Nominal prompt:0.75
+Semantic:0.75
+
+java/85
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/6
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/86
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+java/8
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/74
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+java/132
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/47
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+syntax
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+java/87
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/86
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/133
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+java/11
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/18
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+java/151
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/95
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/0.87
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/92
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/22
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/120
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/69
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/112
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/21
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/83
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/32
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/119
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/135
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/62
+Perturbed prompt:0.75
+Nominal prompt:0.75
+Semantic:0.75
+
+java/136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.5
+
+java/100
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/155
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/77
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/9
+Perturbed prompt:0.5
+Nominal prompt:0.75
+Semantic:0.5
+
+java/129
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+java/76
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+java/120
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/40
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/46
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/96
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/117
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/58
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/48
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/22
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/59
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/126
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/28
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/156
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/6
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/155
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/15
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/162
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/69
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/155
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/143
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/161
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+java/102
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/108
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/102
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+java/118
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/157
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+java/121
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
