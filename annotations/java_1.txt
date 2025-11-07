@@ -18,7 +18,7 @@ Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
 
-java/1
+natural
 Perturbed prompt:0.25
 Nominal prompt:1
 Semantic:1
@@ -488,12 +488,12 @@ Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
 
-java/157
+157
 Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
 
-java/121
+Javan121
 Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
