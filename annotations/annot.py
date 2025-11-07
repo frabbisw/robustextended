@@ -19,10 +19,19 @@ def parse_annotation_file(filename):
             break  # incomplete sample at end
         
         # Parse values from lines i+1, i+2, i+3
-        perturbed = float(lines[i+1].split(':')[1].strip())
-        nominal = float(lines[i+2].split(':')[1].strip())
-        semantic = float(lines[i+3].split(':')[1].strip())
-        
+        try:
+            perturbed = float(lines[i+1].split(':')[1].strip())
+        except:
+            perturbed = .75
+        try:
+            nominal = float(lines[i+2].split(':')[1].strip())
+        except:
+            nominal = .75
+        try:
+            semantic = float(lines[i+3].split(':')[1].strip())
+        except:    
+            semantic = 0.75
+            
         samples.append({
             'naturalness_perturbed': perturbed,
             'naturalness_nominal': nominal,
