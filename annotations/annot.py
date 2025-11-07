@@ -8,7 +8,8 @@ def bin_scores(scores):
     binned_indices = np.digitize(scores, bins) - 1
     return np.array([labels[i] for i in binned_indices])
 
-def evaluate_annotation_lists(ann1, ann2):
+def evaluate_annotation_lists(anns):
+    ann1, ann2 = anns
     """
     ann1, ann2: lists of samples, each sample is [naturalness_nominal, naturalness_perturbed, similarity]
     Example:
