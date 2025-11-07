@@ -1,0 +1,5066 @@
+task_id: JavaScript/62
+----------------------
+unique_id: js#0
+----------------------
+nominal_prompt
+
+/* xs represent coefficients of a polynomial.
+  xs[0] + xs[1] * x + xs[2] * x^2 + ....
+   Return derivative of this polynomial in the same form.
+  >>> derivative([3, 1, 2, 4, 5])
+  [1, 4, 12, 20]
+  >>> derivative([1, 2, 3])
+  [2, 6]
+  */
+const derivative = (xs) => {
+
+----------------------
+perturbed_prompt
+
+/* xs represent coefficients of a polynomial. xs[0] + xs[1] * x + xs[2] * x^2 + .... Return derivative of this polynomial in the same forms.
+  >>> derivative([3, 1, 2, 4, 5])
+  [1, 4, 12, 20]
+  >>> derivative([1, 2, 3])
+  [2, 6]
+  */
+const derivative = (xs) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/70
+----------------------
+unique_id: js#1
+----------------------
+nominal_prompt
+
+/*
+  Given list of integers, return list in strange order.
+  Strange sorting, is when you start with the minimum value,
+  then maximum of the remaining integers, then minimum and so on.
+
+  Examples:
+  strangeSortList([1, 2, 3, 4]) == [1, 4, 2, 3]
+  strangeSortList([5, 5, 5, 5]) == [5, 5, 5, 5]
+  strangeSortList([]) == []
+  */
+const strangeSortList = (lst) => {
+  var res = [], sw = true;
+  while (lst.length) {
+    res.push(sw ? Math.min(...lst) : Math.max(...lst));
+    lst.splice(lst.indexOf(res.at(-1)), 1);
+
+----------------------
+perturbed_prompt
+
+/*
+  Given list of integers, return list in strange order.
+  Strange sorting, is when you start with the minimum value,
+  then maximum of the remaining integers, then minimum and so on.
+
+  Examples:
+  strangeSortList([1, 2, 3, 4]) == [1, 4, 2, 3]
+  strangeSortList([5, 5, 5, 5]) == [5, 5, 5, 5]
+  strangeSortList([]) == []
+  */
+const strangeSortList =(res2) => {
+  var res = [ ], sw = true;
+  while (res2.length) {
+    res.push(sw ? Math.min(... res2) : Math.max(... res2));
+    res2.splice(res2.indexOf(res.at( - 1)), 1);
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#2
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/152
+----------------------
+unique_id: js#3
+----------------------
+nominal_prompt
+
+/*I think we all remember that feeling when the result of some long-awaited
+  event is finally known. The feelings and thoughts you have at that moment are
+  definitely worth noting down and comparing.
+  Your task is to determine if a person correctly guessed the results of a number of matches.
+  You are given two arrays of scores and guesses of equal length, where each index shows a match. 
+  Return an array of the same length denoting how far off each guess was. If they have guessed correctly,
+  the value is 0, and if not, the value is the absolute difference between the guess and the score.
+  
+  
+  example:
+
+  compare([1,2,3,4,5,1],[1,2,3,4,2,-2]) -> [0,0,0,0,3,3]
+  compare([0,5,0,0,0,4],[4,1,1,0,0,-2]) -> [4,4,1,0,0,6]
+  */
+const compare = (game, guess) => {
+  for (let i = 0; i < guess.length; i++) {
+    game[i] -= guess[i]
+ if (game[i]<0)
+
+----------------------
+perturbed_prompt
+
+// I think we all remember that feeling when the result of some long-awaited
+//   event is finally known. The feelings and thoughts you have at that moment are
+//   definitely worth noting down and comparing.
+//   Your task is to determine if a person correctly guessed the results of a number of matches.
+//   You are given two arrays of scores and guesses of equal length, where each index shows a match. 
+//   Return an array of the same length denoting how far off each guess was. If they have guessed correctly,
+//   the value is 0, and if not, the value is the absolute difference between the guess and the score.
+//    
+//    
+//   example:
+// 
+//   compare([1,2,3,4,5,1],[1,2,3,4,2,-2]) -> [0,0,0,0,3,3]
+//   compare([0,5,0,0,0,4],[4,1,1,0,0,-2]) -> [4,4,1,0,0,6]
+// const compare = (game, guess) => {
+  for (let i = 0; i < guess.length; i++) {
+    game[i] -= guess[i]
+ if (game[i]<0)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/128
+----------------------
+unique_id: js#4
+----------------------
+nominal_prompt
+
+/*
+  You are given an array arr of integers and you need to return
+  sum of magnitudes of integers multiplied by product of all signs
+  of each number in the array, represented by 1, -1 or 0.
+  Note: return null for empty arr.
+
+  Example:
+  >>> prodSigns([1, 2, 2, -4]) == -9
+  >>> prodSigns([0, 1]) == 0
+  >>> prodSigns([]) == null
+  */
+const prodSigns = (arr) => {
+  if (arr.length == 0) { return null }
+  let n = 1
+  let s = 0
+  for (let i = 0; i < arr.length; i++) {
+    s += arr[i]
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given an array arr of integers and you need to return
+  sum of magnitudes of integers multiplied by product of all signs
+  of each number in the array, represented by 1, -1 or 0.
+  Note: return null for empty arr.
+
+  Example:
+  >>> prodSigns([1, 2, 2, -4]) == -9
+  >>> prodSigns([0, 1]) == 0
+  >>> prodSigns([]) == null
+  */
+const prodSigns =(arr) => {
+  if (arr.length == 0) {
+    return null}
+  let n = 1
+  let s = 0
+  for (let i = 0;
+for (let _i_2 = 0; _i_2 > 0; _i_2++) {
+    if (arr [ i ] < 0) {
+      n = - n; s-=2 * arr [ i ]}
+    }
+  i < arr.length; i++) {
+    s+=arr [ i ]
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .5
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/69
+----------------------
+unique_id: js#5
+----------------------
+nominal_prompt
+
+/*
+  You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an integer is the number of times it appears in the list.
+  If no such a value exist, return -1.
+  Examples:
+      search([4, 1, 2, 2, 3, 1])) == 2
+      search([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      search([5, 5, 4, 4, 4])) == -1
+  */
+const search = (lst) => {
+  var frq = new Array(Math.max(...lst) + 1).fill(0);
+  for (const i of lst)
+    frq[i] += 1;
+  var ans = -1;
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an integer is the number of times it appears in the list.
+  If no such a value exist, return -1.
+  Examples:
+      search([4, 1, 2, 2, 3, 1])) == 2
+      search([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      search([5, 5, 4, 4, 4])) == -1
+  */
+const search =(lst) => {
+      var frq = new Array(Math.max(... lst) + 1).fill(0);
+      for (const i2 of lst)
+      frq [ i2 ]+=1;
+      var ans = - 1;
+     
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/144
+----------------------
+unique_id: js#6
+----------------------
+nominal_prompt
+
+/*Your task is to implement a function that will simplify the expression
+  x * n. The function returns true if x * n evaluates to a whole number and false
+  otherwise. Both x and n, are string representation of a fraction, and have the following format,
+  <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+  You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+  simplify("1/5", "5/1") = true
+  simplify("1/6", "2/1") = false
+  simplify("7/10", "10/2") = false
+  */
+const simplify = (x, n) => {
+
+----------------------
+perturbed_prompt
+
+/*Your task is to implement a fucntion that will simplify the expression
+  x * n. The fnuction retunrs true if x * n evaluates to a hwole number and false
+  otherwise. tBoh x and n, are string representaiton of a fraction, and have the following fromat,
+  <numerator>/<deonminator> where btoh numerator and denominator are positive wohle numbers.
+
+  You can assume that x, and n are valid fratcions, and do not have zero as denominator.
+
+  simplify("1/5", "5/1") = true
+  simplify("1/6", "2/1") = false
+  simplify("7/10", "10/2") = false
+  */
+const simplify = (x, n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/129
+----------------------
+unique_id: js#7
+----------------------
+nominal_prompt
+
+/*
+  Given a grid with N rows and N columns (N >= 2) and a positive integer k, 
+  each cell of the grid contains a value. Every integer in the range [1, N * N]
+  inclusive appears exactly once on the cells of the grid.
+
+  You have to find the minimum path of length k in the grid. You can start
+  from any cell, and in each step you can move to any of the neighbor cells,
+  in other words, you can go to cells which share an edge with you current
+  cell.
+  Please note that a path of length k means visiting exactly k cells (not
+  necessarily distinct).
+  You CANNOT go off the grid.
+  A path A (of length k) is considered less than a path B (of length k) if
+  after making the ordered lists of the values on the cells that A and B go
+  through (let's call them lst_A and lst_B), lst_A is lexicographically less
+  than lst_B, in other words, there exist an integer index i (1 <= i <= k)
+  such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have
+  lst_A[j] = lst_B[j].
+  It is guaranteed that the answer is unique.
+  Return an ordered list of the values on the cells that the minimum path go through.
+
+  Examples:
+
+      Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+      Output: [1, 2, 1]
+
+      Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+      Output: [1]
+  */
+const minPath = (grid, k) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a grid with N rows and N columns (N>= 2) and a positive integer k, 
+   each cell of the grid will contain a value. Every integer in the range [1, N* N] 
+   inclusive will appear exactly once on the cells of the grid.
+
+   You will have to find the minimum path of length k in the grid. You can will start 
+   from any cell, and in each step you can will move to any of the neighbor cells, 
+   in other words, you can will go to cells which will share an edge with you current 
+   cell. 
+   Please will note that a path of length k will mean visiting exactly k cells (not 
+   necessarily distinct). 
+   You will Cannot will go off the grid.
+   A path A (of length k) will be considered less than a path B (of length k) if 
+   after making the will order lists of the values on the cells that A and B will go 
+   through (will let's will call them lst_A and lst_B), lst_A will be lexicographically less 
+   than lst_B, in other words, there will exist an integer index i (1 <= i <= k)
+   such that lst_A[i] <lst_B[i] and for any j (1 <= j <i) we will have 
+   lst_A[j]= lst_B[j]. 
+   It will be guaranteed that the answer will be unique. 
+   Return an will order list of the values on the cells that the minimum path will go through.
+
+  Examples:
+
+      Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+      Output: [1, 2, 1]
+
+      Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+      Output: [1]
+  */
+const minPath = (grid, k) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/112
+----------------------
+unique_id: js#8
+----------------------
+nominal_prompt
+
+/*Task
+  We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+  then check if the result string is palindrome.
+  A string is called palindrome if it reads the same backward as forward.
+  You should return a tuple containing the result string and true/false for the check.
+  Example
+  For s = "abcde", c = "ae", the result should be ('bcd',false)
+  For s = "abcdef", c = "b"  the result should be ('acdef',false)
+  For s = "abcdedcba", c = "ab", the result should be ('cdedc',true)
+  */
+const reverseDelete = (s, c) => {
+  let t = ''
+  for (let i = 0; i < s.length; i++) {
+    let y = 1
+    for (let j = 0; j < c.length; j++) {
+      if (s[i] == c[j]) {
+        y = 0
+      }
+    }
+    if (y == 1) {
+      t += s[i]
+    }
+
+----------------------
+perturbed_prompt
+
+/*Task
+	We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+	then check if the result string is palindrome.
+	A string is called palindrome if it reads the same backward as forward.
+	You should return a tuple containing the result string and true/false for the check.
+	Example
+	For s = "abcde", c = "ae", the result should be ('bcd',false)
+	For s = "abcdef", c = "b"  the result should be ('acdef',false)
+	For s = "abcdedcba", c = "ab", the result should be ('cdedc',true)
+	*/
+const reverseDelete = (s, c) => {
+	let t = ''
+	for (let i = 0; i < s.length; i++) {
+		let y = 1
+		for (let j = 0; j < c.length; j++) {
+			if (s[i] == c[j]) {
+				y = 0
+			}
+		}
+		if (y == 1) {
+			t += s[i]
+		}
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/28
+----------------------
+unique_id: js#9
+----------------------
+nominal_prompt
+
+/* Concatenate list of strings into a single string
+  >>> concatenate([])
+  ''
+  >>> concatenate(['a', 'b', 'c'])
+  'abc'
+  */
+const concatenate = (strings) => {
+
+----------------------
+perturbed_prompt
+
+/* Conctaenate list of strings into a single string
+  >>> concatenate([])
+  ''
+  >>> concatenate(['a', 'b', 'c'])
+  'abc'
+  */
+const concatenate = (strings) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/125
+----------------------
+unique_id: js#10
+----------------------
+nominal_prompt
+
+/* Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you
+  should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the
+  alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25
+  Examples
+  splitWords("Hello world!") ➞ ["Hello", "world!"]
+  splitWords("Hello,world!") ➞ ["Hello", "world!"]
+  splitWords("abcdef") == 3
+  */
+const splitWords = (txt) => {
+  let t = txt.split(/\s/)
+  if (t.length > 1) {
+    return t
+  } else {
+    t = txt.split(/,/)
+    if (t.length > 1) {
+      return t
+    } else {
+      let p = 0
+
+----------------------
+perturbed_prompt
+
+/* Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you
+  should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the
+  alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25
+  Examples
+  splitWords("Hello world!") ➞ ["Hello", "world!"]
+  splitWords("Hello,world!") ➞ ["Hello", "world!"]
+  splitWords("abcdef") == 3
+  */
+const splitWords = (txt) => {
+  let t = txt.split(/\s/)
+  if (t.length > 1) {
+    return t
+  } else {
+    t = txt.split(/,/)
+    if (t.length > 1) {
+      return t
+    } else {
+      let p = 0
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/148
+----------------------
+unique_id: js#11
+----------------------
+nominal_prompt
+
+/* There are eight planets in our solar system: the closerst to the Sun
+  is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn,
+  Uranus, Neptune.
+  Write a function that takes two planet names as strings planet1 and planet2.
+  The function should return a tuple containing all planets whose orbits are
+  located between the orbit of planet1 and the orbit of planet2, sorted by
+  the proximity to the sun.
+  The function should return an empty tuple if planet1 or planet2
+  are not correct planet names.
+  Examples
+  bf("Jupiter", "Neptune") ==> ("Saturn", "Uranus")
+  bf("Earth", "Mercury") ==> ("Venus")
+  bf("Mercury", "Uranus") ==> ("Venus", "Earth", "Mars", "Jupiter", "Saturn")
+  */
+const bf = (planet1, planet2) => {
+
+----------------------
+perturbed_prompt
+
+/* There are eight planets in our solar system: the closerst to the Sun 
+   is Mercury, the next following one is Venus, then Earth, Mars, Jupiter, Saturn, 
+   Uranus, Neptune. 
+   Write spell a function that takes two planet satellite names as strings planet1 and planet2.
+   The function routine should return a tuple containing all planets whose orbits are 
+   located between the orbit sphere of planet1 and the orbit of planet2, sorted by 
+   the proximity to the sun. 
+   The function routine should return an empty tuple if planet1 or planet2
+   are not correct planet satellite names.
+  Examples
+  bf("Jupiter", "Neptune") ==> ("Saturn", "Uranus")
+  bf("Earth", "Mercury") ==> ("Venus")
+  bf("Mercury", "Uranus") ==> ("Venus", "Earth", "Mars", "Jupiter", "Saturn")
+  */
+const bf = (planet1, planet2) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/150
+----------------------
+unique_id: js#12
+----------------------
+nominal_prompt
+
+/*A simple program which should return the value of x if n is 
+  a prime number and should return the value of y otherwise.
+
+  Examples:
+  for xOrY(7, 34, 12) == 34
+  for xOrY(15, 8, 5) == 5
+  
+  */
+const xOrY = (n, x, y) => {
+  let len = n
+  if (len == 1 || len == 0) { return y }
+  for (let i = 2; i * i <= len; i++) {
+
+----------------------
+perturbed_prompt
+
+/*A simple program which should return the value of x if n is 
+  a prime number and should return the value of y otherwise.
+
+  Examples:
+  for xOrY(7, 34, 12) == 34
+  for xOrY(15, 8, 5) == 5
+  
+  */
+const xOrY =(n, x, y) => {
+  let x2 = n
+  if (x2 == 1 || x2 == 0) {
+    return y}
+  for (let i = 2; i * i <= x2; i++) {
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/53
+----------------------
+unique_id: js#13
+----------------------
+nominal_prompt
+
+/*Add two numbers x and y
+  >>> add(2, 3)
+  5
+  >>> add(5, 7)
+  12
+  */
+const add = (x, y) => {
+
+----------------------
+perturbed_prompt
+
+/*Add two numbers x and y
+  >>> add(2, 3)
+  5
+  >>> add(5, 7)
+  12
+  */
+const add = (x, y) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/155
+----------------------
+unique_id: js#14
+----------------------
+nominal_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount = (num) => {
+
+----------------------
+perturbed_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digit respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount = (num) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/88
+----------------------
+unique_id: js#15
+----------------------
+nominal_prompt
+
+/*
+  Given an array of non-negative integers, return a copy of the given array after sorting,
+  you will sort the given array in ascending order if the sum( first index value, last index value) is odd,
+  or sort it in descending order if the sum( first index value, last index value) is even.
+
+  Note:
+  * don't change the given array.
+
+  Examples:
+  * sortArray([]) => []
+  * sortArray([5]) => [5]
+  * sortArray([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]
+  * sortArray([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]
+  */
+const sortArray = (array) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given an array of non - negative integers, return a transcript of the given array after classify, 
+   you will sort the given array in rise order if the sum (beginning index value, final index value) is odd, 
+   or sort it in derive holy order if the sum (first index value, last exponent value) cost even. 
+
+   Note: 
+   * don't transfer the give array.
+
+  Examples:
+  * sortArray([]) => []
+  * sortArray([5]) => [5]
+  * sortArray([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]
+  * sortArray([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]
+  */
+const sortArray = (array) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/23
+----------------------
+unique_id: js#16
+----------------------
+nominal_prompt
+
+/* Return length of given string
+  >>> strlen('')
+  0
+  >>> strlen('abc')
+  3
+  */
+const strlen = (string) => {
+  return string.length;
+
+----------------------
+perturbed_prompt
+
+/* Return length of given string
+	>>> strlen('')
+	0
+	>>> strlen('abc')
+	3
+	*/
+const strlen = (string) => {
+	return string.length;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/130
+----------------------
+unique_id: js#17
+----------------------
+nominal_prompt
+
+/*Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+  the last couple centuries. However, what people don't know is Tribonacci sequence.
+  Tribonacci sequence is defined by the recurrence:
+  tri(1) = 3
+  tri(n) = 1 + n / 2, if n is even.
+  tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+  For example:
+  tri(2) = 1 + (2 / 2) = 2
+  tri(4) = 3
+  tri(3) = tri(2) + tri(1) + tri(4)
+         = 2 + 3 + 3 = 8 
+  You are given a non-negative integer number n, you have to a return a list of the 
+  first n + 1 numbers of the Tribonacci sequence.
+  Examples:
+  tri(3) = [1, 3, 2, 8]
+  */
+const tri = (n) => {
+  if (n == 0) { return [1] }
+  if (n == 1) { return [1, 3] }
+  let p = [1, 3]
+  for (let i = 2; i <= n; i++) {
+    if (i % 2 == 0) {
+      p.push(1 + i / 2)
+
+----------------------
+perturbed_prompt
+
+/*Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+  the last couple centuries. However, what people don't know is Tribonacci sequence.
+  Tribonacci sequence is defined by the recurrence:
+  tri(1) = 3
+  tri(n) = 1 + n / 2, if n is even.
+  tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+  For example:
+  tri(2) = 1 + (2 / 2) = 2
+  tri(4) = 3
+  tri(3) = tri(2) + tri(1) + tri(4)
+         = 2 + 3 + 3 = 8 
+  You are given a non-negative integer number n, you have to a return a list of the 
+  first n + 1 numbers of the Tribonacci sequence.
+  Examples:
+  tri(3) = [1, 3, 2, 8]
+  */
+const tri =(n) => {
+  if (n == 0) {
+    return [ 1 ]}
+  if (n == 1) {
+    return [ 1, 3 ]}
+  let p = [ 1, 3 ]
+  let i = 2;
+  while (i <= n) {
+     {
+      if (i % 2 == 0) {
+        p.push(1 + i / 2)
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/73
+----------------------
+unique_id: js#18
+----------------------
+nominal_prompt
+
+/*
+  Given an array arr of integers, find the minimum number of elements that
+  need to be changed to make the array palindromic. A palindromic array is an array that
+  is read the same backwards and forwards. In one change, you can change one element to any other element.
+
+  For example:
+  smallestChange([1,2,3,5,4,7,9,6]) == 4
+  smallestChange([1, 2, 3, 4, 3, 2, 2]) == 1
+  smallestChange([1, 2, 3, 2, 1]) == 0
+  */
+const smallestChange = (arr) => {
+  var ans = 0;
+  for (let i = 0; i < Math.floor(arr.length / 2); i++)
+    if (arr[i] != arr.at(-i - 1))
+
+----------------------
+perturbed_prompt
+
+/*
+  Given an array arr of integers, find the minimum number of elements that
+  need to be changed to make the array palindromic. A palindromic array is an array that
+  is read the same backwards and forwards. In one change, you can change one element to any other element.
+
+  For example:
+  smallestChange([1,2,3,5,4,7,9,6]) == 4
+  smallestChange([1, 2, 3, 4, 3, 2, 2]) == 1
+  smallestChange([1, 2, 3, 2, 1]) == 0
+  */
+const smallestChange =(arr) => {
+  var ans = 0;
+  let i = 0;
+  while (i < Math.floor(arr.length / 2)) {
+    if (arr [ i ] != arr.at( - i - 1))
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/80
+----------------------
+unique_id: js#19
+----------------------
+nominal_prompt
+
+/*You are given a string s.
+  Your task is to check if the string is happy or not.
+  A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+  For example:
+  isHappy(a) => false
+  isHappy(aa) => false
+  isHappy(abcd) => true
+  isHappy(aabb) => false
+  isHappy(adb) => true
+  isHappy(xyy) => false
+  */
+const isHappy = (s) => {
+  if (s.length < 3)
+    return false;
+  for (let i = 0; i < s.length - 2; i++)
+
+----------------------
+perturbed_prompt
+
+/*You are given a string s.
+  Your task is to check if the string is happy or not.
+  A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+  For example:
+  isHappy(a) => false
+  isHappy(aa) => false
+  isHappy(abcd) => true
+  isHappy(aabb) => false
+  isHappy(adb) => true
+  isHappy(xyy) => false
+  */
+const isHappy = (s) => {
+  if (s.length < 3)
+    return false;
+  for (let i = 0;  \
+  i < s.length - 2; i++)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/52
+----------------------
+unique_id: js#20
+----------------------
+nominal_prompt
+
+/*Return true if all numbers in the list l are below threshold t.
+  >>> belowThreshold([1, 2, 4, 10], 100)
+  true
+  >>> belowThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const belowThreshold = (l, t) => {
+
+----------------------
+perturbed_prompt
+
+/*Return true if all numbers in the list l are below threshold t.
+  >>> bellwThreshold([1, 2, 4, 10], 100)
+  true
+  >>> bellwThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const bellwThreshold = (l, t) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/151
+----------------------
+unique_id: js#21
+----------------------
+nominal_prompt
+
+/* Given a list of numbers, return the sum of squares of the numbers
+  in the list that are odd. Ignore numbers that are negative or not integers.
+  doubleTheDifference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10
+  doubleTheDifference([-1, -2, 0]) == 0
+  doubleTheDifference([9, -2]) == 81
+  doubleTheDifference([0]) == 0
+  If the input list is empty, return 0.
+  */
+const doubleTheDifference = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/* Given a list of numbers, return the sum of squares of the numbers 
+   in the list that will be odd. Ignore numbers that will be negative or not integers. 
+   doubleTheDifference([1, 3, 2, 0])== 1+ 9+ 0+ 0= 10 
+   doubleTheDifference([-1,-2, 0])== 0 
+   doubleTheDifference([9,-2])== 81 
+   doubleTheDifference([0])== 0 
+   If the input list will be empty, return 0. 
+  */ 
+ const doubleTheDifference= (lst)=>{
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/52
+----------------------
+unique_id: js#22
+----------------------
+nominal_prompt
+
+/*Return true if all numbers in the list l are below threshold t.
+  >>> belowThreshold([1, 2, 4, 10], 100)
+  true
+  >>> belowThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const belowThreshold = (l, t) => {
+
+----------------------
+perturbed_prompt
+
+/*Return true if all numbers in the list l are below threshold doorsill t.
+  >>> belowThreshold([1, 2, 4, 10], 100)
+  true
+  >>> belowThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const belowThreshold = (l, t) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/127
+----------------------
+unique_id: js#23
+----------------------
+nominal_prompt
+
+/*You are given two intervals,
+  where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).
+  The given intervals are closed which means that the interval (start, end)
+  includes both start and end.
+  For each given interval, it is assumed that its start is less or equal its end.
+  Your task is to determine whether the length of intersection of these two 
+  intervals is a prime number.
+  Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)
+  which its length is 1, which not a prime number.
+  If the length of the intersection is a prime number, return "YES",
+  otherwise, return "NO".
+  If the two intervals don't intersect, return "NO".
+
+
+  [input/output] samples:
+  intersection((1, 2), (2, 3)) ==> "NO"
+  intersection((-1, 1), (0, 4)) ==> "NO"
+  intersection((-3, -1), (-5, 5)) ==> "YES"
+  */
+const intersection = (interval1, interval2) => {
+
+----------------------
+perturbed_prompt
+
+/*You was gives two intervals, where each intervals is a pairs of integers. For example, interval = (start, end) = (1, 2).
+  The given intervals are closed which means that the interval (start, end)
+  includes both start and end.
+  For each given interval, it is assumed that its start is less or equal its end.
+  Your task is to determine whether the length of intersection of these two 
+  intervals is a prime number.
+  Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)
+  which its length is 1, which not a prime number.
+  If the length of the intersection is a prime number, return "YES",
+  otherwise, return "NO".
+  If the two intervals don't intersect, return "NO".
+
+
+  [input/output] samples:
+  intersection((1, 2), (2, 3)) ==> "NO"
+  intersection((-1, 1), (0, 4)) ==> "NO"
+  intersection((-3, -1), (-5, 5)) ==> "YES"
+  */
+const intersection = (interval1, interval2) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/31
+----------------------
+unique_id: js#24
+----------------------
+nominal_prompt
+
+/*Return true if a given number is prime, and false otherwise.
+  >>> isPrime(6)
+  false
+  >>> isPrime(101)
+  true
+  >>> isPrime(11)
+  true
+  >>> isPrime(13441)
+  true
+  >>> isPrime(61)
+  true
+  >>> isPrime(4)
+  false
+  >>> isPrime(1)
+  false
+  */
+const isPrime = (n) => {
+
+----------------------
+perturbed_prompt
+
+/*Return true if a givet number is prnme, and false jtherwise.
+  >>> isPrime(6)
+  false
+  >>> isPrime(101)
+  true
+  >>> isPrime(11)
+  true
+  >>> isPrime(13441)
+  true
+  >>> isPrime(61)
+  true
+  >>> isPrime(4)
+  false
+  >>> isPrime(1)
+  false
+  */
+const isPrime = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/126
+----------------------
+unique_id: js#25
+----------------------
+nominal_prompt
+
+/* Given a list of numbers, return whether or not they are sorted
+  in ascending order. If list has more than 1 duplicate of the same
+  number, return false. Assume no negative numbers and only integers.
+  Examples
+  isSorted([5]) ➞ true
+  isSorted([1, 2, 3, 4, 5]) ➞ true
+  isSorted([1, 3, 2, 4, 5]) ➞ false
+  isSorted([1, 2, 3, 4, 5, 6]) ➞ true
+  isSorted([1, 2, 3, 4, 5, 6, 7]) ➞ true
+  isSorted([1, 3, 2, 4, 5, 6, 7]) ➞ false
+  isSorted([1, 2, 2, 3, 3, 4]) ➞ true
+  isSorted([1, 2, 2, 2, 3, 4]) ➞ false
+  */
+const isSorted = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/* Given a list of numbers, return whether or not they will be sorted 
+   in ascending order. If list will have more than 1 duplicate of the same 
+   number, return false. will Assume no negative numbers and only integers.
+  Examples
+  isSorted([5]) ➞ true
+  isSorted([1, 2, 3, 4, 5]) ➞ true
+  isSorted([1, 3, 2, 4, 5]) ➞ false
+  isSorted([1, 2, 3, 4, 5, 6]) ➞ true
+  isSorted([1, 2, 3, 4, 5, 6, 7]) ➞ true
+  isSorted([1, 3, 2, 4, 5, 6, 7]) ➞ false
+  isSorted([1, 2, 2, 3, 3, 4]) ➞ true
+  isSorted([1, 2, 2, 2, 3, 4]) ➞ false
+  */
+const isSorted = (lst) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/130
+----------------------
+unique_id: js#26
+----------------------
+nominal_prompt
+
+/*Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+  the last couple centuries. However, what people don't know is Tribonacci sequence.
+  Tribonacci sequence is defined by the recurrence:
+  tri(1) = 3
+  tri(n) = 1 + n / 2, if n is even.
+  tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+  For example:
+  tri(2) = 1 + (2 / 2) = 2
+  tri(4) = 3
+  tri(3) = tri(2) + tri(1) + tri(4)
+         = 2 + 3 + 3 = 8 
+  You are given a non-negative integer number n, you have to a return a list of the 
+  first n + 1 numbers of the Tribonacci sequence.
+  Examples:
+  tri(3) = [1, 3, 2, 8]
+  */
+const tri = (n) => {
+  if (n == 0) { return [1] }
+  if (n == 1) { return [1, 3] }
+  let p = [1, 3]
+  for (let i = 2; i <= n; i++) {
+    if (i % 2 == 0) {
+      p.push(1 + i / 2)
+
+----------------------
+perturbed_prompt
+
+/*Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+  the last couple centuries. However, what people don't know is Tribonacci sequence.
+  Tribonacci sequence is defined by the recurrence:
+  tri(1) = 3
+  tri(n) = 1 + n / 2, if n is even.
+  tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+  For example:
+  tri(2) = 1 + (2 / 2) = 2
+  tri(4) = 3
+  tri(3) = tri(2) + tri(1) + tri(4)
+         = 2 + 3 + 3 = 8 
+  You are given a non-negative integer number n, you have to a return a list of the 
+  first n + 1 numbers of the Tribonacci sequence.
+  Examples:
+  tri(3) = [1, 3, 2, 8]
+  */
+const tri =(n) => {
+  if (n == 0) {
+    return [ 1 ]}
+  if (n == 1) {
+    return [ 1, 3 ]}
+  let p = [ 1, 3 ]
+  for (let A = 2; A <= n; A++) {
+    if (A % 2 == 0) {
+      p.push(1 + A / 2)
+     
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/137
+----------------------
+unique_id: js#27
+----------------------
+nominal_prompt
+
+/*
+  Create a function that takes integers, floats, or strings representing
+  real numbers, and returns the larger variable in its given variable type.
+  Return null if the values are equal.
+  Note: If a real number is represented as a string, the floating point might be . or ,
+
+  compareOne(1, 2.5) ➞ 2.5
+  compareOne(1, "2,3") ➞ "2,3"
+  compareOne("5,1", "6") ➞ "6"
+  compareOne("1", 1) ➞ null
+  */
+const compareOne = (a, b) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Create a function that takes choose integers, floats air bladder, or strings representing stage 
+   real numbers number, and returns the larger bombastic variable variable star in its given variable type character. 
+   Return null nothing if the values are equal. 
+   Note: If a real actual number phone number is represented exemplify as a string, the floating point might be. or, 
+
+   compareOne(1, 2.5) ➞ 2.5 
+   compareOne(1, " 2,3 ") ➞ " 2,3 " 
+   compareOne("5,1", " 6 ") ➞ " 6 " 
+   compareOne("1", 1) ➞ null 
+   * / 
+ const compareOne = (a, b) = > {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/64
+----------------------
+unique_id: js#28
+----------------------
+nominal_prompt
+
+/*Write a function vowelsCount which takes a string representing
+  a word as input and returns the number of vowels in the string.
+  Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a
+  vowel, but only when it is at the end of the given word.
+
+  Example:
+  >>> vowelsCount("abcde")
+  2
+  >>> vowelsCount("ACEDY")
+  3
+  */
+const vowelsCount = (s) => {
+  var vowels = "aeiouAEIOU";
+  var n_vowels = s.split('').reduce((prev, item) => {
+    return prev + (vowels.includes(item));
+  }, 0);
+
+----------------------
+perturbed_prompt
+
+/*Write a function vowelsCount which takes a string representing
+  a word as input and returns the number of vowels in the string.
+  Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a
+  vowel, but only when it is at the end of the given word.
+
+  Example:
+  >>> vowelsCount("abcde")
+  2
+  >>> vowelsCount("ACEDY")
+  3
+  */
+const vowelsCount =(s) => {
+  var vowels = "aeiouAEIOU";
+  var n_vowels = s.split('').reduce((prev, item) => {
+    return prev +(vowels.includes(item));
+    }
+  , 0);
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/85
+----------------------
+unique_id: js#29
+----------------------
+nominal_prompt
+
+/*Given a non-empty list of integers lst. add the even elements that are at odd indices..
+
+
+  Examples:
+      add([4, 2, 6, 7]) ==> 2 
+  */
+const add = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/*Given a non-empty list of integers lst. lend the even elements that are at odd indices..
+
+
+  Examples:
+      lend([4, 2, 6, 7]) ==> 2 
+  */
+const lend = (lst) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/6
+----------------------
+unique_id: js#30
+----------------------
+nominal_prompt
+
+/* Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+  For each of the group, output the deepest level of nesting of parentheses.
+  E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+  >>> parseNestedParens('(()()) ((())) () ((())()())')
+  [2, 3, 1, 3]
+  */
+const parseNestedParens = (paren_string) => {
+
+----------------------
+perturbed_prompt
+
+/* Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+  For each of the group, output the deepest level of nesting of parentheses.
+  E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+  >>> parseNetsedParens('(()()) ((())) () ((())()())')
+  [2, 3, 1, 3]
+  */
+const parseNetsedParens = (paren_string) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#31
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> capitalCoarseDivisor(3, 5)
+  1
+  >>> capitalCoarseDivisor(25, 15)
+  5
+  */
+const capitalCoarseDivisor = (a, b) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#32
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#33
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor =(a, b2) => {
+  while (b2 != 0) {
+    let temp = a;
+    a = b2;
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/86
+----------------------
+unique_id: js#34
+----------------------
+nominal_prompt
+
+/*
+  Write a function that takes a string and returns an ordered version of it.
+  Ordered version of string, is a string where all words (separated by space)
+  are replaced by a new word where all the characters arranged in
+  ascending order based on ascii value.
+  Note: You should keep the order of words and blank spaces in the sentence.
+
+  For example:
+  antiShuffle('Hi') returns 'Hi'
+  antiShuffle('hello') returns 'ehllo'
+  antiShuffle('Hello World!!!') returns 'Hello !!!Wdlor'
+  */
+const antiShuffle = (s) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Write a function that takes a string and returns an ordered version of it.
+  Ordered version of string, is a string where all words (separated by space)
+  are replaced by a new word where all the characters arranged in
+  ascending order based on ascii value.
+  Note: You should keep the order of words and blank spaces in the sentence.
+
+  For example:
+  anti_shuffle('Hi') returns 'Hi'
+  anti_shuffle('hello') returns 'ehllo'
+  anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'
+  */
+const anti_shuffle = (s) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/3
+----------------------
+unique_id: js#35
+----------------------
+nominal_prompt
+
+/* You're given a list of deposit and withdrawal operations on a bank account that starts with
+  zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+  at that point function should return true. Otherwise it should return false.
+  >>> belowZero([1, 2, 3])
+  false
+  >>> belowZero([1, 2, -4, 5])
+  true
+  */
+const belowZero = (operations) => {
+  var balance = 0;
+  for (const op of operations) {
+    balance += op;
+    if (balance < 0) {
+
+----------------------
+perturbed_prompt
+
+/* You're given a list of deposit and withdrawal operations on a bank account that starts with
+  zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+  at that point function should return true. Otherwise it should return false.
+  >>> belowZero([1, 2, 3])
+  false
+  >>> belowZero([1, 2, -4, 5])
+  true
+  */
+const belowZero =(operations) => {
+  var balance = 0;
+  for (const op of operations) {
+    for (let _i_0 = 0; _i_0 > 0; _i_0++) {
+      return false;
+      }
+    balance+=op;
+    if (balance < 0) {
+     
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/8
+----------------------
+unique_id: js#36
+----------------------
+nominal_prompt
+
+/* For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.
+  Empty sum should be equal to 0 and empty product should be equal to 1.
+  >>> sumProduct([])
+  (0, 1)
+  >>> sumProduct([1, 2, 3, 4])
+  (10, 24)
+  */
+const sumProduct = (numbers, int) => {
+
+----------------------
+perturbed_prompt
+
+/* For a givne list of integers, return a tuple conissting of a sum and a product of all the nietgers in a list.
+  Empty sum sohuld be equal to 0 adn empyt product should be equal to 1.
+  >>> sumProduct([])
+  (0, 1)
+  >>> sumProduct([1, 2, 3, 4])
+  (10, 24)
+  */
+const sumProduct = (numbers, int) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/74
+----------------------
+unique_id: js#37
+----------------------
+nominal_prompt
+
+/*
+  Write a function that accepts two lists of strings and returns the list that has
+  total number of chars in the all strings of the list less than the other list.
+
+  if the two lists have the same number of chars, return the first list.
+
+  Examples
+  totalMatch([], []) ➞ []
+  totalMatch(['hi', 'admin'], ['hI', 'Hi']) ➞ ['hI', 'Hi']
+  totalMatch(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) ➞ ['hi', 'admin']
+  totalMatch(['hi', 'admin'], ['hI', 'hi', 'hi']) ➞ ['hI', 'hi', 'hi']
+  totalMatch(['4'], ['1', '2', '3', '4', '5']) ➞ ['4']
+  */
+const totalMatch = (lst1, lst2) => {
+  var l1 = lst1.reduce(((prev, item) => prev + item.length), 0);
+  var l2 = lst2.reduce(((prev, item) => prev + item.length), 0);
+  if (l1 <= l2)
+
+----------------------
+perturbed_prompt
+
+/*
+  Write a function that accepts two lists of strings and returns the list that has
+  total number of chars in the all strings of the list less than the other list.
+
+  if the two lists have the same number of chars, return the first list.
+
+  Examples
+  totalMatch([], []) ➞ []
+  totalMatch(['hi', 'admin'], ['hI', 'Hi']) ➞ ['hI', 'Hi']
+  totalMatch(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) ➞ ['hi', 'admin']
+  totalMatch(['hi', 'admin'], ['hI', 'hi', 'hi']) ➞ ['hI', 'hi', 'hi']
+  totalMatch(['4'], ['1', '2', '3', '4', '5']) ➞ ['4']
+  */
+const totalMatch =(lst1, lst2) => {
+  var l1 = lst1.reduce(((prev, item) => prev + item.length), 0);
+  var l2 = lst2.reduce(((prev, item) => prev + item.length), 0);
+  if (l1 <= l2)
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/132
+----------------------
+unique_id: js#38
+----------------------
+nominal_prompt
+
+/*
+  Create a function that takes a string as input which contains only square brackets.
+  The function should return true if and only if there is a valid subsequence of brackets
+  where at least one bracket in the subsequence is nested.
+  isNested('[[]]') ➞ true
+  isNested('[]]]]]]][[[[[]') ➞ false
+  isNested('[][]') ➞ false
+  isNested('[]') ➞ false
+  isNested('[[][]]') ➞ true
+  isNested('[[]][[') ➞ true
+  */
+const isNested = (string) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Create a function that takes a string as input which contains only square brackets.
+  The function should return true if and only if there is a valid subsequence of brackets
+  where at least one bracket in the subsequence is nested.
+  isNEsteD('[[]]') ➞ true
+  isNEsteD('[]]]]]]][[[[[]') ➞ false
+  isNEsteD('[][]') ➞ false
+  isNEsteD('[]') ➞ false
+  isNEsteD('[[][]]') ➞ true
+  isNEsteD('[[]][[') ➞ true
+  */
+const isNEsteD = (string) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/47
+----------------------
+unique_id: js#39
+----------------------
+nominal_prompt
+
+/*Return median of elements in the list l.
+  >>> median([3, 1, 2, 4, 5])
+  3
+  >>> median([-10, 4, 6, 1000, 10, 20])
+  8.0
+  */
+const median = (l) => {
+
+----------------------
+perturbed_prompt
+
+/*REtuRn median of eLEmenTs in tHe list l.
+  >>> median([3, 1, 2, 4, 5])
+  3
+  >>> median([-10, 4, 6, 1000, 10, 20])
+  8.0
+  */
+const median = (l) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/36
+----------------------
+unique_id: js#40
+----------------------
+nominal_prompt
+
+/*Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.
+  >>> fizzBuzz(50)
+  0
+  >>> fizzBuzz(78)
+  2
+  >>> fizzBuzz(79)
+  3
+  */
+const fizzBuzz = (n) => {
+  var ns = [], ans = 0;
+  for (let i = 0; i < n; i++)
+    if (i % 11 == 0 || i % 13 == 0)
+      ns.push(i);
+
+----------------------
+perturbed_prompt
+
+/*Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.
+  >>> fizzBuzz(50)
+  0
+  >>> fizzBuzz(78)
+  2
+  >>> fizzBuzz(79)
+  3
+  */
+const fizzBuzz =(n) => {
+  var ns = [ ], ans = 0;
+  for (let l = 0; l < n; l++)
+  if (l % 11 == 0 || l % 13 == 0)
+  ns.push(l);
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/87
+----------------------
+unique_id: js#41
+----------------------
+nominal_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getRow([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getRow([], 1) == []
+  getRow([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getRow = (lst, x) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getRows([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getRows([], 1) == []
+  getRows([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getRows = (lst, x) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/86
+----------------------
+unique_id: js#42
+----------------------
+nominal_prompt
+
+/*
+  Write a function that takes a string and returns an ordered version of it.
+  Ordered version of string, is a string where all words (separated by space)
+  are replaced by a new word where all the characters arranged in
+  ascending order based on ascii value.
+  Note: You should keep the order of words and blank spaces in the sentence.
+
+  For example:
+  antiShuffle('Hi') returns 'Hi'
+  antiShuffle('hello') returns 'ehllo'
+  antiShuffle('Hello World!!!') returns 'Hello !!!Wdlor'
+  */
+const antiShuffle = (s) => {
+  let arr = s.split(/\s/)
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      let ind = j
+      for (let k = j + 1; k < arr[i].length; k++) {
+        if (arr[i][k].charCodeAt() < arr[i][ind].charCodeAt()) {
+          ind = k
+        }
+      }
+      if (ind > j) {
+        arr[i] = arr[i].slice(0, j) + arr[i][ind] + arr[i].slice(j + 1, ind) + arr[i][j] + arr[i].slice(ind + 1, arr[i].length)
+
+----------------------
+perturbed_prompt
+
+//   Write a function that takes a string and returns an ordered version of it.
+//   Ordered version of string, is a string where all words (separated by space)
+//   are replaced by a new word where all the characters arranged in
+//   ascending order based on ascii value.
+//   Note: You should keep the order of words and blank spaces in the sentence.
+// 
+//   For example:
+//   antiShuffle('Hi') returns 'Hi'
+//   antiShuffle('hello') returns 'ehllo'
+//   antiShuffle('Hello World!!!') returns 'Hello !!!Wdlor'
+// const antiShuffle = (s) => {
+  let arr = s.split(/\s/)
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      let ind = j
+      for (let k = j + 1; k < arr[i].length; k++) {
+        if (arr[i][k].charCodeAt() < arr[i][ind].charCodeAt()) {
+          ind = k
+        }
+      }
+      if (ind > j) {
+        arr[i] = arr[i].slice(0, j) + arr[i][ind] + arr[i].slice(j + 1, ind) + arr[i][j] + arr[i].slice(ind + 1, arr[i].length)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/52
+----------------------
+unique_id: js#43
+----------------------
+nominal_prompt
+
+/*Return true if all numbers in the list l are below threshold t.
+  >>> belowThreshold([1, 2, 4, 10], 100)
+  true
+  >>> belowThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const belowThreshold = (l, t) => {
+  for (const e of l)
+    if (e >= t)
+
+----------------------
+perturbed_prompt
+
+/*Return true if all numbers in the list l are below threshold t.
+  >>> belowThreshold([1, 2, 4, 10], 100)
+  true
+  >>> belowThreshold([1, 20, 4, 10], 5)
+  false
+  */
+const belowThreshold =(l, t) => {
+  for (const e of l)
+  if (e >= t)
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/11
+----------------------
+unique_id: js#44
+----------------------
+nominal_prompt
+
+/* Input are two strings a and b consisting only of 1s and 0s.
+  Perform binary XOR on these inputs and return result also as a string.
+  >>> stringXor('010', '110')
+  '100'
+  */
+const stringXor = (a, b) => {
+
+----------------------
+perturbed_prompt
+
+/* Input are two strings a akd b consisting only of 1s and 0s.
+  Perform butary XOR on these inputs and return result also as a strine.
+  >>> stringXor('010', '110')
+  '100'
+  */
+const stringXor = (a, b) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/162
+----------------------
+unique_id: js#45
+----------------------
+nominal_prompt
+
+/*
+  Given a string 'text', return its md5 hash equivalent string.
+  If 'text' is an empty string, return null.
+
+  >>> stringToMd5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+  */
+const stringToMd5 = (text) => {
+  if (text == '') { return null }
+  var md5 = require('js-md5')
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a string 'text', return its md5 hash equivalent string.
+  If 'text' is an empty string, return null.
+
+  >>> stringToMd5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+  */
+const stringToMd5 =(text) => {
+  if (text == '') {
+    return null}
+  var md5 = require('js-md5')
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/151
+----------------------
+unique_id: js#46
+----------------------
+nominal_prompt
+
+/* Given a list of numbers, return the sum of squares of the numbers
+  in the list that are odd. Ignore numbers that are negative or not integers.
+  doubleTheDifference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10
+  doubleTheDifference([-1, -2, 0]) == 0
+  doubleTheDifference([9, -2]) == 81
+  doubleTheDifference([0]) == 0
+  If the input list is empty, return 0.
+  */
+const doubleTheDifference = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/* Given a list of numbers, return the sum of squares of the numbers 
+   in the list that was odd. Ignore numbers that was negative or not integers. 
+   doubleTheDifference([1, 3, 2, 0])== 1+ 9+ 0+ 0= 10 
+   doubleTheDifference([-1,-2, 0])== 0 
+   doubleTheDifference([9,-2])== 81 
+   doubleTheDifference([0])== 0 
+   If the input list was empty, return 0. 
+  */ 
+ const doubleTheDifference= (lst)=>{
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/95
+----------------------
+unique_id: js#47
+----------------------
+nominal_prompt
+
+/*
+  Given a dictionary, return true if all keys are strings in lower 
+  case or all keys are strings in upper case, else return false.
+  The function should return false is the given dictionary is empty.
+  Examples:
+  checkDictCase({"a":"apple", "b":"banana"}) should return true.
+  checkDictCase({"a":"apple", "A":"banana", "B":"banana"}) should return false.
+  checkDictCase({"a":"apple", 8:"banana", "a":"apple"}) should return false.
+  checkDictCase({"Name":"John", "Age":"36", "City":"Houston"}) should return false.
+  checkDictCase({"STATE":"NC", "ZIP":"12345" }) should return true.
+  */
+const checkDictCase = (dict) => {
+  let c = 0
+  let lo = 1
+  let hi = 1
+  for (let key in dict) {
+    c++
+    for (let i = 0; i < key.length; i++) {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a dictionary, return true if all keys are strings in lower 
+  case or all keys are strings in upper case, else return false.
+  The function should return false is the given dictionary is empty.
+  Examples:
+  checkDictCase({"a":"apple", "b":"banana"}) should return true.
+  checkDictCase({"a":"apple", "A":"banana", "B":"banana"}) should return false.
+  checkDictCase({"a":"apple", 8:"banana", "a":"apple"}) should return false.
+  checkDictCase({"Name":"John", "Age":"36", "City":"Houston"}) should return false.
+  checkDictCase({"STATE":"NC", "ZIP":"12345" }) should return true.
+  */
+const checkDictCase = (dict) => {
+  let c = 0
+  let lo = 1
+  let hi = 1
+  for (let key in dict) {
+    c++
+    for (let i = 0;  \
+  i < key.length; i++) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/87
+----------------------
+unique_id: js#48
+----------------------
+nominal_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getRow([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getRow([], 1) == []
+  getRow([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getRow = (lst, x) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getGow([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getGow([], 1) == []
+  getGow([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getGow = (lst, x) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/87
+----------------------
+unique_id: js#49
+----------------------
+nominal_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getRow([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getRow([], 1) == []
+  getRow([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getRow = (lst, x) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a 2 dimensional data, as a nested lists,
+  which is similar to matrix, however, unlike matrices,
+  each row may contain a different number of columns.
+  Given lst, and integer x, find integers x in the list,
+  and return list of tuples, [(x1, y1), (x2, y2) ...] such that
+  each tuple is a coordinate - (row, columns), starting with 0.
+  Sort coordinates initially by rows in ascending order.
+  Also, sort coordinates of the row by columns in descending order.
+  
+  Examples:
+  getGow([
+    [1,2,3,4,5,6],
+    [1,2,3,4,1,6],
+    [1,2,3,4,5,1]
+  ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]
+  getGow([], 1) == []
+  getGow([[], [1], [1, 2, 3]], 3) == [(2, 2)]
+  */
+const getGow = (lst, x) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/92
+----------------------
+unique_id: js#50
+----------------------
+nominal_prompt
+
+/* Create a function that takes 3 numbers.
+  Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+  Returns false in any other cases.
+  Examples
+  anyInt(5, 2, 7) ➞ true
+  anyInt(3, 2, 2) ➞ false
+  anyInt(3, -2, 1) ➞ true
+  anyInt(3.6, -2.2, 2) ➞ false
+  */
+const anyInt = (x, y, z) => {
+
+----------------------
+perturbed_prompt
+
+/* Create a function that takes 3 numbers.
+  Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+  Returns false in any other cases.
+  Examples
+  anyInt(5, 2, 7) ➞ true
+  anyInt(3, 2, 2) ➞ false
+  anyInt(3, -2, 1) ➞ true
+  anyInt(3.6, -2.2, 2) ➞ false
+  */
+const anyInt = (x, y, z) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/119
+----------------------
+unique_id: js#51
+----------------------
+nominal_prompt
+
+/* You are given a list of two strings, both strings consist of open
+  parentheses '(' or close parentheses ')' only.
+  Your job is to check if it is possible to concatenate the two strings in
+  some order, that the resulting string will be good.
+  A string S is considered to be good if and only if all parentheses in S
+  are balanced. For example: the string '(())()' is good, while the string
+  '())' is not.
+  Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.
+  Examples:
+  matchParens(['()(', ')']) == 'Yes'
+  matchParens([')', ')']) == 'No'
+  */
+const matchParens = (lst) => {
+  let w1 = lst[0] + lst[1]
+  let y = 0
+  let u = 1
+  for (let i = 0; i < w1.length; i++) {
+    if (w1[i] == '(') { y++ }
+    else { y-- }
+    if (y < 0) {
+      u = 0;
+      break;
+    }
+  }
+  if (u == 1 && y == 0) { return 'Yes' }
+  w1 = lst[1] + lst[0]
+
+----------------------
+perturbed_prompt
+
+/* You are given a list of two strings, both strings consist of open
+  parentheses '(' or close parentheses ')' only.
+  Your job is to check if it is possible to concatenate the two strings in
+  some order, that the resulting string will be good.
+  A string S is considered to be good if and only if all parentheses in S
+  are balanced. For example: the string '(())()' is good, while the string
+  '())' is not.
+  Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.
+  Examples:
+  matchParens(['()(', ')']) == 'Yes'
+  matchParens([')', ')']) == 'No'
+  */
+const matchParens =(lst) => {
+  let w1 = lst [ 0 ] + lst [ 1 ]
+  let u2 = 0
+  let u = 1
+  for (let i = 0; i < w1.length; i++) {
+    if (w1 [ i ] == '(') {
+      u2++}
+    else {
+      u2--}
+    if (u2 < 0) {
+      u = 0;
+      break;
+      }
+    }
+  if (u == 1 && u2 == 0) {
+    return 'Yes'}
+  w1 = lst [ 1 ] + lst [ 0 ]
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/120
+----------------------
+unique_id: js#52
+----------------------
+nominal_prompt
+
+/*
+  Given an array arr of integers and a positive integer k, return a sorted list 
+  of length k with the maximum k numbers in arr.
+
+  Example 1:
+
+      Input: arr = [-3, -4, 5], k = 3
+      Output: [-4, -3, 5]
+
+  Example 2:
+
+      Input: arr = [4, -4, 4], k = 2
+      Output: [4, 4]
+
+  Example 3:
+
+      Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+      Output: [2]
+
+  Note:
+      1. The length of the array will be in the range of [1, 1000].
+      2. The elements in the array will be in the range of [-1000, 1000].
+      3. 0 <= k <= len(arr)
+  */
+const maximum = (arr, k) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given an array arr of integers and a positive integer k, return a sorted list 
+   of length k with the maximum k numbers in arr.
+
+  Example 1:
+
+      Input: arr = [-3, -4, 5], k = 3
+      Output: [-4, -3, 5]
+
+  Example 2:
+
+      Input: arr = [4, -4, 4], k = 2
+      Output: [4, 4]
+
+  Example 3:
+
+      Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+      Output: [2]
+
+  Note:
+      1. The length of the array will be in the range of [1, 1000].
+      2. The elements in the array will be in the range of [-1000, 1000].
+      3. 0 <= k <= len(arr)
+  */
+const maximum = (arr, k) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/69
+----------------------
+unique_id: js#53
+----------------------
+nominal_prompt
+
+/*
+  You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an integer is the number of times it appears in the list.
+  If no such a value exist, return -1.
+  Examples:
+      search([4, 1, 2, 2, 3, 1])) == 2
+      search([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      search([5, 5, 4, 4, 4])) == -1
+  */
+const search = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an integer is the number of times it appears in the list.
+  If no such a value exist, return -1.
+  Examples:
+      seagch([4, 1, 2, 2, 3, 1])) == 2
+      seagch([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      seagch([5, 5, 4, 4, 4])) == -1
+  */
+const seagch = (lst) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/112
+----------------------
+unique_id: js#54
+----------------------
+nominal_prompt
+
+/*Task
+  We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+  then check if the result string is palindrome.
+  A string is called palindrome if it reads the same backward as forward.
+  You should return a tuple containing the result string and true/false for the check.
+  Example
+  For s = "abcde", c = "ae", the result should be ('bcd',false)
+  For s = "abcdef", c = "b"  the result should be ('acdef',false)
+  For s = "abcdedcba", c = "ab", the result should be ('cdedc',true)
+  */
+const reverseDelete = (s, c) => {
+
+----------------------
+perturbed_prompt
+
+/*Task 
+   We was gave two strings s and c, you had to deleted all the characters in s that was equal to any character in c
+   then checked if the result string was palindrome. 
+   A string was called palindrome if it read the same backward as forward. 
+   You should return a tuple containing the result string and true/ false for the check.
+  Example
+  For s = "abcde", c = "ae", the result should be ('bcd',false)
+  For s = "abcdef", c = "b"  the result should be ('acdef',false)
+  For s = "abcdedcba", c = "ab", the result should be ('cdedc',true)
+  */
+const reverseDelete = (s, c) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/147
+----------------------
+unique_id: js#55
+----------------------
+nominal_prompt
+
+/*
+  You are given a positive integer n. You have to create an integer array a of length n.
+      For each i (1 ≤ i ≤ n), the value of a[i] = i * i - i + 1.
+      Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, 
+  and a[i] + a[j] + a[k] is a multiple of 3.
+
+  Example :
+      Input: n = 5
+      Output: 1
+      Explanation: 
+      a = [1, 3, 7, 13, 21]
+      The only valid triple is (1, 7, 13).
+  */
+const getMaxTriples = (n) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a positive integer n. You have to create an integer array a of length n.
+      For each i (1 ≤ i ≤ n), the value of a[i] = i * i - i + 1.
+      Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, 
+  and a[i] + a[j] + a[k] is a multiple of 3.
+
+  Example :
+      Input: n = 5
+      Output: 1
+      Explanation: 
+      a = [1, 3, 7, 13, 21]
+      The only valid triple is (1, 7, 13).
+  */
+const gottenMaxTriples = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/88
+----------------------
+unique_id: js#56
+----------------------
+nominal_prompt
+
+/*
+  Given an array of non-negative integers, return a copy of the given array after sorting,
+  you will sort the given array in ascending order if the sum( first index value, last index value) is odd,
+  or sort it in descending order if the sum( first index value, last index value) is even.
+
+  Note:
+  * don't change the given array.
+
+  Examples:
+  * sortArray([]) => []
+  * sortArray([5]) => [5]
+  * sortArray([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]
+  * sortArray([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]
+  */
+const sortArray = (array) => {
+  let arr = array
+  let tot = arr[0] + arr[arr.length-1]
+  for (let j = 0; j < arr.length; j++) {
+    let ind = j
+    for (let k = j + 1; k < arr.length; k++) {
+      if ((tot % 2 == 1 && arr[k] < arr[ind]) || (tot % 2 == 0 && arr[k] > arr[ind])) {
+        ind = k
+
+----------------------
+perturbed_prompt
+
+/*
+  Given an array of non-negative integers, return a copy of the given array after sorting,
+  you will sort the given array in ascending order if the sum( first index value, last index value) is odd,
+  or sort it in descending order if the sum( first index value, last index value) is even.
+
+  Note:
+  * don't change the given array.
+
+  Examples:
+  * sortArray([]) => []
+  * sortArray([5]) => [5]
+  * sortArray([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]
+  * sortArray([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]
+  */
+const sortArray =(array) => {
+  let arr = array
+  let tot = arr [ 0 ] + arr [ arr.length - 1 ]
+  for (let j = 0; j < arr.length; j++) {
+    let ind = j
+    let k = j + 1;
+    while (k < arr.length) {
+       {
+        if ((tot % 2 == 1 && arr [ k ] < arr [ ind ]) ||(tot % 2 == 0 && arr [ k ] > arr [ ind ])) {
+          ind = k
+         
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/83
+----------------------
+unique_id: js#57
+----------------------
+nominal_prompt
+
+/*
+  Given a positive integer n, return the count of the numbers of n-digit
+  positive integers that start or end with 1.
+  */
+const startsOneEnds = (n) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a positive integer n, return the count of the numbers of n-digit
+  positive integers that start or end with 1.
+  */
+const stagtsOneEnds = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/32
+----------------------
+unique_id: js#58
+----------------------
+nominal_prompt
+
+/*
+  Evaluates polynomial with coefficients xs at point x.
+  return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+  */
+const poly = (xs, x) => {
+  return xs.reduce((prev, item, index) => {
+    return prev + item * Math.pow(x, index);
+  }, 0);
+}
+
+/*
+  xs are coefficients of a polynomial.
+  findZero find x such that poly(x) = 0.
+  findZero returns only only zero point, even if there are many.
+  Moreover, findZero only takes list xs having even number of coefficients
+  and largest non zero coefficient as it guarantees
+  a solution.
+  >>> round(findZero([1, 2]), 2) # f(x) = 1 + 2x
+  -0.5
+  >>> round(findZero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+  1.0
+  */
+const findZero = (xs) => {
+  var begin = -1.0, end = 1.0;
+  while (poly(xs, begin) * poly(xs, end) > 0) {
+    begin *= 2.0;
+    end *= 2.0;
+  }
+  while (end - begin > 1e-10) {
+    let center = (begin + end) / 2.0;
+
+----------------------
+perturbed_prompt
+
+/*
+  Evaluates polynomial with coefficients xs at point x.
+  return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+  */
+const poly = (xs, x) => {
+  return xs.reduce((prev, item,  \
+  index) => {
+    return prev + item * Math.pow(x, index);
+  }, 0);
+}
+
+/*
+  xs are coefficients of a polynomial.
+  findZero find x such that poly(x) = 0.
+  findZero returns only only zero point, even if there are many.
+  Moreover, findZero only takes list xs having even number of coefficients
+  and largest non zero coefficient as it guarantees
+  a solution.
+  >>> round(findZero([1, 2]), 2) # f(x) = 1 + 2x
+  -0.5
+  >>> round(findZero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+  1.0
+  */
+const findZero = (xs) => {
+  var begin = -1.0, end = 1.0;
+  while (poly(xs, begin) * poly(xs, end) > 0) {
+    begin *= 2.0;
+    end *= 2.0;
+  }
+  while (end - begin > 1e-10) {
+    let center = (begin + end) / 2.0;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/22
+----------------------
+unique_id: js#59
+----------------------
+nominal_prompt
+
+/* Filter given list of any python values only for integers
+  >>> filterIntegers(['a', 3.14, 5])
+  [5]
+  >>> filterIntegers([1, 2, 3, 'abc', {}, []])
+  [1, 2, 3]
+  */
+const filterIntegers = (values) => {
+  return values.filter(x => Number.isInteger(x));
+
+----------------------
+perturbed_prompt
+
+/* Filter given list of any python values only for integers
+  >>> filterIntegers(['a', 3.14, 5])
+  [5]
+  >>> filterIntegers([1, 2, 3, 'abc', {}, []])
+  [1, 2, 3]
+  */
+const filterIntegers =(VAR_0) => {
+  return VAR_0.filter(x => Number.isInteger(x));
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#60
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/135
+----------------------
+unique_id: js#61
+----------------------
+nominal_prompt
+
+/*Create a function which returns the largest index of an element which
+  is not greater than or equal to the element immediately preceding it. If
+  no such element exists then return -1. The given array will not contain
+  duplicate values.
+
+  Examples:
+  canArrange([1,2,4,3,5]) = 3
+  canArrange([1,2,3]) = -1
+  */
+const canArrange = (arr) => {
+  if (arr.length == 0) { return -1 }
+  for (let i = arr.length - 1; i > 0; i--) {
+    if (arr[i] < arr[i - 1]) { return i }
+
+----------------------
+perturbed_prompt
+
+/*Create a function which returns the largest index of an element which
+  is not greater than or equal to the element immediately preceding it. If
+  no such element exists then return -1. The given array will not contain
+  duplicate values.
+
+  Examples:
+  canArrange([1,2,4,3,5]) = 3
+  canArrange([1,2,3]) = -1
+  */
+const canArrange = (arr) => {
+  if (arr.length == 0) { return -1 }
+  for (let i = arr.length -  \
+  1; i > 0; i--) {
+    if (arr[i] < arr[i - 1]) { return i }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/2
+----------------------
+unique_id: js#62
+----------------------
+nominal_prompt
+
+/* Given a positive floating point number, it can be decomposed into
+  and integer part (largest integer smaller than given number) and decimals
+  (leftover part always smaller than 1).
+
+  Return the decimal part of the number.
+  >>> truncateNumber(3.5)
+  0.5
+  */
+const truncateNumber = (number) => {
+  return number % 1.0;
+
+----------------------
+perturbed_prompt
+
+/* Given a positive floating point number, it can be decomposed into
+  and integer part (largest integer smaller than given number) and decimals
+  (leftover part always smaller than 1).
+
+  Return the decimal part of the number.
+  >>> truncateNumber(3.5)
+  0.5
+  */
+const truncateNumber =(r56qDO) => {
+  return r56qDO % 1.0;
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/136
+----------------------
+unique_id: js#63
+----------------------
+nominal_prompt
+
+/* Create a function that returns a tuple (a, b), where 'a' is
+  the largest of negative integers, and 'b' is the smallest
+  of positive integers in a list.
+  If there is no negative or positive integers, return them as null.
+  Examples:
+  largestSmallestIntegers([2, 4, 1, 3, 5, 7]) == (null, 1)
+  largestSmallestIntegers([]) == (null, null)
+  largestSmallestIntegers([0]) == (null, null)
+  */
+const largestSmallestIntegers = (lst) => {
+  let a = Infinity
+  let b = -Infinity
+  for (let i = 0; i < lst.length; i++) {
+    if (lst[i] > 0 && lst[i] < a) { a = lst[i] }
+    if (lst[i] < 0 && lst[i] > b) { b = lst[i] }
+
+----------------------
+perturbed_prompt
+
+/* Create a function that returns a tuple (a, b), where 'a' is
+  the largest of negative integers, and 'b' is the smallest
+  of positive integers in a list.
+  If there is no negative or positive integers, return them as null.
+  Examples:
+  largestSmallestIntegers([2, 4, 1, 3, 5, 7]) == (null, 1)
+  largestSmallestIntegers([]) == (null, null)
+  largestSmallestIntegers([0]) == (null, null)
+  */
+const largestSmallestIntegers = (lst) => {
+  let a = Infinity
+  let b = -Infinity
+  for (let i = 0; i < lst.length; i++) {
+    if (lst[i] > 0 && lst[i]  \
+  < a) { a = lst[i] }
+    if (lst[i] < 0 && lst[i] > b) { b = lst[i] }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/90
+----------------------
+unique_id: js#64
+----------------------
+nominal_prompt
+
+/*
+  You are given a list of integers.
+  Write a function nextSmallest() that returns the 2nd smallest element of the list.
+  Return null if there is no such element.
+  
+  nextSmallest([1, 2, 3, 4, 5]) == 2
+  nextSmallest([5, 1, 4, 3, 2]) == 2
+  nextSmallest([]) == null
+  nextSmallest([1, 1]) == null
+  */
+const nextSmallest = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You were gave a list of integers. 
+   Wrote a function nextSmallest() that returned the 2nd smallest element of the list.
+   Return null if there was no such element. 
+  
+   nextSmallest([1, 2, 3, 4, 5])== 2 
+   nextSmallest([5, 1, 4, 3, 2])== 2 
+   nextSmallest([])== null 
+   nextSmallest([1, 1])== null 
+  */ 
+ const nextSmallest= (lst)=>{
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/100
+----------------------
+unique_id: js#65
+----------------------
+nominal_prompt
+
+/*
+  Given a positive integer n, you have to make a pile of n levels of stones.
+  The first level has n stones.
+  The number of stones in the next level is:
+      - the next odd number if n is odd.
+      - the next even number if n is even.
+  Return the number of stones in each level in a list, where element at index
+  i represents the number of stones in the level (i+1).
+
+  Examples:
+  >>> makeAPile(3)
+  [3, 5, 7]
+  */
+const makeAPile = (n) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a positive integer n, you have to make a pile of n levels of stones.
+  The first level has n stones.
+  The number of stones in the next level is:
+      - the next odd number if n is odd.
+      - the next even number if n is even.
+  Return the number of stones in each level in a list, where element at index
+  i represents the number of stones in the level (i+1).
+
+  Examples:
+  >>> makeAPile(3)
+  [3, 5, 7]
+  */
+const makeAPile = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/61
+----------------------
+unique_id: js#66
+----------------------
+nominal_prompt
+
+/* brackets is a string of "(" and ")".
+  return true if every opening bracket has a corresponding closing bracket.
+
+  >>> correctBracketing("(")
+  false
+  >>> correctBracketing("()")
+  true
+  >>> correctBracketing("(()())")
+  true
+  >>> correctBracketing(")(()")
+  false
+  */
+const correctBracketing = (brackets) => {
+  var depth = 0;
+  for (const b of brackets) {
+    if (b == "(")
+      depth += 1;
+    else
+
+----------------------
+perturbed_prompt
+
+/* brackets is a string of "(" and ")".
+  return true if every opening bracket has a corresponding closing bracket.
+
+  >>> correctBracketing("(")
+  false
+  >>> correctBracketing("()")
+  true
+  >>> correctBracketing("(()())")
+  true
+  >>> correctBracketing(")(()")
+  false
+  */
+const correctBracketing =(brackets) => {
+  var depth = 0;
+  for (const b of brackets) {
+    if (b == "(")
+    depth+=1;
+    else
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/77
+----------------------
+unique_id: js#67
+----------------------
+nominal_prompt
+
+/*
+  Write a function that takes an integer a and returns true
+  if this ingeger is a cube of some integer number.
+  Note: you may assume the input is always valid.
+  Examples:
+  iscube(1) ==> true
+  iscube(2) ==> false
+  iscube(-1) ==> true
+  iscube(64) ==> true
+  iscube(0) ==> true
+  iscube(180) ==> false
+  */
+const iscube = (a) => {
+  a = Math.abs(a);
+
+----------------------
+perturbed_prompt
+
+/*
+  Write a function that takes an integer a and returns true
+  if this ingeger is a cube of some integer number.
+  Note: you may assume the input is always valid.
+  Examples:
+  iscube(1) ==> true
+  iscube(2) ==> false
+  iscube(-1) ==> true
+  iscube(64) ==> true
+  iscube(0) ==> true
+  iscube(180) ==> false
+  */
+
+const iscube = (a) => {
+  a = Math.abs(a);
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/9
+----------------------
+unique_id: js#68
+----------------------
+nominal_prompt
+
+/* From a given list of integers, generate a list of rolling maximum element found until given moment
+  in the sequence.
+  >>> rollingMax([1, 2, 3, 2, 3, 4, 2])
+  [1, 2, 3, 3, 3, 4, 4]
+  */
+const rollingMax = (numbers) => {
+
+----------------------
+perturbed_prompt
+
+/* From a gave list of integers, generated a list of rolling maximum element found until gave moment 
+   in the sequence.
+  >>> rollingMax([1, 2, 3, 2, 3, 4, 2])
+  [1, 2, 3, 3, 3, 4, 4]
+  */
+const rollingMax = (numbers) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/129
+----------------------
+unique_id: js#69
+----------------------
+nominal_prompt
+
+/*
+  Given a grid with N rows and N columns (N >= 2) and a positive integer k, 
+  each cell of the grid contains a value. Every integer in the range [1, N * N]
+  inclusive appears exactly once on the cells of the grid.
+
+  You have to find the minimum path of length k in the grid. You can start
+  from any cell, and in each step you can move to any of the neighbor cells,
+  in other words, you can go to cells which share an edge with you current
+  cell.
+  Please note that a path of length k means visiting exactly k cells (not
+  necessarily distinct).
+  You CANNOT go off the grid.
+  A path A (of length k) is considered less than a path B (of length k) if
+  after making the ordered lists of the values on the cells that A and B go
+  through (let's call them lst_A and lst_B), lst_A is lexicographically less
+  than lst_B, in other words, there exist an integer index i (1 <= i <= k)
+  such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have
+  lst_A[j] = lst_B[j].
+  It is guaranteed that the answer is unique.
+  Return an ordered list of the values on the cells that the minimum path go through.
+
+  Examples:
+
+      Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+      Output: [1, 2, 1]
+
+      Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+      Output: [1]
+  */
+const minPath = (grid, k) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a grid with N rows and N columns column (N > = 2) and a positive incontrovertible integer k, 
+   each cell of the grid contains a value. Every integer in the range image [ 1, N * N ] 
+   inclusive appears exactly once on the cells cell of the grid.
+
+   You have to find the minimum path of length k in the grid. You can start startle 
+   from any cell, and in each step you can move to any of the neighbor cells cell, 
+   in other words, you can go run low to cells cellular telephone which share partake an edge boundary with you current 
+   cell cellular telephone. 
+   Please note that a path of length distance k means visiting exactly k cells (not 
+   necessarily distinct clear-cut). 
+   You CANNOT go rifle off the grid.
+   A path A (of length duration k) is considered view less than a path B (of length distance k) if 
+   after making the ordered order lists of the values on the cells cellular telephone that A and B go 
+   through (let's call them lst_A and lst_B), lst_A is lexicographically less 
+   than lst_B, in other words, there exist an integer index exponent i (1 < = i < = k)
+   such that lst_A[i ] < lst_B[i ] and for any j (1 < = j < i) we have 
+   lst_A[j ] = lst_B[j ]. 
+   It is guaranteed that the answer is unique. 
+   Return an ordered list of the values on the cells that the minimum minimal path way go through.
+
+  Examples:
+
+      Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+      Output: [1, 2, 1]
+
+      Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+      Output: [1]
+  */
+const minPath = (grid, k) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/76
+----------------------
+unique_id: js#70
+----------------------
+nominal_prompt
+
+/*Your task is to write a function that returns true if a number x is a simple
+  power of n and false in other cases.
+  x is a simple power of n if n**int=x
+  For example:
+  isSimplePower(1, 4) => true
+  isSimplePower(2, 2) => true
+  isSimplePower(8, 2) => true
+  isSimplePower(3, 2) => false
+  isSimplePower(3, 1) => false
+  isSimplePower(5, 3) => false
+  */
+const isSimplePower = (x, n) => {
+
+----------------------
+perturbed_prompt
+
+/*YOur task is to write a function that returns true if a number x is a simple power of n and in other cases a false one. x is a simple power of n if n * * int = x
+  For example:
+  isSimplePower(1, 4) => true
+  isSimplePower(2, 2) => true
+  isSimplePower(8, 2) => true
+  isSimplePower(3, 2) => false
+  isSimplePower(3, 1) => false
+  isSimplePower(5, 3) => false
+  */
+const isSimplePower = (x, n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/120
+----------------------
+unique_id: js#71
+----------------------
+nominal_prompt
+
+/*
+  Given an array arr of integers and a positive integer k, return a sorted list 
+  of length k with the maximum k numbers in arr.
+
+  Example 1:
+
+      Input: arr = [-3, -4, 5], k = 3
+      Output: [-4, -3, 5]
+
+  Example 2:
+
+      Input: arr = [4, -4, 4], k = 2
+      Output: [4, 4]
+
+  Example 3:
+
+      Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+      Output: [2]
+
+  Note:
+      1. The length of the array will be in the range of [1, 1000].
+      2. The elements in the array will be in the range of [-1000, 1000].
+      3. 0 <= k <= len(arr)
+  */
+const maximum = (arr, k) => {
+  let p = arr
+  for (let j = 0; j < p.length; j++) {
+    let ind = j
+    for (let k = j + 1; k < p.length; k++) {
+      if (p[k] < p[ind]) {
+        ind = k
+      }
+    }
+
+----------------------
+perturbed_prompt
+
+/*
+  Given an array arr of integers and a positive integer k, return a sorted list 
+  of length k with the maximum k numbers in arr.
+
+  Example 1:
+
+      Input: arr = [-3, -4, 5], k = 3
+      Output: [-4, -3, 5]
+
+  Example 2:
+
+      Input: arr = [4, -4, 4], k = 2
+      Output: [4, 4]
+
+  Example 3:
+
+      Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+      Output: [2]
+
+  Note:
+      1. The length of the array will be in the range of [1, 1000].
+      2. The elements in the array will be in the range of [-1000, 1000].
+      3. 0 <= k <= len(arr)
+  */
+const maximum = (arr, k) => {
+  let p = arr
+  for (let j = 0; j < p.length; j++) {
+    let ind = j
+    for (let k = j +  \
+  1; k < p.length; k++) {
+      if (p[k] < p[ind]) {
+        ind = k
+      }
+    }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/40
+----------------------
+unique_id: js#72
+----------------------
+nominal_prompt
+
+/*
+  triplesSumToZero takes a list of integers as an input.
+  it returns true if there are three distinct elements in the list that
+  sum to zero, and false otherwise.
+
+  >>> triplesSumToZero([1, 3, 5, 0])
+  false
+  >>> triplesSumToZero([1, 3, -2, 1])
+  true
+  >>> triplesSumToZero([1, 2, 3, 7])
+  false
+  >>> triplesSumToZero([2, 4, -5, 3, 9, 7])
+  true
+  >>> triplesSumToZero([1])
+  false
+  */
+const triplesSumToZero = (l) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  triolesSumToZero takes a list of integers as an input.
+  it returns true if there are three distinct elements in the list that
+  sum to zero, and false otherwise.
+
+  >>> triolesSumToZero([1, 3, 5, 0])
+  false
+  >>> triolesSumToZero([1, 3, -2, 1])
+  true
+  >>> triolesSumToZero([1, 2, 3, 7])
+  false
+  >>> triolesSumToZero([2, 4, -5, 3, 9, 7])
+  true
+  >>> triolesSumToZero([1])
+  false
+  */
+const triolesSumToZero = (l) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/46
+----------------------
+unique_id: js#73
+----------------------
+nominal_prompt
+
+/*The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+  fib4(0) -> 0
+  fib4(1) -> 0
+  fib4(2) -> 2
+  fib4(3) -> 0
+  fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+  Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+  >>> fib4(5)
+  4
+  >>> fib4(6)
+  8
+  >>> fib4(7)
+  14
+  */
+const fib4 = (n) => {
+  var results = [0, 0, 2, 0];
+  if (n < 4)
+    return results[n];
+  for (let i = 4; i < n + 1; i++) {
+    results.push(results.at(-1) + results.at(-2) +
+
+----------------------
+perturbed_prompt
+
+/*The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+	fib4(0) -> 0
+	fib4(1) -> 0
+	fib4(2) -> 2
+	fib4(3) -> 0
+	fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+	Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+	>>> fib4(5)
+	4
+	>>> fib4(6)
+	8
+	>>> fib4(7)
+	14
+	*/
+const fib4 = (n) => {
+	var results = [0, 0, 2, 0];
+	if (n < 4)
+		return results[n];
+	for (let i = 4; i < n + 1; i++) {
+		results.push(results.at(-1) + results.at(-2) +
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/118
+----------------------
+unique_id: js#74
+----------------------
+nominal_prompt
+
+/*You are given a word. Your task is to find the closest vowel that stands between 
+  two consonants from the right side of the word (case sensitive).
+  
+  Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+  find any vowel met the above condition. 
+
+  You may assume that the given string contains English letter only.
+
+  Example:
+  getClosestVowel("yogurt") ==> "u"
+  getClosestVowel("FULL") ==> "U"
+  getClosestVowel("quick") ==> ""
+  getClosestVowel("ab") ==> ""
+  */
+const getClosestVowel = (word) => {
+  for (let i = word.length - 2; i > 0; i--) {
+    if (
+      !(word[i] != 'a' && word[i] != 'e' && word[i] != 'i' && word[i] != 'o' && word[i] != 'u' && word[i] != 'A' &&
+        word[i] != 'U' && word[i] != 'O' && word[i] != 'I' && word[i] != 'E')
+      &&
+      (word[i + 1] != 'a' && word[i + 1] != 'e' && word[i + 1] != 'i' && word[i + 1] != 'o' && word[i + 1] != 'u' && word[i + 1] != 'A' &&
+        word[i + 1] != 'U' && word[i + 1] != 'O' && word[i + 1] != 'I' && word[i + 1] != 'E')
+      &&
+
+----------------------
+perturbed_prompt
+
+/*You are given a word. Your task is to find the closest vowel that stands between 
+  two consonants from the right side of the word (case sensitive).
+  
+  Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+  find any vowel met the above condition. 
+
+  You may assume that the given string contains English letter only.
+
+  Example:
+  getClosestVowel("yogurt") ==> "u"
+  getClosestVowel("FULL") ==> "U"
+  getClosestVowel("quick") ==> ""
+  getClosestVowel("ab") ==> ""
+  */
+const getClosestVowel =(word) => {
+  for (let i2 = word.length - 2; i2 > 0; i2--) {
+    if (
+     !(word [ i2 ] != 'a' && word [ i2 ] != 'e' && word [ i2 ] != 'i' && word [ i2 ] != 'o' && word [ i2 ] != 'u' && word [ i2 ] != 'A' &&
+    word [ i2 ] != 'U' && word [ i2 ] != 'O' && word [ i2 ] != 'I' && word [ i2 ] != 'E')
+     &&
+    (word [ i2 + 1 ] != 'a' && word [ i2 + 1 ] != 'e' && word [ i2 + 1 ] != 'i' && word [ i2 + 1 ] != 'o' && word [ i2 + 1 ] != 'u' && word [ i2 + 1 ] != 'A' &&
+    word [ i2 + 1 ] != 'U' && word [ i2 + 1 ] != 'O' && word [ i2 + 1 ] != 'I' && word [ i2 + 1 ] != 'E')
+     &&
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/117
+----------------------
+unique_id: js#75
+----------------------
+nominal_prompt
+
+/*Given a string s and a natural number n, you have been tasked to implement 
+  a function that returns a list of all words from string s that contain exactly 
+  n consonants, in order these words appear in the string s.
+  If the string s is empty then the function should return an empty list.
+  Note: you may assume the input string contains only letters and spaces.
+  Examples:
+  selectWords("Mary had a little lamb", 4) ==> ["little"]
+  selectWords("Mary had a little lamb", 3) ==> ["Mary")
+  selectWords("simple white space", 2) ==> []
+  selectWords("Hello world", 4) ==> ["world"]
+  selectWords("Uncle sam", 3) ==> ["Uncle"]
+  */
+const selectWords = (s, n) => {
+
+----------------------
+perturbed_prompt
+
+/*Given a string s and a natural number n, you had was task to implements a functions that returning a list of all word from string s that containing exactly n consonant, in order these word appear in the string s.
+ If the string s is emptiest then the functions should return an emptiest list.
+ Notes: you may assume the input string containing only letters and space.
+  Examples:
+  selectWords("Mary had a little lamb", 4) ==> ["little"]
+  selectWords("Mary had a little lamb", 3) ==> ["Mary")
+  selectWords("simple white space", 2) ==> []
+  selectWords("Hello world", 4) ==> ["world"]
+  selectWords("Uncle sam", 3) ==> ["Uncle"]
+  */
+const selectWords = (s, n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/58
+----------------------
+unique_id: js#76
+----------------------
+nominal_prompt
+
+/*Return sorted unique common elements for two lists.
+  >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])
+  [1, 5, 653]
+  >>> common([5, 3, 2, 8], [3, 2])
+  [2, 3]
+
+  */
+const common = (l1, l2) => {
+
+----------------------
+perturbed_prompt
+
+/*Return sort ed u niquec ommonelementsfor two lists.
+  >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])
+  [1, 5, 653]
+  >>> common([5, 3, 2, 8], [3, 2])
+  [2, 3]
+
+  */
+const common = (l1, l2) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/48
+----------------------
+unique_id: js#77
+----------------------
+nominal_prompt
+
+/*
+  Checks if given string is a palindrome
+  >>> isPalindrome('')
+  true
+  >>> isPalindrome('aba')
+  true
+  >>> isPalindrome('aaaaa')
+  true
+  >>> isPalindrome('zbcd')
+  false
+  */
+const isPalindrome = (text) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Checks if gave string were a palindrome
+  >>> isPalindrome('')
+  true
+  >>> isPalindrome('aba')
+  true
+  >>> isPalindrome('aaaaa')
+  true
+  >>> isPalindrome('zbcd')
+  false
+  */
+const isPalindrome = (text) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/22
+----------------------
+unique_id: js#78
+----------------------
+nominal_prompt
+
+/* Filter given list of any python values only for integers
+  >>> filterIntegers(['a', 3.14, 5])
+  [5]
+  >>> filterIntegers([1, 2, 3, 'abc', {}, []])
+  [1, 2, 3]
+  */
+const filterIntegers = (values) => {
+  return values.filter(x => Number.isInteger(x));
+
+----------------------
+perturbed_prompt
+
+// Filter given list of any python values only for integers
+//   >>> filterIntegers(['a', 3.14, 5])
+//   [5]
+//   >>> filterIntegers([1, 2, 3, 'abc', {}, []])
+//   [1, 2, 3]
+// const filterIntegers = (values) => {
+  return values.filter(x => Number.isInteger(x));
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/13
+----------------------
+unique_id: js#79
+----------------------
+nominal_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor = (a, b) => {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+
+----------------------
+perturbed_prompt
+
+/* Return a greatest common divisor of two integers a and b
+  >>> greatestCommonDivisor(3, 5)
+  1
+  >>> greatestCommonDivisor(25, 15)
+  5
+  */
+const greatestCommonDivisor =(a, b) => {
+  
+  for (; b != 0;) {
+     {
+      let temp = a;
+      a = b;
+     
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/59
+----------------------
+unique_id: js#80
+----------------------
+nominal_prompt
+
+/*Return the largest prime factor of n. Assume n > 1 and is not a prime.
+  >>> largestPrimeFactor(13195)
+  29
+  >>> largestPrimeFactor(2048)
+  2
+  */
+const largestPrimeFactor = (n) => {
+
+----------------------
+perturbed_prompt
+
+/*Return the largest prime factor of n. Assume n> 1 and will be not a prime.
+  >>> largestPrimeFactor(13195)
+  29
+  >>> largestPrimeFactor(2048)
+  2
+  */
+const largestPrimeFactor = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/80
+----------------------
+unique_id: js#81
+----------------------
+nominal_prompt
+
+/*You are given a string s.
+  Your task is to check if the string is happy or not.
+  A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+  For example:
+  isHappy(a) => false
+  isHappy(aa) => false
+  isHappy(abcd) => true
+  isHappy(aabb) => false
+  isHappy(adb) => true
+  isHappy(xyy) => false
+  */
+const isHappy = (s) => {
+  if (s.length < 3)
+    return false;
+  for (let i = 0; i < s.length - 2; i++)
+
+----------------------
+perturbed_prompt
+
+/*You are given a string s.
+  Your task is to check if the string is happy or not.
+  A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+  For example:
+  isHappy(a) => false
+  isHappy(aa) => false
+  isHappy(abcd) => true
+  isHappy(aabb) => false
+  isHappy(adb) => true
+  isHappy(xyy) => false
+  */
+const isHappy =(VAR_0) => {
+  if (VAR_0.length < 3)
+  return false;
+  for (let i = 0; i < VAR_0.length - 2; i++)
+ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/28
+----------------------
+unique_id: js#82
+----------------------
+nominal_prompt
+
+/* Concatenate list of strings into a single string
+  >>> concatenate([])
+  ''
+  >>> concatenate(['a', 'b', 'c'])
+  'abc'
+  */
+const concatenate = (strings) => {
+  return strings.join('');
+
+----------------------
+perturbed_prompt
+
+/* Concatenate list of strings into a single string
+  >>> concatenate([])
+  ''
+  >>> concatenate(['a', 'b', 'c'])
+  'abc'
+  */
+const concatenate = (strings) => {
+  return  \
+  strings.join('');
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/156
+----------------------
+unique_id: js#83
+----------------------
+nominal_prompt
+
+/*
+  Given a positive integer, obtain its roman numeral equivalent as a string,
+  and return it in lowercase.
+  Restrictions: 1 <= num <= 1000
+
+  Examples:
+  >>> intToMiniRoman(19) == 'xix'
+  >>> intToMiniRoman(152) == 'clii'
+  >>> intToMiniRoman(426) == 'cdxxvi'
+  */
+const intToMiniRoman = (number) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a positive inte g er, obta in its roman numeral equivalent as a string,
+  and returnit in lowerca se. Re stricti ons : 1 <=  num <= 1000
+
+  Examples :
+  >>> intToMiniRoman(19) == 'xix'
+  >>> intToMiniRoman(152) == 'clii'
+  >>> intToMiniRoman(426) == 'cdxxvi'
+  */
+const intToMiniRoman = (number) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/6
+----------------------
+unique_id: js#84
+----------------------
+nominal_prompt
+
+/* Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+  For each of the group, output the deepest level of nesting of parentheses.
+  E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+  >>> parseNestedParens('(()()) ((())) () ((())()())')
+  [2, 3, 1, 3]
+  */
+const parseNestedParens = (paren_string) => {
+
+----------------------
+perturbed_prompt
+
+/* iNpUT to thIs FUNCtion IS a strIng rEpReseNted multiPLe GRoUps FoR nEsTed ParENTheSES sEparatED by spacES.
+  FOr eACH Of tHE grOUP, OuTPuT tHe deepEsT lEvel OF NEStINg of parentHEses.
+  e.g. (()()) has maxImuM two LeVelS Of nesTInG wHile ((())) haS tHree.
+
+  >>> parseNestedParens('(()()) ((())) () ((())()())')
+  [2, 3, 1, 3]
+  */
+const parseNestedParens = (paren_string) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/155
+----------------------
+unique_id: js#85
+----------------------
+nominal_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount = (num) => {
+  let o = 0
+  let e = 0
+  if (num < 0) { num = -num }
+  while (num > 0) {
+    if (num % 2 == 0) { e++ }
+
+----------------------
+perturbed_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount =(VAR_0) => {
+      let o = 0
+      let e = 0
+      if (VAR_0 < 0) {
+            VAR_0 = - VAR_0}
+      while (VAR_0 > 0) {
+            if (VAR_0 % 2 == 0) {
+                  e++}
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/49
+----------------------
+unique_id: js#86
+----------------------
+nominal_prompt
+
+/*Return 2^n modulo p (be aware of numerics).
+  >>> modp(3, 5)
+  3
+  >>> modp(1101, 101)
+  2
+  >>> modp(0, 101)
+  1
+  >>> modp(3, 11)
+  8
+  >>> modp(100, 101)
+  1
+  */
+const modp = (n, p) => {
+
+----------------------
+perturbed_prompt
+
+/*Return 2^n modulo p (be aware of numerics).
+  >>> modp(3, 5)
+  3
+  >>> modp(1101, 101)
+  2
+  >>> modp(0, 101)
+  1
+  >>> modp(3, 11)
+  8
+  >>> modp(100, 101)
+  1
+  */
+const modp = (n, p) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/49
+----------------------
+unique_id: js#87
+----------------------
+nominal_prompt
+
+/*Return 2^n modulo p (be aware of numerics).
+  >>> modp(3, 5)
+  3
+  >>> modp(1101, 101)
+  2
+  >>> modp(0, 101)
+  1
+  >>> modp(3, 11)
+  8
+  >>> modp(100, 101)
+  1
+  */
+const modp = (n, p) => {
+
+----------------------
+perturbed_prompt
+
+/*Return 2^n modulo p (will be aware of numerics).
+  >>> modp(3, 5)
+  3
+  >>> modp(1101, 101)
+  2
+  >>> modp(0, 101)
+  1
+  >>> modp(3, 11)
+  8
+  >>> modp(100, 101)
+  1
+  */
+const modp = (n, p) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/15
+----------------------
+unique_id: js#88
+----------------------
+nominal_prompt
+
+/* Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+  >>> stringSequence(0)
+  '0'
+  >>> stringSequence(5)
+  '0 1 2 3 4 5'
+  */
+const stringSequence = (n) => {
+
+----------------------
+perturbed_prompt
+
+/* Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+  >>> strIngSEquenCe(0)
+  '0'
+  >>> strIngSEquenCe(5)
+  '0 1 2 3 4 5'
+  */
+const strIngSEquenCe = (n) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/162
+----------------------
+unique_id: js#89
+----------------------
+nominal_prompt
+
+/*
+  Given a string 'text', return its md5 hash equivalent string.
+  If 'text' is an empty string, return null.
+
+  >>> stringToMd5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+  */
+const stringToMd5 = (text) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  Given a string 'text', return its md5 hash equivalent string.
+  If 'text' is an empty string, return null.
+
+  >>> strlngToMd5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+  */
+const strlngToMd5 = (text) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/69
+----------------------
+unique_id: js#90
+----------------------
+nominal_prompt
+
+/*
+  You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an integer is the number of times it appears in the list.
+  If no such a value exist, return -1.
+  Examples:
+      search([4, 1, 2, 2, 3, 1])) == 2
+      search([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      search([5, 5, 4, 4, 4])) == -1
+  */
+const search = (lst) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You are given a non-empty list of postiive inetgers. Return the greatest integer that is greeatr than
+  zero, and has a frequency greater than or equal to the value of the integer itself.
+  The frequency of an itneegr si the number of times it appears in the list.
+  If no such a valeu exist, return -1.
+  Examples:
+      search([4, 1, 2, 2, 3, 1])) == 2
+      search([1, 2, 2, 3, 3, 3, 4, 4, 4])) == 3
+      search([5, 5, 4, 4, 4])) == -1
+  */
+const search = (lst) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/155
+----------------------
+unique_id: js#91
+----------------------
+nominal_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount = (num) => {
+
+----------------------
+perturbed_prompt
+
+/*Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+   Example:
+      evenOddCount(-12) ==> (1, 1)
+      evenOddCount(123) ==> (1, 2)
+  */
+const evenOddCount = (num) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/143
+----------------------
+unique_id: js#92
+----------------------
+nominal_prompt
+
+/*
+  You are given a string representing a sentence,
+  the sentence contains some words separated by a space,
+  and you have to return a string that contains the words from the original sentence,
+  whose lengths are prime numbers,
+  the order of the words in the new string should be the same as the original one.
+
+  Example 1:
+      Input: sentence = "This is a test"
+      Output: "is"
+
+  Example 2:
+      Input: sentence = "lets go for swimming"
+      Output: "go for"
+
+  Constraints:
+      * 1 <= len(sentence) <= 100
+      * sentence contains only letters
+  */
+const wordsInSentence = (sentence) => {
+
+----------------------
+perturbed_prompt
+
+/*
+  You was gives a string represents a sentence,
+ the sentence containing some word separates by a space, and you had to return a string that containing the word from the original sentence,
+ whose lengths was prime numbers, the order of the word in the newer string should is the same as the original ones.
+
+  Example 1:
+      Input: sentence = "This is a test"
+      Output: "is"
+
+  Example 2:
+      Input: sentence = "lets go for swimming"
+      Output: "go for"
+
+  Constraints:
+      * 1 <= len(sentence) <= 100
+      * sentence contains only letters
+  */
+const wordsInSentence = (sentence) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/161
+----------------------
+unique_id: js#93
+----------------------
+nominal_prompt
+
+/*You are given a string s.
+  if s[i] is a letter, reverse its case from lower to upper or vise versa, 
+  otherwise keep it as it is.
+  If the string contains no letters, reverse the string.
+  The function should return the resulted string.
+  Examples
+  solve("1234") = "4321"
+  solve("ab") = "AB"
+  solve("#a@C") = "#A@c"
+  */
+const solve = (s) => {
+
+----------------------
+perturbed_prompt
+
+/*YIf s [i] is a letter, the uppercase letter is reversed from the bottom to the top or vice versa, otherwise it remains as it is. If the string contains no letters, the string is reversed. The function should return the resulting string.
+  Examples
+  solve("1234") = "4321"
+  solve("ab") = "AB"
+  solve("#a@C") = "#A@c"
+  */
+const solve = (s) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/102
+----------------------
+unique_id: js#94
+----------------------
+nominal_prompt
+
+/*This function takes two positive numbers x and y and returns the
+  biggest even integer number that is in the range [x, y] inclusive. If 
+  there's no such number, then the function should return -1.
+
+  For example:
+  chooseNum(12, 15) = 14
+  chooseNum(13, 12) = -1
+  */
+const chooseNum = (x, y) => {
+  for (let i = y; i >= x; i--) {
+    if (i % 2 == 0) {return i }
+
+----------------------
+perturbed_prompt
+
+/*This function takes two positive numbers x and y and returns the
+  biggest even integer number that is in the range [x, y] inclusive. If 
+  there's no such number, then the function should return -1.
+
+  For example:
+  chooseNum(12, 15) = 14
+  chooseNum(13, 12) = -1
+  */
+const chooseNum = (x, y) => {
+
+  for (let i = y; i >= x; i--) {
+
+    if (i % 2 == 0) {return i }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/108
+----------------------
+unique_id: js#95
+----------------------
+nominal_prompt
+
+/*
+  Write a function countNums which takes an array of integers and returns
+  the number of elements which has a sum of digits > 0.
+  If a number is negative, then its first signed digit will be negative:
+  e.g. -123 has signed digits -1, 2, and 3.
+  >>> countNums([]) == 0
+  >>> countNums([-1, 11, -11]) == 1
+  >>> countNums([1, 1, 2]) == 3
+  */
+const countNums = (arr) => {
+  let p = 0
+  for (let i = 0; i < arr.length; i++) {
+    let h = arr[i]
+    if (h > 0) {
+      p++;
+      continue;
+    }
+    let k = 0
+    h = -h
+
+----------------------
+perturbed_prompt
+
+/*
+  Write a function countNums which takes an array of integers and returns
+  the number of elements which has a sum of digits > 0.
+  If a number is negative, then its first signed digit will be negative:
+  e.g. -123 has signed digits -1, 2, and 3.
+  >>> countNums([]) == 0
+  >>> countNums([-1, 11, -11]) == 1
+  >>> countNums([1, 1, 2]) == 3
+  */
+const countNums = (arr) => {
+  let p = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    let h = arr[i]
+
+    if (h > 0) {
+      p++;
+      continue;
+
+    }
+
+    let k = 0
+
+    h = -h
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/102
+----------------------
+unique_id: js#96
+----------------------
+nominal_prompt
+
+/*This function takes two positive numbers x and y and returns the
+  biggest even integer number that is in the range [x, y] inclusive. If 
+  there's no such number, then the function should return -1.
+
+  For example:
+  chooseNum(12, 15) = 14
+  chooseNum(13, 12) = -1
+  */
+const chooseNum = (x, y) => {
+
+----------------------
+perturbed_prompt
+
+/*This function takes two positive nubmers x and y and reutrns the
+  biggest even integer number that is in the arnge [x, y] inlcsuive. fI 
+  there's no suhc number, hten the function should return -1.
+
+  For example:
+  chooseNum(12, 15) = 14
+  chooseNum(13, 12) = -1
+  */
+const chooseNum = (x, y) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/118
+----------------------
+unique_id: js#97
+----------------------
+nominal_prompt
+
+/*You are given a word. Your task is to find the closest vowel that stands between 
+  two consonants from the right side of the word (case sensitive).
+  
+  Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+  find any vowel met the above condition. 
+
+  You may assume that the given string contains English letter only.
+
+  Example:
+  getClosestVowel("yogurt") ==> "u"
+  getClosestVowel("FULL") ==> "U"
+  getClosestVowel("quick") ==> ""
+  getClosestVowel("ab") ==> ""
+  */
+const getClosestVowel = (word) => {
+
+----------------------
+perturbed_prompt
+
+/*You are give a word. Your task is to recover the close vowel that stands between 
+   two consonant from the right side of the word (case sensible). 
+  
+   Vowels in the beginning and end doesn't reckon. fall empty drawstring if you didn't 
+   detect any vowel met the above condition. 
+
+   You may assume that the give chain contains English letter only.
+
+  Example:
+  getClosestVowel("yogurt") ==> "u"
+  getClosestVowel("FULL") ==> "U"
+  getClosestVowel("quick") ==> ""
+  getClosestVowel("ab") ==> ""
+  */
+const getClosestVowel = (word) => {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/157
+----------------------
+unique_id: js#98
+----------------------
+nominal_prompt
+
+/*
+ Given the lengths of the three sides of a triangle. Return true if the three
+  sides form a right-angled triangle, false otherwise.
+  A right-angled triangle is a triangle in which one angle is right angle or
+  90 degree.
+  Example:
+  rightAngleTriangle(3, 4, 5) == true
+  rightAngleTriangle(1, 2, 3) == false
+  */
+const rightAngleTriangle = (a, b, c) => {
+  return (a * a + b * b == c * c || a * a == b * b + c * c || b * b == a * a + c * c)
+
+----------------------
+perturbed_prompt
+
+//  Given the lengths of the three sides of a triangle. Return true if the three
+//   sides form a right-angled triangle, false otherwise.
+//   A right-angled triangle is a triangle in which one angle is right angle or
+//   90 degree.
+//   Example:
+//   rightAngleTriangle(3, 4, 5) == true
+//   rightAngleTriangle(1, 2, 3) == false
+// const rightAngleTriangle = (a, b, c) => {
+  return (a * a + b * b == c * c || a * a == b * b + c * c || b * b == a * a + c * c)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: JavaScript/121
+----------------------
+unique_id: js#99
+----------------------
+nominal_prompt
+
+/*Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.
+  
+
+  Examples
+  solution([5, 8, 7, 1]) ==> 12
+  solution([3, 3, 3, 3, 3]) ==> 9
+  solution([30, 13, 24, 321]) ==>0
+  */
+const solution = (lst) => {
+  let p = 0
+  for (let i = 0; i < lst.length; i += 2) {
+    if (lst[i] % 2 == 1) {
+      p += lst[i]
+
+----------------------
+perturbed_prompt
+
+/*Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.
+  
+
+	Examples
+	solution([5, 8, 7, 1]) ==> 12
+	solution([3, 3, 3, 3, 3]) ==> 9
+	solution([30, 13, 24, 321]) ==>0
+	*/
+const solution = (lst) => {
+	let p = 0
+	for (let i = 0; i < lst.length; i += 2) {
+		if (lst[i] % 2 == 1) {
+			p += lst[i]
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+

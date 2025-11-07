@@ -1,0 +1,489 @@
+javascript/62
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/70
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/152
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/128
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+javascript/69
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/144
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/129
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/112
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/28
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+javascript/125
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/148
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/150
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/53
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/155
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/88
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/23
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/130
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/73
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/80
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/52
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/151
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/52
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+javascript/127
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/31
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+javascript/126
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/130
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/137
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/64
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/85
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/86
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/3
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/8
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/74
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/132
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/47
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/36
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/87
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/86
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:0.75
+
+javascript/52
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/11
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/162
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/151
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/95
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/87
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/92
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/119
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/120
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/69
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/112
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/88
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/83
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/32
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/22
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/135
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/2
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/136
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/90
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/100
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/61
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/77
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/9
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/129
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+javascript/76
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/120
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/40
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/118
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/117
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/58
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+javascript/48
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/22
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/13
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/59
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/80
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/28
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+javascript/156
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/6
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/155
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/15
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/162
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/69
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/155
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/143
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/161
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+javascript/102
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/108
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/102
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+javascript/118
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+javascript/157
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/157
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+javascript/121
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1

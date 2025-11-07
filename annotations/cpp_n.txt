@@ -1,0 +1,499 @@
+cpp24
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp22
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp78
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp157
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:0.5
+
+cpp102
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp18
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp93
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp84
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp118
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp126
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp15
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp6
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp92
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp61
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp118
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp110
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+cpp111
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp65
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp111
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp142
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:0.75
+
+same->
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp150
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp92
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp27
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp66
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp3
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp86
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+cpp53
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp32
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+tab_indent
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+0.50
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+cpp9
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+usually
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp150
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp5
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+similar
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp25
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+0.50
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+cpp1
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp111
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+height
+Perturbed prompt:0.75
+Nominal prompt:0.75
+Semantic:1
+
+insertion
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+cpp84
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp154
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+same
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+cpp104
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp3
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp63
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp94
+Perturbed prompt:0.5
+Nominal prompt:0.75
+Semantic:1
+
+
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+rare
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+rare
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp69
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp95
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp14
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp103
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp134
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp63
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+rare
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.75
+
+cpp121
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp79
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+rare
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp49
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp156
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp103
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+cpp136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:1
+
+cpp72
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp86
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:0.75
+
+cpp49
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp138
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp90
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+same
+Perturbed prompt:0.75
+Nominal prompt:0.75
+Semantic:0.75
+
+switch
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp33
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+natural
+Perturbed prompt:0.5
+Nominal prompt:1
+Semantic:0.5
+
+cpp136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp19
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp117
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp35
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp136
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp21
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp27
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp37
+Perturbed prompt:0.75
+Nominal prompt:1
+Semantic:1
+
+cpp61
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+common
+Perturbed prompt:0.25
+Nominal prompt:1
+Semantic:1
+
+cpp144
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp79
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1
+
+cpp147
+Perturbed prompt:1
+Nominal prompt:1
+Semantic:1

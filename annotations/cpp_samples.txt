@@ -1,0 +1,5719 @@
+task_id: CPP/24
+----------------------
+unique_id: cpp#0
+----------------------
+nominal_prompt
+
+/*
+For a given number n, find the largest number that divides n evenly, smaller than n
+>>> largest_divisor(15)
+5
+*/
+#include<stdio.h>
+using namespace std;
+int largest_divisor(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+For a will give number n, will find the largest number that will divide n evenly, smaller than n
+>>> largest_divisor(15)
+5
+*/
+#include<stdio.h>
+using namespace std;
+int largest_divisor(int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/22
+----------------------
+unique_id: cpp#1
+----------------------
+nominal_prompt
+
+/*
+Filter given vector of any python values only for integers
+>>> filter_integers({"a", 3.14, 5})
+{5}
+>>> filter_integers({1, 2, 3, "abc", {}, {}})
+{1, 2, 3}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+#include<boost/any.hpp>
+#include<list>
+typedef std::list<boost::any> list_any;
+using namespace std;
+vector<int> filter_integers(list_any values){
+
+----------------------
+perturbed_prompt
+
+/*
+Filter given vector of any python values only for integers
+>>> filher_integers({"a", 3.14, 5})
+{5}
+>>> filher_integers({1, 2, 3, "abc", {}, {}})
+{1, 2, 3}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+#include<boost/any.hpp>
+#include<list>
+typedef std::list<boost::any> list_any;
+using namespace std;
+vector<int> filher_integers(list_any values){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/78
+----------------------
+unique_id: cpp#2
+----------------------
+nominal_prompt
+
+/*
+You have been tasked to write a function that receives 
+a hexadecimal number as a string and counts the number of hexadecimal 
+digits that are primes (prime number, or a prime, is a natural number 
+greater than 1 that is not a product of two smaller natural numbers).
+Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.
+Prime numbers are 2, 3, 5, 7, 11, 13, 17,...
+So you have to determine a number of the following digits: 2, 3, 5, 7, 
+B (=decimal 11), D (=decimal 13).
+Note: you may assume the input is always correct or empty string, 
+and symbols A,B,C,D,E,F are always uppercase.
+Examples:
+For num = "AB" the output should be 1.
+For num = "1077E" the output should be 2.
+For num = "ABED1A33" the output should be 4.
+For num = "123456789ABCDEF0" the output should be 6.
+For num = "2020" the output should be 2.
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+int hex_key(string num){
+
+----------------------
+perturbed_prompt
+
+/*
+You have been tasked to write a function that receives 
+a hexadecimal number as a string and counts the number of hexadecimal 
+digits that are primes (prime number, or a prime, is a natural number 
+greater than 1 that is not a product of two smaller natural numbers).
+Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.
+Prime numbers are 2, 3, 5, 7, 11, 13, 17,...
+So you have to determine a number of the following digits: 2, 3, 5, 7, 
+B (=decimal 11), D (=decimal 13).
+Note: you may assume the input is always correct or empty string, 
+and symbols A,B,C,D,E,F are always uppercase.
+Examples:
+For num = "AB" the output should be 1.
+For num = "1077E" the output should be 2.
+For num = "ABED1A33" the output should be 4.
+For num = "123456789ABCDEF0" the output should be 6.
+For num = "2020" the output should be 2.
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+int hex_Key(string num){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/157
+----------------------
+unique_id: cpp#3
+----------------------
+nominal_prompt
+
+/*
+Given the lengths of the three sides of a triangle. Return true if the three
+sides form a right-angled triangle, false otherwise.
+A right-angled triangle is a triangle in which one angle is right angle or 
+90 degree.
+Example:
+right_angle_triangle(3, 4, 5) == true
+right_angle_triangle(1, 2, 3) == false
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool right_angle_triangle(float a,float b,float c){
+
+----------------------
+perturbed_prompt
+
+/*
+Given the leigths of the ufree sides pf a triangle. Return true if the three
+sides form a right-angled triangle, false ouherwise.
+A right-angled trianglw is a trianglq in which one ajgle id right angle or 
+90 degree.
+Example:
+right_angle_triangle(3, 4, 5) == true
+right_angle_triangle(1, 2, 3) == false
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool right_angle_triangle(float a,float b,float c){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 0.5
+----------------------
+semantic: 0.5
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/102
+----------------------
+unique_id: cpp#4
+----------------------
+nominal_prompt
+
+/*
+This function takes two positive numbers x and y and returns the
+biggest even integer number that is in the range [x, y] inclusive. If 
+there's no such number, then the function should return -1.
+
+For example:
+choose_num(12, 15) = 14
+choose_num(13, 12) = -1
+*/
+#include<stdio.h>
+using namespace std;
+int choose_num(int x,int y){
+    if (y<x) return -1;
+
+----------------------
+perturbed_prompt
+
+/*
+This function takes two positive numbers x and y and returns the
+biggest even integer number that is in the range [x, y] inclusive. If 
+there's no such number, then the function should return -1.
+
+For example:
+choose_num(12, 15) = 14
+choose_num(13, 12) = -1
+*/
+
+#include<stdio.h>
+using namespace std;
+int choose_num(int x,int y){
+    if (y<x) return -1;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/18
+----------------------
+unique_id: cpp#5
+----------------------
+nominal_prompt
+
+/*
+Find how many times a given substring can be found in the original string. Count overlaping cases.
+>>> how_many_times("", "a")
+0
+>>> how_many_times("aaa", "a")
+3
+>>> how_many_times("aaaa", "aa")
+3
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int how_many_times(string str,string substring){
+    int out=0;
+
+----------------------
+perturbed_prompt
+
+/*
+Find how many times a given substring can be found in the original string. Count overlaping cases.
+>>> how_many_times("", "a")
+0
+>>> how_many_times("aaa", "a")
+3
+>>> how_many_times("aaaa", "aa")
+3
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int how_many_times(string str,string substring){
+    int out=0;
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/93
+----------------------
+unique_id: cpp#6
+----------------------
+nominal_prompt
+
+/*
+Write a function that takes a message, and encodes in such a 
+way that it swaps case of all letters, replaces all vowels in 
+the message with the letter that appears 2 places ahead of that 
+vowel in the english alphabet. 
+Assume only letters. 
+
+Examples:
+>>> encode('test")
+"TGST"
+>>> encode("This is a message")
+'tHKS KS C MGSSCGG"
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string encode(string message){
+    string vowels="aeiouAEIOU";
+    string out="";
+    for (int i=0;i<message.length();i++)
+
+----------------------
+perturbed_prompt
+
+/*
+Write a function that takes a message, and encodes in such a 
+way that it swaps case of all letters, replaces all vowels in 
+the message with the letter that appears 2 places ahead of that 
+vowel in the english alphabet. 
+Assume only letters. 
+
+Examples:
+>>> encode('test")
+"TGST"
+>>> encode("This is a message")
+'tHKS KS C MGSSCGG"
+*/
+#include <stdio.h>
+#include <string>
+#include <algorithm>
+using namespace std;
+string encode(string message) {
+    string vowels = "aeiouAEIOU";
+    string out = "";
+    int i = 0;
+while (i < message.length()) {
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/84
+----------------------
+unique_id: cpp#7
+----------------------
+nominal_prompt
+
+/*
+Given a positive integer N, return the total sum of its digits in binary.
+
+Example
+    For N = 1000, the sum of digits will be 1 the output should be "1".
+    For N = 150, the sum of digits will be 6 the output should be "110".
+    For N = 147, the sum of digits will be 12 the output should be "1100".
+
+Variables:
+    @N integer
+         Constraints: 0 ≤ N ≤ 10000.
+Output:
+     a string of binary number
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string solve(int N){
+    string str,bi="";
+    str=to_string(N);
+    int i,sum=0;
+    for (int i=0;i<str.length();i++)
+
+----------------------
+perturbed_prompt
+
+/*
+Given a positive integer N, return the total sum of its digits in binary.
+
+Example
+    For N = 1000, the sum of digits will be 1 the output should be "1".
+    For N = 150, the sum of digits will be 6 the output should be "110".
+    For N = 147, the sum of digits will be 12 the output should be "1100".
+
+Variables:
+    @N integer
+         Constraints: 0 ≤ N ≤ 10000.
+Output:
+     a string of binary number
+*/
+#include <stdio.h>
+#include<string>
+usingnamespace std;
+string solve(int N) {
+    string str, bi = "";
+    str = to_string(N);
+    int i, N7P = 0;
+    for (int i = 0; i < str.length(); i++)
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 0.5
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/118
+----------------------
+unique_id: cpp#8
+----------------------
+nominal_prompt
+
+/*
+You are given a word. Your task is to find the closest vowel that stands between 
+two consonants from the right side of the word (case sensitive).
+
+Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+find any vowel met the above condition. 
+
+You may assume that the given string contains English letter only.
+
+Example:
+get_closest_vowel("yogurt") ==> "u"
+get_closest_vowel("FULL") ==> "U"
+get_closest_vowel("quick") ==> ""
+get_closest_vowel("ab") ==> ""
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string get_closest_vowel(string word){
+
+----------------------
+perturbed_prompt
+
+/*
+You was gives a word. Your tasks is to find the closer vowel that stand between two consonant from the rightest sides of the word (cases sensitives). Vowel in the beginning and end doesn't count. Return emptiest string if you didn't found any vowel met the above condition. You may assume that the gives string contains English letter only.
+
+Example:
+get_closest_vowel("yogurt") ==> "u"
+get_closest_vowel("FULL") ==> "U"
+get_closest_vowel("quick") ==> ""
+get_closest_vowel("ab") ==> ""
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string get_closest_vowel(string word){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/126
+----------------------
+unique_id: cpp#9
+----------------------
+nominal_prompt
+
+/*
+Given a vector of numbers, return whether or not they are sorted
+in ascending order. If vector has more than 1 duplicate of the same
+number, return false. Assume no negative numbers and only integers.
+
+Examples
+is_sorted({5}) ➞ true
+is_sorted({1, 2, 3, 4, 5}) ➞ true
+is_sorted({1, 3, 2, 4, 5}) ➞ false
+is_sorted({1, 2, 3, 4, 5, 6}) ➞ true
+is_sorted({1, 2, 3, 4, 5, 6, 7}) ➞ true
+is_sorted({1, 3, 2, 4, 5, 6, 7}) ➞ false
+is_sorted({1, 2, 2, 3, 3, 4}) ➞ true
+is_sorted({1, 2, 2, 2, 3, 4}) ➞ false
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+bool is_sorted(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a vector of numbers, return whether or not they are sorted
+in ascending order. If vector has more than 1 duplicate of the same
+number, return false. Assume no negative numbers and only integers.
+
+Examples
+isSorted({5}) ➞ true
+isSorted({1, 2, 3, 4, 5}) ➞ true
+isSorted({1, 3, 2, 4, 5}) ➞ false
+isSorted({1, 2, 3, 4, 5, 6}) ➞ true
+isSorted({1, 2, 3, 4, 5, 6, 7}) ➞ true
+isSorted({1, 3, 2, 4, 5, 6, 7}) ➞ false
+isSorted({1, 2, 2, 3, 3, 4}) ➞ true
+isSorted({1, 2, 2, 2, 3, 4}) ➞ false
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+bool isSorted(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/15
+----------------------
+unique_id: cpp#10
+----------------------
+nominal_prompt
+
+/*
+Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+>>> string_sequence(0)
+"0"
+>>> string_sequence(5)
+"0 1 2 3 4 5"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string string_sequence(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+>>> string_sequence(0)
+"0"
+>>> string_sequence(5)
+"0 1 2 3 4 5"
+*/
+#include <stdio.h>
+#include<string>
+usingnamespace std;
+string string_sequence(int n) {
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 0.5
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/6
+----------------------
+unique_id: cpp#11
+----------------------
+nominal_prompt
+
+/*
+Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+For each of the group, output the deepest level of nesting of parentheses.
+E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+>>> parse_nested_parens("(()()) ((())) () ((())()())")
+{2, 3, 1, 3}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<int> parse_nested_parens(string paren_string){
+    vector<int> all_levels;
+    string current_paren;
+    int level=0,max_level=0;
+    char chr;
+    int i;
+    for (i=0;i<paren_string.length();i++)
+    {
+        chr=paren_string[i];
+        if (chr=='(')
+        {
+        level+=1;
+
+----------------------
+perturbed_prompt
+
+/*
+Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+For each of the group, output the deepest level of nesting of parentheses.
+E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+>>> parse_nested_parens("(()()) ((())) () ((())()())")
+{2, 3, 1, 3}
+*/
+#include <stdio.h>
+#include<vector>
+#include<string>
+usingnamespace std;
+vector < int > parse_nested_parens(string paren_string) {
+    vector < int > all_levels;
+    string current_paren;
+    int level = 0, max_level = 0;
+    char Bt5;
+    int i;
+    for (i = 0; i < paren_string.length(); i++)
+     {
+        Bt5 = paren_string [ i ];
+        if (Bt5 == ' ')
+         {
+            level+=1;
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/92
+----------------------
+unique_id: cpp#12
+----------------------
+nominal_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_int(5, 2, 7) ➞ true
+
+any_int(3, 2, 2) ➞ false
+
+any_int(3, -2, 1) ➞ true
+
+any_int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool any_int(float a,float b,float c){
+    if (round(a)!=a) return false;
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_int(5, 2, 7) ➞ true
+
+any_int(3, 2, 2) ➞ false
+
+any_int(3, -2, 1) ➞ true
+
+any_int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include <stdio.h>
+#include<math.h>
+usingnamespace std;
+bool any_int(float VAR_0, float b, float c) {
+    if (round(VAR_0) != VAR_0) return false;
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/61
+----------------------
+unique_id: cpp#13
+----------------------
+nominal_prompt
+
+/*
+brackets is a string of '(' and ')'.
+return true if every opening bracket has a corresponding closing bracket.
+
+>>> correct_bracketing("(")
+false
+>>> correct_bracketing("()")
+true
+>>> correct_bracketing("(()())")
+true
+>>> correct_bracketing(")(()")
+false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool correct_bracketing(string brackets){
+    int level=0;
+    for (int i=0;i<brackets.length();i++)
+    {
+
+----------------------
+perturbed_prompt
+
+/*
+brackets is a string of '(' and ')'.
+return true if every opening bracket has a corresponding closing bracket.
+
+>>> correct_bracketing("(")
+false
+>>> correct_bracketing("()")
+true
+>>> correct_bracketing("(()())")
+true
+>>> correct_bracketing(")(()")
+false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+
+bool correct_bracketing(string brackets){
+    int level=0;
+    for (int i=0;i<brackets.length();i++)
+    {
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/49
+----------------------
+unique_id: cpp#14
+----------------------
+nominal_prompt
+
+/*
+Return 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+#include<stdio.h>
+using namespace std;
+int modp(int n,int p){
+
+----------------------
+perturbed_prompt
+
+/*
+Return recurrence 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+#include<stdio.h>
+using namespace std;
+int modp(int n,int p){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/118
+----------------------
+unique_id: cpp#15
+----------------------
+nominal_prompt
+
+/*
+You are given a word. Your task is to find the closest vowel that stands between 
+two consonants from the right side of the word (case sensitive).
+
+Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+find any vowel met the above condition. 
+
+You may assume that the given string contains English letter only.
+
+Example:
+get_closest_vowel("yogurt") ==> "u"
+get_closest_vowel("FULL") ==> "U"
+get_closest_vowel("quick") ==> ""
+get_closest_vowel("ab") ==> ""
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string get_closest_vowel(string word){
+    string out="";
+    string vowels="AEIOUaeiou";
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a word. Your task is to find the closest vowel that stands between 
+two consonants from the right side of the word (case sensitive).
+
+Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+find any vowel met the above condition. 
+
+You may assume that the given string contains English letter only.
+
+Example:
+get_closest_vowel("yogurt") ==> "u"
+get_closest_vowel("FULL") ==> "U"
+get_closest_vowel("quick") ==> ""
+get_closest_vowel("ab") ==> ""
+*/
+#include <stdio.h>
+#include<string>
+#include<algorithm>
+usingnamespace std;
+string get_closest_vowel(string word) {
+    string out = "";
+    string RPiLmi = "AEIOUaeiou";
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/110
+----------------------
+unique_id: cpp#16
+----------------------
+nominal_prompt
+
+/*
+In this problem, you will implement a function that takes two vectors of numbers,
+and determines whether it is possible to perform an exchange of elements
+between them to make lst1 a vector of only even numbers.
+There is no limit on the number of exchanged elements between lst1 and lst2.
+If it is possible to exchange elements between the lst1 and lst2 to make
+all the elements of lst1 to be even, return "YES".
+Otherwise, return "NO".
+For example:
+exchange({1, 2, 3, 4}, {1, 2, 3, 4}) => "YES"
+exchange({1, 2, 3, 4}, {1, 5, 3, 4}) => "NO"
+It is assumed that the input vectors will be non-empty.
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+string exchange(vector<int> lst1,vector<int> lst2){
+
+----------------------
+perturbed_prompt
+
+/*
+In this problem, you will implmeent a fcuntion that takes two vectors of numbers,
+and dteermines whether it is possible to perform an exchange fo elements
+between them to make lst1 a vector of only even numbers.
+There is no limit on the number of exchanged elements between lst1 and lst2.
+If it is possible to exchange elements between the lst1 and lst2 to make
+all the elements of lst1 to be even, return "YES".
+Otherwise, return "NO".
+For example:
+exchange({1, 2, 3, 4}, {1, 2, 3, 4}) => "YES"
+exchange({1, 2, 3, 4}, {1, 5, 3, 4}) => "NO"
+It is assumed that the input vectors will be non-empty.
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+string exchange(vector<int> lst1,vector<int> lst2){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/111
+----------------------
+unique_id: cpp#17
+----------------------
+nominal_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histogram("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histogram("a b b a") == {{"a", 2}, {"b", 2}}
+histogram("a b c a b") == {{"a", 2}, {"b", 2}}
+histogram("b b b b a") == {{"b", 4}}
+histogram("") == {}
+
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+map<char,int> histogram(string test){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histograms("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histograms("a b b a") == {{"a", 2}, {"b", 2}}
+histograms("a b c a b") == {{"a", 2}, {"b", 2}}
+histograms("b b b b a") == {{"b", 4}}
+histograms("") == {}
+
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+map<char,int> histograms(string test){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/65
+----------------------
+unique_id: cpp#18
+----------------------
+nominal_prompt
+
+/*
+Circular shift the digits of the integer x, shift the digits right by shift
+and return the result as a string.
+If shift > number of digits, return digits reversed.
+>>> circular_shift(12, 1)
+"21"
+>>> circular_shift(12, 2)
+"12"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string circular_shift(int x,int shift){
+
+----------------------
+perturbed_prompt
+
+/*
+Circular shift the digits of the integer x, shift the digits right by shift
+and return the result as a string.
+If shift > number of digits, return digits reversed.
+>>> circularShift(12, 1)
+"21"
+>>> circularShift(12, 2)
+"12"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string circularShift(int x,int shift){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/111
+----------------------
+unique_id: cpp#19
+----------------------
+nominal_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histogram("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histogram("a b b a") == {{"a", 2}, {"b", 2}}
+histogram("a b c a b") == {{"a", 2}, {"b", 2}}
+histogram("b b b b a") == {{"b", 4}}
+histogram("") == {}
+
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+map<char,int> histogram(string test){
+    map<char,int> count={},out={};
+    map <char,int>::iterator it;
+    int max=0;
+    for (int i=0;i<test.length();i++)
+        if (test[i]!=' ')
+        {
+
+----------------------
+perturbed_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histogram("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histogram("a b b a") == {{"a", 2}, {"b", 2}}
+histogram("a b c a b") == {{"a", 2}, {"b", 2}}
+histogram("b b b b a") == {{"b", 4}}
+histogram("") == {}
+
+*/
+#include <stdio.h>
+#include<string>
+#include<map>
+usingnamespace std;
+map < char, int > histogram(string test) {
+    map < char, int > count = {
+        }
+    , out = {
+        }
+    ;
+    map < char, int > :: iterator it;
+    int max = 0;
+    for (int d = 0; d < test.length(); d++)
+    if (test [ d ] != ' ')
+     {
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/142
+----------------------
+unique_id: cpp#20
+----------------------
+nominal_prompt
+
+/*
+"
+This function will take a vector of integers. For all entries in the vector, the function shall square the integer entry if its index is a 
+multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not 
+change the entries in the vector whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. 
+
+Examples:
+For lst = {1,2,3} the output should be 6
+For lst = {}  the output should be 0
+For lst = {-1,-5,2,-1,-5}  the output should be -126
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int sum_squares(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+"
+This function will take a vector of integers. For all entries in the vector, the function shall square the integer entry if its index is a 
+multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not 
+change the entries in the vector whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. 
+
+Examples:
+For lst = {1,2,3} the output should be 6
+For lst = {}  the output should be 0
+For lst = {-1,-5,2,-1,-5}  the output should be -126
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int summarize_square(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/48
+----------------------
+unique_id: cpp#21
+----------------------
+nominal_prompt
+
+/*
+Checks if given string is a palindrome
+>>> is_palindrome("")
+true
+>>> is_palindrome("aba")
+true
+>>> is_palindrome("aaaaa")
+true
+>>> is_palindrome("zbcd")
+false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+
+----------------------
+perturbed_prompt
+
+/*
+Checks if given string is a palindrome
+>>> is_palindrome("")
+true
+>>> is_palindrome("aba")
+true
+>>> is_palindrome("aaaaa")
+true
+>>> is_palindrome("zbcd")
+false
+*/
+#include <stdio.h>
+#include <string>
+using namespace std;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/150
+----------------------
+unique_id: cpp#22
+----------------------
+nominal_prompt
+
+/*
+A simple program which should return the value of x if n is 
+a prime number and should return the value of y otherwise.
+
+Examples:
+for x_or_y(7, 34, 12) == 34
+for x_or_y(15, 8, 5) == 5
+
+*/
+#include<stdio.h>
+using namespace std;
+int x_or_y(int n,int x,int y){
+
+----------------------
+perturbed_prompt
+
+/*
+A simple program which should return the value of x if n is 
+ a prime premier number and should return the value of y otherwise differently.
+
+Examples:
+for x_or_y(7, 34, 12) == 34
+for x_or_y(15, 8, 5) == 5
+
+*/
+#include<stdio.h>
+using namespace std;
+int x_or_y(int n,int x,int y){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/92
+----------------------
+unique_id: cpp#23
+----------------------
+nominal_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_int(5, 2, 7) ➞ true
+
+any_int(3, 2, 2) ➞ false
+
+any_int(3, -2, 1) ➞ true
+
+any_int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool any_int(float a,float b,float c){
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_Int(5, 2, 7) ➞ true
+
+any_Int(3, 2, 2) ➞ false
+
+any_Int(3, -2, 1) ➞ true
+
+any_Int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool any_Int(float a,float b,float c){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/27
+----------------------
+unique_id: cpp#24
+----------------------
+nominal_prompt
+
+/*
+For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+>>> flip_case("Hello")
+"hELLO"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string filp_case(string str){
+    string out="";
+    for (int i=0;i<str.length();i++)
+    {
+
+----------------------
+perturbed_prompt
+
+/*
+For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+>>> flip_case("Hello")
+"hELLO"
+*/
+
+#include<stdio.h>
+#include<string>
+using namespace std;
+string filp_case(string str){
+    string out="";
+    for (int i=0;i<str.length();i++)
+    {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/66
+----------------------
+unique_id: cpp#25
+----------------------
+nominal_prompt
+
+/*
+Task
+Write a function that takes a string as input and returns the sum of the upper characters only's
+ASCII codes.
+
+Examples:
+    digitSum("") => 0
+    digitSum("abAB") => 131
+    digitSum("abcCd") => 67
+    digitSum("helloE") => 69
+    digitSum("woArBld") => 131
+    digitSum("aAaaaXa") => 153
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int digitSum(string s){
+
+----------------------
+perturbed_prompt
+
+/*
+Task
+Write a function that takes a string as input and returns the sum of the upper characters only's
+ASCII codes.
+
+Examples:
+    digitSums("") => 0
+    digitSums("abAB") => 131
+    digitSums("abcCd") => 67
+    digitSums("helloE") => 69
+    digitSums("woArBld") => 131
+    digitSums("aAaaaXa") => 153
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int digitSums(string s){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/3
+----------------------
+unique_id: cpp#26
+----------------------
+nominal_prompt
+
+/*
+You"re given a vector of deposit and withdrawal operations on a bank account that starts with
+zero balance. Your task is to detect if at any point the balance of account falls below zero, and
+at that point function should return true. Otherwise it should return false.
+>>> below_zero({1, 2, 3})
+false
+>>> below_zero({1, 2, -4, 5})
+true
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool below_zero(vector<int> operations){
+
+----------------------
+perturbed_prompt
+
+/*
+You"re given a vector of deposit and withdrawal operations on a bank account that starts with
+zero balance. Your task is to detect if at any point the balance of account falls below zero, and
+at that point function should return true. Otherwise it should return false.
+>>> bellw_zero({1, 2, 3})
+false
+>>> bellw_zero({1, 2, -4, 5})
+true
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool bellw_zero(vector<int> operations){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/86
+----------------------
+unique_id: cpp#27
+----------------------
+nominal_prompt
+
+/*
+Write a function that takes a string and returns an ordered version of it.
+Ordered version of string, is a string where all words (separated by space)
+are replaced by a new word where all the characters arranged in
+ascending order based on ascii value.
+Note: You should keep the order of words and blank spaces in the sentence.
+
+For example:
+anti_shuffle("Hi") returns "Hi"
+anti_shuffle("hello") returns "ehllo"
+anti_shuffle("Hello World!!!") returns "Hello !!!Wdlor"
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string anti_shuffle(string s){
+
+----------------------
+perturbed_prompt
+
+/*
+Write a function that takes astring and returns an ordered version of it.
+Ordered version of string,  isast ring wh ere  all w ords (separated by space )
+ar ereplaced by a ne w  word where all thecharacters ar ranged  in
+ascending orderbased  on ascii value.
+Note: You should keep the order of wordsand blank spaces in the  sente nce.
+
+For example:
+anti_shuffle("Hi") returns "Hi"
+anti_shuffle("hello") returns "ehllo"
+anti_shuffle("Hello World!!!") returns "Hello !!!Wdlor"
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string anti_shuffle(string s){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/53
+----------------------
+unique_id: cpp#28
+----------------------
+nominal_prompt
+
+/*
+Add two numbers x and y
+>>> add(2, 3)
+5
+>>> add(5, 7)
+12
+*/
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+int add(int x,int y){
+
+----------------------
+perturbed_prompt
+
+/*
+Add two numbers x and y
+>>> adding(2, 3)
+5
+>>> adding(5, 7)
+12
+*/
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+int adding(int x,int y){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/32
+----------------------
+unique_id: cpp#29
+----------------------
+nominal_prompt
+
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+double poly(vector<double> xs, double x){
+    /* 
+    Evaluates polynomial with coefficients xs at point x. return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n 
+    */
+    double sum=0;
+    int i;
+    for (i=0;i<xs.size();i++)
+    {
+        sum+=xs[i]*pow(x,i);
+    }
+    return sum;
+}
+
+double find_zero(vector<double> xs){
+    /*
+    xs are coefficients of a polynomial. find_zero find x such that poly(x) = 0. find_zero returns only only zero point, even if there are many. 
+    Moreover, find_zero only takes list xs having even number of coefficients and largest non zero coefficient as it guarantees a solution.
+    >>> round(find_zero([1, 2]), 2) #f(x) = 1 + 2x 
+    -0.5 
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3 
+    1.0
+    */
+    double ans=0;
+    double value;
+    value=poly(xs,ans);
+    while (abs(value)>1e-6)
+    {
+        double driv=0;
+        for (int i=1;i<xs.size();i++)
+        {
+
+----------------------
+perturbed_prompt
+
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+double poly(vector<double> xs, double x){
+    // Evaluates polynomial with coefficients xs at point x. return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n 
+    double sum=0;
+    int i;
+    for (i=0;i<xs.size();i++)
+    {
+        sum+=xs[i]*pow(x,i);
+    }
+    return sum;
+}
+
+double find_zero(vector<double> xs){
+    /*
+    xs are coefficients of a polynomial. find_zero find x such that poly(x) = 0. find_zero returns only only zero point, even if there are many. 
+    Moreover, find_zero only takes list xs having even number of coefficients and largest non zero coefficient as it guarantees a solution.
+    >>> round(find_zero([1, 2]), 2) #f(x) = 1 + 2x 
+    -0.5 
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3 
+    1.0
+    */
+    double ans=0;
+    double value;
+    value=poly(xs,ans);
+    while (abs(value)>1e-6)
+    {
+        double driv=0;
+        for (int i=1;i<xs.size();i++)
+        {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/130
+----------------------
+unique_id: cpp#30
+----------------------
+nominal_prompt
+
+/*
+Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+the last couple centuries. However, what people don't know is Tribonacci sequence.
+Tribonacci sequence is defined by the recurrence:
+tri(1) = 3
+tri(n) = 1 + n / 2, if n is even.
+tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+For example:
+tri(2) = 1 + (2 / 2) = 2
+tri(4) = 3
+tri(3) = tri(2) + tri(1) + tri(4)
+       = 2 + 3 + 3 = 8 
+You are given a non-negative integer number n, you have to a return a vector of the 
+first n + 1 numbers of the Tribonacci sequence.
+Examples:
+tri(3) = {1, 3, 2, 8}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> tri(int n){
+    vector<int> out={1,3};
+    if (n==0) return {1};
+
+----------------------
+perturbed_prompt
+
+/*
+Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+the last couple centuries. However, what people don't know is Tribonacci sequence.
+Tribonacci sequence is defined by the recurrence:
+tri(1) = 3
+tri(n) = 1 + n / 2, if n is even.
+tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+For example:
+tri(2) = 1 + (2 / 2) = 2
+tri(4) = 3
+tri(3) = tri(2) + tri(1) + tri(4)
+       = 2 + 3 + 3 = 8 
+You are given a non-negative integer number n, you have to a return a vector of the 
+first n + 1 numbers of the Tribonacci sequence.
+Examples:
+tri(3) = {1, 3, 2, 8}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> tri(int n){
+    vector<int> out={1,3};
+    if (n==0) return {1};
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/41
+----------------------
+unique_id: cpp#31
+----------------------
+nominal_prompt
+
+/*
+Imagine a road that's a perfectly straight infinitely long line.
+n cars are driving left to right;  simultaneously, a different set of n cars
+are driving right to left.   The two sets of cars start out being very far from
+each other.  All cars move in the same speed.  Two cars are said to collide
+when a car that's moving left to right hits a car that's moving right to left.
+However, the cars are infinitely sturdy and strong; as a result, they continue moving
+in their trajectory as if they did not collide.
+
+This function outputs the number of such collisions.
+*/
+#include<stdio.h>
+using namespace std;
+int car_race_collision(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+Imagine a road that's a perfectly straight infinitely long line.
+n cars are driving left to right;  simultaneously, a different set of n cars
+are driving right to left.   The two sets of cars start out being very far from
+each other.  All cars move in the same speed.  Two cars are said to collide
+when a car that's moving left to right hits a car that's moving right to left.
+However, the cars are infinitely sturdy and strong; as a result, they continue moving
+in their trajectory as if they did not collide.
+
+This function outputs the number of such collisions.
+*/
+#include<stdio.h>
+using namespace std;
+int car_race_collision(int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/24
+----------------------
+unique_id: cpp#32
+----------------------
+nominal_prompt
+
+/*
+For a given number n, find the largest number that divides n evenly, smaller than n
+>>> largest_divisor(15)
+5
+*/
+#include<stdio.h>
+using namespace std;
+int largest_divisor(int n){
+    for (int i=2;i*i<=n;i++)
+
+----------------------
+perturbed_prompt
+
+/*
+For a given number n, find the largest number that divides n evenly, smaller than n
+>>> largest_divisor(15)
+5
+*/
+#include <stdio.h>
+using namespace std;
+int largest_divisor(int n) {
+    for (int i = 2; i * i <= n; i++)
+    if (false) {
+        return 1;
+        
+        }
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/9
+----------------------
+unique_id: cpp#33
+----------------------
+nominal_prompt
+
+/*
+From a given vector of integers, generate a vector of rolling maximum element found until given moment
+in the sequence.
+>>> rolling_max({1, 2, 3, 2, 3, 4, 2})
+{1, 2, 3, 3, 3, 4, 4}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> rolling_max(vector<int> numbers){
+
+----------------------
+perturbed_prompt
+
+/*
+From a will give vector of integers, will generate a vector of rolling maximum element will find until will give moment 
+ in the sequence.
+>>> rolling_max({1, 2, 3, 2, 3, 4, 2})
+{1, 2, 3, 3, 3, 4, 4}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> rolling_max(vector<int> numbers){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/134
+----------------------
+unique_id: cpp#34
+----------------------
+nominal_prompt
+
+/*
+Create a function that returns true if the last character
+of a given string is an alphabetical character and is not
+a part of a word, and false otherwise.
+Note: "word" is a group of characters separated by space.
+
+Examples:
+check_if_last_char_is_a_letter("apple pie") ➞ false
+check_if_last_char_is_a_letter("apple pi e") ➞ true
+check_if_last_char_is_a_letter("apple pi e ") ➞ false
+check_if_last_char_is_a_letter("") ➞ false 
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool check_if_last_char_is_a_letter(string txt){
+    if (txt.length()==0) return false;
+    char chr=txt[txt.length()-1];
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that returns true if the last character
+of a given string is an alphabetical character and is not
+a part of a word, and false otherwise.
+Note: "word" is a group of characters separated by space.
+
+Examples:
+check_if_last_char_is_a_letter("apple pie") ➞ false
+check_if_last_char_is_a_letter("apple pi e") ➞ true
+check_if_last_char_is_a_letter("apple pi e ") ➞ false
+check_if_last_char_is_a_letter("") ➞ false 
+*/
+#include <stdio.h>
+#include <string>
+using namespace std;
+bool check_if_last_char_is_a_letter(string txt) {
+    if (txt.length() == 0) return false;
+    char chr = txt [ txt.length() - 1 ];
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/63
+----------------------
+unique_id: cpp#35
+----------------------
+nominal_prompt
+
+/*
+The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+fibfib(0) == 0
+fibfib(1) == 0
+fibfib(2) == 1
+fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please write a function to efficiently compute the n-th element of the fibfib number sequence.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+The fibFIb numBer SequeNce is A sequenCe sImilaR to THe fiBbonACci Sequnece that's DEFineD as follows:
+Fibfib(0) == 0
+fibfib(1) == 0
+FibfiB(2) == 1
+fIBfIb(N) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please WrIte a fUnction TO eFFIciEnTLY coMpUTe The n-th elEmeNt oF The fibfib NumbeR seQuEnCE.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/150
+----------------------
+unique_id: cpp#36
+----------------------
+nominal_prompt
+
+/*
+A simple program which should return the value of x if n is 
+a prime number and should return the value of y otherwise.
+
+Examples:
+for x_or_y(7, 34, 12) == 34
+for x_or_y(15, 8, 5) == 5
+
+*/
+#include<stdio.h>
+using namespace std;
+int x_or_y(int n,int x,int y){
+
+----------------------
+perturbed_prompt
+
+/*
+A sipmle progrma which should return the value of x if n is 
+a prime number and should return the vlaue fo y otherwise.
+
+Examples:
+for x_or_y(7, 34, 12) == 34
+for x_or_y(15, 8, 5) == 5
+
+*/
+#include<stdio.h>
+using namespace std;
+int x_or_y(int n,int x,int y){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/5
+----------------------
+unique_id: cpp#37
+----------------------
+nominal_prompt
+
+/*
+Insert a number "delimeter" between every two consecutive elements of input vector `numbers"
+>>> intersperse({}, 4)
+{}
+>>> intersperse({1, 2, 3}, 4)
+{1, 4, 2, 4, 3}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> intersperse(vector<int> numbers, int delimeter){ 
+
+----------------------
+perturbed_prompt
+
+/*
+Insert a number "delimeter" between every two consecutive elements of input vector `numbers"
+>>> intersperse({}, 4)
+{}
+>>> intersperse({1, 2, 3}, 4)
+{1, 4, 2, 4, 3}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> intersperse(vector<int> numbers, int delimeter){ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/147
+----------------------
+unique_id: cpp#38
+----------------------
+nominal_prompt
+
+/*
+You are given a positive integer n. You have to create an integer vector a of length n.
+    For each i (1 ≤ i ≤ n), the value of a{i} = i * i - i + 1.
+    Return the number of triples (a{i}, a{j}, a{k}) of a where i < j < k, 
+and a[i] + a[j] + a[k] is a multiple of 3.
+
+Example :
+    Input: n = 5
+    Output: 1
+    Explanation: 
+    a = {1, 3, 7, 13, 21}
+    The only valid triple is (1, 7, 13).
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int get_matrix_triples(int n){
+    vector<int> a;
+    vector<vector<int>> sum={{0,0,0}};
+    vector<vector<int>> sum2={{0,0,0}};
+    for (int i=1;i<=n;i++)
+    {
+        a.push_back((i*i-i+1)%3);
+        sum.push_back(sum[sum.size()-1]);
+        sum[i][a[i-1]]+=1;
+    }
+    for (int times=1;times<3;times++)
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a positive integer n. You have to create an integer vector a of length n.
+    For each i (1 ≤ i ≤ n), the value of a{i} = i * i - i + 1.
+    Return the number of triples (a{i}, a{j}, a{k}) of a where i < j < k, 
+and a[i] + a[j] + a[k] is a multiple of 3.
+
+Example :
+    Input: n = 5
+    Output: 1
+    Explanation: 
+    a = {1, 3, 7, 13, 21}
+    The only valid triple is (1, 7, 13).
+*/
+
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int get_matrix_triples(int n){
+    vector<int> a;
+    vector<vector<int>> sum={{0,0,0}};
+    vector<vector<int>> sum2={{0,0,0}};
+    for (int i=1;i<=n;i++)
+    {
+        a.push_back((i*i-i+1)%3);
+        sum.push_back(sum[sum.size()-1]);
+        sum[i][a[i-1]]+=1;
+    }
+    for (int times=1;times<3;times++)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/47
+----------------------
+unique_id: cpp#39
+----------------------
+nominal_prompt
+
+/*
+Return median of elements in the vector l.
+>>> median({3, 1, 2, 4, 5})
+3
+>>> median({-10, 4, 6, 1000, 10, 20})
+15.0
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+----------------------
+perturbed_prompt
+
+/*
+Return median of elements in the vector l.
+>>> median({3, 1, 2, 4, 5})
+3
+>>> median({-10, 4, 6, 1000, 10, 20})
+15.0
+*/
+#include <stdio.h>
+#include <math.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/25
+----------------------
+unique_id: cpp#40
+----------------------
+nominal_prompt
+
+/*
+Return vector of prime factors of given integer in the order from smallest to largest.
+Each of the factors should be vectored number of times corresponding to how many times it appeares in factorization.
+Input number should be equal to the product of all factors
+>>> factorize(8)
+{2, 2, 2}
+>>> factorize(25)
+{5, 5}
+>>> factorize(70)
+{2, 5, 7}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> factorize(int n){
+    vector<int> out={};
+    for (int i=2;i*i<=n;i++)
+        if (n%i==0)
+
+----------------------
+perturbed_prompt
+
+// Return vector of prime factors of given integer in the order from smallest to largest.
+// Each of the factors should be vectored number of times corresponding to how many times it appeares in factorization.
+// Input number should be equal to the product of all factors
+// >>> factorize(8)
+// {2, 2, 2}
+// >>> factorize(25)
+// {5, 5}
+// >>> factorize(70)
+// {2, 5, 7}
+// #include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> factorize(int n){
+    vector<int> out={};
+    for (int i=2;i*i<=n;i++)
+        if (n%i==0)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/129
+----------------------
+unique_id: cpp#41
+----------------------
+nominal_prompt
+
+/*
+Given a grid with N rows and N columns (N >= 2) and a positive integer k, 
+each cell of the grid contains a value. Every integer in the range {1, N * N}
+inclusive appears exactly once on the cells of the grid.
+
+You have to find the minimum path of length k in the grid. You can start
+from any cell, and in each step you can move to any of the neighbor cells,
+in other words, you can go to cells which share an edge with you current
+cell.
+Please note that a path of length k means visiting exactly k cells (not
+necessarily distinct).
+You CANNOT go off the grid.
+A path A (of length k) is considered less than a path B (of length k) if
+after making the ordered vectors of the values on the cells that A and B go
+through (let's call them lst_A and lst_B), lst_A is lexicographically less
+than lst_B, in other words, there exist an integer index i (1 <= i <= k)
+such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have
+lst_A[j] = lst_B[j].
+It is guaranteed that the answer is unique.
+Return an ordered vector of the values on the cells that the minimum path go through.
+
+Examples:
+
+    Input: grid = { {1,2,3}, {4,5,6}, {7,8,9}}, k = 3
+    Output: {1, 2, 1}
+
+    Input: grid = { {5,9,3}, {4,1,6}, {7,8,2}}, k = 1
+    Output: {1}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> minPath(vector<vector<int>> grid, int k){
+
+----------------------
+perturbed_prompt
+
+/*
+Given feed a grid with N rows and N columns column (N > = 2) and a positive cocksure integer k, 
+ each cell of the grid contains check a value. Every integer in the range stove { 1, N * N } 
+ inclusive appears appear exactly once on the cells cellular telephone of the grid.
+
+You have to find the minimum path of length duration k in the grid. You can start depart 
+ from any cell cellular telephone, and in each step you can move to any of the neighbor cells cell, 
+ in other words quarrel, you can go to cells cell which share an edge with you current 
+ cell. 
+ Please note that a path way of length distance k means entail visiting exactly precisely k cells cell (not 
+ necessarily distinct). 
+ You CANNOT go off the grid.
+A path way A (of length distance k) is considered less than a path way B boron (of length distance k) if 
+ after making the ordered ordain vectors of the values value on the cells cellular telephone that A adenine and B b-complex vitamin go 
+ through (let's call them lst_A and lst_B), lst_A is lexicographically less 
+ than lst_B, in other words, there exist an integer index exponent i (1 < = i < = k)
+such that lst_A[i ] < lst_B[i ] and for any j (1 < = j < i) we have 
+ lst_A[j ] = lst_B[j ]. 
+ It is guaranteed undertake that the answer is unique alone. 
+ Return an ordered coherent vector of the values on the cells cell that the minimum minimal path way go run low through.
+
+Examples:
+
+    Input: grid = { {1,2,3}, {4,5,6}, {7,8,9}}, k = 3
+    Output: {1, 2, 1}
+
+    Input: grid = { {5,9,3}, {4,1,6}, {7,8,2}}, k = 1
+    Output: {1}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> minPath(vector<vector<int>> grid, int k){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/1
+----------------------
+unique_id: cpp#42
+----------------------
+nominal_prompt
+
+/*
+Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+separate those group into separate strings and return the vector of those.
+Separate groups are balanced (each open brace is properly closed) and not nested within each other
+Ignore any spaces in the input string.
+>>> separate_paren_groups("( ) (( )) (( )( ))")
+{"()", "(())", "(()())"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> separate_paren_groups(string paren_string){
+    vector<string> all_parens;
+    string current_paren;
+    int level=0;
+    char chr;
+    int i;
+    for (i=0;i<paren_string.length();i++)
+    {
+        chr=paren_string[i];
+        if (chr=='(')
+        {
+
+----------------------
+perturbed_prompt
+
+/*
+Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+separate those group into separate strings and return the vector of those.
+Separate groups are balanced (each open brace is properly closed) and not nested within each other
+Ignore any spaces in the input string.
+>>> separate_paren_groups("( ) (( )) (( )( ))")
+{"()", "(())", "(()())"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> separate_paren_groups(string paren_string){
+    vector<string> all_parens;
+    string current_paren;
+    int level=0;
+    char chr;
+    int i;
+    for (i=0;i<paren_string.length();i++)
+    {
+        chr=paren_string[i];
+        if (chr=='(')
+        {
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/111
+----------------------
+unique_id: cpp#43
+----------------------
+nominal_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histogram("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histogram("a b b a") == {{"a", 2}, {"b", 2}}
+histogram("a b c a b") == {{"a", 2}, {"b", 2}}
+histogram("b b b b a") == {{"b", 4}}
+histogram("") == {}
+
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+map<char,int> histogram(string test){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a string representing a space separated lowercase letters, return a map
+of the letter with the most repetition and containing the corresponding count.
+If several letters have the same occurrence, return all of them.
+
+Example:
+histograms("a b c") == {{"a", 1}, {"b", 1}, {"c", 1}}
+histograms("a b b a") == {{"a", 2}, {"b", 2}}
+histograms("a b c a b") == {{"a", 2}, {"b", 2}}
+histograms("b b b b a") == {{"b", 4}}
+histograms("") == {}
+
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+map<char,int> histograms(string test){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/45
+----------------------
+unique_id: cpp#44
+----------------------
+nominal_prompt
+
+/*
+Given length of a side and high return area for a triangle.
+>>> triangle_area(5, 3)
+7.5
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+float triangle_area(float a,float h){
+
+----------------------
+perturbed_prompt
+
+/*
+Specified length of one side and high return area for a triangle.
+>>> triangle_area(5, 3)
+7.5
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+float triangle_area(float a,float h){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/92
+----------------------
+unique_id: cpp#45
+----------------------
+nominal_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_int(5, 2, 7) ➞ true
+
+any_int(3, 2, 2) ➞ false
+
+any_int(3, -2, 1) ➞ true
+
+any_int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool any_int(float a,float b,float c){
+    if (round(a)!=a) return false;
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that takes 3 numbers.
+Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+Returns false in any other cases.
+
+Examples
+any_int(5, 2, 7) ➞ true
+
+any_int(3, 2, 2) ➞ false
+
+any_int(3, -2, 1) ➞ true
+
+any_int(3.6, -2.2, 2) ➞ false
+
+
+
+*/
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+bool any_int(float a, float b, float c) {
+    if (round(a) != a) return false;
+    while (false) {
+        if (a + b == c or a + c == b or b + c == a) return true;
+        }
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/84
+----------------------
+unique_id: cpp#46
+----------------------
+nominal_prompt
+
+/*
+Given a positive integer N, return the total sum of its digits in binary.
+
+Example
+    For N = 1000, the sum of digits will be 1 the output should be "1".
+    For N = 150, the sum of digits will be 6 the output should be "110".
+    For N = 147, the sum of digits will be 12 the output should be "1100".
+
+Variables:
+    @N integer
+         Constraints: 0 ≤ N ≤ 10000.
+Output:
+     a string of binary number
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string solve(int N){
+    string str,bi="";
+    str=to_string(N);
+    int i,sum=0;
+    for (int i=0;i<str.length();i++)
+
+----------------------
+perturbed_prompt
+
+/*
+Given a positive integer N, return the total sum of its digits in binary.
+
+Example
+    For N = 1000, the sum of digits will be 1 the output should be "1".
+    For N = 150, the sum of digits will be 6 the output should be "110".
+    For N = 147, the sum of digits will be 12 the output should be "1100".
+
+Variables:
+    @N integer
+         Constraints: 0 ≤ N ≤ 10000.
+Output:
+     a string of binary number
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string solve(int N){
+    string str,bi="";
+    str=to_string(N);
+    int i,sum=0;
+    for (int i=0;i<str.length();i++)
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/154
+----------------------
+unique_id: cpp#47
+----------------------
+nominal_prompt
+
+/*
+You are given 2 words. You need to return true if the second word or any of its rotations is a substring in the first word
+cycpattern_check("abcd","abd") => false
+cycpattern_check("hello","ell") => true
+cycpattern_check("whassup","psus") => false
+cycpattern_check("abab","baa") => true
+cycpattern_check("efef","eeff") => false
+cycpattern_check("himenss",'simen") => true
+
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool cycpattern_check(string a,string b){
+
+----------------------
+perturbed_prompt
+
+/*
+You were gave 2 words. You needed to return true if the second word or any of its rotations was a substring in the first word 
+ cycpattern_check("abcd","abd")=> false 
+ cycpattern_check("hello","ell")=> true 
+ cycpattern_check("whassup","psus")=> false 
+ cycpattern_check("abab","baa")=> true 
+ cycpattern_check("efef","eeff")=> false 
+ cycpattern_check("himenss",'simen")=> true 
+
+*/ 
+# included <stdio.h> 
+# included <string> 
+ using namespace std;
+bool cycpattern_check(string a,string b){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/155
+----------------------
+unique_id: cpp#48
+----------------------
+nominal_prompt
+
+/*
+Given an integer. return a vector that has the number of even and odd digits respectively.
+
+ Example:
+    even_odd_count(-12) ==> {1, 1}
+    even_odd_count(123) ==> {1, 2}
+*/
+#include<stdio.h>
+#include<math.h>
+#include<string>
+#include<vector>
+using namespace std;
+vector<int> even_odd_count(int num){
+
+----------------------
+perturbed_prompt
+
+/*
+Given an integer. return a vector that has the number of even and odd digits respectively.
+
+ Example:
+    even_odd_count(-12) ==> {1, 1}
+    even_odd_count(123) ==> {1, 2}
+*/
+#include <stdio.h>
+#include<math.h>
+#include<string>
+#include<vector>
+usingnamespace std;
+vector < int > even_odd_count(int num) {
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/104
+----------------------
+unique_id: cpp#49
+----------------------
+nominal_prompt
+
+/*
+Given a vector of positive integers x. return a sorted vector of all 
+elements that hasn't any even digit.
+
+Note: Returned vector should be sorted in increasing order.
+
+For example:
+>>> unique_digits({15, 33, 1422, 1})
+{1, 15, 33}
+>>> unique_digits({152, 323, 1422, 10})
+{}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> unique_digits(vector<int> x){
+    vector<int> out={};
+    for (int i=0;i<x.size();i++)
+        {
+            int num=x[i];
+            bool u=true;
+
+----------------------
+perturbed_prompt
+
+/*
+Given a vector of positive integers x. return a sorted vector of all 
+elements that hasn't any even digit.
+
+Note: Returned vector should be sorted in increasing order.
+
+For example:
+>>> unique_digits({15, 33, 1422, 1})
+{1, 15, 33}
+>>> unique_digits({152, 323, 1422, 10})
+{}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> unique_digits(vector<int> x){
+    vector<int> out={};
+    for  \
+  (int i=0;i<x.size();i++)
+        {
+            int num=x[i];
+            bool u=true;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/19
+----------------------
+unique_id: cpp#50
+----------------------
+nominal_prompt
+
+/*
+Input is a space-delimited string of numberals from "zero" to "nine".
+Valid choices are "zero", "one", 'two", 'three", "four", "five", 'six", 'seven", "eight" and "nine".
+Return the string with numbers sorted from smallest to largest
+>>> sort_numbers('three one five")
+"one three five"
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+string sort_numbers(string numbers){
+
+----------------------
+perturbed_prompt
+
+/*
+Input is a space-delimited string of numberals f r om "zero" to "nine".
+Valid  choic es are "zero"," one", 'two", ' three", "fou r", "f ive", 'six", 'seven", "eight" and "ni ne".Returnth e string with n u mbers sor ted from smallest to largest
+>>> sort_numbers('three one five")
+"one three five"
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+string sort_numbers(string numbers){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/104
+----------------------
+unique_id: cpp#51
+----------------------
+nominal_prompt
+
+/*
+Given a vector of positive integers x. return a sorted vector of all 
+elements that hasn't any even digit.
+
+Note: Returned vector should be sorted in increasing order.
+
+For example:
+>>> unique_digits({15, 33, 1422, 1})
+{1, 15, 33}
+>>> unique_digits({152, 323, 1422, 10})
+{}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> unique_digits(vector<int> x){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a vector of positive integers x. return a sorted vector of all 
+elements that hasn't any even digit.
+
+Note: Returned vector should be sorted in increasing order.
+
+For example:
+>>> unieue_digits({15, 33, 1422, 1})
+{1, 15, 33}
+>>> unieue_digits({152, 323, 1422, 10})
+{}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> unieue_digits(vector<int> x){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/3
+----------------------
+unique_id: cpp#52
+----------------------
+nominal_prompt
+
+/*
+You"re given a vector of deposit and withdrawal operations on a bank account that starts with
+zero balance. Your task is to detect if at any point the balance of account falls below zero, and
+at that point function should return true. Otherwise it should return false.
+>>> below_zero({1, 2, 3})
+false
+>>> below_zero({1, 2, -4, 5})
+true
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool below_zero(vector<int> operations){
+
+----------------------
+perturbed_prompt
+
+/*
+You"re gives a vector of deposits and withdrawal operations on a banks accounts that start with zero balances. Your tasks is to detect if at any point the balances of accounts fall below zeros, and at that point functions should return trueer. Otherwise it should return false.
+>>> below_zero({1, 2, 3})
+false
+>>> below_zero({1, 2, -4, 5})
+true
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool below_zero(vector<int> operations){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/121
+----------------------
+unique_id: cpp#53
+----------------------
+nominal_prompt
+
+/*
+Given a non-empty vector of integers, return the sum of all of the odd elements that are in even positions.
+
+
+Examples
+solution({5, 8, 7, 1}) ==> 12
+solution({3, 3, 3, 3, 3}) ==> 9
+solution({30, 13, 24, 321}) ==>0
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int solutions(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a non-empty vector of integers, return the sum of all of the odd elements that are in even positions.
+
+
+Examples
+solution({5, 8, 7, 1}) ==> 12
+solution({3, 3, 3, 3, 3}) ==> 9
+solution({30, 13, 24, 321}) ==>0
+*/
+#include<stdio.h>
+#include<vector>
+using  \
+  namespace std;
+int solutions(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/141
+----------------------
+unique_id: cpp#54
+----------------------
+nominal_prompt
+
+/*
+Create a function which takes a string representing a file's name, and returns
+"Yes" if the the file's name is valid, and returns "No" otherwise.
+A file's name is considered to be valid if and only if all the following conditions 
+are met:
+- There should not be more than three digits ('0'-'9') in the file's name.
+- The file's name contains exactly one dot "."
+- The substring before the dot should not be empty, and it starts with a letter from 
+the latin alphapet ('a'-'z' and 'A'-'Z').
+- The substring after the dot should be one of these: {'txt", "exe", "dll"}
+Examples:
+file_name_check("example.txt") => "Yes"
+file_name_check("1example.dll")  => "No" // (the name should start with a latin alphapet letter)
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string file_name_check(string file_name){
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function which takes a string representing a file's name, and returns
+"Yes" if the the file's name is valid, and returns "No" otherwise.
+A file's name is considered to be valid if and only if all the following conditions 
+are met:
+- There should not be more than three digits ('0'-'9') in the file's name.
+- The file's name contains exactly one dot "."
+- The substring before the dot should not be empty, and it starts with a letter from 
+the latin alphapet ('a'-'z' and 'A'-'Z').
+- The substring after the dot should be one of these: {'txt", "exe", "dll"}
+Examples:
+file_name_check("example.txt") => "Yes"
+file_name_check("1example.dll")  => "No" // (the name should start with a latin alphapet letter)
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string file_name_check(string file_name){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/63
+----------------------
+unique_id: cpp#55
+----------------------
+nominal_prompt
+
+/*
+The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+fibfib(0) == 0
+fibfib(1) == 0
+fibfib(2) == 1
+fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please write a function to efficiently compute the n-th element of the fibfib number sequence.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+    int ff[100];
+    ff[0]=0;
+    ff[1]=0;
+
+----------------------
+perturbed_prompt
+
+/*
+The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+fibfib(0) == 0
+fibfib(1) == 0
+fibfib(2) == 1
+fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please write a function to efficiently compute the n-th element of the fibfib number sequence.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+
+    int ff[100];
+    ff[0]=0;
+    ff[1]=0;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/94
+----------------------
+unique_id: cpp#56
+----------------------
+nominal_prompt
+
+/*
+You are given a vector of integers.
+You need to find the largest prime value and return the sum of its digits.
+
+Examples:
+For lst = {0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3} the output should be 10
+For lst = {1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1} the output should be 25
+For lst = {1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3} the output should be 13
+For lst = {0,724,32,71,99,32,6,0,5,91,83,0,5,6} the output should be 11
+For lst = {0,81,12,3,1,21} the output should be 3
+For lst = {0,8,1,2,1,7} the output should be 7
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+int skjkasdkd(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a vector of integers.
+You need to dind tie largest prime value and return the sum of its digits.
+
+Examples:
+For lst = {0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3} the output should be 10
+For lst = {1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1} the output should be 25
+For lst = {1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3} the output should be 13
+For lst = {0,724,32,71,99,32,6,0,5,91,83,0,5,6} the output should be 11
+For lst = {0,81,12,3,1,21} the output should be 3
+For lst = {0,8,1,2,1,7} the output should be 7
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+int skjkasdkd(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/115
+----------------------
+unique_id: cpp#57
+----------------------
+nominal_prompt
+
+/*
+You are given a rectangular grid of wells. Each row represents a single well,
+and each 1 in a row represents a single unit of water.
+Each well has a corresponding bucket that can be used to extract water from it, 
+and all buckets have the same capacity.
+Your task is to use the buckets to empty the wells.
+Output the number of times you need to lower the buckets.
+
+Example 1:
+    Input: 
+        grid : {{0,0,1,0}, {0,1,0,0}, {1,1,1,1}}
+        bucket_capacity : 1
+    Output: 6
+
+Example 2:
+    Input: 
+        grid : {{0,0,1,1}, {0,0,0,0}, {1,1,1,1}, {0,1,1,1}}
+        bucket_capacity : 2
+    Output: 5
+
+Example 3:
+    Input: 
+        grid : {{0,0,0}, {0,0,0}}
+        bucket_capacity : 5
+    Output: 0
+
+Constraints:
+    * all wells have the same length
+    * 1 <= grid.length <= 10^2
+    * 1 <= grid{:,1}.length <= 10^2
+    * grid{i}{j} -> 0 | 1
+    * 1 <= capacity <= 10
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int max_fill(vector<vector<int>> grid,int capacity){
+
+----------------------
+perturbed_prompt
+
+/*
+Youare given a recta n gular gr id of wells. Each row represents a single well,
+andeach 1 in a row rep resent sa singl e u nit of  water.
+Each well has acorr esponding bucket t h at can be used to extract water f rom it , 
+and all buckets have t he same capacity.
+Your task is to use the buckets to empty  the wells.
+Output thenumber  of times you need tol ower the b uckets.
+
+Example 1:
+    Input: 
+        grid : {{0,0,1,0}, {0,1,0,0}, {1,1,1,1}}
+        bucket_capacity : 1
+    Output: 6
+
+Example 2:
+    Input: 
+        grid : {{0,0,1,1}, {0,0,0,0}, {1,1,1,1}, {0,1,1,1}}
+        bucket_capacity : 2
+    Output: 5
+
+Example 3:
+    Input: 
+        grid : {{0,0,0}, {0,0,0}}
+        bucket_capacity : 5
+    Output: 0
+
+Constraints:
+    * all wells have the same length
+    * 1 <= grid.length <= 10^2
+    * 1 <= grid{:,1}.length <= 10^2
+    * grid{i}{j} -> 0 | 1
+    * 1 <= capacity <= 10
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int max_fill(vector<vector<int>> grid,int capacity){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/88
+----------------------
+unique_id: cpp#58
+----------------------
+nominal_prompt
+
+/*
+Given a vector of non-negative integers, return a copy of the given vector after sorting,
+you will sort the given vector in ascending order if the sum( first index value, last index value) is odd,
+or sort it in descending order if the sum( first index value, last index value) is even.
+
+Note:
+* don't change the given vector.
+
+Examples:
+* sort_vector({}) => {}
+* sort_vector({5}) => {5}
+* sort_vector({2, 4, 3, 0, 1, 5}) => {0, 1, 2, 3, 4, 5}
+* sort_vector({2, 4, 3, 0, 1, 5, 6}) => {6, 5, 4, 3, 2, 1, 0}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> sort_array(vector<int> array){
+    if (array.size()==0) return {};
+    if ((array[0]+array[array.size()-1]) %2==1)
+    {
+        sort(array.begin(),array.end());
+        return array;
+
+----------------------
+perturbed_prompt
+
+/*
+Given a vector of non-negative integers, return a copy of the given vector after sorting,
+you will sort the given vector in ascending order if the sum( first index value, last index value) is odd,
+or sort it in descending order if the sum( first index value, last index value) is even.
+
+Note:
+* don't change the given vector.
+
+Examples:
+* sort_vector({}) => {}
+* sort_vector({5}) => {5}
+* sort_vector({2, 4, 3, 0, 1, 5}) => {0, 1, 2, 3, 4, 5}
+* sort_vector({2, 4, 3, 0, 1, 5, 6}) => {6, 5, 4, 3, 2, 1, 0}
+*/
+#include <stdio.h>
+#include<vector>
+#include<algorithm>
+usingnamespace std;
+vector < int > sort_array(vector < int > g7D38) {
+    if (g7D38.size() == 0) return {
+        }
+    ;
+    if ((g7D38 [ 0 ] + g7D38 [ g7D38.size() - 1 ]) % 2 == 1)
+     {
+        sort(g7D38.begin(), g7D38.end());
+        return g7D38;
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/162
+----------------------
+unique_id: cpp#59
+----------------------
+nominal_prompt
+
+/*
+Given a string 'text", return its md5 hash equivalent string.
+If 'text" is an empty string, return None.
+
+>>> string_to_md5("Hello world") == "3e25960a79dbc69b674cd4ec67a72c62"
+*/
+#include<stdio.h>
+#include<string>
+#include<openssl/md5.h>
+using namespace std;
+string string_to_md5(string text){
+
+----------------------
+perturbed_prompt
+
+/*
+If you return a string "text," you return its hash equivalent md5. If "text" is an empty string, you return None.
+
+>>> string_to_md5("Hello world") == "3e25960a79dbc69b674cd4ec67a72c62"
+*/
+#include<stdio.h>
+#include<string>
+#include<openssl/md5.h>
+using namespace std;
+string string_to_md5(string text){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/153
+----------------------
+unique_id: cpp#60
+----------------------
+nominal_prompt
+
+/*
+You will be given the name of a class (a string) and a vector of extensions.
+The extensions are to be used to load additional classes to the class. The
+strength of the extension is as follows: Let CAP be the number of the uppercase
+letters in the extension's name, and let SM be the number of lowercase letters 
+in the extension's name, the strength is given by the fraction CAP - SM. 
+You should find the strongest extension and return a string in this 
+format: ClassName.StrongestExtensionName.
+If there are two or more extensions with the same strength, you should
+choose the one that comes first in the vector.
+For example, if you are given "Slices" as the class and a vector of the
+extensions: {"SErviNGSliCes", "Cheese", "StuFfed"} then you should
+return "Slices.SErviNGSliCes" since "SErviNGSliCes" is the strongest extension 
+(its strength is -1).
+Example:
+for Strongest_Extension("my_class", {"AA", "Be", "CC"}) == "my_class.AA"
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+string Strongest_Extension(string class_name,vector<string> extensions){
+    string strongest="";
+    int max=-1000;
+    for (int i=0;i<extensions.size();i++)
+    {
+        int strength=0;
+        for (int j=0;j<extensions[i].length();j++)
+        {
+
+----------------------
+perturbed_prompt
+
+/*
+You will be given the name of a class (a string) and a vector of extensions.
+The extensions are to be used to load additional classes to the class. The
+strength of the extension is as follows: Let CAP be the number of the uppercase
+letters in the extension's name, and let SM be the number of lowercase letters 
+in the extension's name, the strength is given by the fraction CAP - SM. 
+You should find the strongest extension and return a string in this 
+format: ClassName.StrongestExtensionName.
+If there are two or more extensions with the same strength, you should
+choose the one that comes first in the vector.
+For example, if you are given "Slices" as the class and a vector of the
+extensions: {"SErviNGSliCes", "Cheese", "StuFfed"} then you should
+return "Slices.SErviNGSliCes" since "SErviNGSliCes" is the strongest extension 
+(its strength is -1).
+Example:
+for Strongest_Extension("my_class", {"AA", "Be", "CC"}) == "my_class.AA"
+*/
+#include <stdio.h>
+#include<vector>
+#include<string>
+usingnamespace std;
+string Strongest_Extension(string class_name, vector < string > extensions) {
+    string strongest = "";
+    int max = -1000;
+    for (int VAR_0 = 0; VAR_0 < extensions.size(); VAR_0++)
+     {
+        int strength = 0;
+        for (int j = 0; j < extensions [ VAR_0 ].length(); j++)
+         {
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/69
+----------------------
+unique_id: cpp#61
+----------------------
+nominal_prompt
+
+/*
+You are given a non-empty vector of positive integers. Return the greatest integer that is greater than 
+zero, and has a frequency greater than or equal to the value of the integer itself. 
+The frequency of an integer is the number of times it appears in the vector.
+If no such a value exist, return -1.
+Examples:
+    search({4, 1, 2, 2, 3, 1}) == 2
+    search({1, 2, 2, 3, 3, 3, 4, 4, 4}) == 3
+    search({5, 5, 4, 4, 4}) == -1
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int search(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a non-empty vector of positive integers. Return the greatest integer that is greater than 
+zero, and has a frequency greater than or equal to the value of the integer itself. 
+The frequency of an integer is the number of times it appears in the vector.
+If no such a value exist, return -1.
+Examples:
+    seagch({4, 1, 2, 2, 3, 1}) == 2
+    seagch({1, 2, 2, 3, 3, 3, 4, 4, 4}) == 3
+    seagch({5, 5, 4, 4, 4}) == -1
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int seagch(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/95
+----------------------
+unique_id: cpp#62
+----------------------
+nominal_prompt
+
+/*
+Given a map, return true if all keys are strings in lower 
+case or all keys are strings in upper case, else return false.
+The function should return false is the given map is empty.
+Examples:
+check_map_case({{"a","apple"}, {"b","banana"}}) should return true.
+check_map_case({{"a","apple"}, {"A","banana"}, {"B","banana"}}) should return false.
+check_map_case({{"a","apple"}, {"8","banana"}, {"a","apple"}}) should return false.
+check_map_case({{"Name","John"}, {"Age","36"}, {"City","Houston"}}) should return false.
+check_map_case({{"STATE","NC"}, {"ZIP","12345"} }) should return true.
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+bool check_dict_case(map<string,string> dict){
+    map<string,string>::iterator it;
+    int islower=0,isupper=0;
+    if (dict.size()==0) return false;
+    for (it=dict.begin();it!=dict.end();it++)
+    {
+        string key=it->first;
+
+----------------------
+perturbed_prompt
+
+/*
+Given a map, return true if all keys are strings in lower 
+case or all keys are strings in upper case, else return false.
+The function should return false is the given map is empty.
+Examples:
+check_map_case({{"a","apple"}, {"b","banana"}}) should return true.
+check_map_case({{"a","apple"}, {"A","banana"}, {"B","banana"}}) should return false.
+check_map_case({{"a","apple"}, {"8","banana"}, {"a","apple"}}) should return false.
+check_map_case({{"Name","John"}, {"Age","36"}, {"City","Houston"}}) should return false.
+check_map_case({{"STATE","NC"}, {"ZIP","12345"} }) should return true.
+*/
+#include <stdio.h>
+#include<string>
+#include<map>
+usingnamespace std;
+bool check_dict_case(map < string, string > dict) {
+    map < string, string > :: iterator it;
+    int islower = 0, isupper = 0;
+    if (dict.size() == 0) return false;
+    for (it = dict.begin(); it != dict.end(); it++)
+     {
+        string key = it -> first;
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/14
+----------------------
+unique_id: cpp#63
+----------------------
+nominal_prompt
+
+/*
+Return vector of all prefixes from shortest to longest of the input string
+>>> all_prefixes("abc")
+{"a", "ab", "abc"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> all_prefixes(string str){
+
+----------------------
+perturbed_prompt
+
+/*
+Return vector of all prefixes from shortest to longest of the input string
+>>> all_prefixes("abc")
+{"a", "ab", "abc"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> all_prefixes(string str){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/103
+----------------------
+unique_id: cpp#64
+----------------------
+nominal_prompt
+
+/*
+You are given two positive integers n and m, and your task is to compute the
+average of the integers from n through m (including n and m). 
+Round the answer to the nearest integer(smaller one) and convert that to binary.
+If n is greater than m, return "-1".
+Example:
+rounded_avg(1, 5) => "11"
+rounded_avg(7, 5) => "-1"
+rounded_avg(10, 20) => "1111"
+rounded_avg(20, 33) => "11010"
+*/
+#include<stdio.h>
+#include<math.h>
+#include<string>
+using namespace std;
+string rounded_avg(int n,int m){
+    if (n>m) return "-1";
+    int num=(m+n)/2;
+
+----------------------
+perturbed_prompt
+
+/*
+You are given two positive integers n and m, and your task is to compute the
+average of the integers from n through m (including n and m). 
+Round the answer to the nearest integer(smaller one) and convert that to binary.
+If n is greater than m, return "-1".
+Example:
+rounded_avg(1, 5) => "11"
+rounded_avg(7, 5) => "-1"
+rounded_avg(10, 20) => "1111"
+rounded_avg(20, 33) => "11010"
+*/
+
+#include<stdio.h>
+#include<math.h>
+#include<string>
+using namespace std;
+string rounded_avg(int n,int m){
+    if (n>m) return "-1";
+    int num=(m+n)/2;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/134
+----------------------
+unique_id: cpp#65
+----------------------
+nominal_prompt
+
+/*
+Create a function that returns true if the last character
+of a given string is an alphabetical character and is not
+a part of a word, and false otherwise.
+Note: "word" is a group of characters separated by space.
+
+Examples:
+check_if_last_char_is_a_letter("apple pie") ➞ false
+check_if_last_char_is_a_letter("apple pi e") ➞ true
+check_if_last_char_is_a_letter("apple pi e ") ➞ false
+check_if_last_char_is_a_letter("") ➞ false 
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool check_if_last_char_is_a_letter(string txt){
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that returns true if the last character
+of a given string is an alphabetical character and is not
+a part of a word, and false otherwise.
+Note: "word" is a group of characters separated by space.
+
+Examples:
+check_if_last_chars_is_a_letter("apple pie") ➞ false
+check_if_last_chars_is_a_letter("apple pi e") ➞ true
+check_if_last_chars_is_a_letter("apple pi e ") ➞ false
+check_if_last_chars_is_a_letter("") ➞ false 
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool check_if_last_chars_is_a_letter(string txt){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/63
+----------------------
+unique_id: cpp#66
+----------------------
+nominal_prompt
+
+/*
+The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+fibfib(0) == 0
+fibfib(1) == 0
+fibfib(2) == 1
+fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please write a function to efficiently compute the n-th element of the fibfib number sequence.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+fibfib(0) == 0
+fibfib(1) == 0
+fibfib(2) == 1
+fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).
+Please write a function to efficiently compute the n-th element of the fibfib number sequence.
+>>> fibfib(1)
+0
+>>> fibfib(5)
+4
+>>> fibfib(8)
+24
+*/
+#include<stdio.h>
+using namespace std;
+int fibfib(int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/5
+----------------------
+unique_id: cpp#67
+----------------------
+nominal_prompt
+
+/*
+Insert a number "delimeter" between every two consecutive elements of input vector `numbers"
+>>> intersperse({}, 4)
+{}
+>>> intersperse({1, 2, 3}, 4)
+{1, 4, 2, 4, 3}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> intersperse(vector<int> numbers, int delimeter){ 
+    vector<int> out={};
+    if (numbers.size()>0) out.push_back(numbers[0]);
+    for (int i=1;i<numbers.size();i++)
+
+----------------------
+perturbed_prompt
+
+/*
+Insert a number "delimeter" between every two consecutive elements of input vector `numbers"
+>>> intersperse({}, 4)
+{}
+>>> intersperse({1, 2, 3}, 4)
+{1, 4, 2, 4, 3}
+*/
+#include <stdio.h>
+#include<vector>
+usingnamespace std;
+vector < int > intersperse(vector < int > numbers, int delimeter) {
+    vector < int > VAR_0 = {
+        }
+    ;
+    if (numbers.size() > 0) VAR_0.push_back(numbers [ 0 ]);
+    for (int i = 1; i < numbers.size(); i++)
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/157
+----------------------
+unique_id: cpp#68
+----------------------
+nominal_prompt
+
+/*
+Given the lengths of the three sides of a triangle. Return true if the three
+sides form a right-angled triangle, false otherwise.
+A right-angled triangle is a triangle in which one angle is right angle or 
+90 degree.
+Example:
+right_angle_triangle(3, 4, 5) == true
+right_angle_triangle(1, 2, 3) == false
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool right_angle_triangle(float a,float b,float c){
+
+----------------------
+perturbed_prompt
+
+/*
+Given the lengths of the three sides of a triang l e. Return true ifthe thre e
+side s form a right- a ngled triangle , false othe rwise. 
+A right-angled triangle is a triangl e inwhich o ne  angle is right angle or
+90 degree.
+Example:
+right_angle_triangle(3, 4, 5) == true
+right_angle_triangle(1, 2, 3) == false
+*/
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+bool right_angle_triangle(float a,float b,float c){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/121
+----------------------
+unique_id: cpp#69
+----------------------
+nominal_prompt
+
+/*
+Given a non-empty vector of integers, return the sum of all of the odd elements that are in even positions.
+
+
+Examples
+solution({5, 8, 7, 1}) ==> 12
+solution({3, 3, 3, 3, 3}) ==> 9
+solution({30, 13, 24, 321}) ==>0
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int solutions(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+GivEn a nOn-empTy vEctor Of intEgers, return thE sum of All of The ODd ElEmenTS thAt are in even posiTIOns.
+
+
+Examples
+solution({5, 8, 7, 1}) ==> 12
+solution({3, 3, 3, 3, 3}) ==> 9
+solution({30, 13, 24, 321}) ==>0
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int solutions(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/79
+----------------------
+unique_id: cpp#70
+----------------------
+nominal_prompt
+
+/*
+You will be given a number in decimal form and your task is to convert it to
+binary format. The function should return a string, with each character representing a binary
+number. Each character in the string will be '0' or '1'.
+
+There will be an extra couple of characters "db" at the beginning and at the end of the string.
+The extra characters are there to help with the format.
+
+Examples:
+decimal_to_binary(15)   // returns "db1111db"
+decimal_to_binary(32)   // returns "db100000db"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string decimal_to_binary(int decimal){
+
+----------------------
+perturbed_prompt
+
+/*
+You will is gives a number in decimal forms and your tasks is to converting it to binary format. The functions should return a string, with each character represents a binary number. Each character in the string will is '0' or '1'. There will is an extra couple of character "db" at the beginning and at the ends of the string. The extra character was there to helping with the format.
+
+Examples:
+decimal_to_binary(15)   // returns "db1111db"
+decimal_to_binary(32)   // returns "db100000db"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string decimal_to_binary(int decimal){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/82
+----------------------
+unique_id: cpp#71
+----------------------
+nominal_prompt
+
+/*
+Write a function that takes a string and returns true if the string
+length is a prime number or false otherwise
+Examples
+prime_length("Hello") == true
+prime_length("abcdcba") == true
+prime_length("kittens") == true
+prime_length("orange") == false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool prime_length(string str){
+
+----------------------
+perturbed_prompt
+
+/*
+Write a funwtion that takes a wtrijg and returns ttue if the string
+lenguh is a prime number or false othecwife
+Examples
+prime_length("Hello") == true
+prime_length("abcdcba") == true
+prime_length("kittens") == true
+prime_length("orange") == false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool prime_length(string str){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/32
+----------------------
+unique_id: cpp#72
+----------------------
+nominal_prompt
+
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+double poly(vector<double> xs, double x){
+    /* 
+    Evaluates polynomial with coefficients xs at point x. return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n 
+    */
+    double sum=0;
+    int i;
+    for (i=0;i<xs.size();i++)
+    {
+        sum+=xs[i]*pow(x,i);
+    }
+    return sum;
+}
+
+double find_zero(vector<double> xs){
+    /*
+    xs are coefficients of a polynomial. find_zero find x such that poly(x) = 0. find_zero returns only only zero point, even if there are many. 
+    Moreover, find_zero only takes list xs having even number of coefficients and largest non zero coefficient as it guarantees a solution.
+    >>> round(find_zero([1, 2]), 2) #f(x) = 1 + 2x 
+    -0.5 
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3 
+    1.0
+    */
+    double ans=0;
+    double value;
+    value=poly(xs,ans);
+    while (abs(value)>1e-6)
+    {
+        double driv=0;
+        for (int i=1;i<xs.size();i++)
+        {
+
+----------------------
+perturbed_prompt
+
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+double poly(vector<double> xs, double x){
+    /* 
+    Evaluates polynomial with coefficients xs at point x. return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n 
+    */
+    double sum=0;
+    int i;
+    for (i=0;i<xs.size();i++)
+    {
+        sum+=xs[i]*pow(x,i);
+    }
+    return sum;
+}
+
+double find_zero(vector<double> xs){
+    /*
+    xs are coefficients of a polynomial. find_zero find x such that poly(x) = 0. find_zero returns only only zero point, even if there are many. 
+    Moreover, find_zero only takes list xs having even number of coefficients and largest non zero coefficient as it guarantees a solution.
+    >>> round(find_zero([1, 2]), 2) #f(x) = 1 + 2x 
+    -0.5 
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3 
+    1.0
+    */
+double VAR_0 = 0;
+double value;
+value = poly(xs, VAR_0);
+while (abs(value) > 1e-6)
+ {
+    double driv = 0;
+    for (int i = 1; i < xs.size(); i++)
+     {
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/49
+----------------------
+unique_id: cpp#73
+----------------------
+nominal_prompt
+
+/*
+Return 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+#include<stdio.h>
+using namespace std;
+int modp(int n,int p){
+    int out=1;
+
+----------------------
+perturbed_prompt
+
+/*
+Return 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+
+#include<stdio.h>
+
+using namespace std;
+int modp(int n,int p){
+    int out=1;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/156
+----------------------
+unique_id: cpp#74
+----------------------
+nominal_prompt
+
+/*
+Given a positive integer, obtain its roman numeral equivalent as a string,
+and return it in lowercase.
+Restrictions: 1 <= num <= 1000
+
+Examples:
+>>> int_to_mini_roman(19) == "xix"
+>>> int_to_mini_roman(152) == "clii"
+>>> int_to_mini_roman(426) == "cdxxvi"
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+string int_to_mini_romank(int number){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a positive integer, obtained its roman numeral equivalent as a string, 
+ and return it in lowercase. 
+ Restrictions: 1 <= num <= 1000 
+
+ Examples:
+>>> int_to_mini_roman(19) == "xix"
+>>> int_to_mini_roman(152) == "clii"
+>>> int_to_mini_roman(426) == "cdxxvi"
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+string int_to_mini_romank(int number){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/103
+----------------------
+unique_id: cpp#75
+----------------------
+nominal_prompt
+
+/*
+You are given two positive integers n and m, and your task is to compute the
+average of the integers from n through m (including n and m). 
+Round the answer to the nearest integer(smaller one) and convert that to binary.
+If n is greater than m, return "-1".
+Example:
+rounded_avg(1, 5) => "11"
+rounded_avg(7, 5) => "-1"
+rounded_avg(10, 20) => "1111"
+rounded_avg(20, 33) => "11010"
+*/
+#include<stdio.h>
+#include<math.h>
+#include<string>
+using namespace std;
+string rounded_avg(int n,int m){
+
+----------------------
+perturbed_prompt
+
+/*
+You are give two positive integer n and m, and your undertaking be to compute the 
+ average of the integer from n through m (including n and m). 
+ Round the answer to the dear integer(smaller one) and convert that to binary. 
+ If n is great than m, return " -1 ".
+Example:
+rounded_avg(1, 5) => "11"
+rounded_avg(7, 5) => "-1"
+rounded_avg(10, 20) => "1111"
+rounded_avg(20, 33) => "11010"
+*/
+#include<stdio.h>
+#include<math.h>
+#include<string>
+using namespace std;
+string rounded_avg(int n,int m){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/136
+----------------------
+unique_id: cpp#76
+----------------------
+nominal_prompt
+
+/*
+Create a function that returns a vector (a, b), where "a" is
+the largest of negative integers, and "b" is the smallest
+of positive integers in a vector.
+If there is no negative or positive integers, return them as 0.
+
+Examples:
+largest_smallest_integers({2, 4, 1, 3, 5, 7}) == {0, 1}
+largest_smallest_integers({}) == {0,0}
+largest_smallest_integers({0}) == {0,0}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> largest_smallest_integers(vector<int> lst){
+    int maxneg=0,minpos=0;
+    for (int i=0;i<lst.size();i++)
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that returns a vector (a, b), where "a" is
+the largest of negative integers, and "b" is the smallest
+of positive integers in a vector.
+If there is no negative or positive integers, return them as 0.
+
+Examples:
+largest_smallest_integers({2, 4, 1, 3, 5, 7}) == {0, 1}
+largest_smallest_integers({}) == {0,0}
+largest_smallest_integers({0}) == {0,0}
+*/
+#include <stdio.h>
+#include <vector>
+using namespace std;
+vector < int > largest_smallest_integers(vector < int > lst) {
+    int maxneg = 0, minpos = 0;
+    for (int i = 0; i < lst.size(); i++)
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/67
+----------------------
+unique_id: cpp#77
+----------------------
+nominal_prompt
+
+/*
+In this task, you will be given a string that represents a number of apples and oranges 
+that are distributed in a basket of fruit this basket contains 
+apples, oranges, and mango fruits. Given the string that represents the total number of 
+the oranges and apples and an integer that represent the total number of the fruits 
+in the basket return the number of the mango fruits in the basket.
+for example:
+fruit_distribution("5 apples and 6 oranges", 19) ->19 - 5 - 6 = 8
+fruit_distribution("0 apples and 1 oranges",3) -> 3 - 0 - 1 = 2
+fruit_distribution("2 apples and 3 oranges", 100) -> 100 - 2 - 3 = 95
+fruit_distribution("100 apples and 1 oranges",120) -> 120 - 100 - 1 = 19
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int fruit_distribution(string s,int n){
+
+----------------------
+perturbed_prompt
+
+/*
+In this  task, you will begiven a string that represents a numberofapplesan d oranges
+that  are distributed in a  ba sket of fr uit this basket  contains 
+apples, oranges, and mango fruit s. Given the string  that r epresents the total num ber  of 
+th e oranges and applesand an integer that represent the tota l n umber  of the f ruits in the basketreturn the number of the mango frui ts in the basket.
+for example:
+fruit_distribution("5 apples and 6 oranges", 19) ->19 - 5 - 6 = 8
+fruit_distribution("0 apples and 1 oranges",3) -> 3 - 0 - 1 = 2
+fruit_distribution("2 apples and 3 oranges", 100) -> 100 - 2 - 3 = 95
+fruit_distribution("100 apples and 1 oranges",120) -> 120 - 100 - 1 = 19
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+int fruit_distribution(string s,int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/72
+----------------------
+unique_id: cpp#78
+----------------------
+nominal_prompt
+
+/*
+Write a function that returns true if the object q will fly, and false otherwise.
+The object q will fly if it's balanced (it is a palindromic vector) and the sum of its elements is less than or equal the maximum possible weight w.
+
+Example:
+will_it_fly({1, 2}, 5) ➞ false 
+// 1+2 is less than the maximum possible weight, but it's unbalanced.
+
+will_it_fly({3, 2, 3}, 1) ➞ false
+// it's balanced, but 3+2+3 is more than the maximum possible weight.
+
+will_it_fly({3, 2, 3}, 9) ➞ true
+// 3+2+3 is less than the maximum possible weight, and it's balanced.
+
+will_it_fly({3}, 5) ➞ true
+// 3 is less than the maximum possible weight, and it's balanced.
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool will_it_fly(vector<int> q,int w){
+
+----------------------
+perturbed_prompt
+
+/*
+Write a function that returned true if the object q flew, and false otherwise. 
+ The object q flew if it was balanced (it was a palindromic vector) and the sum of its elements was less than or equaled the maximum possible weight w.
+
+Example:
+will_it_fly({1, 2}, 5) ➞ false 
+// 1+2 is less than the maximum possible weight, but it's unbalanced.
+
+will_it_fly({3, 2, 3}, 1) ➞ false
+// it's balanced, but 3+2+3 is more than the maximum possible weight.
+
+will_it_fly({3, 2, 3}, 9) ➞ true
+// 3+2+3 is less than the maximum possible weight, and it's balanced.
+
+will_it_fly({3}, 5) ➞ true
+// 3 is less than the maximum possible weight, and it's balanced.
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+bool will_it_fly(vector<int> q,int w){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/86
+----------------------
+unique_id: cpp#79
+----------------------
+nominal_prompt
+
+/*
+Write a function that takes a string and returns an ordered version of it.
+Ordered version of string, is a string where all words (separated by space)
+are replaced by a new word where all the characters arranged in
+ascending order based on ascii value.
+Note: You should keep the order of words and blank spaces in the sentence.
+
+For example:
+anti_shuffle("Hi") returns "Hi"
+anti_shuffle("hello") returns "ehllo"
+anti_shuffle("Hello World!!!") returns "Hello !!!Wdlor"
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string anti_shuffle(string s){
+
+----------------------
+perturbed_prompt
+
+/*
+Write a function that takes a string and returns an coherent translation of it. 
+ order interpretation of string, is a string where all words (separate by quad) 
+ are replaced by a newfangled news where all the quality arrange in
+ascending order base on ascii value. 
+ eminence: You should restrain the club of password and blank spaces in the sentence.
+
+For example:
+anti_shuffle("Hi") returns "Hi"
+anti_shuffle("hello") returns "ehllo"
+anti_shuffle("Hello World!!!") returns "Hello !!!Wdlor"
+*/
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+string anti_shuffle(string s){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/49
+----------------------
+unique_id: cpp#80
+----------------------
+nominal_prompt
+
+/*
+Return 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+#include<stdio.h>
+using namespace std;
+int modp(int n,int p){
+
+----------------------
+perturbed_prompt
+
+/*
+Return 2^n modulo p (be aware of numerics).
+>>> modp(3, 5)
+3
+>>> modp(1101, 101)
+2
+>>> modp(0, 101)
+1
+>>> modp(3, 11)
+8
+>>> modp(100, 101)
+1
+*/
+#include<stdio.h>
+using namespace std;
+int modp(int n,int p){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/138
+----------------------
+unique_id: cpp#81
+----------------------
+nominal_prompt
+
+/*
+Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+Example
+is_equal_to_sum_even(4) == false
+is_equal_to_sum_even(6) == false
+is_equal_to_sum_even(8) == true
+*/
+#include<stdio.h>
+using namespace std;
+bool is_equal_to_sum_even(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+Example
+isEqualToSumEven(4) == false
+isEqualToSumEven(6) == false
+isEqualToSumEven(8) == true
+*/
+#include<stdio.h>
+using namespace std;
+bool isEqualToSumEven(int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/90
+----------------------
+unique_id: cpp#82
+----------------------
+nominal_prompt
+
+/*
+You are given a vector of integers.
+Write a function next_smallest() that returns the 2nd smallest element of the vector.
+Return None if there is no such element.
+
+next_smallest({1, 2, 3, 4, 5}) == 2
+next_smallest({5, 1, 4, 3, 2}) == 2
+next_smallest({}) == None
+next_smallest({1, 1}) == None
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int next_smallest(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a vector of integers.
+Write a function next_smallest() that returns the 2nd smallest element of the vector.
+Return None if there is no such element.
+
+next_smallest({1, 2, 3, 4, 5}) == 2
+next_smallest({5, 1, 4, 3, 2}) == 2
+next_smallest({}) == None
+next_smallest({1, 1}) == None
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int next_smallest(vector<int> lst){
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/15
+----------------------
+unique_id: cpp#83
+----------------------
+nominal_prompt
+
+/*
+Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+>>> string_sequence(0)
+"0"
+>>> string_sequence(5)
+"0 1 2 3 4 5"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string string_sequence(int n){
+
+----------------------
+perturbed_prompt
+
+/*
+Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+>>> string_sequence(0)
+"0"
+>>> string_sequence(5)
+"0 1 2 3 4 5"
+*/
+#include <stdio.h>
+#include<string>
+usingnamespace std;
+string string_sequence(int n) {
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/142
+----------------------
+unique_id: cpp#84
+----------------------
+nominal_prompt
+
+/*
+"
+This function will take a vector of integers. For all entries in the vector, the function shall square the integer entry if its index is a 
+multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not 
+change the entries in the vector whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. 
+
+Examples:
+For lst = {1,2,3} the output should be 6
+For lst = {}  the output should be 0
+For lst = {-1,-5,2,-1,-5}  the output should be -126
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int sum_squares(vector<int> lst){
+    int sum=0;
+
+----------------------
+perturbed_prompt
+
+/*
+"
+This function will take a vector of integers. For all entries in the vector, the function shall square the integer entry if its index is a 
+multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not 
+change the entries in the vector whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. 
+
+Examples:
+For lst = {1,2,3} the output should be 6
+For lst = {}  the output should be 0
+For lst = {-1,-5,2,-1,-5}  the output should be -126
+*/
+#include <stdio.h>
+#include <vector>
+using namespace std;
+int sum_squares(vector < int > lst) {
+    int sum = 0;
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/33
+----------------------
+unique_id: cpp#85
+----------------------
+nominal_prompt
+
+/*
+This function takes a vector l and returns a vector l' such that
+l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal
+to the values of the corresponding indicies of l, but sorted.
+>>> sort_third({1, 2, 3})
+{1, 2, 3}
+>>> sort_third({5, 6, 3, 4, 8, 9, 2})
+{2, 6, 3, 4, 8, 9, 5}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> sort_third(vector<int> l){
+
+----------------------
+perturbed_prompt
+
+/*
+This function will take a vector l and will return a vector l' such that 
+ l 'will be identical to l in the indicies that will be not divisible by three, while its values at the indicies that will be divisible by three will be equal 
+ to the values of the corresponding indicies of l, but will sort.
+>>> sort_third({1, 2, 3})
+{1, 2, 3}
+>>> sort_third({5, 6, 3, 4, 8, 9, 2})
+{2, 6, 3, 4, 8, 9, 5}
+*/
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> sort_third(vector<int> l){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/14
+----------------------
+unique_id: cpp#86
+----------------------
+nominal_prompt
+
+/*
+Return vector of all prefixes from shortest to longest of the input string
+>>> all_prefixes("abc")
+{"a", "ab", "abc"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> all_prefixes(string str){
+
+----------------------
+perturbed_prompt
+
+/*
+Return vector of all prefiexs frmo shortset to longest of the input stirgn
+>>> all_prefixes("abc")
+{"a", "ab", "abc"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+vector<string> all_prefixes(string str){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/136
+----------------------
+unique_id: cpp#87
+----------------------
+nominal_prompt
+
+/*
+Create a function that returns a vector (a, b), where "a" is
+the largest of negative integers, and "b" is the smallest
+of positive integers in a vector.
+If there is no negative or positive integers, return them as 0.
+
+Examples:
+largest_smallest_integers({2, 4, 1, 3, 5, 7}) == {0, 1}
+largest_smallest_integers({}) == {0,0}
+largest_smallest_integers({0}) == {0,0}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> largest_smallest_integers(vector<int> lst){
+    int maxneg=0,minpos=0;
+    for (int i=0;i<lst.size();i++)
+
+----------------------
+perturbed_prompt
+
+// Create a function that returns a vector (a, b), where "a" is
+// the largest of negative integers, and "b" is the smallest
+// of positive integers in a vector.
+// If there is no negative or positive integers, return them as 0.
+// 
+// Examples:
+// largest_smallest_integers({2, 4, 1, 3, 5, 7}) == {0, 1}
+// largest_smallest_integers({}) == {0,0}
+// largest_smallest_integers({0}) == {0,0}
+// #include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> largest_smallest_integers(vector<int> lst){
+    int maxneg=0,minpos=0;
+    for (int i=0;i<lst.size();i++)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/19
+----------------------
+unique_id: cpp#88
+----------------------
+nominal_prompt
+
+/*
+Input is a space-delimited string of numberals from "zero" to "nine".
+Valid choices are "zero", "one", 'two", 'three", "four", "five", 'six", 'seven", "eight" and "nine".
+Return the string with numbers sorted from smallest to largest
+>>> sort_numbers('three one five")
+"one three five"
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+string sort_numbers(string numbers){
+
+----------------------
+perturbed_prompt
+
+/*
+Input is a space-delimited string of numberals from "zero" to "nine". Valid choices was "zero", "one", 'two", 'three", "four", "five", 'six", 'seven", "eight" and "nine". Return the string with numbers sort from smaller to larger
+>>> sort_numbers('three one five")
+"one three five"
+*/
+#include<stdio.h>
+#include<string>
+#include<map>
+using namespace std;
+string sort_numbers(string numbers){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/117
+----------------------
+unique_id: cpp#89
+----------------------
+nominal_prompt
+
+/*
+Given a string s and a natural number n, you have been tasked to implement 
+a function that returns a vector of all words from string s that contain exactly 
+n consonants, in order these words appear in the string s.
+If the string s is empty then the function should return an empty vector.
+Note: you may assume the input string contains only letters and spaces.
+Examples:
+select_words("Mary had a little lamb", 4) ==> {"little"}
+select_words("Mary had a little lamb", 3) ==> {"Mary", "lamb"}
+select_words('simple white space", 2) ==> {}
+select_words("Hello world", 4) ==> {"world"}
+select_words("Uncle sam", 3) ==> {"Uncle"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+vector<string> select_words(string s,int n){
+
+----------------------
+perturbed_prompt
+
+/*
+Given a string s and a natural number n, you were tasked to implement 
+ a function that returned a vector of all words from string s that contained exactly 
+n consonants, in order these words appeared in the string s.
+If the string s were empty then the function should return an empty vector. 
+ Note: you may assumed the input string contained only letters and spaces.
+Examples:
+select_words("Mary had a little lamb", 4) ==> {"little"}
+select_words("Mary had a little lamb", 3) ==> {"Mary", "lamb"}
+select_words('simple white space", 2) ==> {}
+select_words("Hello world", 4) ==> {"world"}
+select_words("Uncle sam", 3) ==> {"Uncle"}
+*/
+#include<stdio.h>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+vector<string> select_words(string s,int n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/35
+----------------------
+unique_id: cpp#90
+----------------------
+nominal_prompt
+
+/*
+Return maximum element in the vector.
+>>> max_element({1, 2, 3})
+3
+>>> max_element({5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10})
+123
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+float max_element(vector<float> l){
+
+----------------------
+perturbed_prompt
+
+/*
+Return maximum element in the vector.
+>>> max_element({1, 2, 3})
+3
+>>> max_element({5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10})
+123
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+float max_element(vector<float> l){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/136
+----------------------
+unique_id: cpp#91
+----------------------
+nominal_prompt
+
+/*
+Create a function that returns a vector (a, b), where "a" is
+the largest of negative integers, and "b" is the smallest
+of positive integers in a vector.
+If there is no negative or positive integers, return them as 0.
+
+Examples:
+largest_smallest_integers({2, 4, 1, 3, 5, 7}) == {0, 1}
+largest_smallest_integers({}) == {0,0}
+largest_smallest_integers({0}) == {0,0}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> largest_smallest_integers(vector<int> lst){
+
+----------------------
+perturbed_prompt
+
+/*
+Create a function that returns a vector (a, b), where "a" is
+the largest of negative integers, and "b" is the smallest
+of positive integers in a vector.
+If there is no negative or positive integers, return them as 0.
+
+Examples:
+larGest_SmallEst_IntegErs({2, 4, 1, 3, 5, 7}) == {0, 1}
+larGest_SmallEst_IntegErs({}) == {0,0}
+larGest_SmallEst_IntegErs({0}) == {0,0}
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+vector<int> larGest_SmallEst_IntegErs(vector<int> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/21
+----------------------
+unique_id: cpp#92
+----------------------
+nominal_prompt
+
+/*
+Given vector of numbers (of at least two elements), apply a linear transform to that vector,
+such that the smallest number will become 0 and the largest will become 1
+>>> rescale_to_unit({1.0, 2.0, 3.0, 4.0, 5.0})
+{0.0, 0.25, 0.5, 0.75, 1.0}
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+vector<float> rescale_to_unit(vector<float> numbers){ 
+
+----------------------
+perturbed_prompt
+
+/*
+Given vector of numbers (of at least two elements), apply a linear transform to that vector,
+such that the smallest number will become 0 and the largest will become 1
+>>> rescaleToUnit({1.0, 2.0, 3.0, 4.0, 5.0})
+{0.0, 0.25, 0.5, 0.75, 1.0}
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+vector<float> rescaleToUnit(vector<float> numbers){ 
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/27
+----------------------
+unique_id: cpp#93
+----------------------
+nominal_prompt
+
+/*
+For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+>>> flip_case("Hello")
+"hELLO"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string filp_case(string str){
+    string out="";
+    for (int i=0;i<str.length();i++)
+    {
+
+----------------------
+perturbed_prompt
+
+/*
+For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+>>> flip_case("Hello")
+"hELLO"
+*/
+#include <stdio.h>
+#include <string>
+using namespace std;
+string filp_case(string str) {
+    string out = "";
+    int i = 0;
+while (i < str.length()) {
+         {
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/37
+----------------------
+unique_id: cpp#94
+----------------------
+nominal_prompt
+
+/*
+This function takes a vector l and returns a vector l' such that
+l' is identical to l in the odd indicies, while its values at the even indicies are equal
+to the values of the even indicies of l, but sorted.
+>>> sort_even({1, 2, 3})
+{1, 2, 3}
+>>> sort_even({5, 6, 3, 4})
+{3, 6, 5, 4}
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<float> sort_even(vector<float> l){
+
+----------------------
+perturbed_prompt
+
+/*
+This function took a vector l and returned a vector l' such that 
+ l 'was identical to l in the odd indicies, while its values at the even indicies were equal 
+ to the values of the even indicies of l, but sorted.
+>>> sort_even({1, 2, 3})
+{1, 2, 3}
+>>> sort_even({5, 6, 3, 4})
+{3, 6, 5, 4}
+*/
+#include<stdio.h>
+#include<math.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<float> sort_even(vector<float> l){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/61
+----------------------
+unique_id: cpp#95
+----------------------
+nominal_prompt
+
+/*
+brackets is a string of '(' and ')'.
+return true if every opening bracket has a corresponding closing bracket.
+
+>>> correct_bracketing("(")
+false
+>>> correct_bracketing("()")
+true
+>>> correct_bracketing("(()())")
+true
+>>> correct_bracketing(")(()")
+false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool correct_bracketing(string brackets){
+
+----------------------
+perturbed_prompt
+
+/*
+brackets is a stringo f '(' an d ')'.
+return true if every opening bracket has a corresponding closing  brack et .
+
+>>> correct_bracketing("(")
+false
+>>> correct_bracketing("()")
+true
+>>> correct_bracketing("(()())")
+true
+>>> correct_bracketing(")(()")
+false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool correct_bracketing(string brackets){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/23
+----------------------
+unique_id: cpp#96
+----------------------
+nominal_prompt
+
+/*
+Return length of given string
+>>> strlen("")
+0
+>>> strlen("abc")
+3
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+
+----------------------
+perturbed_prompt
+
+/*
+Return length of given string
+>>> strlen("")
+0
+>>> strlen("abc")
+3
+*/
+#include <stdio.h>
+#include<string>
+usingnamespace std;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/144
+----------------------
+unique_id: cpp#97
+----------------------
+nominal_prompt
+
+/*
+Your task is to implement a function that will simplify the expression
+x * n. The function returns true if x * n evaluates to a whole number and false
+otherwise. Both x and n, are string representation of a fraction, and have the following format,
+<numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+simplify("1/5", "5/1") = true
+simplify("1/6", "2/1") = false
+simplify("7/10", "10/2") = false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool simplify(string x,string n){
+
+----------------------
+perturbed_prompt
+
+/*
+Your task is to implement a function that will simplify the expression
+x * n. The function returns true if x * n evaluates to a whole number and false
+otherwise. Both x and n, are string representation of a fraction, and have the following format,
+<numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+simplify("1/5", "5/1") = true
+simplify("1/6", "2/1") = false
+simplify("7/10", "10/2") = false
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+bool simplify(string x,string n){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/79
+----------------------
+unique_id: cpp#98
+----------------------
+nominal_prompt
+
+/*
+You will be given a number in decimal form and your task is to convert it to
+binary format. The function should return a string, with each character representing a binary
+number. Each character in the string will be '0' or '1'.
+
+There will be an extra couple of characters "db" at the beginning and at the end of the string.
+The extra characters are there to help with the format.
+
+Examples:
+decimal_to_binary(15)   // returns "db1111db"
+decimal_to_binary(32)   // returns "db100000db"
+*/
+#include<stdio.h>
+#include<string>
+using namespace std;
+string decimal_to_binary(int decimal){
+    string out="";
+    if (decimal==0) return "db0db";
+    while (decimal>0)
+
+----------------------
+perturbed_prompt
+
+/*
+You will be given a number in decimal form and your task is to convert it to
+binary format. The function should return a string, with each character representing a binary
+number. Each character in the string will be '0' or '1'.
+
+There will be an extra couple of characters "db" at the beginning and at the end of the string.
+The extra characters are there to help with the format.
+
+Examples:
+decimal_to_binary(15)   // returns "db1111db"
+decimal_to_binary(32)   // returns "db100000db"
+*/
+
+#include<stdio.h>
+#include<string>
+using namespace std;
+string decimal_to_binary(int decimal){
+    string out="";
+    if (decimal==0) return "db0db";
+    while (decimal>0)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: CPP/147
+----------------------
+unique_id: cpp#99
+----------------------
+nominal_prompt
+
+/*
+You are given a positive integer n. You have to create an integer vector a of length n.
+    For each i (1 ≤ i ≤ n), the value of a{i} = i * i - i + 1.
+    Return the number of triples (a{i}, a{j}, a{k}) of a where i < j < k, 
+and a[i] + a[j] + a[k] is a multiple of 3.
+
+Example :
+    Input: n = 5
+    Output: 1
+    Explanation: 
+    a = {1, 3, 7, 13, 21}
+    The only valid triple is (1, 7, 13).
+*/
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int get_matrix_triples(int n){
+    vector<int> a;
+    vector<vector<int>> sum={{0,0,0}};
+    vector<vector<int>> sum2={{0,0,0}};
+    for (int i=1;i<=n;i++)
+    {
+        a.push_back((i*i-i+1)%3);
+        sum.push_back(sum[sum.size()-1]);
+        sum[i][a[i-1]]+=1;
+    }
+    for (int times=1;times<3;times++)
+
+----------------------
+perturbed_prompt
+
+/*
+You are given a positive integer n. You have to create an integer vector a of length n.
+    For each i (1 ≤ i ≤ n), the value of a{i} = i * i - i + 1.
+    Return the number of triples (a{i}, a{j}, a{k}) of a where i < j < k, 
+and a[i] + a[j] + a[k] is a multiple of 3.
+
+Example :
+    Input: n = 5
+    Output: 1
+    Explanation: 
+    a = {1, 3, 7, 13, 21}
+    The only valid triple is (1, 7, 13).
+*/
+
+#include<stdio.h>
+#include<vector>
+using namespace std;
+int get_matrix_triples(int n){
+    vector<int> a;
+    vector<vector<int>> sum={{0,0,0}};
+    vector<vector<int>> sum2={{0,0,0}};
+    for (int i=1;i<=n;i++)
+    {
+        a.push_back((i*i-i+1)%3);
+        sum.push_back(sum[sum.size()-1]);
+        sum[i][a[i-1]]+=1;
+    }
+    for (int times=1;times<3;times++)
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+

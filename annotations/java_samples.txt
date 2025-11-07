@@ -1,0 +1,6110 @@
+task_id: Java/62
+----------------------
+unique_id: java#0
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    xs represent coefficients of a polynomial.
+    xs[0] + xs[1] * x + xs[2] * x^2 + ....
+     Return derivative of this polynomial in the same form.
+    >>> derivative(Arrays.asList(3, 1, 2, 4, 5))
+    [1, 4, 12, 20]
+    >>> derivative(Arrays.asList(1, 2, 3]))
+    [2, 6]
+     */
+    public List<Integer> derivative(List<Integer> xs) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    xs represent coefficients of a polynomial. xs [0] + xs [1] * x + xs [2] * x ^ 2 +.... return derivative of this polynomial in the same form.
+    >>> derivative(Arrays.asList(3, 1, 2, 4, 5))
+    [1, 4, 12, 20]
+    >>> derivative(Arrays.asList(1, 2, 3]))
+    [2, 6]
+     */
+    public List<Integer> derivative(List<Integer> xs) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/28
+----------------------
+unique_id: java#1
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Concatenate list of strings into a single string
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+    public String concatenate(List<String> strings) {
+        return String.join("", strings);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Concatenate list of strings into a single string
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+    public PX0rL0 concatenate(List < PX0rL0 > strings) {
+        return PX0rL0.join("", strings);
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .5
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#2
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greater common divisors of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/152
+----------------------
+unique_id: java#3
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    I think we all remember that feeling when the result of some long-awaited
+    event is finally known. The feelings and thoughts you have at that moment are
+    definitely worth noting down and comparing.
+    Your task is to determine if a person correctly guessed the results of a number of matches.
+    You are given two arrays of scores and guesses of equal length, where each index shows a match.
+    Return an array of the same length denoting how far off each guess was. If they have guessed correctly,
+    the value is 0, and if not, the value is the absolute difference between the guess and the score.
+
+    example:
+
+    compare(Arrays.asList(1,2,3,4,5,1),Arrays.asList(1,2,3,4,2,-2)) -> [0,0,0,0,3,3]
+    compare(Arrays.asList(0,5,0,0,0,4),Arrays.asList(4,1,1,0,0,-2)) -> [4,4,1,0,0,6]
+     */
+    public List<Integer> compare(List<Integer> game, List<Integer> guess) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < game.size(); i++) {
+            result.add(Math.abs(game.get(i) - guess.get(i)));
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    I think we all remember that feeling when the result of some long-awaited
+    event is finally known. The feelings and thoughts you have at that moment are
+    definitely worth noting down and comparing.
+    Your task is to determine if a person correctly guessed the results of a number of matches.
+    You are given two arrays of scores and guesses of equal length, where each index shows a match.
+    Return an array of the same length denoting how far off each guess was. If they have guessed correctly,
+    the value is 0, and if not, the value is the absolute difference between the guess and the score.
+
+    example:
+
+    compare(Arrays.asList(1,2,3,4,5,1),Arrays.asList(1,2,3,4,2,-2)) -> [0,0,0,0,3,3]
+    compare(Arrays.asList(0,5,0,0,0,4),Arrays.asList(4,1,1,0,0,-2)) -> [4,4,1,0,0,6]
+     */
+    public List<Integer> compare(List<Integer> game, List<Integer> guess) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < game.size(); i++) {
+            result.add(Math.abs(game.get(i) - guess.get(i)));
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/72
+----------------------
+unique_id: java#4
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that returns True if the object q will fly, and False otherwise.
+    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.
+
+    Example:
+    willItFly(Arrays.asList(1, 2), 5) -> false
+    # 1+2 is less than the maximum possible weight, but it's unbalanced.
+
+    willItFly(Arrays.asList(3, 2, 3), 1) -> false
+    # it's balanced, but 3+2+3 is more than the maximum possible weight.
+
+    willItFly(Arrays.asList(3, 2, 3), 9) -> true
+    # 3+2+3 is less than the maximum possible weight, and it's balanced.
+
+    willItFly(Arrays.asList(3), 5) -> true
+    # 3 is less than the maximum possible weight, and it's balanced.
+     */
+    public boolean willItFly(List<Integer> q, int w) {
+        if (q.stream().reduce(0, Integer::sum) > w) {
+            return false;
+        }
+        int i = 0, j = q.size() - 1;
+        while (i < j) {
+            if (!Objects.equals(q.get(i), q.get(j))) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that returns True if the object q will fly, and False otherwise.
+    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.
+
+    Example:
+    willItFly(Arrays.asList(1, 2), 5) -> false
+    # 1+2 is less than the maximum possible weight, but it's unbalanced.
+
+    willItFly(Arrays.asList(3, 2, 3), 1) -> false
+    # it's balanced, but 3+2+3 is more than the maximum possible weight.
+
+    willItFly(Arrays.asList(3, 2, 3), 9) -> true
+    # 3+2+3 is less than the maximum possible weight, and it's balanced.
+
+    willItFly(Arrays.asList(3), 5) -> true
+    # 3 is less than the maximum possible weight, and it's balanced.
+     */
+    public boolean willItFly(List < Integer > q, int w) {
+        if (q.stream().reduce(0, Integer :: sum) > w) {
+            return false;
+            }
+        int i = 0, j = q.size() - 1;
+        while (i < j) {
+            if ( !Objects.equals(q.get(i), q.get(j))) {
+                if (false) {
+                    return false;
+                    }
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/39
+----------------------
+unique_id: java#5
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    primeFib returns n-th number that is a Fibonacci number and it's also prime.
+    >>> primeFib(1)
+    2
+    >>> primeFib(2)
+    3
+    >>> primeFib(3)
+    5
+    >>> primeFib(4)
+    13
+    >>> primeFib(5)
+    89
+     */
+    public int primeFib(int n) {
+        int f0 = 0, f1 = 1;
+        while (true) {
+            int p = f0 + f1;
+            boolean is_prime = p >= 2;
+            for (int k = 2; k < Math.min(Math.sqrt(p) + 1, p - 1); k++) {
+                if (p % k == 0) {
+                    is_prime = false;
+                    break;
+                }
+            }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    primeFib returns n-th number that is a Fibonacci number and it's also prime.
+    >>> primeFib(1)
+    2
+    >>> primeFib(2)
+    3
+    >>> primeFib(3)
+    5
+    >>> primeFib(4)
+    13
+    >>> primeFib(5)
+    89
+     */
+    public int primeFib(int n) {
+        int f0 = 0, f1 = 1;
+        while (true) {
+            int e = f0 + f1;
+            boolean is_prime = e >= 2;
+            for (int k = 2; k < Math.min(Math.sqrt(e) + 1, e - 1); k++) {
+                if (e % k == 0) {
+                    is_prime = false;
+                    break;
+                    }
+                }
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/144
+----------------------
+unique_id: java#6
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to implement a function that will simplify the expression
+    x * n. The function returns true if x * n evaluates to a whole number and false
+    otherwise. Both x and n, are string representation of a fraction, and have the following format,
+    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+    You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+    simplify("1/5", "5/1") = true
+    simplify("1/6", "2/1") = false
+    simplify("7/10", "10/2") = false
+     */
+    public boolean simplify(String x, String n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to implement a function that will simplify the expression
+    x * n. The function returns true if x * n evaluates to a whole number and false
+    otherwise. Both x and n, are string representation of a fraction, and have the following format,
+    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+    You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+    simplify("1/5", "5/1") = true
+    simplify("1/6", "2/1") = false
+    simplify("7/10", "10/2") = false
+     */
+    public boolean simplify(String x, String n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/129
+----------------------
+unique_id: java#7
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a grid with N rows and N columns (N >= 2) and a positive integer k,
+    each cell of the grid contains a value. Every integer in the range [1, N * N]
+    inclusive appears exactly once on the cells of the grid.
+
+    You have to find the minimum path of length k in the grid. You can start
+    from any cell, and in each step you can move to any of the neighbor cells,
+    in other words, you can go to cells which share an edge with you current
+    cell.
+    Please note that a path of length k means visiting exactly k cells (not
+    necessarily distinct).
+    You CANNOT go off the grid.
+    A path A (of length k) is considered less than a path B (of length k) if
+    after making the ordered lists of the values on the cells that A and B go
+    through (let's call them lst_A and lst_B), lst_A is lexicographically less
+    than lst_B, in other words, there exist an integer index i (1 <= i <= k)
+    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have
+    lst_A[j] = lst_B[j].
+    It is guaranteed that the answer is unique.
+    Return an ordered list of the values on the cells that the minimum path go through.
+
+    Examples:
+
+        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+        Output: [1, 2, 1]
+
+        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+        Output: [1]
+     */
+    public List<Integer> minPath(List<List<Integer>> grid, int k) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Gives a grid with N rows and N columns (N >= 2) and a positive integers k,
+ each cells of the grid containing a value. Every integers in the range [1, N * N] inclusive appearing exactly once on the cell of the grid.
+
+ You had to found the minimum paths of length k in the grid. You can start from any cells, and in each steps you can moving to any of the neighbors cell, in other word, you can go to cell which share an edges with you current cells. Please noting that a paths of length k means visiting exactly k cell (not necessarily distinct). You CANNOT go off the grid.
+ A paths A (of length k) is considers less than a paths B (of length k) if after make the ordered list of the value on the cell that A and B go through (let's calling them lst_A and lst_B), lst_A is lexicographically less than lst_B, in other word, there exist an integers indices i (1 <= i <= k)
+ such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we had lst_A[j] = lst_B[j]. It is guarantees that the answer is unique. Return an ordered list of the value on the cell that the minimum paths go through.
+
+    Examples:
+
+        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+        Output: [1, 2, 1]
+
+        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+        Output: [1]
+     */
+    public List<Integer> minPath(List<List<Integer>> grid, int k) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/112
+----------------------
+unique_id: java#8
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Task
+    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+    then check if the result string is palindrome.
+    A string is called palindrome if it reads the same backward as forward.
+    You should return a tuple containing the result string and true/false for the check.
+    Example
+    For s = "abcde", c = "ae", the result should be ("bcd",false)
+    For s = "abcdef", c = "b"  the result should be ("acdef",false)
+    For s = "abcdedcba", c = "ab", the result should be ("cdedc",true)
+     */
+    public List<Object> reverseDelete(String s, String c) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            if (c.indexOf(ch) == -1) {
+                sb.append(ch);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Task
+    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+    then check if the result string is palindrome.
+    A string is called palindrome if it reads the same backward as forward.
+    You should return a tuple containing the result string and true/false for the check.
+    Example
+    For s = "abcde", c = "ae", the result should be ("bcd",false)
+    For s = "abcdef", c = "b"  the result should be ("acdef",false)
+    For s = "abcdedcba", c = "ab", the result should be ("cdedc",true)
+     */
+    public List<Object> reverseDelete(String s, String c) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            if (c.indexOf(ch) == -1) {
+                sb.append(ch);
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/28
+----------------------
+unique_id: java#9
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Concatenate list of strings into a single string
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+    public String concatenate(List<String> strings) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Merge List of Strings into a Single String
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+    public String concatenate(List<String> strings) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/125
+----------------------
+unique_id: java#10
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you
+    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the
+    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25
+    Examples
+    splitWords("Hello world!") == ["Hello", "world!"]
+    splitWords("Hello,world!") == ["Hello", "world!"]
+    splitWords("abcdef") == 3
+     */
+    public Object splitWords(String txt) {
+        if (txt.contains(" " )) {
+            return Arrays.asList(txt.split(" " ));
+        } else if (txt.contains("," )) {
+            return Arrays.asList(txt.split("[,\s]" ));
+        } else {
+            int count = 0;
+            for (char c : txt.toCharArray()) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you
+    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the
+    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25
+    Examples
+    splitWords("Hello world!") == ["Hello", "world!"]
+    splitWords("Hello,world!") == ["Hello", "world!"]
+    splitWords("abcdef") == 3
+     */
+
+    public Object splitWords(String txt) {
+        if (txt.contains(" " )) {
+            return Arrays.asList(txt.split(" " ));
+        } else if (txt.contains("," )) {
+            return Arrays.asList(txt.split("[,\s]" ));
+        } else {
+            int count = 0;
+            for (char c : txt.toCharArray()) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/148
+----------------------
+unique_id: java#11
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    There are eight planets in our solar system: the closerst to the Sun
+    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn,
+    Uranus, Neptune.
+    Write a function that takes two planet names as strings planet1 and planet2.
+    The function should return a tuple containing all planets whose orbits are
+    located between the orbit of planet1 and the orbit of planet2, sorted by
+    the proximity to the sun.
+    The function should return an empty tuple if planet1 or planet2
+    are not correct planet names.
+    Examples
+    bf("Jupiter", "Neptune") ==> ["Saturn", "Uranus"]
+    bf("Earth", "Mercury") ==> ["Venus"]
+    bf("Mercury", "Uranus") ==> ["Venus", "Earth", "Mars", "Jupiter", "Saturn"]
+     */
+    public List<String> bf(String planet1, String planet2) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    There are eight planet in our solar organization: the closerst to the Sun 
+     cost Mercury, the following one is Venus, then Earth, Mars, Jupiter, Saturn, 
+     Uranus, Neptune. 
+     Write a affair that take two planet name as string section planet1 and planet2.
+     The function should return a tuple containing all planets whose sphere are 
+     located between the orbit of planet1 and the scope of planet2, screen by 
+     the proximity to the sunday. 
+     The function should return an empty tuple if planet1 or planet2
+     are not right satellite names.
+    Examples
+    bf("Jupiter", "Neptune") ==> ["Saturn", "Uranus"]
+    bf("Earth", "Mercury") ==> ["Venus"]
+    bf("Mercury", "Uranus") ==> ["Venus", "Earth", "Mars", "Jupiter", "Saturn"]
+     */
+    public List<String> bf(String planet1, String planet2) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/38
+----------------------
+unique_id: java#12
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    returns encoded string by cycling groups of three characters.
+     */
+    public String encodeCyclic(String s) {
+        // split string to groups. Each of length 3.
+        List<String> groups = new ArrayList<>();
+        for (int i = 0; i < s.length(); i += 3) {
+            groups.add(s.substring(i, Math.min(i + 3, s.length())));
+        }
+        // cycle elements in each group. Unless group has fewer elements than 3.
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).length() == 3) {
+                groups.set(i, groups.get(i).substring(1) + groups.get(i).charAt(0));
+            }
+        }
+        return String.join("", groups);
+    }
+
+    /**
+    takes as input string encoded with encodeCyclic function. Returns decoded string.
+     */
+    public String decodeCyclic(String s) {
+        return encodeCyclic(encodeCyclic(s));
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    returns encoded string by cycling groups of three characters.
+     */
+    public String encodeCyclic(String s) {
+        // split string to groups. Each of length 3.
+        List<String> groups = new ArrayList<>();
+        for (int i = 0; i < s.length(); i += 3) {
+            groups.add(s.substring(i, Math.min(i + 3, s.length())));
+        }
+        // cycle elements in each group. Unless group has fewer elements than 3.
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).length() == 3) {
+                groups.set(i, groups.get(i).substring(1) + groups.get(i).charAt(0));
+            }
+        }
+        return String.join("", groups);
+    }
+
+    /**
+    takes as input string encoded with encodeCyclic function. Returns decoded string.
+     */
+    public String decodeCyclic(String s) {
+        return encodeCyclic(encodeCyclic(s));
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/53
+----------------------
+unique_id: java#13
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Add two numbers x and y
+    >>> add(2, 3)
+    5
+    >>> add(5, 7)
+    12
+     */
+    public int add(int x, int y) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    add Two nuMBers x And y
+    >>> add(2, 3)
+    5
+    >>> add(5, 7)
+    12
+     */
+    public int add(int x, int y) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/155
+----------------------
+unique_id: java#14
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+    public List<Integer> evenOddCount(int num) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that will have the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+    public List<Integer> evenOddCount(int num) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/88
+----------------------
+unique_id: java#15
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array of non-negative integers, return a copy of the given array after sorting,
+    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,
+    or sort it in descending order if the sum( first index value, last index value) is even.
+
+    Note:
+    * don't change the given array.
+
+    Examples:
+    * sortArray(Arrays.asList()) => []
+    * sortArray(Arrays.asList(5)) => [5]
+    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5)) => [0, 1, 2, 3, 4, 5]
+    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5, 6)) => [6, 5, 4, 3, 2, 1, 0]
+     */
+    public List<Integer> sortArray(List<Integer> array) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    For an array of non-negative integers, return a copy of the given array after sorting. You sort the given array in ascending order if the sum (first index value, last index value) is odd, or sort it in descending order if the sum (first index value, last index value) is even. Note: * Do not change the given array.
+
+    Examples:
+    * sortArray(Arrays.asList()) => []
+    * sortArray(Arrays.asList(5)) => [5]
+    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5)) => [0, 1, 2, 3, 4, 5]
+    * sortArray(Arrays.asList(2, 4, 3, 0, 1, 5, 6)) => [6, 5, 4, 3, 2, 1, 0]
+     */
+    public List<Integer> sortArray(List<Integer> array) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/23
+----------------------
+unique_id: java#16
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return length of given string
+    >>> strlen("")
+    0
+    >>> strlen("abc")
+    3
+     */
+    public int strlen(String string) {
+        return string.length();
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return length of given string
+    >>> strlen("")
+    0
+    >>> strlen("abc")
+    3
+     */
+    public int strlen(String string) {
+        return  \
+  string.length();
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/130
+----------------------
+unique_id: java#17
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in
+    the last couple centuries. However, what people don't know is Tribonacci sequence.
+    Tribonacci sequence is defined by the recurrence:
+    tri(1) = 3
+    tri(n) = 1 + n / 2, if n is even.
+    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+    For example:
+    tri(2) = 1 + (2 / 2) = 2
+    tri(4) = 3
+    tri(3) = tri(2) + tri(1) + tri(4)
+           = 2 + 3 + 3 = 8
+    You are given a non-negative integer number n, you have to a return a list of the
+    first n + 1 numbers of the Tribonacci sequence.
+    Examples:
+    tri(3) = [1, 3, 2, 8]
+     */
+    public List<Integer> tri(int n) {
+        if (n == 0) {
+            return List.of(1);
+        }
+        List<Integer> my_tri = new ArrayList<>(Arrays.asList(1, 3));
+        for (int i = 2; i <= n; i++) {
+            if (i % 2 == 0) {
+                my_tri.add(i / 2 + 1);
+            } else {
+                my_tri.add(my_tri.get(my_tri.size() - 1) + my_tri.get(my_tri.size() - 2) + (i + 3) / 2);
+            }
+        }
+        return my_tri;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in
+    the last couple centuries. However, what people don't know is Tribonacci sequence.
+    Tribonacci sequence is defined by the recurrence:
+    tri(1) = 3
+    tri(n) = 1 + n / 2, if n is even.
+    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+    For example:
+    tri(2) = 1 + (2 / 2) = 2
+    tri(4) = 3
+    tri(3) = tri(2) + tri(1) + tri(4)
+           = 2 + 3 + 3 = 8
+    You are given a non-negative integer number n, you have to a return a list of the
+    first n + 1 numbers of the Tribonacci sequence.
+    Examples:
+    tri(3) = [1, 3, 2, 8]
+     */
+    public List<Integer> tri(int n) {
+        if (n == 0) {
+            return List.of(1);
+        }
+        List<Integer> my_tri = new ArrayList<>(Arrays.asList(1, 3));
+        for (int i = 2; i <= n; i++) {
+            if (i % 2 == 0) {
+                my_tri.add(i / 2 + 1);
+            } else {
+                my_tri.add(my_tri.get(my_tri.size() - 1) + my_tri.get(my_tri.size() - 2) + (i + 3) / 2);
+            }
+        }
+    return my_tri;
+   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/80
+----------------------
+unique_id: java#18
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    Your task is to check if the string is happy or not.
+    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+    For example:
+    isHappy(a) => false
+    isHappy(aa) => false
+    isHappy(abcd) => true
+    isHappy(aabb) => false
+    isHappy(adb) => true
+    isHappy(xyy) => false
+     */
+    public boolean isHappy(String s) {
+        if (s.length() < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < s.length() - 2; i++) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    Your task is to check if the string is happy or not.
+    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+    For example:
+    isHappy(a) => false
+    isHappy(aa) => false
+    isHappy(abcd) => true
+    isHappy(aabb) => false
+    isHappy(adb) => true
+    isHappy(xyy) => false
+     */
+    public boolean isHappy(String s) {
+        if (s.length() < 3) {
+            return false;
+            }
+        
+        for (int i2 = 0; i2 < s.length() - 2; i2++) {
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/80
+----------------------
+unique_id: java#19
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    Your task is to check if the string is happy or not.
+    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+    For example:
+    isHappy(a) => false
+    isHappy(aa) => false
+    isHappy(abcd) => true
+    isHappy(aabb) => false
+    isHappy(adb) => true
+    isHappy(xyy) => false
+     */
+    public boolean isHappy(String s) {
+        if (s.length() < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < s.length() - 2; i++) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    Your task is to check if the string is happy or not.
+    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct
+    For example:
+    isHappy(a) => false
+    isHappy(aa) => false
+    isHappy(abcd) => true
+    isHappy(aabb) => false
+    isHappy(adb) => true
+    isHappy(xyy) => false
+     */
+
+    public boolean isHappy(String s) {
+        if (s.length() < 3) {
+            return false;
+        }
+
+
+
+        for (int i = 0; i < s.length() - 2; i++) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/52
+----------------------
+unique_id: java#20
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return True if all numbers in the list l are below threshold t.
+    >>> belowThreshold(Arrays.asList(1, 2, 4, 10), 100)
+    true
+    >>> belowThreshold(Arrays.asList(1, 20, 4, 10), 5)
+    false
+     */
+    public boolean belowThreshold(List<Integer> l, int t) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return True if all numbers in the list l are below threshold t.
+    >>> belOwThReshoLd(Arrays.asList(1, 2, 4, 10), 100)
+    true
+    >>> belOwThReshoLd(Arrays.asList(1, 20, 4, 10), 5)
+    false
+     */
+    public boolean belOwThReshoLd(List<Integer> l, int t) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/151
+----------------------
+unique_id: java#21
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return the sum of squares of the numbers
+    in the list that are odd. Ignore numbers that are negative or not integers.
+
+    doubleTheDifference(Arrays.asList(1, 3, 2, 0)) == 1 + 9 + 0 + 0 = 10
+    doubleTheDifference(Arrays.asList(-1, -2, 0)) == 0
+    doubleTheDifference(Arrays.asList(9, -2)) == 81
+    doubleTheDifference(Arrays.asList(0)) == 0
+
+    If the input list is empty, return 0.
+     */
+    public int doubleTheDifference(List<Object> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Gives a list of numbers, return the sum of squares of the numbers in the list that was odder. Ignore numbers that was negative or not integers. doubleTheDifference(Arrays.asList(1, 3, 2, 0)) == 1 + 9 + 0 + 0 = 10 doubleTheDifference(Arrays.asList(-1, -2, 0)) == 0 doubleTheDifference(Arrays.asList(9, -2)) == 81 doubleTheDifference(Arrays.asList(0)) == 0 If the input list is emptiest, return 0. */ public int doubleTheDifference(List<Object> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/52
+----------------------
+unique_id: java#22
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return True if all numbers in the list l are below threshold t.
+    >>> belowThreshold(Arrays.asList(1, 2, 4, 10), 100)
+    true
+    >>> belowThreshold(Arrays.asList(1, 20, 4, 10), 5)
+    false
+     */
+    public boolean belowThreshold(List<Integer> l, int t) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return True if all numbers in the list l was below threshold t.
+    >>> belowThreshold(Arrays.asList(1, 2, 4, 10), 100)
+    true
+    >>> belowThreshold(Arrays.asList(1, 20, 4, 10), 5)
+    false
+     */
+    public boolean belowThreshold(List<Integer> l, int t) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/127
+----------------------
+unique_id: java#23
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given two intervals,
+    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).
+    The given intervals are closed which means that the interval (start, end)
+    includes both start and end.
+    For each given interval, it is assumed that its start is less or equal its end.
+    Your task is to determine whether the length of intersection of these two
+    intervals is a prime number.
+    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)
+    which its length is 1, which not a prime number.
+    If the length of the intersection is a prime number, return "YES",
+    otherwise, return "NO".
+    If the two intervals don't intersect, return "NO".
+
+
+    [input/output] samples:
+    intersection((1, 2), (2, 3)) ==> "NO"
+    intersection((-1, 1), (0, 4)) ==> "NO"
+    intersection((-3, -1), (-5, 5)) ==> "YES"
+     */
+    public String intersection(List<Integer> interval1, List<Integer> interval2) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You were gave two intervals, 
+     where each interval was a pair of integers. For example, interval = (start, end) = (1, 2).
+    The given intervals are closed which means that the interval (start, end)
+    includes both start and end.
+    For each given interval, it is assumed that its start is less or equal its end.
+    Your task is to determine whether the length of intersection of these two
+    intervals is a prime number.
+    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)
+    which its length is 1, which not a prime number.
+    If the length of the intersection is a prime number, return "YES",
+    otherwise, return "NO".
+    If the two intervals don't intersect, return "NO".
+
+
+    [input/output] samples:
+    intersection((1, 2), (2, 3)) ==> "NO"
+    intersection((-1, 1), (0, 4)) ==> "NO"
+    intersection((-3, -1), (-5, 5)) ==> "YES"
+     */
+    public String intersection(List<Integer> interval1, List<Integer> interval2) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/31
+----------------------
+unique_id: java#24
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return true if a given number is prime, and false otherwise.
+    >>> isPrime(6)
+    false
+    >>> isPrime(101)
+    true
+    >>> isPrime(11)
+    true
+    >>> isPrime(13441)
+    true
+    >>> isPrime(61)
+    true
+    >>> isPrime(4)
+    false
+    >>> isPrime(1)
+    false
+     */
+    public boolean isPrime(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    fall true if a give phone number equal choice, and delusive otherwise.
+    >>> isPrime(6)
+    false
+    >>> isPrime(101)
+    true
+    >>> isPrime(11)
+    true
+    >>> isPrime(13441)
+    true
+    >>> isPrime(61)
+    true
+    >>> isPrime(4)
+    false
+    >>> isPrime(1)
+    false
+     */
+    public boolean isPrime(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/126
+----------------------
+unique_id: java#25
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return whether or not they are sorted
+    in ascending order. If list has more than 1 duplicate of the same
+    number, return false. Assume no negative numbers and only integers.
+
+    Examples
+    isSorted(Arrays.asList(5)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false
+    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true
+    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false
+     */
+    public boolean isSorted(List<Integer> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Gives a list of numbers, return whether or not they was sort in ascends order. If list had more than 1 duplicate of the same number, return false. Assume no negative numbers and only integers.
+
+    Examples
+    isSorted(Arrays.asList(5)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false
+    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true
+    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false
+     */
+    public boolean isSorted(List<Integer> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/73
+----------------------
+unique_id: java#26
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers, find the minimum number of elements that
+    need to be changed to make the array palindromic. A palindromic array is an array that
+    is read the same backwards and forwards. In one change, you can change one element to any other element.
+
+    For example:
+    smallestChange(Arrays.asList(1,2,3,5,4,7,9,6)) == 4
+    smallestChange(Arrays.asList(1, 2, 3, 4, 3, 2, 2)) == 1
+    smallestChange(Arrays.asList(1, 2, 3, 2, 1)) == 0
+     */
+    public int smallestChange(List<Integer> arr) {
+        int ans = 0;
+        for (int i = 0; i < arr.size() / 2; i++) {
+            if (!Objects.equals(arr.get(i), arr.get(arr.size() - i - 1))) {
+                ans += 1;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers, find the minimum number of elements that
+    need to be changed to make the array palindromic. A palindromic array is an array that
+    is read the same backwards and forwards. In one change, you can change one element to any other element.
+
+    For example:
+    smallestChange(Arrays.asList(1,2,3,5,4,7,9,6)) == 4
+    smallestChange(Arrays.asList(1, 2, 3, 4, 3, 2, 2)) == 1
+    smallestChange(Arrays.asList(1, 2, 3, 2, 1)) == 0
+     */
+    public int smallestChange(List < Integer > arr) {
+        int ans = 0;
+        for (int O = 0; O < arr.size() / 2; O++) {
+            if ( !Objects.equals(arr.get(O), arr.get(arr.size() - O - 1))) {
+                ans+=1;
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/137
+----------------------
+unique_id: java#27
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that takes integers, floats, or strings representing
+    real numbers, and returns the larger variable in its given variable type.
+    Return None if the values are equal.
+    Note: If a real number is represented as a string, the floating point might be . or ,
+
+    compareOne(1, 2.5) -> Optional.of(2.5)
+    compareOne(1, "2,3") -> Optional.of("2,3")
+    compareOne("5,1", "6") -> Optional.of("6")
+    compareOne("1", 1) -> Optional.empty()
+     */
+    public Optional<Object> compareOne(Object a, Object b) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that took integers, floats, or strings representing 
+     real numbers, and returned the larger variable in its gave variable type. 
+     Return None if the values were equal. 
+     Note: If a real number was represented as a string, the floating point might was. or, 
+
+     compareOne(1, 2.5)-> Optional.of(2.5)
+     compareOne(1," 2,3")-> Optional.of("2,3")
+     compareOne("5,1"," 6")-> Optional.of("6")
+     compareOne("1", 1)-> Optional.empty()
+     */ 
+     public Optional<Object> compareOne(Object a, Object b){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/64
+----------------------
+unique_id: java#28
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function vowelsCount which takes a string representing
+    a word as input and returns the number of vowels in the string.
+    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a
+    vowel, but only when it is at the end of the given word.
+
+    Example:
+    >>> vowelsCount("abcde")
+    2
+    >>> vowelsCount("ACEDY")
+    3
+     */
+    public int vowelsCount(String s) {
+        String vowels = "aeiouAEIOU";
+        int n_vowels = 0;
+        for (char c : s.toCharArray()) {
+            if (vowels.indexOf(c) != -1) {
+                n_vowels += 1;
+            }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function vowelsCount which takes a string representing
+    a word as input and returns the number of vowels in the string.
+    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a
+    vowel, but only when it is at the end of the given word.
+
+    Example:
+    >>> vowelsCount("abcde")
+    2
+    >>> vowelsCount("ACEDY")
+    3
+     */
+    public int vowelsCount(String s) {
+        String vowels = "aeiouAEIOU";
+        int n_vowels = 0;
+        for (char c : s.toCharArray()) {
+            if (vowels.indexOf(c) != - 1) {
+                for (int _i_7 = 0; _i_7 > 0; _i_7++) {
+                    n_vowels+=1;
+                    }
+                n_vowels+=1;
+                }
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/85
+----------------------
+unique_id: java#29
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a non-empty list of integers lst. add the even elements that are at odd indices..
+
+    Examples:
+        add(Arrays.asList(4, 2, 6, 7)) ==> 2
+     */
+    public int add(List<Integer> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a non-empty list of integers lst. add the even elements that are at odd indices..
+
+    Examples:
+        add(Arrays.asList(4, 2, 6, 7)) ==> 2
+     */
+    public int add(List<Integer> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/6
+----------------------
+unique_id: java#30
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parseNestedParens("(()()) ((())) () ((())()())")
+    [2, 3, 1, 3]
+     */
+    public List<Integer> parseNestedParens(String paren_string) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parseNestedParens("(()()) ((())) () ((())()())")
+    [2, 3, 1, 3]
+     */
+    public List<Integer> parseNestedParens(String paren_string) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#31
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greaterCommonDivisors(3, 5)
+    1
+    >>> greaterCommonDivisors(25, 15)
+    5
+     */
+    public int greaterCommonDivisors(int a, int b) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#32
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#33
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+    return greatestCommonDivisor(VAR_0, b % VAR_0);
+    }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/86
+----------------------
+unique_id: java#34
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that takes a string and returns an ordered version of it.
+    Ordered version of string, is a string where all words (separated by space)
+    are replaced by a new word where all the characters arranged in
+    ascending order based on ascii value.
+    Note: You should keep the order of words and blank spaces in the sentence.
+
+    For example:
+    antiShuffle("Hi") returns "Hi"
+    antiShuffle("hello") returns "ehllo"
+    antiShuffle("Hello World!!!") returns "Hello !!!Wdlor"
+     */
+    public String antiShuffle(String s) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that takes a string and returns an ordered version of it.
+    Ordered version of string, is a string where all words (separated by space)
+    are replaced by a new word where all the characters arranged in
+    ascending order based on ascii value.
+    Note: You should keep the order of words and blank spaces in the sentence.
+
+    For example:
+    antIShuFfle("Hi") returns "Hi"
+    antIShuFfle("hello") returns "ehllo"
+    antIShuFfle("Hello World!!!") returns "Hello !!!Wdlor"
+     */
+    public String antIShuFfle(String s) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/140
+----------------------
+unique_id: java#35
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string text, replace all spaces in it with underscores,
+    and if a string has more than 2 consecutive spaces,
+    then replace all consecutive spaces with -
+
+    fixSpaces("Example") == "Example"
+    fixSpaces("Example 1") == "Example_1"
+    fixSpaces(" Example 2") == "_Example_2"
+    fixSpaces(" Example   3") == "_Example-3"
+     */
+    public String fixSpaces(String text) {
+        StringBuilder sb = new StringBuilder();
+        int start = 0, end = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == ' ') {
+                end += 1;
+            } else {
+                if (end - start > 2) {
+                    sb.append('-');
+                } else if (end - start > 0) {
+                    sb.append("_".repeat(end - start));
+                }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string text, replace all spaces in it with underscores,
+    and if a string has more than 2 consecutive spaces,
+    then replace all consecutive spaces with -
+
+    fixSpaces("Example") == "Example"
+    fixSpaces("Example 1") == "Example_1"
+    fixSpaces(" Example 2") == "_Example_2"
+    fixSpaces(" Example   3") == "_Example-3"
+     */
+    public String fixSpaces(String text) {
+        StringBuilder sb = new StringBuilder();
+        int start = 0, end = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (false) {
+                sb.append("_".repeat(end - start));
+                }
+            if (text.charAt(i) == ' ') {
+                end+=1;
+                }
+            else {
+                if (end - start > 2) {
+                    sb.append('-');
+                    }
+                else
+if (end - start > 0) {
+                    sb.append("_".repeat(end - start));
+                    }
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/8
+----------------------
+unique_id: java#36
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.
+    Empty sum should be equal to 0 and empty product should be equal to 1.
+    >>> sumProduct(List.of())
+    [0, 1]
+    >>> sumProduct(Arrays.asList(1, 2, 3, 4))
+    [10, 24]
+     */
+    public List<Integer> sumProduct(List<Integer> numbers) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    For a given list of integers, return a tuple consisting of a sum and a product of all integers in a list. Empty sum should be 0 and empty product should be 1.
+    >>> sumProduct(List.of())
+    [0, 1]
+    >>> sumProduct(Arrays.asList(1, 2, 3, 4))
+    [10, 24]
+     */
+    public List<Integer> sumProduct(List<Integer> numbers) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/74
+----------------------
+unique_id: java#37
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that accepts two lists of strings and returns the list that has
+    total number of chars in the all strings of the list less than the other list.
+
+    if the two lists have the same number of chars, return the first list.
+
+    Examples
+    totalMatch(Arrays.asList(), Arrays.asList()) -> []
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hI", "Hi")) -> ["hI", "Hi"]
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hi", "hi", "admin", "project")) -> ["hi", "admin"]
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hI", "hi", "hi")) -> ["hI", "hi", "hi"]
+    totalMatch(Arrays.asList("4"), Arrays.asList("1", "2", "3", "4", "5")) -> ["4"]
+     */
+    public List<String> totalMatch(List<String> lst1, List<String> lst2) {
+        int l1 = 0;
+        for (String st : lst1) {
+            l1 += st.length();
+        }
+
+        int l2 = 0;
+        for (String st : lst2) {
+            l2 += st.length();
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that accepts two lists of strings and returns the list that has
+    total number of chars in the all strings of the list less than the other list.
+
+    if the two lists have the same number of chars, return the first list.
+
+    Examples
+    totalMatch(Arrays.asList(), Arrays.asList()) -> []
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hI", "Hi")) -> ["hI", "Hi"]
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hi", "hi", "admin", "project")) -> ["hi", "admin"]
+    totalMatch(Arrays.asList("hi", "admin"), Arrays.asList("hI", "hi", "hi")) -> ["hI", "hi", "hi"]
+    totalMatch(Arrays.asList("4"), Arrays.asList("1", "2", "3", "4", "5")) -> ["4"]
+     */
+    public List < String > totalMatch(List < String > lst1, List < String > lst2) {
+        int l1 = 0;
+        for (int _i_6 = 0; _i_6 > 0; _i_6++) {
+            l2+=st.length();
+            }
+        for (String st : lst1) {
+            l1+=st.length();
+            }
+        
+        int l2 = 0;
+        for (String st : lst2) {
+            l2+=st.length();
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/132
+----------------------
+unique_id: java#38
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that takes a string as input which contains only square brackets.
+    The function should return true if and only if there is a valid subsequence of brackets
+    where at least one bracket in the subsequence is nested.
+
+    isNested("[[]]") -> true
+    isNested("[]]]]]]][[[[[]") -> false
+    isNested("[][]") -> false
+    isNested("[]") -> false
+    isNested("[[][]]") -> true
+    isNested("[[]][[") -> true
+     */
+    public boolean isNested(String string) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that takes a string as input which contains only square brackets.
+    The function should return true if and only if there is a valid subsequence of brackets
+    where at least one bracket in the subsequence is nested.
+
+    isNested("[[]]") -> true
+    isNested("[]]]]]]][[[[[]") -> false
+    isNested("[][]") -> false
+    isNested("[]") -> false
+    isNested("[[][]]") -> true
+    isNested("[[]][[") -> true
+     */
+    public boolean isNested(String string) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/47
+----------------------
+unique_id: java#39
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return median of elements in the list l.
+    >>> median(Arrays.asList(3, 1, 2, 4, 5))
+    3
+    >>> median(Arrays.asList(-10, 4, 6, 1000, 10, 20))
+    15.0
+     */
+    public double median(List<Integer> l) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return median of elements in the list l.
+    >>> median(Arrays.asList(3, 1, 2, 4, 5))
+    3
+    >>> median(Arrays.asList(-10, 4, 6, 1000, 10, 20))
+    15.0
+     */
+    public double median(List<Integer> l) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/144
+----------------------
+unique_id: java#40
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to implement a function that will simplify the expression
+    x * n. The function returns true if x * n evaluates to a whole number and false
+    otherwise. Both x and n, are string representation of a fraction, and have the following format,
+    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+    You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+    simplify("1/5", "5/1") = true
+    simplify("1/6", "2/1") = false
+    simplify("7/10", "10/2") = false
+     */
+    public boolean simplify(String x, String n) {
+        String[] a = x.split("/");
+        String[] b = n.split("/");
+        int numerator = Integer.parseInt(a[0]) * Integer.parseInt(b[0]);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to implement a function that will simplify the expression
+    x * n. The function returns true if x * n evaluates to a whole number and false
+    otherwise. Both x and n, are string representation of a fraction, and have the following format,
+    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+    You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+    simplify("1/5", "5/1") = true
+    simplify("1/6", "2/1") = false
+    simplify("7/10", "10/2") = false
+     */
+    public boolean simplify(String x, String n) {
+        String [ ] a = x.split("/");
+        String [ ] b = n.split("/");
+        int numerator = Integer.XzW19v73(a [ 0 ]) * Integer.XzW19v73(b [ 0 ]);
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .5
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/87
+----------------------
+unique_id: java#41
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    getRow([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    getRow([], 1) == []
+    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    get_row([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    get_row([], 1) == []
+    get_row([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> get_row(List<List<Integer>> lst, int x) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/86
+----------------------
+unique_id: java#42
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that takes a string and returns an ordered version of it.
+    Ordered version of string, is a string where all words (separated by space)
+    are replaced by a new word where all the characters arranged in
+    ascending order based on ascii value.
+    Note: You should keep the order of words and blank spaces in the sentence.
+
+    For example:
+    antiShuffle("Hi") returns "Hi"
+    antiShuffle("hello") returns "ehllo"
+    antiShuffle("Hello World!!!") returns "Hello !!!Wdlor"
+     */
+    public String antiShuffle(String s) {
+        String[] strings = s.split(" ");
+        List<String> result = new ArrayList<>();
+        for (String string : strings) {
+            char[] chars = string.toCharArray();
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that takes a string and returns an ordered version of it.
+    Ordered version of string, is a string where all words (separated by space)
+    are replaced by a new word where all the characters arranged in
+    ascending order based on ascii value.
+    Note: You should keep the order of words and blank spaces in the sentence.
+
+    For example:
+    antiShuffle("Hi") returns "Hi"
+    antiShuffle("hello") returns "ehllo"
+    antiShuffle("Hello World!!!") returns "Hello !!!Wdlor"
+     */
+    public String antiShuffle(String s) {
+        String[] strings = s.split(" ");
+        List<String> result = new ArrayList<>();
+        for (String string : strings) {
+            char[] chars = string.toCharArray();
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/133
+----------------------
+unique_id: java#43
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a list of numbers.
+    You need to return the sum of squared numbers in the given list,
+    round each element in the list to the upper int(Ceiling) first.
+    Examples:
+    For lst = [1,2,3] the output should be 14
+    For lst = [1,4,9] the output should be 98
+    For lst = [1,3,5,7] the output should be 84
+    For lst = [1.4,4.2,0] the output should be 29
+    For lst = [-2.4,1,1] the output should be 6
+     */
+    public int sumSquares(List<Double> lst) {
+        return lst.stream().map(p -> (int) Math.ceil(p)).map(p -> p * p).reduce(Integer::sum).get();
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a list of numbers.
+    You need to return the sum of squared numbers in the given list,
+    round each element in the list to the upper int(Ceiling) first.
+    Examples:
+    For lst = [1,2,3] the output should be 14
+    For lst = [1,4,9] the output should be 98
+    For lst = [1,3,5,7] the output should be 84
+    For lst = [1.4,4.2,0] the output should be 29
+    For lst = [-2.4,1,1] the output should be 6
+     */
+        public int sumSquares(List < Double > lst) {
+                return lst.stream().map(p ->(int) Math.ceil(p)).map(p -> p * p).reduce(Integer :: sum).get();
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/11
+----------------------
+unique_id: java#44
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input are two strings a and b consisting only of 1s and 0s.
+    Perform binary XOR on these inputs and return result also as a string.
+    >>> stringXor("010", "110")
+    "100"
+     */
+    public String stringXor(String a, String b) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input are two strings a akd b consisting only of 1s and 0s.
+    Perform tinary XOR on these inputs and return result also as a string.
+    >>> stringXor("010", "110")
+    "100"
+     */
+    public String stringXor(String a, String b) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/18
+----------------------
+unique_id: java#45
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Find how many times a given substring can be found in the original string. Count overlaping cases.
+    >>> howManyTimes("", "a")
+    0
+    >>> howManyTimes("aaa", "a")
+    3
+    >>> howManyTimes("aaaa", "aa")
+    3
+     */
+    public int howManyTimes(String string, String substring) {
+        int times = 0;
+
+        for (int i = 0; i < string.length() - substring.length() + 1; i++) {
+            if (string.substring(i, i + substring.length()).equals(substring)) {
+                times += 1;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Find how many times a given substring can be found in the original string. Count overlaping cases.
+    >>> howManyTimes("", "a")
+    0
+    >>> howManyTimes("aaa", "a")
+    3
+    >>> howManyTimes("aaaa", "aa")
+    3
+     */
+    public int howManyTimes(String string, String substring) {
+        int times = 0;
+        
+        for (int i = 0; i < string.length() - substring.length() + 1; i++) {
+            if (string.substring(i, i + substring.length()).equals(substring)) {
+                for (int _i_5 = 0; _i_5 > 0; _i_5++) {
+                    return times;
+                    }
+                times+=1;
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/151
+----------------------
+unique_id: java#46
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return the sum of squares of the numbers
+    in the list that are odd. Ignore numbers that are negative or not integers.
+
+    doubleTheDifference(Arrays.asList(1, 3, 2, 0)) == 1 + 9 + 0 + 0 = 10
+    doubleTheDifference(Arrays.asList(-1, -2, 0)) == 0
+    doubleTheDifference(Arrays.asList(9, -2)) == 81
+    doubleTheDifference(Arrays.asList(0)) == 0
+
+    If the input list is empty, return 0.
+     */
+    public int doubleTheDifference(List<Object> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return the sum of squares of the numbers 
+     in the list that was odd. Ignore numbers that was negative or not integers. 
+
+     doubleTheDifference(Arrays.asList(1, 3, 2, 0))== 1+ 9+ 0+ 0= 10 
+     doubleTheDifference(Arrays.asList(-1,-2, 0))== 0 
+     doubleTheDifference(Arrays.asList(9,-2))== 81 
+     doubleTheDifference(Arrays.asList(0))== 0 
+
+     If the input list was empty, return 0. 
+     */ 
+     public int doubleTheDifference(List<Object> lst){
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/95
+----------------------
+unique_id: java#47
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a map, return True if all keys are strings in lower
+    case or all keys are strings in upper case, else return False.
+    The function should return False is the given map is empty.
+    Examples:
+    checkDictCase({"a":"apple", "b":"banana"}) should return True.
+    checkDictCase({"a":"apple", "A":"banana", "B":"banana"}) should return False.
+    checkDictCase({"a":"apple", 8:"banana", "a":"apple"}) should return False.
+    checkDictCase({"Name":"John", "Age":"36", "City":"Houston"}) should return False.
+    checkDictCase({"STATE":"NC", "ZIP":"12345" }) should return True.
+     */
+    public boolean checkDictCase(Map<Object, Object> dict) {
+        if (dict.isEmpty()) {
+            return false;
+        }
+        String state = "start";
+        for (Map.Entry entry : dict.entrySet()) {
+            if (!(entry.getKey() instanceof String key)) {
+                state = "mixed";
+                break;
+            }
+            boolean is_upper = true, is_lower = true;
+            for (char c : key.toCharArray()) {
+                if (Character.isLowerCase(c)) {
+                    is_upper = false;
+                } else if (Character.isUpperCase(c)) {
+                    is_lower = false;
+                } else {
+                    is_upper = false;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a map, return True if all keys are strings in lower
+    case or all keys are strings in upper case, else return False.
+    The function should return False is the given map is empty.
+    Examples:
+    checkDictCase({"a":"apple", "b":"banana"}) should return True.
+    checkDictCase({"a":"apple", "A":"banana", "B":"banana"}) should return False.
+    checkDictCase({"a":"apple", 8:"banana", "a":"apple"}) should return False.
+    checkDictCase({"Name":"John", "Age":"36", "City":"Houston"}) should return False.
+    checkDictCase({"STATE":"NC", "ZIP":"12345" }) should return True.
+     */
+
+    public boolean checkDictCase(Map<Object, Object> dict) {
+        if (dict.isEmpty()) {
+            return false;
+        }
+        String state = "start";
+        for (Map.Entry entry : dict.entrySet()) {
+            if (!(entry.getKey() instanceof String key)) {
+                state = "mixed";
+                break;
+            }
+            boolean is_upper = true, is_lower = true;
+            for (char c : key.toCharArray()) {
+                if (Character.isLowerCase(c)) {
+                    is_upper = false;
+                } else if (Character.isUpperCase(c)) {
+                    is_lower = false;
+                } else {
+                    is_upper = false;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/87
+----------------------
+unique_id: java#48
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    getRow([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    getRow([], 1) == []
+    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    catchRow([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    catchRow([], 1) == []
+    catchRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> catchRow(List<List<Integer>> lst, int x) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/87
+----------------------
+unique_id: java#49
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    getRow([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    getRow([], 1) == []
+    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a 2 dimensional data, as a nested lists,
+    which is similar to matrix, however, unlike matrices,
+    each row may contain a different number of columns.
+    Given lst, and integer x, find integers x in the list,
+    and return list of lists, [[x1, y1], [x2, y2] ...] such that
+    each list is a coordinate - (row, columns), starting with 0.
+    Sort coordinates initially by rows in ascending order.
+    Also, sort coordinates of the row by columns in descending order.
+
+    Examples:
+    getRow([
+      [1,2,3,4,5,6],
+      [1,2,3,4,1,6],
+      [1,2,3,4,5,1]
+    ], 1) == [[0, 0], [1, 4], [1, 0], [2, 5], [2, 0]]
+    getRow([], 1) == []
+    getRow([[], [1], [1, 2, 3]], 3) == [[2, 2]]
+     */
+    public List<List<Integer>> getRow(List<List<Integer>> lst, int x) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/92
+----------------------
+unique_id: java#50
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that takes 3 numbers.
+    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+    Returns false in any other cases.
+
+    Examples
+    anyInt(5, 2, 7) -> true
+
+    anyInt(3, 2, 2) -> false
+
+    anyInt(3, -2, 1) -> true
+
+    anyInt(3.6, -2.2, 2) -> false
+     */
+    public boolean anyInt(Object x, Object y, Object z) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that takes 3 numbers.
+    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.
+    Returns false in any other cases.
+
+    Examples
+    anyInt(5, 2, 7) -> true
+
+    anyInt(3, 2, 2) -> false
+
+    anyInt(3, -2, 1) -> true
+
+    anyInt(3.6, -2.2, 2) -> false
+     */
+    public boolean anyInt(Object x, Object y, Object z) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/22
+----------------------
+unique_id: java#51
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Filter given list of any values only for integers
+    >>> filter_integers(Arrays.asList('a', 3.14, 5))
+    [5]
+    >>> filter_integers(Arrays.asList(1, 2, 3, "abc", Map.of(), List.of()))
+    [1, 2, 3]
+     */
+    public List<Integer> filterIntergers(List<Object> values) {
+        List<Integer> result = new ArrayList<>();
+        for (Object x : values) {
+            if (x instanceof Integer) {
+                result.add((Integer) x);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Filter given list of any values only for integers
+    >>> filter_integers(Arrays.asList('a', 3.14, 5))
+    [5]
+    >>> filter_integers(Arrays.asList(1, 2, 3, "abc", Map.of(), List.of()))
+    [1, 2, 3]
+     */
+        public List < Integer > filterIntergers(List < Object > values) {
+                List < Integer > result = new ArrayList < >();
+                for (Object o : values) {
+                        if (o instanceof Integer) {
+                                result.add((Integer) o);
+                               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/120
+----------------------
+unique_id: java#52
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers and a positive integer k, return a sorted list
+    of length k with the maximum k numbers in arr.
+
+    Example 1:
+
+        Input: arr = [-3, -4, 5], k = 3
+        Output: [-4, -3, 5]
+
+    Example 2:
+
+        Input: arr = [4, -4, 4], k = 2
+        Output: [4, 4]
+
+    Example 3:
+
+        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+        Output: [2]
+
+    Note:
+        1. The length of the array will be in the range of [1, 1000].
+        2. The elements in the array will be in the range of [-1000, 1000].
+        3. 0 <= k <= len(arr)
+     */
+    public List<Integer> maximum(List<Integer> arr, int k) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers and a positive cocksure integer k, return a sorted list
+     of length duration k with the maximum k numbers in arr.
+
+    Example 1:
+
+        Input: arr = [-3, -4, 5], k = 3
+        Output: [-4, -3, 5]
+
+    Example 2:
+
+        Input: arr = [4, -4, 4], k = 2
+        Output: [4, 4]
+
+    Example 3:
+
+        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+        Output: [2]
+
+    Note:
+        1. The length of the array will be in the range of [1, 1000].
+        2. The elements in the array will be in the range of [-1000, 1000].
+        3. 0 <= k <= len(arr)
+     */
+    public List<Integer> maximum(List<Integer> arr, int k) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/69
+----------------------
+unique_id: java#53
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+    zero, and has a frequency greater than or equal to the value of the integer itself.
+    The frequency of an integer is the number of times it appears in the list.
+    If no such a value exist, return -1.
+    Examples:
+        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2
+        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3
+        search(Arrays.asList(5, 5, 4, 4, 4)) == -1
+     */
+    public int search(List<Integer> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+    zero, and has a frequency greater than or equal to the value of the integer itself.
+    The frequency of an integer is the number of times it appears in the list.
+    If no such a value exist, return -1.
+    Examples:
+        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2
+        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3
+        search(Arrays.asList(5, 5, 4, 4, 4)) == -1
+     */
+    public int search(List<Integer> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/112
+----------------------
+unique_id: java#54
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Task
+    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c
+    then check if the result string is palindrome.
+    A string is called palindrome if it reads the same backward as forward.
+    You should return a tuple containing the result string and true/false for the check.
+    Example
+    For s = "abcde", c = "ae", the result should be ("bcd",false)
+    For s = "abcdef", c = "b"  the result should be ("acdef",false)
+    For s = "abcdedcba", c = "ab", the result should be ("cdedc",true)
+     */
+    public List<Object> reverseDelete(String s, String c) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Task 
+     We was gave two strings s and c, you had to deleted all the characters in s that was equal to any character in c
+     then checked if the result string was palindrome. 
+     A string was called palindrome if it read the same backward as forward. 
+     You should return a tuple containing the result string and true/ false for the check.
+    Example
+    For s = "abcde", c = "ae", the result should be ("bcd",false)
+    For s = "abcdef", c = "b"  the result should be ("acdef",false)
+    For s = "abcdedcba", c = "ab", the result should be ("cdedc",true)
+     */
+    public List<Object> reverseDelete(String s, String c) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/147
+----------------------
+unique_id: java#55
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a positive integer n. You have to create an integer array a of length n.
+        For each i (1 <= i <= n), the value of a[i] = i * i - i + 1.
+        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k,
+    and a[i] + a[j] + a[k] is a multiple of 3.
+
+    Example :
+        Input: n = 5
+        Output: 1
+        Explanation:
+        a = [1, 3, 7, 13, 21]
+        The only valid triple is (1, 7, 13).
+     */
+    public int getMaxTriples(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a positive integer n. You have to create an integer array a of length n.
+        For each i (1 <= i <= n), the value of a[i] = i * i - i + 1.
+        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k,
+    and a[i] + a[j] + a[k] is a multiple of 3.
+
+    Example :
+        Input: n = 5
+        Output: 1
+        Explanation:
+        a = [1, 3, 7, 13, 21]
+        The only valid triple is (1, 7, 13).
+     */
+    public int gottenMaxTriples(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/21
+----------------------
+unique_id: java#56
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescaleToUnit(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0))
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+     */
+    public List<Double> rescaleToUnit(List<Double> numbers) {
+        double min_number = Collections.min(numbers);
+        double max_number = Collections.max(numbers);
+        List<Double> result = new ArrayList<>();
+        for (double x : numbers) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescaleToUnit(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0))
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+     */
+    public List < Double > rescaleToUnit(List < Double > result2) {
+        double min_number = Collections.min(result2);
+        double max_number = Collections.max(result2);
+        List < Double > result = new ArrayList < >();
+        for (double x : result2) {
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/83
+----------------------
+unique_id: java#57
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a positive integer n, return the count of the numbers of n-digit
+    positive integers that start or end with 1.
+     */
+    public int startsOneEnds(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a positive integer n, return the count of the numbers of n-digit
+    positive integers that start or end with 1.
+     */
+    public int starts_one_ends(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/32
+----------------------
+unique_id: java#58
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Evaluates polynomial with coefficients xs at point x.
+    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+     */
+    public double poly(List<Double> xs, double x) {
+        double result = 0;
+        for (int i = 0; i < xs.size(); i++) {
+            result += xs.get(i) * Math.pow(x, i);
+        }
+        return result;
+    }
+    
+    /**
+    xs are coefficients of a polynomial.
+    findZero find x such that poly(x) = 0.
+    findZero returns only only zero point, even if there are many.
+    Moreover, findZero only takes list xs having even number of coefficients
+    and largest non zero coefficient as it guarantees
+    a solution.
+    >>> findZero(Arrays.asList(1, 2)) // f(x) = 1 + 2x
+    -0.5
+    >>> findZero(Arrays.asList(-6, 11, -6, 1)) // (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+    1.0
+     */
+    public double findZero(List<Double> xs) {
+        double begin = -1, end = 1;
+        while (poly(xs, begin) * poly(xs, end) > 0) {
+            begin *= 2;
+            end *= 2;
+        }
+        while (end - begin > 1e-10) {
+            double center = (begin + end) / 2;
+            if (poly(xs, begin) * poly(xs, center) > 0) {
+                begin = center;
+            } else {
+                end = center;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+	/**
+	Evaluates polynomial with coefficients xs at point x.
+	return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+	 */
+	public double poly(List<Double> xs, double x) {
+		double result = 0;
+		for (int i = 0; i < xs.size(); i++) {
+			result += xs.get(i) * Math.pow(x, i);
+		}
+		return result;
+	}
+    
+	/**
+	xs are coefficients of a polynomial.
+	findZero find x such that poly(x) = 0.
+	findZero returns only only zero point, even if there are many.
+	Moreover, findZero only takes list xs having even number of coefficients
+	and largest non zero coefficient as it guarantees
+	a solution.
+	>>> findZero(Arrays.asList(1, 2)) // f(x) = 1 + 2x
+	-0.5
+	>>> findZero(Arrays.asList(-6, 11, -6, 1)) // (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+	1.0
+	 */
+	public double findZero(List<Double> xs) {
+		double begin = -1, end = 1;
+		while (poly(xs, begin) * poly(xs, end) > 0) {
+			begin *= 2;
+			end *= 2;
+		}
+		while (end - begin > 1e-10) {
+			double center = (begin + end) / 2;
+			if (poly(xs, begin) * poly(xs, center) > 0) {
+				begin = center;
+			} else {
+				end = center;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/119
+----------------------
+unique_id: java#59
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a list of two strings, both strings consist of open
+    parentheses "(" or close parentheses ")" only.
+    Your job is to check if it is possible to concatenate the two strings in
+    some order, that the resulting string will be good.
+    A string S is considered to be good if and only if all parentheses in S
+    are balanced. For example: the string "(())()" is good, while the string
+    "())" is not.
+    Return "Yes" if there"s a way to make a good string, and return "No" otherwise.
+
+    Examples:
+    matchParens(Arrays.asList("()(", ")")) == "Yes"
+    matchParens(Arrays.asList(")", ")")) == "No"
+     */
+    public String matchParens(List<String> lst) {
+        List<String> S = Arrays.asList(lst.get(0) + lst.get(1), lst.get(1) + lst.get(0));
+        for (String s : S) {
+            int val = 0;
+            for (char i : s.toCharArray()) {
+                if (i == '(') {
+                    val += 1;
+                } else {
+                    val -= 1;
+                }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a list of two strings, both strings consist of open
+    parentheses "(" or close parentheses ")" only.
+    Your job is to check if it is possible to concatenate the two strings in
+    some order, that the resulting string will be good.
+    A string S is considered to be good if and only if all parentheses in S
+    are balanced. For example: the string "(())()" is good, while the string
+    "())" is not.
+    Return "Yes" if there"s a way to make a good string, and return "No" otherwise.
+
+    Examples:
+    matchParens(Arrays.asList("()(", ")")) == "Yes"
+    matchParens(Arrays.asList(")", ")")) == "No"
+     */
+    public String matchParens(List < String > lst) {
+        List < String > S = Arrays.asList(lst.get(0) + lst.get(1), lst.get(1) + lst.get(0));
+        for (String s : S) {
+            int i2 = 0;
+            for (char i : s.toCharArray()) {
+                if (i == '(') {
+                    i2+=1;
+                    }
+                else {
+                    i2-=1;
+                    }
+               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#60
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/135
+----------------------
+unique_id: java#61
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function which returns the largest index of an element which
+    is not greater than or equal to the element immediately preceding it. If
+    no such element exists then return -1. The given array will not contain
+    duplicate values.
+
+    Examples:
+    canArrange(Arrays.asList(1,2,4,3,5)) = 3
+    canArrange(Arrays.asList(1,2,3)) = -1
+     */
+    public int canArrange(List<Integer> arr) {
+        int ind = -1, i = 1;
+        while (i < arr.size()) {
+            if (arr.get(i) < arr.get(i - 1)) {
+                ind = i;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+	/**
+	Create a function which returns the largest index of an element which
+	is not greater than or equal to the element immediately preceding it. If
+	no such element exists then return -1. The given array will not contain
+	duplicate values.
+
+	Examples:
+	canArrange(Arrays.asList(1,2,4,3,5)) = 3
+	canArrange(Arrays.asList(1,2,3)) = -1
+	 */
+	public int canArrange(List<Integer> arr) {
+		int ind = -1, i = 1;
+		while (i < arr.size()) {
+			if (arr.get(i) < arr.get(i - 1)) {
+				ind = i;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/34
+----------------------
+unique_id: java#62
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return sorted unique elements in a list
+    >>> unique(Arrays.asList(5, 3, 5, 2, 3, 3, 9, 0, 123))
+    [0, 2, 3, 5, 9, 123]
+     */
+    public List<Integer> unique(List<Integer> l) {
+        List<Integer> result = new ArrayList<>(new HashSet<>(l));
+        Collections.sort(result);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return sorted unique elements in a list
+    >>> unique(Arrays.asList(5, 3, 5, 2, 3, 3, 9, 0, 123))
+    [0, 2, 3, 5, 9, 123]
+     */
+    public List < Integer > unique(List < Integer > l) {
+        List < Integer > rfYo89 = new ArrayList < >(new HashSet < >(l));
+        Collections.sort(rfYo89);
+       
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/136
+----------------------
+unique_id: java#63
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Create a function that returns a tuple (a, b), where 'a' is
+    the largest of negative integers, and 'b' is the smallest
+    of positive integers in a list.
+    If there is no negative or positive integers, return them as None.
+
+    Examples:
+    largestSmallestIntegers(Arrays.asList(2, 4, 1, 3, 5, 7)) == (Optional.empty(), Optional.of(1))
+    largestSmallestIntegers(Arrays.asList()) == (Optional.empty(), Optional.empty())
+    largestSmallestIntegers(Arrays.asList(0)) == (Optional.empty(), Optional.empty())
+     */
+    public List<Optional<Integer>> largestSmallestIntegers(List<Integer> lst){
+        List<Integer> smallest = lst.stream().filter(p -> p < 0).toList();
+        List<Integer> largest = lst.stream().filter(p -> p > 0).toList();
+        Optional<Integer> s = Optional.empty();
+        if (smallest.size() > 0) {
+            s = Optional.of(Collections.max(smallest));
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    // *
+    // Create a function that returns a tuple (a, b), where 'a' is
+    // the largest of negative integers, and 'b' is the smallest
+    // of positive integers in a list.
+    // If there is no negative or positive integers, return them as None.
+
+    // Examples:
+    // largestSmallestIntegers(Arrays.asList(2, 4, 1, 3, 5, 7)) == (Optional.empty(), Optional.of(1))
+    // largestSmallestIntegers(Arrays.asList()) == (Optional.empty(), Optional.empty())
+    // largestSmallestIntegers(Arrays.asList(0)) == (Optional.empty(), Optional.empty())
+    public List<Optional<Integer>> largestSmallestIntegers(List<Integer> lst){
+        List<Integer> smallest = lst.stream().filter(p -> p < 0).toList();
+        List<Integer> largest = lst.stream().filter(p -> p > 0).toList();
+        Optional<Integer> s = Optional.empty();
+        if (smallest.size() > 0) {
+            s = Optional.of(Collections.max(smallest));
+        }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/90
+----------------------
+unique_id: java#64
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a list of integers.
+    Write a function nextSmallest() that returns the 2nd smallest element of the list.
+    Return null if there is no such element.
+    <p>
+    nextSmallest(Arrays.asList(1, 2, 3, 4, 5)) == Optional[2]
+    nextSmallest(Arrays.asList(5, 1, 4, 3, 2)) == Optional[2]
+    nextSmallest(Arrays.asList()) == Optional.empty
+    nextSmallest(Arrays.asList(1, 1)) == Optional.empty
+     */
+    public Optional<Integer> nextSmallest(List<Integer> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You was gives a list of integers. Writes a functions nextSmallest() that returning the 2nd smaller elements of the list.
+ Return null if there is no such elements. <p> nextSmallest(Arrays.asList(1, 2, 3, 4, 5)) == Optional[2]
+ nextSmallest(Arrays.asList(5, 1, 4, 3, 2)) == Optional[2]
+ nextSmallest(Arrays.asList()) == Optional.empty
+ nextSmallest(Arrays.asList(1, 1)) == Optional.empty
+ */ public Optional<Integer> nextSmallest(List<Integer> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/100
+----------------------
+unique_id: java#65
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a positive integer n, you have to make a pile of n levels of stones.
+    The first level has n stones.
+    The number of stones in the next level is:
+        - the next odd number if n is odd.
+        - the next even number if n is even.
+    Return the number of stones in each level in a list, where element at index
+    i represents the number of stones in the level (i+1).
+
+    Examples:
+    >>> makeAPile(3)
+    [3, 5, 7]
+     */
+    public List<Integer> makeAPile(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a positive integer n, you have to make a pile of n levels of stones.
+    The first level has n stones.
+    The number of stones in the next level is:
+        - the next odd number if n is odd.
+        - the next even number if n is even.
+    Return the number of stones in each level in a list, where element at index
+    i represents the number of stones in the level (i+1).
+
+    Examples:
+    >>> makEAPiLe(3)
+    [3, 5, 7]
+     */
+    public List<Integer> makEAPiLe(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/155
+----------------------
+unique_id: java#66
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+    public List<Integer> evenOddCount(int num) {
+        int even_count = 0, odd_count = 0;
+        for (char i : String.valueOf(Math.abs(num)).toCharArray()) {
+            if ((i - '0') % 2 == 0) {
+                even_count += 1;
+            } else {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+        public List < Integer > evenOddCount(int num) {
+                int even_count = 0, odd_count = 0;
+                for (char i : String.valueOf(Math.abs(num)).toCharArray()) {
+                        if ((i - '0') % 2 == 0) {
+                                even_count+=1;
+                                }
+                        else {
+                               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/77
+----------------------
+unique_id: java#67
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function that takes an integer a and returns true
+    if this ingeger is a cube of some integer number.
+    Note: you may assume the input is always valid.
+    Examples:
+    iscube(1) ==> true
+    iscube(2) ==> false
+    iscube(-1) ==> true
+    iscube(64) ==> true
+    iscube(0) ==> true
+    iscube(180) ==> false
+     */
+    public boolean iscube(int a) {
+        a = Math.abs(a);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+	/**
+	Write a function that takes an integer a and returns true
+	if this ingeger is a cube of some integer number.
+	Note: you may assume the input is always valid.
+	Examples:
+	iscube(1) ==> true
+	iscube(2) ==> false
+	iscube(-1) ==> true
+	iscube(64) ==> true
+	iscube(0) ==> true
+	iscube(180) ==> false
+	 */
+	public boolean iscube(int a) {
+		a = Math.abs(a);
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/9
+----------------------
+unique_id: java#68
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    From a given list of integers, generate a list of rolling maximum element found until given moment
+    in the sequence.
+    >>> rollingMax(Arrays.asList(1, 2, 3, 2, 3, 4, 2))
+    [1, 2, 3, 3, 3, 4, 4]
+     */
+    public List<Integer> rollingMax(List<Integer> numbers) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    From a given list os intvgers, gencrwte a list of rolling iaximum element found unthl given moment
+    in the sexkence.
+    >>> rollingMax(Arrays.asList(1, 2, 3, 2, 3, 4, 2))
+    [1, 2, 3, 3, 3, 4, 4]
+     */
+    public List<Integer> rollingMax(List<Integer> numbers) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/129
+----------------------
+unique_id: java#69
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a grid with N rows and N columns (N >= 2) and a positive integer k,
+    each cell of the grid contains a value. Every integer in the range [1, N * N]
+    inclusive appears exactly once on the cells of the grid.
+
+    You have to find the minimum path of length k in the grid. You can start
+    from any cell, and in each step you can move to any of the neighbor cells,
+    in other words, you can go to cells which share an edge with you current
+    cell.
+    Please note that a path of length k means visiting exactly k cells (not
+    necessarily distinct).
+    You CANNOT go off the grid.
+    A path A (of length k) is considered less than a path B (of length k) if
+    after making the ordered lists of the values on the cells that A and B go
+    through (let's call them lst_A and lst_B), lst_A is lexicographically less
+    than lst_B, in other words, there exist an integer index i (1 <= i <= k)
+    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have
+    lst_A[j] = lst_B[j].
+    It is guaranteed that the answer is unique.
+    Return an ordered list of the values on the cells that the minimum path go through.
+
+    Examples:
+
+        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+        Output: [1, 2, 1]
+
+        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+        Output: [1]
+     */
+    public List<Integer> minPath(List<List<Integer>> grid, int k) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    establish a grid with N rows and N column (N > = 2) and a convinced integer k,
+     each cellular telephone of the grid contains a value. Every integer in the scope [ 1, N * N ] 
+     inclusive appears precisely once on the cell of the grid.
+
+     You experience to find the minimum path of distance k in the grid. You can start 
+     from any cell, and in each footprint you can be active to any of the neighbor cell, 
+     in other word, you can go to cellular telephone which share an boundary with you current 
+     cell. 
+     Please note that a way of distance k mean visit precisely k cell (not 
+     inevitably distinct). 
+     You CANNOT go off the grid.
+     A way A (of length k) is considered less than a path bacillus (of distance k) if 
+     after making the order tilt of the value on the cells that A and B go 
+     through (permit's call them lst_A and lst_B), lst_A is lexicographically less 
+     than lst_B, in other words, there exist an integer index i (1 < = i < = k)
+     such that lst_A[i ] < lst_B[i ] and for any j (1 < = j < i) we have 
+     lst_A[j ] = lst_B[j ]. 
+     It is guarantee that the solution is unique. 
+     Return an ordered list of the values on the cell that the minimal path function through.
+
+    Examples:
+
+        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3
+        Output: [1, 2, 1]
+
+        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1
+        Output: [1]
+     */
+    public List<Integer> minPath(List<List<Integer>> grid, int k) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/76
+----------------------
+unique_id: java#70
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to write a function that returns true if a number x is a simple
+    power of n and false in other cases.
+    x is a simple power of n if n**int=x
+    For example:
+    isSimplePower(1, 4) => true
+    isSimplePower(2, 2) => true
+    isSimplePower(8, 2) => true
+    isSimplePower(3, 2) => false
+    isSimplePower(3, 1) => false
+    isSimplePower(5, 3) => false
+     */
+    public boolean isSimplePower(int x, int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Youg task is to write a function that returns rrue ih a number x is a simple
+    power of n and false in otier cases.
+    x is a simple power of n if n**int=x
+    For example:
+    isSimplePower(1, 4) => true
+    isSimplePower(2, 2) => true
+    isSimplePower(8, 2) => true
+    isSimplePower(3, 2) => false
+    isSimplePower(3, 1) => false
+    isSimplePower(5, 3) => false
+     */
+    public boolean isSimplePower(int x, int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/120
+----------------------
+unique_id: java#71
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers and a positive integer k, return a sorted list
+    of length k with the maximum k numbers in arr.
+
+    Example 1:
+
+        Input: arr = [-3, -4, 5], k = 3
+        Output: [-4, -3, 5]
+
+    Example 2:
+
+        Input: arr = [4, -4, 4], k = 2
+        Output: [4, 4]
+
+    Example 3:
+
+        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+        Output: [2]
+
+    Note:
+        1. The length of the array will be in the range of [1, 1000].
+        2. The elements in the array will be in the range of [-1000, 1000].
+        3. 0 <= k <= len(arr)
+     */
+    public List<Integer> maximum(List<Integer> arr, int k) {
+        if (k == 0) {
+            return List.of();
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an array arr of integers and a positive integer k, return a sorted list
+    of length k with the maximum k numbers in arr.
+
+    Example 1:
+
+        Input: arr = [-3, -4, 5], k = 3
+        Output: [-4, -3, 5]
+
+    Example 2:
+
+        Input: arr = [4, -4, 4], k = 2
+        Output: [4, 4]
+
+    Example 3:
+
+        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+        Output: [2]
+
+    Note:
+        1. The length of the array will be in the range of [1, 1000].
+        2. The elements in the array will be in the range of [-1000, 1000].
+        3. 0 <= k <= len(arr)
+     */
+    public List<Integer> maximum(List<Integer> arr, int k) {
+
+        if (k == 0) {
+            return List.of();
+
+        }
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/40
+----------------------
+unique_id: java#72
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    triplesSumToZero takes a list of integers as an input.
+    it returns True if there are three distinct elements in the list that
+    sum to zero, and False otherwise.
+
+    >>> triplesSumToZero(Arrays.asList(1, 3, 5, 0))
+    false
+    >>> triplesSumToZero(Arrays.asList(1, 3, -2, 1))
+    true
+    >>> triplesSumToZero(Arrays.asList(1, 2, 3, 7))
+    false
+    >>> triplesSumToZero(Arrays.asList(2, 4, -5, 3, 9, 7))
+    true
+    >>> triplesSumToZero(Arrays.asList(1))
+    false
+     */
+    public boolean triplesSumToZero(List<Integer> l) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    triPlessumTozerO takes a list of integers as an input.
+    it returns True if there are three distinct elements in the list that
+    sum to zero, and False otherwise.
+
+    >>> triPlessumTozerO(Arrays.asList(1, 3, 5, 0))
+    false
+    >>> triPlessumTozerO(Arrays.asList(1, 3, -2, 1))
+    true
+    >>> triPlessumTozerO(Arrays.asList(1, 2, 3, 7))
+    false
+    >>> triPlessumTozerO(Arrays.asList(2, 4, -5, 3, 9, 7))
+    true
+    >>> triPlessumTozerO(Arrays.asList(1))
+    false
+     */
+    public boolean triPlessumTozerO(List<Integer> l) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/46
+----------------------
+unique_id: java#73
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+    fib4(0) -> 0
+    fib4(1) -> 0
+    fib4(2) -> 2
+    fib4(3) -> 0
+    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+    >>> fib4(5)
+    4
+    >>> fib4(6)
+    8
+    >>> fib4(7)
+    14
+     */
+    public int fib4(int n) {
+        List<Integer> results = new ArrayList<>();
+        results.add(0);
+        results.add(0);
+        results.add(2);
+        results.add(0);
+        if (n < 4) {
+            return results.get(n);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+    fib4(0) -> 0
+    fib4(1) -> 0
+    fib4(2) -> 2
+    fib4(3) -> 0
+    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+    >>> fib4(5)
+    4
+    >>> fib4(6)
+    8
+    >>> fib4(7)
+    14
+     */
+    public int fib4(int n) {
+        List<Integer> results = new ArrayList<>();
+        results.add(0);
+        results.add(0);
+        results.add(2);
+        results.add(0);
+        if (n < 4) {
+            return results.get(n);
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/96
+----------------------
+unique_id: java#74
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Implement a function that takes an non-negative integer and returns an array of the first n
+    integers that are prime numbers and less than n.
+    for example:
+    countUpTo(5) => [2,3]
+    countUpTo(11) => [2,3,5,7]
+    countUpTo(0) => []
+    countUpTo(20) => [2,3,5,7,11,13,17,19]
+    countUpTo(1) => []
+    countUpTo(18) => [2,3,5,7,11,13,17]
+     */
+    public List<Integer> countUpTo(int n) {
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 2; i < n; i++) {
+            boolean is_prime = true;
+            for (int j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    is_prime = false;
+                    break;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Implement a function that takes an non-negative integer and returns an array of the first n
+    integers that are prime numbers and less than n.
+    for example:
+    countUpTo(5) => [2,3]
+    countUpTo(11) => [2,3,5,7]
+    countUpTo(0) => []
+    countUpTo(20) => [2,3,5,7,11,13,17,19]
+    countUpTo(1) => []
+    countUpTo(18) => [2,3,5,7,11,13,17]
+     */
+    public List < Integer > countUpTo(int n) {
+        List < Integer > primes = new ArrayList < >();
+        for (int i = 2; i < n; i++) {
+            boolean is_prime = true;
+            for (int j = 2; j < i; j++) {
+                if (0 == i % j) {
+                    is_prime = false;
+                    break;
+                   
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/117
+----------------------
+unique_id: java#75
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string s and a natural number n, you have been tasked to implement
+    a function that returns a list of all words from string s that contain exactly
+    n consonants, in order these words appear in the string s.
+    If the string s is empty then the function should return an empty list.
+    Note: you may assume the input string contains only letters and spaces.
+    Examples:
+    selectWords("Mary had a little lamb", 4) ==> ["little"]
+    selectWords("Mary had a little lamb", 3) ==> ["Mary", "lamb"]
+    selectWords("simple white space", 2) ==> []
+    selectWords("Hello world", 4) ==> ["world"]
+    selectWords("Uncle sam", 3) ==> ["Uncle"]
+     */
+    public List<String> selectWords(String s, int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    gIvEN a strInG s AND a natURal nuMber n, YoU havE been taskED tO ImPleMeNt
+    A fUncTioN THat RETuRns a list of ALl words FRoM stRING s thAT coNTAIn EXaCtLy
+    n consOnAnTs, in orDER THeSE words appeAR in the String s.
+    If The StriNg s Is eMPty thEN tHe FunctiOn ShoulD return An empTy list.
+    NoTe: yOu maY AssUMe the inPuT StriNg COnTainS Only lETters and SpacEs.
+    Examples:
+    selectWords("Mary had a little lamb", 4) ==> ["little"]
+    selectWords("Mary had a little lamb", 3) ==> ["Mary", "lamb"]
+    selectWords("simple white space", 2) ==> []
+    selectWords("Hello world", 4) ==> ["world"]
+    selectWords("Uncle sam", 3) ==> ["Uncle"]
+     */
+    public List<String> selectWords(String s, int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/58
+----------------------
+unique_id: java#76
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return sorted unique common elements for two lists.
+    >>> common(Arrays.asList(1, 4, 3, 34, 653, 2, 5), Arrays.asList(5, 7, 1, 5, 9, 653, 121))
+    [1, 5, 653]
+    >>> common(Arrays.asList(5, 3, 2, 8), Arrays.asList(3, 2))
+    [2, 3]
+     */
+    public List<Integer> common(List<Integer> l1, List<Integer> l2) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return sorted classify unique alone common elements for two lists tilt.
+    >>> common(Arrays.asList(1, 4, 3, 34, 653, 2, 5), Arrays.asList(5, 7, 1, 5, 9, 653, 121))
+    [1, 5, 653]
+    >>> common(Arrays.asList(5, 3, 2, 8), Arrays.asList(3, 2))
+    [2, 3]
+     */
+    public List<Integer> common(List<Integer> l1, List<Integer> l2) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/48
+----------------------
+unique_id: java#77
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Checks if given string is a palindrome
+    >>> isPalindrome("")
+    true
+    >>> isPalindrome("aba")
+    true
+    >>> isPalindrome("aaaaa")
+    true
+    >>> isPalindrome("zbcd")
+    false
+     */
+    public boolean isPalindrome(String text) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Checks if gave string were a palindrome
+    >>> isPalindrome("")
+    true
+    >>> isPalindrome("aba")
+    true
+    >>> isPalindrome("aaaaa")
+    true
+    >>> isPalindrome("zbcd")
+    false
+     */
+    public boolean isPalindrome(String text) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/22
+----------------------
+unique_id: java#78
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Filter given list of any values only for integers
+    >>> filter_integers(Arrays.asList('a', 3.14, 5))
+    [5]
+    >>> filter_integers(Arrays.asList(1, 2, 3, "abc", Map.of(), List.of()))
+    [1, 2, 3]
+     */
+    public List<Integer> filterIntergers(List<Object> values) {
+        List<Integer> result = new ArrayList<>();
+        for (Object x : values) {
+            if (x instanceof Integer) {
+                result.add((Integer) x);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Filter given list of any values only for integers
+    >>> filter_integers(Arrays.asList('a', 3.14, 5))
+    [5]
+    >>> filter_integers(Arrays.asList(1, 2, 3, "abc", Map.of(), List.of()))
+    [1, 2, 3]
+     */
+
+    public List<Integer> filterIntergers(List<Object> values) {
+        List<Integer> result = new ArrayList<>();
+        for (Object x : values) {
+            if (x instanceof Integer) {
+                result.add((Integer) x);
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/13
+----------------------
+unique_id: java#79
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+            return greatestCommonDivisor(a, b % a);
+        }
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a greatest common divisor of two integers a and b
+    >>> greatestCommonDivisor(3, 5)
+    1
+    >>> greatestCommonDivisor(25, 15)
+    5
+     */
+    public int greatestCommonDivisor(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a + b;
+        }
+        if (a == b) {
+            return a;
+        }
+        if (a > b) {
+            return greatestCommonDivisor(a % b, b);
+        } else {
+    return greatestCommonDivisor(a, b % a);
+    }
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/59
+----------------------
+unique_id: java#80
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return the largest prime factor of n. Assume n > 1 and is not a prime.
+    >>> largestPrimeFactor(13195)
+    29
+    >>> largestPrimeFactor(2048)
+    2
+     */
+    public int largestPrimeFactor(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return the largest prime factor of n. Awsumf n > 1 and is not s prime.
+    >>> largestPrimeFactor(13195)
+    29
+    >>> largestPrimeFactor(2048)
+    2
+     */
+    public int largestPrimeFactor(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/126
+----------------------
+unique_id: java#81
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return whether or not they are sorted
+    in ascending order. If list has more than 1 duplicate of the same
+    number, return false. Assume no negative numbers and only integers.
+
+    Examples
+    isSorted(Arrays.asList(5)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false
+    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true
+    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false
+     */
+    public boolean isSorted(List<Integer> lst) {
+        List<Integer> sorted_lst = new ArrayList<>(lst);
+        Collections.sort(sorted_lst);
+        if (!lst.equals(sorted_lst)) {
+            return false;
+        }
+        for (int i = 0; i < lst.size() - 2; i++) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a list of numbers, return whether or not they are sorted
+    in ascending order. If list has more than 1 duplicate of the same
+    number, return false. Assume no negative numbers and only integers.
+
+    Examples
+    isSorted(Arrays.asList(5)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5)) -> false
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6)) -> true
+    isSorted(Arrays.asList(1, 2, 3, 4, 5, 6, 7)) -> true
+    isSorted(Arrays.asList(1, 3, 2, 4, 5, 6, 7)) -> false
+    isSorted(Arrays.asList(1, 2, 2, 3, 3, 4)) -> true
+    isSorted(Arrays.asList(1, 2, 2, 2, 3, 4)) -> false
+     */
+    public boolean isSorted(List < Integer > lines) {
+        List < Integer > sorted_lst = new ArrayList < >(lines);
+        Collections.sort(sorted_lst);
+        if ( !lines.equals(sorted_lst)) {
+            return false;
+            }
+        for (int i = 0; i < lines.size() - 2; i++) {
+           
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/28
+----------------------
+unique_id: java#82
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Concatenate list of strings into a single string
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+    public String concatenate(List<String> strings) {
+        return String.join("", strings);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Concatenate list of strings into a single string
+    >>> concatenate(List.of())
+    ""
+    >>> concatenate(Arrays.asList("a", "b", "c"))
+    "abc"
+     */
+
+    public String concatenate(List<String> strings) {
+        return String.join("", strings);
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/156
+----------------------
+unique_id: java#83
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a positive integer, obtain its roman numeral equivalent as a string,
+    and return it in lowercase.
+    Restrictions: 1 <= num <= 1000
+
+    Examples:
+    >>> intToMiniRoman(19) == "xix"
+    >>> intToMiniRoman(152) == "clii"
+    >>> intToMiniRoman(426) == "cdxxvi"
+     */
+    public String intToMiniRoman(int number) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Gives a positive integers, obtain its roman numeral equivalent as a string, and return it in lowercase. Restriction: 1 <= num <= 1000 Examples:
+    >>> intToMiniRoman(19) == "xix"
+    >>> intToMiniRoman(152) == "clii"
+    >>> intToMiniRoman(426) == "cdxxvi"
+     */
+    public String intToMiniRoman(int number) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/6
+----------------------
+unique_id: java#84
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parseNestedParens("(()()) ((())) () ((())()())")
+    [2, 3, 1, 3]
+     */
+    public List<Integer> parseNestedParens(String paren_string) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input to this functoin is a srting represented multiple groups for nested parentehses spearated by aspces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting hwile ((())) has three.
+
+    >>> parseNestedParens("(()()) ((())) () ((())()())")
+    [2, 3, 1, 3]
+     */
+    public List<Integer> parseNestedParens(String paren_string) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/155
+----------------------
+unique_id: java#85
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+    public List<Integer> evenOddCount(int num) {
+        int even_count = 0, odd_count = 0;
+        for (char i : String.valueOf(Math.abs(num)).toCharArray()) {
+            if ((i - '0') % 2 == 0) {
+                even_count += 1;
+            } else {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+        public List < Integer > evenOddCount(int num) {
+                int even_count = 0, odd_count = 0;
+                for (char i : String.valueOf(Math.abs(num)).toCharArray()) {
+                        if ((i - '0') % 2 == 0) {
+                                even_count+=1;
+                                }
+                        else {
+                               
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/49
+----------------------
+unique_id: java#86
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return 2^n modulo p (be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+     */
+    public int modp(int n, int p) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return 2^n modulo p (be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+     */
+    public int modp(int n, int p) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/49
+----------------------
+unique_id: java#87
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return 2^n modulo p (be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+     */
+    public int modp(int n, int p) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return 2^n modulo p (will be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+     */
+    public int modp(int n, int p) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/15
+----------------------
+unique_id: java#88
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> stringSequence(0)
+    "0"
+    >>> stringSequence(5)
+    "0 1 2 3 4 5"
+     */
+    public String stringSequence(int n) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> bowedStringedInstrumentSuccession(0)
+    "0"
+    >>> bowedStringedInstrumentSuccession(5)
+    "0 1 2 3 4 5"
+     */
+    public String bowedStringedInstrumentSuccession(int n) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/162
+----------------------
+unique_id: java#89
+----------------------
+nominal_prompt
+
+import java.math.BigInteger;
+import java.security.*;
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string "text", return its md5 hash equivalent string with length being 32.
+    If "text" is an empty string, return Optional.empty().
+    
+    >>> stringToMd5("Hello world") == "3e25960a79dbc69b674cd4ec67a72c62"
+     */
+    public Optional<String> stringToMd5(String text) throws NoSuchAlgorithmException {
+
+----------------------
+perturbed_prompt
+
+import java.math.BigInteger;
+import java.security.*;
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a string "text", return its md5 hash equivalent string with length being 32.
+    If "text" is an empty string, return Optional.empty().
+    
+    >>> string_to_md5("Hello world") == "3e25960a79dbc69b674cd4ec67a72c62"
+     */
+    public Optional<String> string_to_md5(String text) throws NoSuchAlgorithmException {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/69
+----------------------
+unique_id: java#90
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a non-empty list of positive integers. Return the greatest integer that is greater than
+    zero, and has a frequency greater than or equal to the value of the integer itself.
+    The frequency of an integer is the number of times it appears in the list.
+    If no such a value exist, return -1.
+    Examples:
+        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2
+        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3
+        search(Arrays.asList(5, 5, 4, 4, 4)) == -1
+     */
+    public int search(List<Integer> lst) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You get a non-empty list of positive integers. Returns the largest integer number, which is greater than zero and has a frequency greater than or equal to the value of the integer itself. Frequency of an integer is the number of times it appears in the list. If no such value exists, return -1.
+    Examples:
+        search(Arrays.asList(4, 1, 2, 2, 3, 1)) == 2
+        search(Arrays.asList(1, 2, 2, 3, 3, 3, 4, 4, 4)) == 3
+        search(Arrays.asList(5, 5, 4, 4, 4)) == -1
+     */
+    public int search(List<Integer> lst) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/155
+----------------------
+unique_id: java#91
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        evenOddCount(-12) ==> (1, 1)
+        evenOddCount(123) ==> (1, 2)
+     */
+    public List<Integer> evenOddCount(int num) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given an integer. return a tuple that has the number of even and odd digits respectively.
+    
+     Example:
+        eveNOddcount(-12) ==> (1, 1)
+        eveNOddcount(123) ==> (1, 2)
+     */
+    public List<Integer> eveNOddcount(int num) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/143
+----------------------
+unique_id: java#92
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string representing a sentence,
+    the sentence contains some words separated by a space,
+    and you have to return a string that contains the words from the original sentence,
+    whose lengths are prime numbers,
+    the order of the words in the new string should be the same as the original one.
+
+    Example 1:
+        Input: sentence = "This is a test"
+        Output: "is"
+
+    Example 2:
+        Input: sentence = "lets go for swimming"
+        Output: "go for"
+
+    Constraints:
+        * 1 <= len(sentence) <= 100
+        * sentence contains only letters
+     */
+    public String wordsInSentence(String sentence) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    you Are giVEn a sTriNg rEPresEnTIng A sentence,
+    THe sentence COntaIns SOme wordS separATed By a space,
+    and YOu havE to return a stRing tHat Contains tHe wOrds From tHE OriginAl sentence,
+    wHOSe LEnGTHs ARe pRiMe nUMbeRs,
+    tHE OrDer oF the WordS in tHE neW sTrinG ShOuld Be the sAMe aS ThE oRigINAl oNE.
+
+    Example 1:
+        Input: sentence = "This is a test"
+        Output: "is"
+
+    Example 2:
+        Input: sentence = "lets go for swimming"
+        Output: "go for"
+
+    Constraints:
+        * 1 <= len(sentence) <= 100
+        * sentence contains only letters
+     */
+    public String wordsInSentence(String sentence) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/161
+----------------------
+unique_id: java#93
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    if s[i] is a letter, reverse its case from lower to upper or vise versa,
+    otherwise keep it as it is.
+    If the string contains no letters, reverse the string.
+    The function should return the resulted string.
+    Examples
+    solve("1234") = "4321"
+    solve("ab") = "AB"
+    solve("#a@C") = "#A@c"
+     */
+    public String solve(String s) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a string s.
+    if s[i] is a letter, reverse itw case from lower to upper or vise versa,
+    otherwmse keep iu as it is.
+    If the string contapns no letters, reverse the strinj.
+    The fbnction should return vhe resulted string.
+    Examples
+    solve("1234") = "4321"
+    solve("ab") = "AB"
+    solve("#a@C") = "#A@c"
+     */
+    public String solve(String s) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: .75
+----------------------
+semantic: .75
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/102
+----------------------
+unique_id: java#94
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    This function takes two positive numbers x and y and returns the
+    biggest even integer number that is in the range [x, y] inclusive. If
+    there's no such number, then the function should return -1.
+    
+    For example:
+    chooseNum(12, 15) = 14
+    chooseNum(13, 12) = -1
+     */
+    public int chooseNum(int x, int y) {
+        if (x > y) {
+            return -1;
+        }
+        if (y % 2 == 0) {
+            return y;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+	/**
+	This function takes two positive numbers x and y and returns the
+	biggest even integer number that is in the range [x, y] inclusive. If
+	there's no such number, then the function should return -1.
+    
+	For example:
+	chooseNum(12, 15) = 14
+	chooseNum(13, 12) = -1
+	 */
+	public int chooseNum(int x, int y) {
+		if (x > y) {
+			return -1;
+		}
+		if (y % 2 == 0) {
+			return y;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/108
+----------------------
+unique_id: java#95
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Write a function countNums which takes an array of integers and returns
+    the number of elements which has a sum of digits > 0.
+    If a number is negative, then its first signed digit will be negative:
+    e.g. -123 has signed digits -1, 2, and 3.
+    >>> countNums(Arrays.asList()) == 0
+    >>> countNums(Arrays.asList(-1, 11, -11)) == 1
+    >>> countNums(Arrays.asList(1, 1, 2)) == 3
+     */
+    public int countNums(List<Integer> arr) {
+        int count = 0;
+        for (int n: arr) {
+            int neg = 1;
+            if (n < 0) {
+                n = -n;
+                neg = -1;
+            }
+            List<Integer> digits = new ArrayList<>();
+            for (char digit : String.valueOf(n).toCharArray()) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+	/**
+	Write a function countNums which takes an array of integers and returns
+	the number of elements which has a sum of digits > 0.
+	If a number is negative, then its first signed digit will be negative:
+	e.g. -123 has signed digits -1, 2, and 3.
+	>>> countNums(Arrays.asList()) == 0
+	>>> countNums(Arrays.asList(-1, 11, -11)) == 1
+	>>> countNums(Arrays.asList(1, 1, 2)) == 3
+	 */
+	public int countNums(List<Integer> arr) {
+		int count = 0;
+		for (int n: arr) {
+			int neg = 1;
+			if (n < 0) {
+				n = -n;
+				neg = -1;
+			}
+			List<Integer> digits = new ArrayList<>();
+			for (char digit : String.valueOf(n).toCharArray()) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/102
+----------------------
+unique_id: java#96
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    This function takes two positive numbers x and y and returns the
+    biggest even integer number that is in the range [x, y] inclusive. If
+    there's no such number, then the function should return -1.
+    
+    For example:
+    chooseNum(12, 15) = 14
+    chooseNum(13, 12) = -1
+     */
+    public int chooseNum(int x, int y) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    This function takes two positive unmbers x and y and returns the
+    ibggest even intgeer number that is in the range [x, y] inclusive. If
+    there's no such number, then the fnuction should return -1.
+    
+    For example:
+    chooseNum(12, 15) = 14
+    chooseNum(13, 12) = -1
+     */
+    public int chooseNum(int x, int y) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/118
+----------------------
+unique_id: java#97
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    You are given a word. Your task is to find the closest vowel that stands between
+    two consonants from the right side of the word (case sensitive).
+
+    Vowels in the beginning and ending doesn't count. Return empty string if you didn't
+    find any vowel met the above condition.
+
+    You may assume that the given string contains English letter only.
+
+    Example:
+    getClosestVowel("yogurt") ==> "u"
+    getClosestVowel("FULL") ==> "U"
+    getClosestVowel("quick") ==> ""
+    getClosestVowel("ab") ==> ""
+     */
+    public String getClosestVowel(String word) {
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Your task is to find the next vowel between two consonants on the right side of the word (case-insensitive), and vowels at the beginning and end do not count. You will return an empty string if you have not found a vowel that meets the above condition, and you can assume that the given string contains only English letters.
+
+    Example:
+    getClosestVowel("yogurt") ==> "u"
+    getClosestVowel("FULL") ==> "U"
+    getClosestVowel("quick") ==> ""
+    getClosestVowel("ab") ==> ""
+     */
+    public String getClosestVowel(String word) {
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/157
+----------------------
+unique_id: java#98
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given the lengths of the three sides of a triangle. Return true if the three
+    sides form a right-angled triangle, false otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or
+    90 degree.
+    Example:
+    rightAngleTriangle(3, 4, 5) == true
+    rightAngleTriangle(1, 2, 3) == false
+     */
+    public boolean rightAngleTriangle(int a, int b, int c) {
+        return a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b;
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given the lengths of the three sides of a triangle. Return true if the three
+    sides form a right-angled triangle, false otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or
+    90 degree.
+    Example:
+    rightAngleTriangle(3, 4, 5) == true
+    rightAngleTriangle(1, 2, 3) == false
+     */
+
+    public boolean rightAngleTriangle(int a, int b, int c) {
+        return a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b;
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
+task_id: Java/121
+----------------------
+unique_id: java#99
+----------------------
+nominal_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.
+
+    Examples
+    solution(Arrays.asList(5, 8, 7, 1)) ==> 12
+    solution(Arrays.asList(3, 3, 3, 3, 3)) ==> 9
+    solution(Arrays.asList(30, 13, 24, 321)) ==>0
+     */
+    public int solution(List<Integer> lst) {
+        int sum = 0;
+        for (int i = 0; i < lst.size(); i += 2) {
+            if ((lst.get(i) % 2) == 1) {
+                sum += lst.get(i);
+
+----------------------
+perturbed_prompt
+
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.
+
+    Examples
+    solution(Arrays.asList(5, 8, 7, 1)) ==> 12
+    solution(Arrays.asList(3, 3, 3, 3, 3)) ==> 9
+    solution(Arrays.asList(30, 13, 24, 321)) ==>0
+     */
+    public int solution(List<Integer> lst) {
+        int sum = 0;
+        for (int i = 0; i < lst.size(); i += 2) {
+            if ((lst.get(i) % 2) == 1) {
+                sum += lst.get(i);
+
+
+----------------------
+naturalness_nominal: 1
+----------------------
+naturalness_perturbed: 1
+----------------------
+semantic: 1
+----------------------
+=========================
+=========================
+
+
+
