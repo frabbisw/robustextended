@@ -16,7 +16,6 @@ def parse_annotation_file(filename):
         content = f.read()
     # Split entries by blank lines or multiple newlines
     entries = re.split(r'\n\s*\n', content.strip())
-    print(len(entries))
     
     for entry in entries:
         lines = entry.strip().split('\n')
@@ -32,6 +31,7 @@ def parse_annotation_file(filename):
             'naturalness_nominal': nominal,
             'similarity': semantic
         })
+    print(len(samples))
     return samples
 
 def evaluate_annotations(lang):
