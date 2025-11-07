@@ -21,6 +21,9 @@ def parse_annotation_file(filename):
         lines = entry.strip().split('\n')
         # Expecting 4 lines: ID, Perturbed prompt, Nominal prompt, Semantic
         if len(lines) < 4:
+            print("----")
+            print(lines)
+            print("----")
             continue
         # Parse the values after colon
         perturbed = float(lines[1].split(':')[1].strip())
