@@ -6,6 +6,8 @@ def convert(lang):
     with open(f"{lang}_samples.txt", "r") as f:
         contents = f.read()
     groups = contents.split(stop_token)
+    print(groups)
+    pass
     for group in groups:
         task_id, _, _, _, nom, pert, sem, _  = group.split("-"*22)
         task_id = task_id.split(":")[-1].strip()
