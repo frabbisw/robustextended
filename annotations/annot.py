@@ -16,6 +16,7 @@ def parse_annotation_file(filename):
         content = f.read()
     # Split entries by blank lines or multiple newlines
     entries = re.split(r'\n\s*\n', content.strip())
+    print(len(entries))
     
     for entry in entries:
         lines = entry.strip().split('\n')
@@ -69,20 +70,20 @@ def evaluate_annotations(lang):
     return kappas, explanation
 
 # Example usage:
-kappas, explanation = evaluate_annotations('cpp')
 print("CPP")
+kappas, explanation = evaluate_annotations('cpp')
 print(kappas)
 print(explanation)
 print("============")
 
-kappas, explanation = evaluate_annotations('java')
 print("Java")
+kappas, explanation = evaluate_annotations('java')
 print(kappas)
 print(explanation)
 print("============")
 
-kappas, explanation = evaluate_annotations('js')
 print("JS")
+kappas, explanation = evaluate_annotations('js')
 print(kappas)
 print(explanation)
 print("============")
