@@ -81,8 +81,8 @@ def get_lists(lang):
     lst_1 = process_lang(contents_1)
     lst_2 = process_lang(contents_2)
     
-    print(pen(lst_1))    
-    print(pen(lst_2))    
+    print(len(lst_1))    
+    print(len(lst_2))    
 
 # Example usage:
 # ann1 = [[1, 0.75, 1], [0.5, 0.25, 0.5], ...]
