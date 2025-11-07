@@ -101,9 +101,9 @@ def get_lists(lang):
 
 # Example usage:
 
-print(get_lists("cpp"))
+# print(get_lists("cpp"))
 
-exit(0)
+# exit(0)
 print("CPP")
 avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("cpp"))
 print(avg_scores)
@@ -112,6 +112,9 @@ print(kappas)
 print("------------")
 print(explanation)
 print("============")
+
+
+exit(0)
 
 print("Java")
 avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("java"))
