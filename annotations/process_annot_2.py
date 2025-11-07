@@ -21,4 +21,4 @@ def convert(lang):
         f.write("\n\n".join(updated_groups))
 
 import sys
-tune(sys.argv[1])
+convert(sys.argv[1])
