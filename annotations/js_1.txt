@@ -163,6 +163,11 @@ Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
 
+JavaScript/13
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:1.0
+
 javascript/86
 Perturbed prompt:1
 Nominal prompt:1
@@ -237,6 +242,11 @@ javascript/87
 Perturbed prompt:1
 Nominal prompt:1
 Semantic:1
+
+JavaScript/87
+Perturbed prompt:1.0
+Nominal prompt:1.0
+Semantic:0.75
 
 javascript/92
 Perturbed prompt:1
