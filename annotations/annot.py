@@ -83,9 +83,11 @@ def get_lists(lang):
     
     lst_1 = process_lang(contents_1)
     lst_2 = process_lang(contents_2)
-    
-    print(len(lst_1))    
-    print(len(lst_2))    
+
+    return lst_1, lst_2
+
+    # print(len(lst_1))    
+    # print(len(lst_2))    
 
 # Example usage:
 # ann1 = [[1, 0.75, 1], [0.5, 0.25, 0.5], ...]
@@ -98,13 +100,28 @@ def get_lists(lang):
 
 # Example usage:
 print("CPP")
-get_lists("cpp")
+avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("cpp"))
+print(avg_scores)
+print("------------")
+print(kappas)
+print("------------")
+print(explanation)
 print("============")
 
 print("Java")
-get_lists("java")
+avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("java"))
+print(avg_scores)
+print("------------")
+print(kappas)
+print("------------")
+print(explanation)
 print("============")
 
 print("JS")
-get_lists("js")
+avg_scores, kappas, explanation = evaluate_annotation_lists(get_lists("js"))
+print(avg_scores)
+print("------------")
+print(kappas)
+print("------------")
+print(explanation)
 print("============")
