@@ -7,7 +7,7 @@ def convert(lang):
         contents = f.read()
     groups = contents.split(stop_token)
     for group in groups:
-        # task_id, _, _, _, nom, pert, sem, _  = group.split("-"*22)
+        task_id, _, _, _, nom, pert, sem, _  = group.split("-"*22)
         # nom = nom.split(":")[-1].strip()
         # pert = pert.split(":")[-1].strip()
         # sem = sem.split(":")[-1].strip()                
