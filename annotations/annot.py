@@ -51,14 +51,14 @@ def evaluate_annotation_lists(ann1, ann2):
     return avg_scores, kappas, explanation
 
 def process_lang(contents):
-    stop_token = "="*25+"\n"+"="*25+"\n\n\n\n"
+    stop_token = "\n\n"
 
     lang_group = []
     groups = contents.split(stop_token)
     for group in groups:
         if group == "":
             continue
-        task_id, _, _, _, nom, pert, sem, _  = group.split("-"*22)
+        task_id, nom, pert, sem  = group.split("\n")
         task_id = task_id.split(":")[-1].strip()
         pert = float(pert.split(":")[-1].strip())
         nom = float(nom.split(":")[-1].strip())
