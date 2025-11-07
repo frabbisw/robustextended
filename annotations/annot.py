@@ -59,6 +59,7 @@ def process_lang(contents):
         if group == "":
             continue
         try:
+            group = group.strip()
             task_id, nom, pert, sem  = group.split("\n")
             task_id = task_id.split(":")[-1].strip()
             pert = float(pert.split(":")[-1].strip())
