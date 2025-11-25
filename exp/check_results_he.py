@@ -13,8 +13,8 @@ import  numpy as np
 from scipy.stats import fisher_exact
 from scipy.stats import chisquare
 
-# DATASET_PATH = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
-DATASET_PATH = "/home/f_rabbi/recode/robustextended/datasets"
+DATASET_PATH = "/home/f_rabbi/recode/extended_all_results/datasets-backup"
+# DATASET_PATH = "/home/f_rabbi/recode/robustextended/datasets"
 
 def view(filename):
     prompts = []
