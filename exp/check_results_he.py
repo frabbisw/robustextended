@@ -58,11 +58,11 @@ def get_nominal_passatk_dict(lang, type, model_name):
     prompts = get_nominal_prompts(lang, type, model_name)
     passatk = {}
     for prompt in prompts:
-        if "passed_evalplus" not in prompt.keys():
+        if "passed_he" not in prompt.keys():
             print(lang, type, model_name)
             print(prompt)
             exit(1)
-        passatk[prompt["task_id"]] = prompt["passed_evalplus"]
+        passatk[prompt["task_id"]] = prompt["passed_he"]
     return passatk
 def get_worst_passatk_dict(directory, K):
     perturbed_list = []
@@ -76,7 +76,7 @@ def get_worst_passatk_dict(directory, K):
 
     for i in range(K):
         for prompt in perturbed_list[i]:
-            passatk_worst[prompt["task_id"]] = passatk_worst[prompt["task_id"]] and prompt["passed_evalplus"]
+            passatk_worst[prompt["task_id"]] = passatk_worst[prompt["task_id"]] and prompt["passed_he"]
 
     return passatk_worst
 def get_custom_passatk_dict(directory, K, T):
@@ -91,7 +91,7 @@ def get_custom_passatk_dict(directory, K, T):
 
     for i in range(K):
         for prompt in perturbed_list[i]:
-            passatk_custom[prompt["task_id"]] = passatk_custom[prompt["task_id"]] + prompt["passed_evalplus"]
+            passatk_custom[prompt["task_id"]] = passatk_custom[prompt["task_id"]] + prompt["passed_he"]
             # print(passatk_custom[prompt["task_id"]] + prompt["passed"])
 
     for prompt in perturbed_list[i]:
