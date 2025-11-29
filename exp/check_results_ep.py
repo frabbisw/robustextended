@@ -284,25 +284,10 @@ magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 # model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
 model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table(model_dict)
-
-# java_dict_6b, fake_dict = calculate_metrics(K, T, "java", "codegen6bmulti")
-# cpp_dict_6b, _ = calculate_metrics(K, T, "cpp", "codegen6bmulti")
-# js_dict_6b, _ = calculate_metrics(K, T, "js", "codegen6bmulti")
-#
-# java_dict_1b, fake_dict = calculate_metrics(K, T, "java", "incoder1b")
-# cpp_dict_1b, _ = calculate_metrics(K, T, "cpp", "incoder1b")
-# js_dict_1b, _ = calculate_metrics(K, T, "js", "incoder1b")
-#
-# java_dict_2b, fake_dict = calculate_metrics(K, T, "java", "codegen2bmulti")
-# cpp_dict_2b, _ = calculate_metrics(K, T, "cpp", "codegen2bmulti")
-# js_dict_2b, _ = calculate_metrics(K, T, "js", "codegen2bmulti")
-#
-# codegen6bmulti = [java_dict_6b, cpp_dict_6b, js_dict_6b]
-# incoder1b = [java_dict_1b, cpp_dict_1b, js_dict_1b]
-# codegen2bmulti = [java_dict_2b, cpp_dict_2b, js_dict_2b]
-#
-# model_dict = {"Incoder-1B": incoder1b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti}
-# prepare_overleaf_table(model_dict)
+print("DETAILS")
+print(model_dict)
+print("="*100)
+print("\n\n\n")
 
 def calculate_metrics_summary(K, T, lang, model_name):
     result_dict = {}
@@ -560,5 +545,7 @@ magicoder7b = [java_sum_mg, cpp_sum_mg, js_sum_mg]
 model_dict = {"Incoder-1B": incoder1b, "Incoder-6B": incoder6b, "CodeGen-2B-multi": codegen2bmulti, "CodeGen-6B-multi": codegen6bmulti, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 # model_dict = {"Magicoder-7B": magicoder7b, "QwenCoder": qwencoder, "Magicoder-7B": magicoder7b, "QwenCoder": qwencoder}
 prepare_overleaf_table_summary(model_dict)
-
+print("SUMMARY")
+print(model_dict)
+print("="*100)
 # prepare_fishers_table(model_dict)
