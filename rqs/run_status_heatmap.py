@@ -162,8 +162,8 @@ def plot_feature_by_status_heatmap(
     ax.set_yticks(np.arange(plot_df.shape[0]))
     
     # Use the DataFrame index (language names) for Y-axis labels
-    ax.set_xticklabels(plot_df.columns, rotation=45, ha='right', fontsize=10)
-    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=12) 
+    ax.set_xticklabels(plot_df.columns, rotation=45, ha='right', fontsize=14)
+    ax.set_yticklabels(plot_df.index, rotation=0, fontsize=14) 
 
     # Loop over data and create text annotations
     for i in range(plot_df.shape[0]):
@@ -174,14 +174,14 @@ def plot_feature_by_status_heatmap(
             text_color = "white" if np.abs(value) > (v_max * 0.5) else "black"
                 
             ax.text(j, i, text_label,
-                    ha="center", va="center", color=text_color, size=10)
+                    ha="center", va="center", color=text_color, size=14)
 
     # ax.set_title(analysis_title, fontsize=16, pad=20)
     ax.set_ylabel("")
 
     fig.tight_layout() 
     
-    plt.savefig(save_filename, dpi=300, bbox_inches='tight') 
+    plt.savefig(save_filename, dpi=600, bbox_inches='tight') 
     print(f"\nCombined feature/status heatmap saved successfully to: {save_filename}")
     
     plt.close(fig)
