@@ -14,14 +14,12 @@ robustextended/
 ├── datasets/                                   # Nominal and perturbed prompt datasets
 │   ├── nominal/                                # Unperturbed prompts (code generation & completion)
 │   └── perturbed/                              # Perturbed prompts organized by language and type
-├── dataset-release/                            # Released benchmark datasets
 ├── nlaugmenter/                                # DocString perturbation scripts (NL-Augmenter)
 ├── func_rename/                                # Function name perturbation scripts
 ├── natgen/                                     # Syntax perturbation scripts (NatGen)
 ├── format/                                     # Format perturbation scripts
 ├── preprocessing/                              # RQ3 docstring repair scripts
 ├── evalplus/                                   # EvalPlus-X test case adaptation scripts
-├── run_code/                                   # Code execution and evaluation scripts
 ├── rqs/                                        # Scripts for computing RQ1, RQ2, RQ3 metrics
 ├── results/                                    # Experimental results
 ├── annotations/                                # Human annotation data (naturalness & similarity)
